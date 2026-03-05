@@ -45,7 +45,7 @@ void main() async {
   await ErrorStack.init(
     level: ErrorStackLogLevel.verbose,
     initialRoute: '/',
-    enableDevPanel: true,
+    enableDevPanel: false,
     devPanelConfig: DevPanelConfig(
       enableApiLogging: true,
       enableConsoleLogging: true,
