@@ -116,19 +116,20 @@ class _DPadStepperState extends State<DPadStepper>
   }
 
   KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
-    final isUp = event.logicalKey == LogicalKeyboardKey.arrowUp;
     final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
-    final isDown = event.logicalKey == LogicalKeyboardKey.arrowDown;
     final isLeft = event.logicalKey == LogicalKeyboardKey.arrowLeft;
 
-    if (isUp || isRight) {
+    // ArrowRight → increment, ArrowLeft → decrement.
+    // ArrowUp/Down sengaja TIDAK ditangani di sini agar focus traversal
+    // Flutter bisa memindahkan fokus ke baris stepper berikutnya/sebelumnya.
+    if (isRight) {
       if (event is KeyDownEvent) {
         _startTimer(true);
       } else if (event is KeyUpEvent) {
         _cancelTimer();
       }
       return KeyEventResult.handled;
-    } else if (isDown || isLeft) {
+    } else if (isLeft) {
       if (event is KeyDownEvent) {
         _startTimer(false);
       } else if (event is KeyUpEvent) {
@@ -137,7 +138,6 @@ class _DPadStepperState extends State<DPadStepper>
       return KeyEventResult.handled;
     }
 
-    // if other keys and we are holding, maybe cancel it?
     if (event is KeyUpEvent) {
       _cancelTimer();
     }
@@ -148,6 +148,7 @@ class _DPadStepperState extends State<DPadStepper>
   @override
   Widget build(BuildContext context) {
     return Focus(
+      skipTraversal: true,
       onKeyEvent: (node, event) => _handleKeyEvent(node, event),
       child: FocusableWidget(
         autofocus: widget.autofocus,
