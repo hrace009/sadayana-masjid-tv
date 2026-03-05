@@ -79,6 +79,27 @@ Implementasi UI Setup Wizard (4 langkah) selesai:
 - **Features**: D-Pad navigation support, data persistence via `SetupWizardCubit` (Plan 09), 1920x1080 responsive design
 - **Testing**: Widget tests passing for all steps (layout, interaction, overflow prevention)
 
-### Plan 11 dan seterusnya — BELUM DIMULAI
+### Plan 11 — Settings Logic ✅ COMPLETED (2026-02-20)
 
-Fase berikutnya: entities, models, repositories (data layer).
+- **`SettingsCubit`** di `lib/presentation/cubits/settings/settings_cubit.dart`
+- **Features**: auto-save debounce, PIN management, update logic
+- **Testing**: Comprehensive unit tests passing
+
+### Plan 12 dan seterusnya — BELUM DIMULAI
+
+Fase berikutnya: Settings UI, Main Display UI, dan fitur lainnya.
+
+## Known Bugs & Fixes
+
+### Bug: DropdownButton Blank saat Back Navigation (LocationStep) — Fixed 2026-03-05
+
+**Root Cause**: `_syncWithCubit()` membuat dummy `City(id: 0)` untuk pre-fill dropdown.
+`City` memakai `Equatable` yang menyertakan `id` di `props`, sehingga dummy tidak cocok
+dengan item real dari DB → Flutter assertion error → widget blank.
+
+**Fix**: Hapus dummy object. Cukup set `_selectedProvince` (String), lalu pass
+`preselectCityName` sebagai parameter ke `_loadCities()`. Preselect objek real dilakukan
+dalam satu `setState` bersamaan dengan pengisian `_cities` list.
+
+**Pattern generik**: Jangan gunakan dummy Equatable object sebagai `DropdownButton.value`
+sebelum `items` tersedia. Selalu preselect setelah data real dimuat.

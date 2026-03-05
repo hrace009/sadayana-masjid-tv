@@ -607,6 +607,74 @@ Widget _buildDimmedMovingClock() {
 
 **Real Case**: State machine SHOLAT state, idle timeout setelah Iqomah.
 
+### 6. DropdownButton Value-Not-In-Items (Equatable + Async Race Condition)
+
+**Issue**: `DropdownButton` menampilkan blank/kosong saat back navigation karena `value` tidak ditemukan di `items` list.
+
+**Root Cause**: Terjadi ketika kode membuat objek "dummy" dengan ID placeholder untuk pre-fill dropdown, padahal entity menggunakan `Equatable` yang membandingkan **semua field termasuk `id`**. Flutter akan assertion error jika `value != null` tapi tidak ada item yang `==` dengan `value`.
+
+**Problem**:
+```dart
+// ❌ WRONG - Dummy City dengan id=0 menyebabkan assertion error
+void _syncWithCubit() {
+  setState(() {
+    // DropdownButton.value = City(id=0), tapi items = []
+    // Flutter assertion: "value not in items" → widget blank/error
+    _selectedCity = City(
+      id: 0, // ← MASALAH: id dummy tidak cocok dengan City real dari DB
+      cityName: cubitData.cityName,
+      provinceName: cubitData.provinceName,
+      ...
+    );
+    _selectedProvince = cubitData.provinceName;
+  });
+  _loadCities(_selectedProvince!); // Items baru tersedia SETELAH async ini selesai
+}
+```
+
+**Solution**:
+```dart
+// ✅ CORRECT - Jangan buat dummy object. Preselect hanya setelah data real tersedia.
+void _syncWithCubit() {
+  setState(() {
+    // Hanya set province (String sederhana, tidak pakai Equatable)
+    _selectedProvince = cubitData.provinceName;
+    // _selectedCity SENGAJA dibiarkan null sampai _loadCities selesai
+  });
+  _loadCities(cubitData.provinceName, preselectCityName: cubitData.cityName);
+}
+
+Future<void> _loadCities(String provinceName, {String? preselectCityName}) async {
+  final cities = await repo.getCitiesByProvince(provinceName);
+  if (mounted) {
+    setState(() {
+      _cities = cities;
+      // Preselect SETELAH items tersedia — cari objek real, bukan dummy
+      if (preselectCityName != null) {
+        try {
+          _selectedCity = cities.firstWhere((c) => c.cityName == preselectCityName);
+        } catch (_) {
+          _selectedCity = null;
+        }
+      }
+    });
+  }
+}
+```
+
+**Why This Works**:
+- `DropdownButton.value` selalu `null` saat `items` belum diisi → tidak ada assertion error
+- Preselect dilakukan dalam satu `setState` bersamaan dengan pengisian `items` → konsisten
+- Menggunakan objek real dari database → `Equatable` comparison selalu cocok
+
+**Prevention**:
+1. **Jangan gunakan dummy/placeholder object** untuk Equatable entities di dropdown
+2. **Hindari dua setState terpisah** yang membuat window invalid state (value != null, items = [])
+3. **Pass preselect via parameter** ke fungsi async, bukan via shared state yang di-set sebelumnya
+4. **Waspada dengan Equatable**: entity yang `props`-nya menyertakan `id` tidak boleh dibuat dengan ID dummy
+
+**Real Case**: `LocationStep` – back navigation dari Preview ke Location step di Setup Wizard.
+
 ## Flutter Architecture Guidelines
 
 - Follow Clean Architecture principles dengan clear layer separation

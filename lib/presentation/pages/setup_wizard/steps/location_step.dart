@@ -42,23 +42,17 @@ class _LocationStepState extends State<LocationStep> {
         ? state.data
         : const SetupWizardData();
     if (cubitData.cityName.isNotEmpty) {
-      if (_selectedCity == null ||
-          _selectedCity!.cityName != cubitData.cityName) {
-        setState(() {
-          _selectedCity = City(
-            id: 0, // Dummy ID
-            cityName: cubitData.cityName,
-            provinceName: cubitData.provinceName,
-            latitude: cubitData.latitude,
-            longitude: cubitData.longitude,
-          );
-          _selectedProvince = _selectedCity!.provinceName;
-        });
-        // If we have a city, we need to load the cities for that province
-        if (_selectedProvince != null) {
-          _loadCities(_selectedProvince!);
-        }
-      }
+      // Hanya set province — JANGAN buat dummy City di sini.
+      // Dummy City dengan id=0 menyebabkan Flutter assertion error karena
+      // DropdownButton.value tidak ditemukan dalam items (list masih kosong).
+      // _selectedCity akan di-set setelah kota real berhasil dimuat.
+      setState(() {
+        _selectedProvince = cubitData.provinceName;
+      });
+      _loadCities(
+        cubitData.provinceName,
+        preselectCityName: cubitData.cityName,
+      );
     }
   }
 
@@ -87,7 +81,10 @@ class _LocationStepState extends State<LocationStep> {
     }
   }
 
-  Future<void> _loadCities(String provinceName) async {
+  Future<void> _loadCities(
+    String provinceName, {
+    String? preselectCityName,
+  }) async {
     try {
       setState(() => _isLoadingCities = true);
       final repo = context.read<CityRepository>();
@@ -97,6 +94,19 @@ class _LocationStepState extends State<LocationStep> {
         setState(() {
           _cities = cities;
           _isLoadingCities = false;
+
+          // Jika ada cityName yang perlu di-preselect (back navigation),
+          // cari objek City real dari list — bukan dummy.
+          if (preselectCityName != null) {
+            try {
+              _selectedCity = cities.firstWhere(
+                (c) => c.cityName == preselectCityName,
+              );
+            } catch (_) {
+              // Kota tidak ditemukan, biarkan dropdown kosong
+              _selectedCity = null;
+            }
+          }
         });
       }
     } catch (e) {
