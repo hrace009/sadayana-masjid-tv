@@ -1,0 +1,82 @@
+00:00 +0: loading D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/setup_wizard/setup_wizard_page_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: SetupWizardPage Widget Tests Renders WelcomeStep initially (step 0)
+00:00 +1: SetupWizardPage Widget Tests Renders IdentityStep at step 1
+00:00 +2: SetupWizardPage Widget Tests Renders LocationStep at step 2
+00:00 +3: SetupWizardPage Widget Tests Renders PreviewStep at step 3
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 12 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/lib/presentation/pages/setup_wizard/steps/preview_step.dart:211:14
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#fa4b2 relayoutBoundary=up12 OVERFLOWING:
+  creator: Row ← Padding ← Column ← Expanded ← Row ← Padding ← Padding ← DecoratedBox ← Container ←
+    BackdropFilter ← ClipRRect ← Container ← ⋯
+  parentData: offset=Offset(0.0, 4.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=254.8, 0.0<=h<=Infinity)
+  size: Size(254.8, 34.0)
+  direction: horizontal
+  mainAxisAlignment: spaceBetween
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 36 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/lib/presentation/pages/setup_wizard/steps/preview_step.dart:211:14
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#43a14 relayoutBoundary=up12 OVERFLOWING:
+  creator: Row ← Padding ← Column ← Expanded ← Row ← Padding ← Padding ← DecoratedBox ← Container ←
+    BackdropFilter ← ClipRRect ← Container ← ⋯
+  parentData: offset=Offset(0.0, 4.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=254.8, 0.0<=h<=Infinity)
+  size: Size(254.8, 34.0)
+  direction: horizontal
+  mainAxisAlignment: spaceBetween
+  mainAxisSize: max
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +3 -1: SetupWizardPage Widget Tests Renders PreviewStep at step 3 [E]
+  Test failed. See exception logs above.
+  The test description was: Renders PreviewStep at step 3
+  
+00:00 +3 -1: SetupWizardPage Widget Tests Step 0: "Mulai Setup" button interactions
+00:01 +4 -1: (tearDownAll)
+00:01 +4 -1: Some tests failed.

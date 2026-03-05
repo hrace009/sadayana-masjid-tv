@@ -1,0 +1,413 @@
+00:00 +0: loading D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart
+00:00 +0: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: (setUpAll)
+00:00 +0: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+00:00 +1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +0 -1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled [E]
+  Test failed. See exception logs above.
+  The test description was: Renders PIN gate UI when PIN is enabled
+  
+  This test failed after it had already completed.
+  Make sure to use a matching library which informs the test runner
+  of pending async work.
+  
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Renders PIN gate UI when PIN is enabled
+  
+00:00 +0 -1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Shows error text on invalid PIN
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown while running async test code:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "PIN yang Anda masukkan salah.": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:187:31)
+#1      _expect (package:matcher/src/expect/expect.dart:182:3)
+#2      expect (package:matcher/src/expect/expect.dart:65:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:473:18)
+#4      main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart:101:9)
+<asynchronous suspension>
+<asynchronous suspension>
+#6      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart:80:7)
+<asynchronous suspension>
+#7      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#8      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 2 frames from dart:async and package:stack_trace)
+
+The exception was caught asynchronously.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +0 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Shows error text on invalid PIN [E]
+  Test failed. See exception logs above.
+  The test description was: Shows error text on invalid PIN
+  
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Shows error text on invalid PIN
+  
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Shows error text on invalid PIN
+  
+00:01 +1 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN
+00:01 +1 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+00:01 +2 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+00:01 +2 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +1 -3: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+00:01 +1 -3: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN [E]
+  Test failed. See exception logs above.
+  The test description was: Navigates to menu on valid PIN
+  
+  This test failed after it had already completed.
+  Make sure to use a matching library which informs the test runner
+  of pending async work.
+  
+00:01 +1 -3: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -4: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+00:01 +0 -4: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly [E]
+  Test failed. See exception logs above.
+  The test description was: Renders categories correctly
+  
+  This test failed after it had already completed.
+  Make sure to use a matching library which informs the test runner
+  of pending async work.
+  
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Renders categories correctly
+  
+00:01 +1 -4: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu immediately if PIN is disabled
+00:01 +1 -4: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -5: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu immediately if PIN is disabled
+00:01 +0 -5: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers [E]
+  Test failed. See exception logs above.
+  The test description was: Ihtiyat section shows 7 DPadSteppers
+  
+  This test failed after it had already completed.
+  Make sure to use a matching library which informs the test runner
+  of pending async work.
+  
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Ihtiyat section shows 7 DPadSteppers
+  
+00:01 +0 -5: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -5: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN [E]
+  Test failed. See exception logs above.
+  The test description was: Navigates to menu on valid PIN
+  
+00:01 +1 -5: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:01 +1 -5: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu immediately if PIN is disabled
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -6: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:01 +0 -6: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu immediately if PIN is disabled [E]
+  Test failed. See exception logs above.
+  The test description was: Navigates to menu immediately if PIN is disabled
+  
+  This test failed after it had already completed.
+  Make sure to use a matching library which informs the test runner
+  of pending async work.
+  
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Navigates to menu immediately if PIN is disabled
+  
+00:01 +0 -6: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown while running async test code:
+Expected: exactly 5 matching candidates
+  Actual: _TypeWidgetFinder:<Found 7 widgets with type "DPadStepper": [
+            DPadStepper(state: _DPadStepperState#f13e4(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#53e60(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#f27e5(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#01d04(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#f53bc(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#f2d37(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#6732a(ticker inactive)),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:187:31)
+#1      _expect (package:matcher/src/expect/expect.dart:182:3)
+#2      expect (package:matcher/src/expect/expect.dart:65:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:473:18)
+#4      main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart:105:9)
+<asynchronous suspension>
+<asynchronous suspension>
+#6      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart:97:7)
+<asynchronous suspension>
+#7      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#8      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 2 frames from dart:async and package:stack_trace)
+
+The exception was caught asynchronously.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -7: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers [E]
+  Test failed. See exception logs above.
+  The test description was: Iqomah section shows 5 DPadSteppers
+  
+00:01 +0 -7: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: (tearDownAll)
+00:01 +0 -7: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+Error: google_fonts was unable to load font Poppins-SemiBold because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-SemiBold was not found
+in the application assets. Ensure Poppins-SemiBold.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +0 -7: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers [E]
+  Test failed. See exception logs above.
+  The test description was: Iqomah section shows 5 DPadSteppers
+  
+Error: google_fonts was unable to load font Poppins-Regular because the following exception occurred:
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your pubspec's assets.
+
+There is likely something wrong with your test. Please see https://github.com/flutter/packages/blob/main/packages/google_fonts/example/test for examples of how to test with google_fonts.
+If troubleshooting doesn't solve the problem, please file an issue at https://github.com/flutter/flutter/issues/new/choose.
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test (but after the test had completed):
+Exception: GoogleFonts.config.allowRuntimeFetching is false but font Poppins-Regular was not found
+in the application assets. Ensure Poppins-Regular.ttf exists in a folder that is included in your
+pubspec's assets.
+
+When the exception was thrown, this was the stack:
+#0      loadFontIfNecessary (package:google_fonts/src/google_fonts_base.dart:177:7)
+<asynchronous suspension>
+#1      googleFontsTextStyle.<anonymous closure> (package:google_fonts/src/google_fonts_base.dart:110:22)
+<asynchronous suspension>
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: Iqomah section shows 5 DPadSteppers
+  
+00:01 +0 -7: Some tests failed.

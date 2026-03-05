@@ -1,0 +1,206 @@
+# 🕌 Miqotul Khoir TV
+
+![Platform: Android TV](https://img.shields.io/badge/platform-Android%20TV-green)
+![Framework: Flutter](https://img.shields.io/badge/framework-Flutter-blue)
+![Architecture: Clean Architecture](https://img.shields.io/badge/architecture-Clean%20Architecture-purple)
+![Status: In Development](https://img.shields.io/badge/status-In%20Development-yellow)
+![License: GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue)
+
+Aplikasi **jam masjid digital** dan papan informasi jadwal sholat berbasis Android TV. Dirancang untuk menggantikan jam jadwal sholat konvensional di masjid atau musala dengan tampilan yang indah dan mudah dibaca dari jarak jauh.
+
+Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi satu kali, dan aplikasi ini menghitung jadwal sholat secara **presisi abadi** tanpa perlu terhubung ke internet. Kompatibel dengan **TV Android**, **TV Pintar**, dan **Kotak Dekoder**.
+
+---
+
+## ✨ Fitur Utama
+
+### 🕐 Jadwal Sholat Real-Time (Offline)
+
+- Kalkulasi astronomis menggunakan library `adhan-dart` — **100% offline**
+- Mendukung 7 waktu sholat: **Subuh, Syuruq, Dhuha, Dzuhur, Ashar, Maghrib, Isya**
+- Standar **Kemenag RI (SIHAT)** — Subuh 20°, Isya 18°, Ihtiyat bawaan +2 menit
+- Koreksi Ketinggian Tempat (**DPL/Elevasi**) — akurasi Syuruq & Maghrib untuk kota dataran tinggi
+- Koreksi manual (Ihtiyat) per waktu sholat (-30 s/d +30 menit)
+- **Penanganan Jum'at** — label, durasi iqomah, dan durasi layar mati khusus hari Jumat
+- Konversi tanggal Hijriah dengan adjustment manual (H-1 / H+1)
+
+### 🔄 State Machine — 5 Mode Tampilan Otomatis
+
+| State | Trigger | Tampilan |
+|-------|---------|----------|
+| **Standby** | Default | Jam besar, tanggal, jadwal sholat, running text |
+| **Pre-Adzan** | H-10 menit sebelum waktu sholat | Countdown timer + highlight jadwal terkait |
+| **Adzan** | Waktu sholat tiba | Visual "SAATNYA ADZAN" + audio opsional |
+| **Iqomah** | Setelah adzan selesai | Countdown timer iqomah (durasi per sholat) |
+| **Sholat** | Timer iqomah habis | Layar gelap / jam redup (OLED safe) |
+
+### 📺 Dioptimalkan untuk Android TV
+
+- **D-Pad Navigation First** — semua elemen fokusable via remote control
+- Resolusi 16:9 Landscape (1920×1080 FHD)
+- Anti screen burn-in mechanism (gradient shift periodik)
+- Minimum tap target 48×48 logical pixels (accessibility)
+
+### 🎨 Islamic Glassmorphism Design
+
+- Tema **Deep Emerald Green** dengan aksen **Gold/Amber**
+- Efek glassmorphism (backdrop blur + semi-transparent)
+- Typography menggunakan font **Poppins** via Google Fonts
+- Responsive UI dengan `flutter_screenutil`
+
+### ⚙️ Setup Wizard & Settings
+
+- **4-step first-run wizard**: Welcome → Identitas Masjid → Lokasi → Konfirmasi
+- Pilih kota dari database **514 kota, 34 provinsi** Indonesia (pre-populated, termasuk data elevasi)
+- Menu settings dengan 9 kategori: Identitas, Ihtiyat, Iqomah, Dhuha, Timing, Running Text, Kas Masjid, Keamanan, Reset
+- Menu settings dilindungi PIN opsional (SHA-256)
+- **Informasi Kas Masjid** — tampilkan saldo, pemasukan, pengeluaran di layar utama (opsional)
+- Running text (marquee) yang dapat diedit
+
+---
+
+## 🏗️ Arsitektur
+
+Proyek ini menggunakan **Clean Architecture** dengan layer yang terpisah jelas:
+
+```
+lib/
+├── core/              # Utilities, constants, theme system
+│   └── theme/         # Islamic colors, typography, ThemeData
+├── data/              # SQLite models, repositories, data sources
+│   ├── datasources/   # DatabaseHelper, local data sources
+│   ├── models/        # Data models (fromMap/toMap)
+│   └── repositories/  # Repository implementations
+├── domain/            # Business logic (pure Dart)
+│   ├── entities/      # Immutable domain entities
+│   └── repositories/  # Abstract repository interfaces
+└── presentation/      # UI layer
+    └── widgets/       # Reusable UI components
+```
+
+### Prinsip Arsitektur
+
+- **Dependency Rule** — outer layer depends on inner, never reverse
+- **State Management** — Cubit (dari `flutter_bloc`)
+- **Data Persistence** — SQLite offline-first, single source of truth
+- **Repository Pattern** — abstraksi akses data via interface
+
+---
+
+## 📦 Tech Stack
+
+| Kategori | Package | Kegunaan |
+|----------|---------|----------|
+| **Framework** | Flutter (Dart SDK ^3.11.0) | UI framework |
+| **Database** | `sqflite` | SQLite lokal |
+| **State Management** | `flutter_bloc` / Cubit | Reactive state |
+| **Prayer Calculation** | `adhan` | Kalkulasi astronomi |
+| **Calendar** | `hijri` | Konversi tanggal Hijriah |
+| **UI Scaling** | `flutter_screenutil` | Responsive (1920×1080 baseline) |
+| **Typography** | `google_fonts` | Poppins font |
+| **Running Text** | `marquee` | Horizontal scrolling ticker |
+| **Formatting** | `intl` | Format tanggal & angka Rupiah (id_ID) |
+| **Equality** | `equatable` | Value equality untuk entities |
+| **Security** | `crypto` | SHA-256 PIN hashing |
+| **Anti-Sleep** | `wakelock_plus` | Mencegah layar TV sleep ⚠️ *belum ditambahkan* |
+
+---
+
+## 📊 Status Implementasi
+
+| # | Plan | Scope | Status |
+|:-:|------|-------|:------:|
+| 01 | Database Infrastructure | DatabaseHelper, DDL, migration v1-v6, seed 514 kota | ✅ |
+| 02 | Data Layer | Entities, models, repositories, PIN hashing | ✅ |
+| 03 | Theme System | Colors, typography, ThemeData, ScreenUtil, TV safe area | ✅ |
+| 04 | UI Components | GlassmorphismCard, FocusableWidget, IslamicBackground, RunningText | ✅ |
+| 05 | Prayer Calculation | PrayerTime entities, CalculateUseCase, Kemenag SIHAT, DPL | ✅ |
+| 06 | Prayer Cubit | PrayerTimeCubit, states, midnight timer | ✅ |
+| 07 | State Evaluation | DisplayState classes (5 states), EvaluateUseCase | ✅ |
+| 08 | Display State Machine | DisplayStateCubit, tick timer, power recovery | ✅ |
+| 09 | Setup Wizard Logic | SetupWizardCubit, validation, step navigation | ✅ |
+| 10 | Setup Wizard UI | 4 step pages, city picker, prayer preview | ✅ |
+| 11 | Settings Logic | SettingsCubit, auto-save, PIN management | ✅ |
+| 12 | Settings UI | Menu pages, DPadStepper, PinInput, 9 categories | ✅ |
+| 13 | Main Display UI | 5 layout states, AnimatedSwitcher, D-Pad menu access | ✅ |
+| — | Kemenag Method Fix | Ganti MUIS → SIHAT, fix ihtiyat bawaan +2 menit | ✅ |
+| — | Elevation/DPL | Koreksi ketinggian tempat untuk akurasi Maghrib/Syuruq | ✅ |
+| — | Jum'at Handling | Label dinamis, durasi layar & iqomah khusus Jum'at | ✅ |
+| — | Treasury/Kas Masjid | Widget informasi saldo kas di Standby Layout | ✅ |
+| — | Rebranding | SMD → Miqotul Khoir TV, seluruh dokumen & kode | ✅ |
+
+> **Legend**: ✅ Completed
+
+### Test Coverage
+
+| Layer | Tests |
+|-------|:-----:|
+| Data (models, repositories, database) | 22 |
+| Theme (colors, typography, theme) | 42 |
+| Domain & Business Logic (Prayer, State, Setup, Settings, Jum'at) | 80+ |
+| Widgets & Presentation (Cubit, UI components, widgets) | 62+ |
+| **Total** | **206** |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter SDK ^3.11.0
+- Android Studio / VS Code
+- Android TV emulator atau perangkat fisik
+
+### Instalasi
+
+```bash
+# Clone repository
+git clone https://github.com/GulajavaMinistudio/miqotul-khoir-tv.git
+cd miqotul-khoir-tv
+
+# Install dependencies
+flutter pub get
+
+# Run tests
+flutter test --reporter=expanded
+
+# Run di Android TV emulator
+flutter run
+```
+
+---
+
+## 📁 Dokumentasi
+
+| Dokumen | Deskripsi |
+|---------|-----------|
+| [`Product_Requirement_Document.md`](Product_Requirement_Document.md) | PRD lengkap dengan functional & non-functional requirements |
+| [`docs/SPECIFICATION_OVERVIEW.md`](docs/SPECIFICATION_OVERVIEW.md) | Overview 6 technical specifications |
+| [`docs/ARCHITECTURE_PATTERNS.md`](docs/ARCHITECTURE_PATTERNS.md) | State machine, offline-first, timer patterns |
+| [`docs/UI_UX_GUIDE.md`](docs/UI_UX_GUIDE.md) | Android TV design, ScreenUtil, glassmorphism |
+| [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md) | Testing strategies (SQLite, Cubit, widget) |
+| [`plan/README.md`](plan/README.md) | Index 12 implementation plans |
+
+---
+
+## 🎯 Target Users
+
+- **Admin DKM (Primary Operator)** — Mengatur jadwal sholat dan konten via remote TV
+- **Jamaah (Viewer)** — Melihat waktu sholat, iqomah, dan informasi masjid
+
+---
+
+## 📄 License
+
+Proyek ini dilisensikan di bawah **GNU General Public License v3.0 (GPL-3.0)**.
+
+Artinya Anda bebas untuk:
+- ✅ Menggunakan, mempelajari, dan memodifikasi kode ini
+- ✅ Mendistribusikan ulang kode ini
+- ✅ Menggunakan untuk keperluan komersial
+
+Dengan syarat:
+- 📋 Kode turunan (modifikasi) **wajib** dilisensikan dengan GPL v3 juga
+- 📋 Source code wajib tersedia / open source
+
+Lihat file [LICENSE](LICENSE) untuk teks lengkap lisensi.

@@ -1,0 +1,22 @@
+Analyzing 2 items...                                            
+
+  error - Target of URI doesn't exist: 'step_indicator_widget.dart' - lib\presentation\pages\setup_wizard\setup_wizard_page.dart:6:8 - uri_does_not_exist
+  error - The method 'StepIndicatorWidget' isn't defined for the type 'SetupWizardView' - lib\presentation\pages\setup_wizard\setup_wizard_page.dart:73:28 - undefined_method
+  error - The getter 'data' isn't defined for the type 'SetupWizardState' - lib\presentation\pages\setup_wizard\steps\identity_step.dart:26:63 - undefined_getter
+  error - The getter 'data' isn't defined for the type 'SetupWizardState' - lib\presentation\pages\setup_wizard\steps\identity_step.dart:28:25 - undefined_getter
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\identity_step.dart:119:58 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\identity_step.dart:121:60 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\identity_step.dart:218:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\identity_step.dart:271:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\identity_step.dart:284:40 - deprecated_member_use
+  error - The getter 'data' isn't defined for the type 'SetupWizardState' - lib\presentation\pages\setup_wizard\steps\location_step.dart:38:62 - undefined_getter
+  error - The name 'SetupWizardState' isn't a type, so it can't be used as a type argument - lib\presentation\pages\setup_wizard\steps\location_step.dart:191:43 - non_type_as_type_argument
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\location_step.dart:270:54 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\location_step.dart:297:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\location_step.dart:348:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\location_step.dart:361:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\preview_step.dart:248:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\preview_step.dart:261:40 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\welcome_step.dart:88:49 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\presentation\pages\setup_wizard\steps\welcome_step.dart:89:50 - deprecated_member_use
+

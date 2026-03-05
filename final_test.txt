@@ -1,0 +1,123 @@
+00:00 +0: loading D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart
+00:00 +0: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Renders label, value, and suffix correctly
+00:00 +1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:00 +2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Increments value when add button is tapped
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: <11>
+  Actual: <null>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart:55:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart line 55
+The test description was:
+  Increments value when add button is tapped
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +2 -1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +2 -1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Increments value when add button is tapped [E]
+  Test failed. See exception logs above.
+  The test description was: Increments value when add button is tapped
+  
+00:00 +2 -1: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Decrements value when remove button is tapped
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: <9>
+  Actual: <null>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart:77:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart line 77
+The test description was:
+  Decrements value when remove button is tapped
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +2 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +2 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Decrements value when remove button is tapped [E]
+  Test failed. See exception logs above.
+  The test description was: Decrements value when remove button is tapped
+  
+00:00 +3 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +4 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +5 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:00 +6 -2: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 123 pixels on the right.
+
+The relevant error-causing widget was:
+  Row
+  Row:file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/lib/presentation/pages/settings/settings_menu_page.dart:140:36
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#b0a14 relayoutBoundary=up15 OVERFLOWING:
+  creator: Row ← Padding ← DecoratedBox ← Container ← BackdropFilter ← ClipRRect ← Container ←
+    GlassmorphismCard ← ConstrainedBox ← Listener ← _GestureSemantics ← RawGestureDetector ← ⋯
+  parentData: offset=Offset(25.0, 17.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=301.0, 14.0<=h<=Infinity)
+  size: Size(301.0, 34.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+pumpAndSettle timed out
+
+When the exception was thrown, this was the stack:
+#0      WidgetTester.pumpAndSettle.<anonymous closure> (package:flutter_test/src/widget_tester.dart:717:11)
+<asynchronous suspension>
+#1      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#2      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart:55:7)
+<asynchronous suspension>
+#3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Renders categories correctly
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +6 -3: D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly [E]
+  Test failed. See exception logs above.
+  The test description was: Renders categories correctly
+  
+00:03 +6 -3: Some tests failed.

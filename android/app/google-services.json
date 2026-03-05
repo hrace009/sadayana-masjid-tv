@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592645241994",
+    "project_id": "mqotulkhoir7",
+    "storage_bucket": "mqotulkhoir7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592645241994:android:7b85dfaaa118a055454173",
+        "android_client_info": {
+          "package_name": "gulajava.mini.miqotul_khoir_tv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqpubr2S4OqY1Dp2PeX85J_0Jd6sL2I5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

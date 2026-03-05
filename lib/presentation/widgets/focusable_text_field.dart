@@ -1,0 +1,146 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../core/theme/islamic_colors.dart';
+import '../../core/theme/islamic_typography.dart';
+import 'focusable_widget.dart';
+
+/// TextField khusus Android TV yang mendukung D-Pad navigation.
+///
+/// Menggunakan kombinasi dua FocusNode:
+/// 1. Container FocusNode: Menangkap event navigasi D-Pad dan menampilkan highlight/border.
+/// 2. TextField FocusNode: Menangkap keyboard input.
+///
+/// Cara kerja:
+/// - Saat user menavigasi ke field menggunakan D-Pad, container di-highlight.
+/// - Saat user menekan tombol Select / Tengah / OK pada D-Pad, TextField diberikan fokus
+///   sehingga virtual keyboard (Soft Keyboard) muncul.
+/// - Setelah keyboard ditutup, fokus dikembalikan kembali ke container untuk navigasi D-Pad lanjutan.
+class FocusableTextField extends StatefulWidget {
+  final TextEditingController controller;
+  final String hintText;
+  final IconData? icon;
+  final int maxLines;
+  final int minLines;
+  final bool autofocus;
+  final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
+  final TextInputType keyboardType;
+
+  const FocusableTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    this.icon,
+    this.maxLines = 1,
+    this.minLines = 1,
+    this.autofocus = false,
+    this.onChanged,
+    this.onSubmitted,
+    this.keyboardType = TextInputType.text,
+  });
+
+  @override
+  State<FocusableTextField> createState() => _FocusableTextFieldState();
+}
+
+class _FocusableTextFieldState extends State<FocusableTextField> {
+  late FocusNode _containerFocusNode;
+  late FocusNode _textFieldFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _containerFocusNode = FocusNode();
+    _textFieldFocusNode = FocusNode();
+
+    // Ketika textField kehilangan fokus (misalnya keyboard di tutup / back button)
+    _textFieldFocusNode.addListener(() {
+      if (!_textFieldFocusNode.hasFocus) {
+        if (mounted) {
+          // Kembalikan fokus ke container agar D-Pad kembali bisa navigasi antar field
+          _containerFocusNode.requestFocus();
+        }
+      }
+      // Trigger re-render untuk update UI border
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _containerFocusNode.dispose();
+    _textFieldFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FocusableWidget(
+      focusNode: _containerFocusNode,
+      autofocus: widget.autofocus,
+      onSelect: () {
+        // Saat D-Pad Select/Tengah ditekan, minta fokus ke text field dan paksa buka keyboard
+        _textFieldFocusNode.requestFocus();
+        SystemChannels.textInput.invokeMethod('TextInput.show');
+      },
+      builder: (isContainerFocused) {
+        // Highlight border berwarna Gold/Emerald jika container terpilih ATAU sedang mengetik
+        final isFocused = isContainerFocused || _textFieldFocusNode.hasFocus;
+
+        return Container(
+          decoration: BoxDecoration(
+            color: isFocused
+                ? IslamicColors.surfaceLight
+                : IslamicColors.surfaceDark,
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color: isFocused
+                  ? IslamicColors.goldAmber
+                  : IslamicColors.glassBorder,
+              width: 1.5,
+            ),
+            boxShadow: isFocused
+                ? [
+                    BoxShadow(
+                      color: IslamicColors.goldAmber.withValues(alpha: 0.2),
+                      blurRadius: 12,
+                    ),
+                  ]
+                : null,
+          ),
+          child: TextField(
+            controller: widget.controller,
+            focusNode: _textFieldFocusNode,
+            maxLines: widget.maxLines,
+            minLines: widget.minLines,
+            keyboardType: widget.keyboardType,
+            style: IslamicTypography.body(color: IslamicColors.textPrimary),
+            cursorColor: IslamicColors.goldAmber,
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              hintStyle: IslamicTypography.body(color: IslamicColors.textMuted),
+              prefixIcon: widget.icon != null
+                  ? Icon(
+                      widget.icon,
+                      color: isFocused
+                          ? IslamicColors.goldAmber
+                          : IslamicColors.textSecondary,
+                    )
+                  : null,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 16.h,
+                horizontal: 16.w,
+              ),
+            ),
+            onChanged: widget.onChanged,
+            onSubmitted: widget.onSubmitted,
+          ),
+        );
+      },
+    );
+  }
+}

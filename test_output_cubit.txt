@@ -1,0 +1,47 @@
+00:00 +0: loading D:/AndroidProject/LatihanFlutter/sadayana_masjid_tv/test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart
+00:00 +0: PrayerTimeCubit initial state is PrayerTimeInitial
+00:00 +1: PrayerTimeCubit emits [PrayerTimeLoading, PrayerTimeLoaded] when initialized and use case succeeds
+00:00 +1 -1: PrayerTimeCubit emits [PrayerTimeLoading, PrayerTimeLoaded] when initialized and use case succeeds [E]
+  Expected: [<<Instance of 'PrayerTimeLoading'>>, <<Instance of 'PrayerTimeLoaded'>>]
+    Actual: [
+              PrayerTimeLoaded:PrayerTimeLoaded(MockDailyPrayerTimes, 2026-02-19 13:12:39.448281)
+            ]
+     Which: at location [0] is PrayerTimeLoaded:<PrayerTimeLoaded(MockDailyPrayerTimes, 2026-02-19 13:12:39.448281)> which is not an instance of 'PrayerTimeLoading'
+  
+  package:matcher                              expect
+  package:bloc_test/src/bloc_test.dart 218:16  testBloc.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                   _Completer.completeError
+  package:bloc_test/src/bloc_test.dart 255:43  _runZonedGuarded.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                   _CustomZone.registerBinaryCallback
+  package:bloc_test/src/bloc_test.dart 252:5   _runZonedGuarded.<fn>
+  dart:async                                   runZonedGuarded
+  package:bloc_test/src/bloc_test.dart 251:3   _runZonedGuarded
+  package:bloc_test/src/bloc_test.dart 198:11  testBloc
+  package:bloc_test/src/bloc_test.dart 156:13  blocTest.<fn>
+  
+00:00 +1 -1: PrayerTimeCubit emits [PrayerTimeLoading, PrayerTimeError] when initialized and use case fails
+00:00 +1 -2: PrayerTimeCubit emits [PrayerTimeLoading, PrayerTimeError] when initialized and use case fails [E]
+  Expected: [
+              <<Instance of 'PrayerTimeLoading'>>,
+              <<Instance of 'PrayerTimeError'> with `message`: contains 'Failed to calculate'>
+            ]
+    Actual: []
+     Which: at location [0] is [] which shorter than expected
+  
+  package:matcher                              expect
+  package:bloc_test/src/bloc_test.dart 218:16  testBloc.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                   _Completer.completeError
+  package:bloc_test/src/bloc_test.dart 255:43  _runZonedGuarded.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                   _CustomZone.registerBinaryCallback
+  package:bloc_test/src/bloc_test.dart 252:5   _runZonedGuarded.<fn>
+  dart:async                                   runZonedGuarded
+  package:bloc_test/src/bloc_test.dart 251:3   _runZonedGuarded
+  package:bloc_test/src/bloc_test.dart 198:11  testBloc
+  package:bloc_test/src/bloc_test.dart 156:13  blocTest.<fn>
+  
+00:00 +1 -2: PrayerTimeCubit recalculate() triggers reload sequence
+00:00 +2 -2: Some tests failed.
