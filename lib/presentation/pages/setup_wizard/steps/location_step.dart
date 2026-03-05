@@ -283,34 +283,55 @@ class _LocationStepState extends State<LocationStep> {
     required String Function(T) itemLabel,
     required Function(T?) onChanged,
   }) {
+    // DropdownButton tidak menangani LogicalKeyboardKey.select (tombol D-Pad center
+    // Android TV), dan FocusableWidget memblokir key event sebelum sampai ke
+    // DropdownButton. Solusi TV-friendly: buka dialog picker saat Select/Enter ditekan.
+    void openPicker() {
+      if (isDisabled || items.isEmpty) return;
+      showDialog<T>(
+        context: context,
+        barrierDismissible: true,
+        builder: (_) => _DropdownPickerDialog<T>(
+          title: hint,
+          items: items,
+          selectedItem: value,
+          itemLabel: itemLabel,
+        ),
+      ).then((selected) {
+        if (selected != null) onChanged(selected);
+      });
+    }
+
     return FocusableWidget(
+      onSelect: (isDisabled || isLoading) ? null : openPicker,
       builder: (isFocused) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          decoration: BoxDecoration(
-            color: isFocused
-                ? IslamicColors.surfaceLight
-                : IslamicColors.surfaceDark,
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(
+        return GestureDetector(
+          onTap: (isDisabled || isLoading) ? null : openPicker,
+          child: Container(
+            height: 56.h,
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            decoration: BoxDecoration(
               color: isFocused
-                  ? IslamicColors.goldAmber
-                  : IslamicColors.glassBorder,
-              width: 1.5,
+                  ? IslamicColors.surfaceLight
+                  : IslamicColors.surfaceDark,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: isFocused
+                    ? IslamicColors.goldAmber
+                    : IslamicColors.glassBorder,
+                width: 1.5,
+              ),
+              boxShadow: isFocused
+                  ? [
+                      BoxShadow(
+                        color: IslamicColors.goldAmber.withValues(alpha: 0.2),
+                        blurRadius: 12,
+                      ),
+                    ]
+                  : null,
             ),
-            boxShadow: isFocused
-                ? [
-                    BoxShadow(
-                      color: IslamicColors.goldAmber.withValues(alpha: 0.2),
-                      blurRadius: 12,
-                    ),
-                  ]
-                : null,
-          ),
-          child: isLoading
-              ? SizedBox(
-                  height: 56.h,
-                  child: Center(
+            child: isLoading
+                ? Center(
                     child: SizedBox(
                       width: 24.w,
                       height: 24.w,
@@ -319,41 +340,32 @@ class _LocationStepState extends State<LocationStep> {
                         color: IslamicColors.goldAmber,
                       ),
                     ),
-                  ),
-                )
-              : DropdownButtonHideUnderline(
-                  child: DropdownButton<T>(
-                    value: value,
-                    hint: Text(
-                      hint,
-                      style: IslamicTypography.body(
-                        color: isDisabled
-                            ? IslamicColors.textMuted.withValues(alpha: 0.5)
-                            : IslamicColors.textMuted,
+                  )
+                : Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          value != null ? itemLabel(value) : hint,
+                          style: IslamicTypography.body(
+                            color: value != null
+                                ? IslamicColors.textPrimary
+                                : (isDisabled
+                                      ? IslamicColors.textMuted.withValues(
+                                          alpha: 0.5,
+                                        )
+                                      : IslamicColors.textMuted),
+                          ),
+                        ),
                       ),
-                    ),
-                    isExpanded: true,
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: isDisabled
-                          ? IslamicColors.glassBorder
-                          : IslamicColors.textSecondary,
-                    ),
-                    dropdownColor: IslamicColors.surfaceDark,
-                    style: IslamicTypography.body(
-                      color: IslamicColors.textPrimary,
-                    ),
-                    items: isDisabled
-                        ? []
-                        : items.map((T item) {
-                            return DropdownMenuItem<T>(
-                              value: item,
-                              child: Text(itemLabel(item)),
-                            );
-                          }).toList(),
-                    onChanged: isDisabled ? null : onChanged,
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: isDisabled
+                            ? IslamicColors.glassBorder
+                            : IslamicColors.textSecondary,
+                      ),
+                    ],
                   ),
-                ),
+          ),
         );
       },
     );
@@ -415,6 +427,120 @@ class _LocationStepState extends State<LocationStep> {
           ),
         );
       },
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Dialog picker yang fully D-Pad navigable untuk Android TV.
+// Menggantikan DropdownButton yang tidak menangani LogicalKeyboardKey.select.
+// ---------------------------------------------------------------------------
+
+class _DropdownPickerDialog<T> extends StatelessWidget {
+  final String title;
+  final List<T> items;
+  final T? selectedItem;
+  final String Function(T) itemLabel;
+
+  const _DropdownPickerDialog({
+    super.key,
+    required this.title,
+    required this.items,
+    this.selectedItem,
+    required this.itemLabel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: IslamicColors.surfaceDark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.r),
+        side: BorderSide(color: IslamicColors.glassBorder),
+      ),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 520.w, maxHeight: 600.h),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Header
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+              child: Text(
+                title,
+                style: IslamicTypography.title(
+                  color: IslamicColors.goldAmber,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Divider(color: IslamicColors.glassBorder, height: 1, thickness: 1),
+            // Scrollable list
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  final isSelected = item == selectedItem;
+                  // Autofocus: item yang sudah dipilih, atau item pertama jika belum ada pilihan.
+                  // Flutter akan otomatis scroll ListView ke item yang autofocus.
+                  final autofocus =
+                      isSelected || (selectedItem == null && index == 0);
+                  return FocusableWidget(
+                    autofocus: autofocus,
+                    onSelect: () => Navigator.of(context).pop(item),
+                    builder: (isFocused) {
+                      return GestureDetector(
+                        onTap: () => Navigator.of(context).pop(item),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24.w,
+                            vertical: 14.h,
+                          ),
+                          color: isFocused
+                              ? IslamicColors.goldAmber.withValues(alpha: 0.15)
+                              : (isSelected
+                                    ? IslamicColors.surfaceLight.withValues(
+                                        alpha: 0.4,
+                                      )
+                                    : Colors.transparent),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 24.r,
+                                child: isSelected
+                                    ? Icon(
+                                        Icons.check,
+                                        color: IslamicColors.goldAmber,
+                                        size: 20.r,
+                                      )
+                                    : null,
+                              ),
+                              SizedBox(width: 12.w),
+                              Expanded(
+                                child: Text(
+                                  itemLabel(item),
+                                  style: IslamicTypography.body(
+                                    color: isSelected
+                                        ? IslamicColors.goldAmber
+                                        : IslamicColors.textPrimary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

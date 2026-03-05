@@ -60,9 +60,17 @@ class _IdentityStepState extends State<IdentityStep> {
 
         return LayoutBuilder(
           builder: (context, constraints) {
+            // Tambahkan bottom padding sebesar tinggi keyboard agar semua
+            // konten (termasuk tombol navigasi) bisa di-scroll ke atas keyboard.
+            final keyboardHeight = MediaQuery.viewInsetsOf(context).bottom;
             return SingleChildScrollView(
+              padding: EdgeInsets.only(bottom: keyboardHeight),
               child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                // Kurangi minHeight dengan keyboardHeight agar Column tidak
+                // mem-push konten ke bawah viewport saat keyboard muncul.
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight - keyboardHeight,
+                ),
                 child: Center(
                   child: SizedBox(
                     width: 700.w,

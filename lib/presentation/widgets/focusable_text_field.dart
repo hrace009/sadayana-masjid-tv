@@ -55,9 +55,23 @@ class _FocusableTextFieldState extends State<FocusableTextField> {
     _containerFocusNode = FocusNode();
     _textFieldFocusNode = FocusNode();
 
-    // Ketika textField kehilangan fokus (misalnya keyboard di tutup / back button)
+    // Ketika textField mendapat atau kehilangan fokus
     _textFieldFocusNode.addListener(() {
-      if (!_textFieldFocusNode.hasFocus) {
+      if (_textFieldFocusNode.hasFocus) {
+        // Scroll agar field ini terlihat di atas keyboard.
+        // Delay 200ms untuk memberi waktu keyboard selesai muncul
+        // dan layout (viewInsets padding) selesai di-recalculate.
+        Future.delayed(const Duration(milliseconds: 200), () {
+          if (mounted && _textFieldFocusNode.hasFocus) {
+            Scrollable.ensureVisible(
+              context,
+              alignment: 0.3,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
+          }
+        });
+      } else {
         if (mounted) {
           // Kembalikan fokus ke container agar D-Pad kembali bisa navigasi antar field
           _containerFocusNode.requestFocus();

@@ -62,6 +62,10 @@ class SetupWizardView extends StatelessWidget {
         }
 
         return Scaffold(
+          // Jangan biarkan Scaffold menyusutkan body saat keyboard muncul.
+          // Penanganan keyboard dilakukan secara manual via viewInsetsOf padding
+          // pada SingleChildScrollView di setiap step yang memiliki TextField.
+          resizeToAvoidBottomInset: false,
           body: IslamicBackground(
             child: TVSafeArea(
               child: Column(
