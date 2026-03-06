@@ -136,7 +136,9 @@ class _RunningTextSectionState extends State<RunningTextSection> {
                   );
                 },
                 builder: (isFocused) {
-                  return Container(
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
                       horizontal: 24.w,
                       vertical: 12.h,

@@ -33,10 +33,17 @@ class _PinInputWidgetState extends State<PinInputWidget>
   late final AnimationController _shakeController;
   late final Animation<double> _shakeAnimation;
 
+  // Hidden TextField untuk membuka soft keyboard di Android TV.
+  // skipTraversal: true → tidak masuk D-pad traversal otomatis.
+  final FocusNode _hiddenFocusNode = FocusNode(skipTraversal: true);
+  late final TextEditingController _hiddenController;
+
   @override
   void initState() {
     super.initState();
     _digits = List.filled(widget.pinLength, '');
+    _hiddenController = TextEditingController();
+    _hiddenController.addListener(_onHiddenTextChanged);
 
     _shakeController = AnimationController(
       vsync: this,
@@ -75,7 +82,28 @@ class _PinInputWidgetState extends State<PinInputWidget>
   @override
   void dispose() {
     _shakeController.dispose();
+    _hiddenController.removeListener(_onHiddenTextChanged);
+    _hiddenController.dispose();
+    _hiddenFocusNode.dispose();
     super.dispose();
+  }
+
+  /// Menangkap digit dari soft keyboard melalui hidden TextField.
+  ///
+  /// Setiap kali karakter masuk ke hidden field:
+  /// 1. Ambil digit terakhir → teruskan ke [_onDigitEntered]
+  /// 2. Clear field di frame berikutnya supaya siap menerima input berikutnya
+  void _onHiddenTextChanged() {
+    final text = _hiddenController.text;
+    if (text.isEmpty) return;
+    final digit = text[text.length - 1];
+    if (int.tryParse(digit) != null) {
+      _onDigitEntered(digit);
+    }
+    // Clear setelah frame ini selesai agar soft keyboard tetap terbuka.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _hiddenController.clear();
+    });
   }
 
   void _onDigitEntered(String digit) {
@@ -182,61 +210,86 @@ class _PinInputWidgetState extends State<PinInputWidget>
       },
       child: Focus(
         onKeyEvent: (node, event) => _handleKeyEvent(node, event),
-        child: FocusableWidget(
-          autofocus: widget.autofocus,
-          builder: (isFocusedWrapper) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: List.generate(widget.pinLength, (index) {
-                final isCurrent = index == _currentIndex;
-                final isFilled = _digits[index].isNotEmpty;
-                // isFocused indicates if the whole UI widget is focused.
-                // we highlight the current sub-box if wrapper is focused, or we can just highlight it relative to others
-                final boxFocused = isFocusedWrapper && isCurrent;
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Hidden TextField sebagai IME connection untuk soft keyboard.
+            // Offstage: tidak visible tapi tetap dalam widget tree sehingga
+            // requestFocus() berfungsi dan soft keyboard bisa terbuka.
+            Offstage(
+              child: TextField(
+                focusNode: _hiddenFocusNode,
+                controller: _hiddenController,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                onSubmitted: (_) => _hiddenFocusNode.unfocus(),
+              ),
+            ),
+            FocusableWidget(
+              autofocus: widget.autofocus,
+              onSelect: () {
+                // Defer ke frame berikutnya agar key-event selesai sebelum IME
+                // connection dibuka — sama seperti pattern di identity/treasury.
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _hiddenFocusNode.requestFocus();
+                });
+              },
+              builder: (isFocusedWrapper) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(widget.pinLength, (index) {
+                    final isCurrent = index == _currentIndex;
+                    final isFilled = _digits[index].isNotEmpty;
+                    // isFocused indicates if the whole UI widget is focused.
+                    // we highlight the current sub-box if wrapper is focused, or we can just highlight it relative to others
+                    final boxFocused = isFocusedWrapper && isCurrent;
 
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Container(
-                    width: 60.w,
-                    height: 80.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                        color: boxFocused
-                            ? IslamicColors.goldAmber
-                            : (widget.showError
-                                  ? IslamicColors.error
-                                  : IslamicColors.glassBorder),
-                        width: boxFocused ? 2.w : 1.w,
-                      ),
-                      color: widget.showError
-                          ? IslamicColors.error.withValues(alpha: 0.2)
-                          : IslamicColors.glassOverlay,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      isFilled
-                          ? (index == _currentIndex ? _digits[index] : '●')
-                          : '−',
-                      style:
-                          IslamicTypography.heading(
-                            color: widget.showError
-                                ? IslamicColors.error
-                                : (isFilled
-                                      ? IslamicColors.textPrimary
-                                      : IslamicColors.textMuted),
-                          ).copyWith(
-                            // Adjust translation of bullet vs numbers to feel aligned natively
-                            height: isFilled && index != _currentIndex
-                                ? 1.0
-                                : null,
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      child: Container(
+                        width: 60.w,
+                        height: 80.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                            color: boxFocused
+                                ? IslamicColors.goldAmber
+                                : (widget.showError
+                                      ? IslamicColors.error
+                                      : IslamicColors.glassBorder),
+                            width: boxFocused ? 2.w : 1.w,
                           ),
-                    ),
-                  ),
+                          color: widget.showError
+                              ? IslamicColors.error.withValues(alpha: 0.2)
+                              : IslamicColors.glassOverlay,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          isFilled
+                              ? (index == _currentIndex ? _digits[index] : '●')
+                              : '−',
+                          style:
+                              IslamicTypography.heading(
+                                color: widget.showError
+                                    ? IslamicColors.error
+                                    : (isFilled
+                                          ? IslamicColors.textPrimary
+                                          : IslamicColors.textMuted),
+                              ).copyWith(
+                                // Adjust translation of bullet vs numbers to feel aligned natively
+                                height: isFilled && index != _currentIndex
+                                    ? 1.0
+                                    : null,
+                              ),
+                        ),
+                      ),
+                    );
+                  }),
                 );
-              }),
-            );
-          },
+              },
+            ),
+          ],
         ),
       ),
     );

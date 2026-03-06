@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/islamic_colors.dart';
 import '../../../../core/theme/islamic_typography.dart';
 import '../../../cubits/settings/settings_cubit.dart';
+import '../../../widgets/focusable_widget.dart';
 import '../../splash_page.dart';
 
 /// Section untuk mereset pengaturan ke default pabrik.
@@ -21,59 +22,126 @@ class ResetSection extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: curContext,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
+        return Dialog(
           backgroundColor: IslamicColors.surfaceDark,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
             side: const BorderSide(color: IslamicColors.error),
           ),
-          title: Row(
-            children: [
-              const Icon(
-                Icons.warning_amber_rounded,
-                color: IslamicColors.error,
-              ),
-              SizedBox(width: 12.w),
-              Text(
-                'Konfirmasi Reset',
-                style: IslamicTypography.heading(color: IslamicColors.error),
-              ),
-            ],
-          ),
-          content: Text(
-            'Apakah Anda yakin ingin mereset semua pengaturan ke bawaan pabrik?\n\n'
-            'Tindakan ini akan menghapus kota tersimpan, koreksi waktu, '
-            'dan identitas masjid.',
-            style: IslamicTypography.body(color: IslamicColors.textPrimary),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(false),
-              child: Text(
-                'Batal',
-                style: IslamicTypography.body(
-                  color: IslamicColors.textSecondary,
+          child: Padding(
+            padding: EdgeInsets.all(32.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                Row(
+                  children: [
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      color: IslamicColors.error,
+                      size: 48.sp,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      'Konfirmasi Reset',
+                      style: IslamicTypography.heading(
+                        color: IslamicColors.error,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                SizedBox(height: 24.h),
+                // Content
+                Text(
+                  'Apakah Anda yakin ingin mereset semua pengaturan ke bawaan pabrik?',
+                  style: IslamicTypography.body(
+                    color: IslamicColors.textPrimary,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  'Tindakan ini akan menghapus kota tersimpan, koreksi waktu, '
+                  'dan identitas masjid.',
+                  style: IslamicTypography.body(
+                    color: IslamicColors.textSecondary,
+                  ),
+                ),
+                SizedBox(height: 32.h),
+                // Action buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FocusableWidget(
+                      autofocus: true,
+                      onSelect: () => Navigator.of(dialogContext).pop(false),
+                      builder: (isFocused) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 28.w,
+                            vertical: 14.h,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: isFocused
+                                  ? IslamicColors.goldAmber
+                                  : IslamicColors.glassBorder,
+                              width: isFocused ? 2.0 : 1.0,
+                            ),
+                            color: isFocused
+                                ? IslamicColors.glassWhite
+                                : Colors.transparent,
+                          ),
+                          child: Text(
+                            'Batal',
+                            style: IslamicTypography.body(
+                              color: isFocused
+                                  ? IslamicColors.textPrimary
+                                  : IslamicColors.textSecondary,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(width: 16.w),
+                    FocusableWidget(
+                      onSelect: () => Navigator.of(dialogContext).pop(true),
+                      builder: (isFocused) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 28.w,
+                            vertical: 14.h,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: isFocused
+                                  ? IslamicColors.goldAmber
+                                  : IslamicColors.error,
+                              width: isFocused ? 2.0 : 1.0,
+                            ),
+                            color: IslamicColors.error,
+                          ),
+                          child: Text(
+                            'Hapus Data',
+                            style: IslamicTypography.body(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(dialogContext).pop(true),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: IslamicColors.error,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-              ),
-              child: Text(
-                'Hapus Data',
-                style: IslamicTypography.body(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
+          ),
         );
       },
     );
