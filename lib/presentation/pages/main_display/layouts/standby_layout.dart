@@ -135,69 +135,81 @@ class StandbyLayout extends StatelessWidget {
       timeRemainingStr = '$minutes Menit';
     }
 
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          GlassmorphismCard(
-            padding: EdgeInsets.all(40.w),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.topCenter,
+          child: SizedBox(
+            width: constraints.maxWidth,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Label kecil
-                Text(
-                  'Sholat Berikutnya',
-                  style: IslamicTypography.subtitle(
-                    color: IslamicColors.textSecondary,
-                  ).copyWith(fontSize: 34.sp),
+                GlassmorphismCard(
+                  padding: EdgeInsets.all(40.w),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Label kecil
+                      Text(
+                        'Sholat Berikutnya',
+                        style: IslamicTypography.subtitle(
+                          color: IslamicColors.textSecondary,
+                        ).copyWith(fontSize: 34.sp),
+                      ),
+                      SizedBox(height: 20.h),
+                      // Nama sholat — paling dominan
+                      Text(
+                        state.nextPrayer!.name,
+                        style: IslamicTypography.heading(
+                          color: IslamicColors.goldAmber,
+                          fontWeight: FontWeight.bold,
+                        ).copyWith(fontSize: 84.sp),
+                      ),
+                      SizedBox(height: 12.h),
+                      // Countdown
+                      Text(
+                        'Dalam waktu $timeRemainingStr',
+                        style: IslamicTypography.body(
+                          color: IslamicColors.textPrimary,
+                        ).copyWith(fontSize: 36.sp),
+                      ),
+                      SizedBox(height: 28.h),
+                      // Waktu masuk
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time,
+                            color: Colors.white,
+                            size: 32.w,
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                            'Masuk pada ${state.nextPrayer!.formattedTime}',
+                            style: IslamicTypography.body(
+                              color: Colors.white,
+                            ).copyWith(fontSize: 30.sp),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 20.h),
-                // Nama sholat — paling dominan
-                Text(
-                  state.nextPrayer!.name,
-                  style: IslamicTypography.heading(
-                    color: IslamicColors.goldAmber,
-                    fontWeight: FontWeight.bold,
-                  ).copyWith(fontSize: 84.sp),
-                ),
-                SizedBox(height: 12.h),
-                // Countdown
-                Text(
-                  'Dalam waktu $timeRemainingStr',
-                  style: IslamicTypography.body(
-                    color: IslamicColors.textPrimary,
-                  ).copyWith(fontSize: 36.sp),
-                ),
-                SizedBox(height: 28.h),
-                // Waktu masuk
-                Row(
-                  children: [
-                    Icon(Icons.access_time, color: Colors.white, size: 32.w),
-                    SizedBox(width: 10.w),
-                    Text(
-                      'Masuk pada ${state.nextPrayer!.formattedTime}',
-                      style: IslamicTypography.body(
-                        color: Colors.white,
-                      ).copyWith(fontSize: 30.sp),
-                    ),
-                  ],
-                ),
+                if (settings != null && settings.isTreasuryEnabled) ...[
+                  SizedBox(height: 24.h),
+                  TreasuryInfoWidget(
+                    balance: settings.treasuryBalance,
+                    income: settings.treasuryIncome,
+                    expense: settings.treasuryExpense,
+                  ),
+                ],
               ],
             ),
           ),
-          if (settings != null && settings.isTreasuryEnabled) ...[
-            SizedBox(height: 24.h),
-            TreasuryInfoWidget(
-              balance: settings.treasuryBalance,
-              income: settings.treasuryIncome,
-              expense: settings.treasuryExpense,
-            ),
-          ],
-        ],
-      ),
+        );
+      },
     );
   }
 }

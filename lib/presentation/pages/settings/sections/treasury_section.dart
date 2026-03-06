@@ -29,6 +29,12 @@ class _TreasurySectionState extends State<TreasurySection> {
   late final TextEditingController _incomeController;
   late final TextEditingController _expenseController;
 
+  // skipTraversal: true → tidak masuk D-pad traversal, tapi masih bisa
+  // difokuskan secara programatik via requestFocus() untuk membuka keyboard.
+  final FocusNode _balanceFocusNode = FocusNode(skipTraversal: true);
+  final FocusNode _incomeFocusNode = FocusNode(skipTraversal: true);
+  final FocusNode _expenseFocusNode = FocusNode(skipTraversal: true);
+
   bool _initialized = false;
 
   @override
@@ -44,6 +50,9 @@ class _TreasurySectionState extends State<TreasurySection> {
     _balanceController.dispose();
     _incomeController.dispose();
     _expenseController.dispose();
+    _balanceFocusNode.dispose();
+    _incomeFocusNode.dispose();
+    _expenseFocusNode.dispose();
     super.dispose();
   }
 
@@ -175,57 +184,65 @@ class _TreasurySectionState extends State<TreasurySection> {
                     SizedBox(height: 24.h),
 
                     // Input groups — disabled (opacity 0.4) saat toggle OFF — TASK-018
-                    IgnorePointer(
-                      ignoring: !settings.isTreasuryEnabled,
-                      child: Opacity(
-                        opacity: settings.isTreasuryEnabled ? 1.0 : 0.4,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Input Group 1: Saldo Kas — TASK-019
-                            _buildInputGroup(
-                              label: 'Saldo Kas (Rp)',
-                              icon: Icons.account_balance_wallet,
-                              iconColor: IslamicColors.goldAmber,
-                              controller: _balanceController,
-                              onChanged: (val) {
-                                setState(() {});
-                                cubit.updateTreasuryBalance(
-                                  int.tryParse(val) ?? 0,
-                                );
-                              },
-                            ),
-                            SizedBox(height: 24.h),
+                    // ExcludeFocus: mencegah TextField mendapat fokus via D-pad
+                    // saat kas dinonaktifkan.
+                    ExcludeFocus(
+                      excluding: !settings.isTreasuryEnabled,
+                      child: IgnorePointer(
+                        ignoring: !settings.isTreasuryEnabled,
+                        child: Opacity(
+                          opacity: settings.isTreasuryEnabled ? 1.0 : 0.4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Input Group 1: Saldo Kas — TASK-019
+                              _buildInputGroup(
+                                label: 'Saldo Kas (Rp)',
+                                icon: Icons.account_balance_wallet,
+                                iconColor: IslamicColors.goldAmber,
+                                controller: _balanceController,
+                                textFocusNode: _balanceFocusNode,
+                                onChanged: (val) {
+                                  setState(() {});
+                                  cubit.updateTreasuryBalance(
+                                    int.tryParse(val) ?? 0,
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 24.h),
 
-                            // Input Group 2: Pemasukan — TASK-020
-                            _buildInputGroup(
-                              label: 'Pemasukan Periode Ini (Rp)',
-                              icon: Icons.arrow_upward,
-                              iconColor: IslamicColors.success,
-                              controller: _incomeController,
-                              onChanged: (val) {
-                                setState(() {});
-                                cubit.updateTreasuryIncome(
-                                  int.tryParse(val) ?? 0,
-                                );
-                              },
-                            ),
-                            SizedBox(height: 24.h),
+                              // Input Group 2: Pemasukan — TASK-020
+                              _buildInputGroup(
+                                label: 'Pemasukan Periode Ini (Rp)',
+                                icon: Icons.arrow_upward,
+                                iconColor: IslamicColors.success,
+                                controller: _incomeController,
+                                textFocusNode: _incomeFocusNode,
+                                onChanged: (val) {
+                                  setState(() {});
+                                  cubit.updateTreasuryIncome(
+                                    int.tryParse(val) ?? 0,
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 24.h),
 
-                            // Input Group 3: Pengeluaran — TASK-021
-                            _buildInputGroup(
-                              label: 'Pengeluaran Periode Ini (Rp)',
-                              icon: Icons.arrow_downward,
-                              iconColor: IslamicColors.warning,
-                              controller: _expenseController,
-                              onChanged: (val) {
-                                setState(() {});
-                                cubit.updateTreasuryExpense(
-                                  int.tryParse(val) ?? 0,
-                                );
-                              },
-                            ),
-                          ],
+                              // Input Group 3: Pengeluaran — TASK-021
+                              _buildInputGroup(
+                                label: 'Pengeluaran Periode Ini (Rp)',
+                                icon: Icons.arrow_downward,
+                                iconColor: IslamicColors.warning,
+                                controller: _expenseController,
+                                textFocusNode: _expenseFocusNode,
+                                onChanged: (val) {
+                                  setState(() {});
+                                  cubit.updateTreasuryExpense(
+                                    int.tryParse(val) ?? 0,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -279,67 +296,111 @@ class _TreasurySectionState extends State<TreasurySection> {
     );
   }
 
-  /// Membangun satu input group: ikon + label, TextField numerik, dan preview Rupiah.
+  /// Membangun satu input group dengan pola Android TV:
+  /// - [FocusableWidget] sebagai target D-pad (kuning saat focused)
+  /// - Tekan OK/Select → [textFocusNode.requestFocus()] membuka keyboard
+  /// - [TextField] dibungkus [ExcludeFocus] agar tidak terjangkau traversal D-pad
   Widget _buildInputGroup({
     required String label,
     required IconData icon,
     required Color iconColor,
     required TextEditingController controller,
     required ValueChanged<String> onChanged,
+    required FocusNode textFocusNode,
   }) {
     final rawValue = int.tryParse(controller.text) ?? 0;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Icon(icon, color: iconColor, size: 20.sp),
-            SizedBox(width: 8.w),
-            Text(
-              label,
-              style: IslamicTypography.body(
-                color: IslamicColors.textSecondary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 8.h),
-        TextField(
-          controller: controller,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          style: IslamicTypography.body(color: IslamicColors.textPrimary),
-          decoration: InputDecoration(
-            hintText: '0',
-            hintStyle: IslamicTypography.body(color: IslamicColors.textMuted),
-            filled: true,
-            fillColor: IslamicColors.glassWhite,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: IslamicColors.glassBorder),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: IslamicColors.glassBorder),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: IslamicColors.goldAmber, width: 2),
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 16.h,
+    return FocusableWidget(
+      onSelect: () {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          textFocusNode.requestFocus();
+        });
+      },
+      builder: (isFocused) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: EdgeInsets.all(16.r),
+          decoration: BoxDecoration(
+            color: IslamicColors.glassWhite,
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color: isFocused
+                  ? IslamicColors.goldAmber
+                  : IslamicColors.glassBorder,
+              width: isFocused ? 2.0 : 1.0,
             ),
           ),
-          onChanged: onChanged,
-        ),
-        SizedBox(height: 6.h),
-        Text(
-          'Preview: ${_formatRupiah(rawValue)}',
-          style: IslamicTypography.body(color: IslamicColors.textMuted),
-        ),
-      ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(icon, color: iconColor, size: 20.sp),
+                  SizedBox(width: 8.w),
+                  Text(
+                    label,
+                    style: IslamicTypography.body(
+                      color: isFocused
+                          ? IslamicColors.goldAmber
+                          : IslamicColors.textSecondary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (isFocused) ...[
+                    const Spacer(),
+                    Text(
+                      'Tekan OK untuk edit',
+                      style: IslamicTypography.body(
+                        color: IslamicColors.textMuted,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+              SizedBox(height: 8.h),
+              TextField(
+                focusNode: textFocusNode,
+                controller: controller,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                style: IslamicTypography.body(color: IslamicColors.textPrimary),
+                decoration: InputDecoration(
+                  hintText: '0',
+                  hintStyle: IslamicTypography.body(
+                    color: IslamicColors.textMuted,
+                  ),
+                  filled: true,
+                  fillColor: IslamicColors.glassWhite,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide(color: IslamicColors.glassBorder),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide(color: IslamicColors.glassBorder),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide(
+                      color: IslamicColors.goldAmber,
+                      width: 2,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 16.h,
+                  ),
+                ),
+                onChanged: onChanged,
+              ),
+              SizedBox(height: 6.h),
+              Text(
+                'Preview: ${_formatRupiah(rawValue)}',
+                style: IslamicTypography.body(color: IslamicColors.textMuted),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
