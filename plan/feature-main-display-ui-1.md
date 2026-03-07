@@ -74,6 +74,35 @@ Implementation plan ini bertujuan untuk membangun antarmuka pengguna (UI) dari *
 
 - **ALT-001**: Menggunakan satu layout statis dan menyembunyikan/menampilkan widget dengan `Visibility`. *Tidak dipilih* karena kode UI akan membengkak, solid principles terlanggar, dan transisi animasi menjadi lebih sulit diatur dibanding membuat class Layout terpisah.
 
+## 5. Bug Fixes (Post-Implementation)
+
+### BUG-001 — Treasury Info Kepotong di Resolusi 1280×720 (2026-03-05)
+
+**Affected**: `standby_layout.dart` — panel kanan `_buildInfoPanel`
+
+**Gejala**: Widget `TreasuryInfoWidget` (info kas masjid) tidak terlihat/terpotong di layar 1280×720. Di 1920×1080 normal.
+
+**Root Cause**: Panel kanan menggunakan `SingleChildScrollView(physics: NeverScrollableScrollPhysics)` — konten yang melebihi tinggi panel langsung dipotong, tidak bisa di-scroll.
+
+**Fix**: Ganti dengan `LayoutBuilder` + `FittedBox(fit: BoxFit.scaleDown, alignment: Alignment.topCenter)`. Prinsip kerja:
+- Di **1920×1080**: tidak ada perubahan visual (scale = 1.0, konten muat)
+- Di **1280×720**: seluruh panel di-scale down proporsional agar Sholat card + Treasury card keduanya terlihat
+
+```dart
+return LayoutBuilder(
+  builder: (context, constraints) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      alignment: Alignment.topCenter,
+      child: SizedBox(
+        width: constraints.maxWidth,
+        child: Column(...), // card sholat + treasury
+      ),
+    );
+  },
+);
+```
+
 ## 4. Dependencies
 
 - **DEP-001**: Membutuhkan `DisplayStateCubit` dari Plan 08 yang sudah selesai.

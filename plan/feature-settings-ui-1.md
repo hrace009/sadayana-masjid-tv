@@ -158,6 +158,77 @@ Plan ini mencakup implementasi seluruh **UI layer** untuk settings dan content m
 - **ALT-002**: Dedicated settings page per category (full page navigation) — Ditolak karena split-panel (menu left + content right) lebih efisien untuk TV landscape layout
 - **ALT-003**: Number pad overlay untuk PIN input — Ditolak karena custom digit boxes lebih visual dan familiar untuk TV interface
 
+## 5. Bug Fixes (Post-Implementation)
+
+### BUG-001 — Text Field Tidak Dapat Dinavigasi via D-Pad (2026-03-06)
+
+**Affected**: `identity_section.dart`, `treasury_section.dart`
+
+**Gejala**: Navigasi D-Pad atas/bawah tidak bisa memindahkan fokus ke field form. Field alamat masjid tidak bisa diisi.
+
+**Root Cause**: `TextField` langsung diekspos ke D-pad traversal tanpa `FocusableWidget` wrapper. D-pad tidak tahu cara "memilih" sebuah `TextField`.
+
+**Fix**: Setiap `TextField` dibungkus dalam `FocusableWidget` dengan `FocusNode(skipTraversal: true)` pada text field-nya. D-pad navigasi ke `FocusableWidget`, tekan OK → `requestFocus()` programatik membuka keyboard.
+
+### BUG-002 — Soft Keyboard Tidak Muncul saat Tekan OK (2026-03-06)
+
+**Affected**: `identity_section.dart`, `treasury_section.dart`
+
+**Gejala**: D-pad highlight sudah berjalan, tapi saat tekan OK, keyboard tidak keluar.
+
+**Root Cause 1**: `ExcludeFocus()` tanpa parameter `excluding:` — defaultnya `excluding: true` → `descendantsAreFocusable: false` → `requestFocus()` diam-diam diabaikan Flutter.
+
+**Fix 1**: Hapus `ExcludeFocus` dari sekitar `TextField`. `FocusNode(skipTraversal: true)` sudah cukup mencegah D-pad traversal otomatis.
+
+**Root Cause 2**: `requestFocus()` dipanggil synchronously di dalam key-event handler → Flutter belum selesai memproses event → IME tidak ter-trigger.
+
+**Fix 2**: Defer ke frame berikutnya:
+```dart
+onSelect: () {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    focusNode.requestFocus();
+  });
+},
+```
+
+### BUG-003 — Soft Keyboard Tidak Muncul di PinInputWidget (2026-03-06)
+
+**Affected**: `pin_input_widget.dart`, `security_section.dart`
+
+**Gejala**: PIN input tidak memunculkan keyboard virtual saat tombol OK ditekan.
+
+**Root Cause**: `PinInputWidget` menggunakan custom `Focus` widget untuk menangkap key events hardware keyboard — tidak ada `TextField` sama sekali, sehingga tidak ada IME connection.
+
+**Fix**: Tambah **hidden `TextField`** (`Offstage`) sebagai IME connection. Saat OK ditekan, `_hiddenFocusNode.requestFocus()` → keyboard muncul → digit diteruskan ke `_onDigitEntered` via `TextController` listener.
+
+### BUG-004 — Teks Tombol `FocusableWidget` Tidak Rata Tengah (2026-03-06)
+
+**Affected**: `security_section.dart`, `running_text_section.dart`, `reset_section.dart`
+
+**Gejala**: Teks di dalam tombol naik ke atas, ada ruang kosong di bawah.
+
+**Root Cause**: `FocusableWidget` memiliki `ConstrainedBox(minHeight: 48)` yang membuat `Container` meregang tanpa centering.
+
+**Fix**: Gunakan `AnimatedContainer(alignment: Alignment.center, ...)` + bungkus `FocusableWidget` dengan `IntrinsicHeight` bila berada di dalam `Column`.
+
+### BUG-005 — Dialog Tombol Tampil Aneh saat Pakai `AlertDialog.actions` (2026-03-06)
+
+**Affected**: `reset_section.dart`
+
+**Gejala**: `FocusableWidget` di dalam `AlertDialog.actions` tampil tidak proporsional karena `OverflowBar` Flutter.
+
+**Fix**: Ganti `AlertDialog` → `Dialog` biasa dengan layout `Column` + `Row` untuk action buttons, memberikan kontrol penuh tanpa interferensi `OverflowBar`.
+
+### BUG-006 — Tombol Enter Muncul di Field Multiline Alamat Masjid (2026-03-06)
+
+**Affected**: `identity_section.dart` (field alamat, `maxLines: 2`)
+
+**Gejala**: Keyboard menampilkan tombol Enter bukan tombol centang/Done.
+
+**Root Cause**: `maxLines > 1` otomatis menyetel `TextInputAction.newline`.
+
+**Fix**: Tambah `textInputAction: TextInputAction.done` dan `onSubmitted: (_) => focusNode.unfocus()` secara eksplisit.
+
 ## 4. Dependencies
 
 - **DEP-001**: Plan 11 `SettingsCubit` — Business logic

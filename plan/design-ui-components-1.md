@@ -115,6 +115,118 @@ Plan ini mencakup implementasi reusable UI components yang digunakan di seluruh 
 - **ALT-002**: Menggunakan default Flutter `Focus` widget tanpa wrapper — Ditolak karena berulang kali menulis focus logic di setiap widget tidak DRY, dan butuh konsistensi visual focus indicator
 - **ALT-003**: Menggunakan `AnimatedContainer` untuk glassmorphism — Ditolak karena `BackdropFilter` memberikan real blur effect, bukan simulasi
 
+## 5. Android TV D-Pad + Keyboard Patterns (Proven)
+
+### PATTERN-001 — TextField dengan D-Pad Navigation
+
+Untuk setiap `TextField` yang harus bisa diakses via D-pad remote:
+
+```dart
+// FocusNode di level State:
+final FocusNode _fieldFocusNode = FocusNode(skipTraversal: true);
+//   ^ skipTraversal: true = D-pad tidak auto-landing di sini
+//     tapi requestFocus() programatik tetap berfungsi
+
+// Builder:
+FocusableWidget(
+  onSelect: () {
+    // WAJIB defer ke postFrameCallback — jika synchronous,
+    // IME tidak ter-trigger karena key event belum selesai diproses.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fieldFocusNode.requestFocus();
+    });
+  },
+  builder: (isFocused) {
+    return AnimatedContainer(
+      // ...
+      child: TextField(
+        focusNode: _fieldFocusNode,
+        // JANGAN bungkus TextField dengan ExcludeFocus()
+        // karena akan memblokir requestFocus() programatik!
+      ),
+    );
+  },
+)
+```
+
+**Aturan kritis**:
+- `FocusNode(skipTraversal: true)` sudah cukup mencegah D-pad traversal otomatis
+- `ExcludeFocus()` tanpa `excluding: false` → `descendantsAreFocusable = false` → `requestFocus()` diam-diam diabaikan
+- `addPostFrameCallback` wajib untuk membuka IME dari dalam key-event handler
+
+### PATTERN-002 — Widget Non-TextField yang Butuh Soft Keyboard
+
+Contoh: `PinInputWidget` yang menampilkan digit boxes kustom tapi butuh keyboard virtual.
+
+```dart
+// Hidden TextField sebagai IME connection:
+Offstage(
+  child: TextField(
+    focusNode: _hiddenFocusNode,
+    controller: _hiddenController,
+    keyboardType: TextInputType.number,
+    textInputAction: TextInputAction.done,
+    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+  ),
+)
+// FocusableWidget memanggil _hiddenFocusNode.requestFocus() via postFrameCallback
+// Controller listener meneruskan digit ke business logic
+```
+
+### PATTERN-003 — Tombol FocusableWidget di Column (Teks Rata Tengah)
+
+```dart
+IntrinsicHeight(              // mencegah FocusableWidget meregang vertikal
+  child: FocusableWidget(
+    builder: (isFocused) {
+      return AnimatedContainer(
+        alignment: Alignment.center,  // teks rata tengah H & V
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        // ...
+        child: Text('Label'),
+      );
+    },
+  ),
+)
+```
+
+### PATTERN-004 — Dialog dengan FocusableWidget Buttons
+
+Gunakan `Dialog` (bukan `AlertDialog`) saat menempatkan `FocusableWidget` sebagai tombol aksi. `AlertDialog.actions` menggunakan `OverflowBar` yang mengganggu layout `FocusableWidget`.
+
+```dart
+showDialog(
+  builder: (_) => Dialog(
+    child: Padding(
+      padding: EdgeInsets.all(32.w),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // ... content ...
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FocusableWidget(autofocus: true, /* Batal */, ...),
+              FocusableWidget(/* Konfirmasi */, ...),
+            ],
+          ),
+        ],
+      ),
+    ),
+  ),
+)
+```
+
+### PATTERN-005 — Multiline TextField: Tombol Done bukan Enter
+
+```dart
+TextField(
+  maxLines: 2,
+  textInputAction: TextInputAction.done,  // override default newline
+  onSubmitted: (_) => focusNode.unfocus(),
+)
+```
+
 ## 4. Dependencies
 
 - **DEP-001**: `marquee` (^2.3.0) — Horizontal auto-scrolling text widget

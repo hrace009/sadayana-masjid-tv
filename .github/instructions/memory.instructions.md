@@ -103,3 +103,68 @@ dalam satu `setState` bersamaan dengan pengisian `_cities` list.
 
 **Pattern generik**: Jangan gunakan dummy Equatable object sebagai `DropdownButton.value`
 sebelum `items` tersedia. Selalu preselect setelah data real dimuat.
+
+---
+
+## Android TV — D-Pad & Soft Keyboard Patterns (2026-03-06)
+
+### Pattern: TextField yang Bisa Dibuka via D-Pad
+
+```dart
+// FocusNode pada TextField dengan skipTraversal: true
+final _fieldFocusNode = FocusNode(skipTraversal: true);
+// ^ D-pad tidak auto-landing di sini, tapi requestFocus() programatik tetap jalan
+
+FocusableWidget(
+  onSelect: () {
+    // WAJIB addPostFrameCallback — requestFocus() synchronous di dalam key-event handler
+    // tidak trigger IME karena event belum selesai diproses Flutter
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fieldFocusNode.requestFocus();
+    });
+  },
+  builder: (isFocused) => TextField(focusNode: _fieldFocusNode),
+)
+```
+
+**JANGAN** bungkus `TextField` dengan `ExcludeFocus()` (tanpa `excluding: false`) — defaultnya `excluding: true` → `requestFocus()` diam-diam diabaikan.
+
+### Pattern: Soft Keyboard untuk Widget Non-TextField (misal PIN input)
+
+Tambah hidden `Offstage(TextField)` sebagai IME connection:
+
+```dart
+Offstage(
+  child: TextField(
+    focusNode: _hiddenFocusNode, // skipTraversal: true
+    controller: _hiddenController,
+    keyboardType: TextInputType.number,
+  ),
+)
+// FocusableWidget.onSelect → addPostFrameCallback(() => _hiddenFocusNode.requestFocus())
+// Controller listener meneruskan digit ke business logic
+```
+
+### Pattern: Teks Tombol FocusableWidget Tidak Rata Tengah
+
+`FocusableWidget` memiliki `ConstrainedBox(minHeight: 48)` — bila di dalam `Column`, widget meregang dan teks naik ke atas.
+
+**Fix**: `AnimatedContainer(alignment: Alignment.center)` + bungkus dengan `IntrinsicHeight`.
+
+### Pattern: Dialog dengan FocusableWidget Buttons
+
+`AlertDialog.actions` memakai `OverflowBar` → layout `FocusableWidget` rusak.
+
+**Fix**: Gunakan `Dialog` biasa + layout `Column`/`Row` custom.
+
+### Pattern: Multi-Resolusi (1920×1080 vs 1280×720)
+
+`SingleChildScrollView(physics: NeverScrollableScrollPhysics)` memotong konten — tidak scroll, tidak shrink.
+
+**Fix**: `LayoutBuilder` + `FittedBox(fit: BoxFit.scaleDown, alignment: Alignment.topCenter)`.
+
+### Pattern: Multiline TextField — Tombol Done bukan Enter
+
+`maxLines > 1` otomatis set `TextInputAction.newline`.
+
+**Fix**: `textInputAction: TextInputAction.done` + `onSubmitted: (_) => focusNode.unfocus()`.
