@@ -7,7 +7,9 @@ import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
+import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/display_state/display_state.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/prayer_time/prayer_time.dart';
@@ -20,6 +22,8 @@ class MockPrayerTimeCubit extends Mock implements PrayerTimeCubit {}
 
 class MockSettingsRepository extends Mock implements SettingsRepository {}
 
+class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
+
 class MockDailyPrayerTimes extends Mock implements DailyPrayerTimes {}
 
 class MockPrayerTime extends Mock implements PrayerTime {}
@@ -31,6 +35,7 @@ void main() {
   late EvaluateDisplayStateUseCase evaluateUseCase;
   late PrayerTimeCubit prayerTimeCubit;
   late SettingsRepository settingsRepository;
+  late WisdomQuoteRepository wisdomQuoteRepository;
   late DailyPrayerTimes dailyPrayerTimes;
   late StreamController<PrayerTimeState> prayerTimeStreamController;
 
@@ -93,10 +98,14 @@ void main() {
     evaluateUseCase = MockEvaluateDisplayStateUseCase();
     prayerTimeCubit = MockPrayerTimeCubit();
     settingsRepository = MockSettingsRepository();
+    wisdomQuoteRepository = MockWisdomQuoteRepository();
     dailyPrayerTimes = MockDailyPrayerTimes();
     prayerTimeStreamController = StreamController<PrayerTimeState>();
 
     // Default Mocks
+    when(
+      () => wisdomQuoteRepository.getByIds(any()),
+    ).thenAnswer((_) async => const []);
     when(
       () => prayerTimeCubit.stream,
     ).thenAnswer((_) => prayerTimeStreamController.stream);
@@ -114,6 +123,7 @@ void main() {
         dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
         config: any(named: 'config'),
         hijriDate: any(named: 'hijriDate'),
+        activeQuotes: any(named: 'activeQuotes'),
       ),
     ).thenAnswer((invocation) {
       evaluateCallCount++;
@@ -131,6 +141,7 @@ void main() {
         evaluateUseCase: evaluateUseCase,
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
       );
       expect(cubit.state, isA<StandbyState>());
       cubit.close();
@@ -141,6 +152,7 @@ void main() {
         evaluateUseCase: evaluateUseCase,
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
       );
 
       // Verify initialization
@@ -154,6 +166,8 @@ void main() {
           now: any(named: 'now'),
           dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
           config: any(named: 'config'),
+          hijriDate: any(named: 'hijriDate'),
+          activeQuotes: any(named: 'activeQuotes'),
         ),
       ).thenReturn(newState);
 
@@ -176,6 +190,7 @@ void main() {
         evaluateUseCase: evaluateUseCase,
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
       );
 
       // Verify initialization
@@ -218,6 +233,7 @@ void main() {
         evaluateUseCase: evaluateUseCase,
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
       );
 
       await Future.delayed(const Duration(milliseconds: 50));
@@ -255,6 +271,7 @@ void main() {
         evaluateUseCase: evaluateUseCase,
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
       );
 
       await Future.delayed(const Duration(milliseconds: 50));
@@ -299,6 +316,7 @@ void main() {
         evaluateUseCase: evaluateUseCase,
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
       );
 
       // Verify initialization
@@ -331,5 +349,105 @@ void main() {
 
       cubit.close();
     });
+
+    test('loads wisdomQuoteRepository.getByIds saat init()', () async {
+      // Verifikasi bahwa _loadConfig memanggil wisdomQuoteRepository.getByIds dengan
+      // settings.wisdomSelectedIds (default = [] → getByIds([]) dipanggil)
+      final cubit = DisplayStateCubit(
+        evaluateUseCase: evaluateUseCase,
+        prayerTimeCubit: prayerTimeCubit,
+        settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
+      );
+
+      await Future.delayed(const Duration(milliseconds: 50));
+
+      // Default settings.wisdomSelectedIds = [] → getByIds([]) harus dipanggil
+      verify(() => wisdomQuoteRepository.getByIds(any())).called(1);
+
+      cubit.close();
+    });
+
+    test(
+      '_tick meneruskan activeQuotes ke evaluate saat WisdomQuoteRepository menyediakan data',
+      () async {
+        final wisdomQuote = const WisdomQuote(
+          id: 'quran_001',
+          type: 'quran',
+          label: 'Ayat Al-Quran',
+          translationText:
+              'Karena sesungguhnya bersama kesulitan ada kemudahan.',
+          reference: 'QS. Al-Insyirah [94]: 6',
+        );
+
+        // Stub settings dengan wisdomSelectedIds non-kosong
+        const settingsWithWisdom = Settings(
+          isWisdomEnabled: true,
+          wisdomSelectedIds: ['quran_001'],
+          wisdomIntervalMinutes: 15,
+          wisdomDurationMinutes: 3,
+          wisdomStartHour: 6,
+          wisdomStartMinute: 0,
+          wisdomEndHour: 21,
+          wisdomEndMinute: 0,
+        );
+
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => settingsWithWisdom);
+        when(
+          () => wisdomQuoteRepository.getByIds(['quran_001']),
+        ).thenAnswer((_) async => [wisdomQuote]);
+
+        // evaluate tetap return StandbyState — kita hanya verifikasi argument passing
+        int callsWithWisdom = 0;
+        when(
+          () => evaluateUseCase.evaluate(
+            now: any(named: 'now'),
+            dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
+            config: any(named: 'config'),
+            hijriDate: any(named: 'hijriDate'),
+            activeQuotes: any(named: 'activeQuotes'),
+          ),
+        ).thenAnswer((invocation) {
+          final quotes =
+              invocation.namedArguments[const Symbol('activeQuotes')]
+                  as List<WisdomQuote>?;
+          if (quotes != null && quotes.isNotEmpty) callsWithWisdom++;
+          evaluateCallCount++;
+          return StandbyState(currentTime: DateTime.now());
+        });
+
+        final cubit = DisplayStateCubit(
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+        );
+
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        // Emit PrayerTimeLoaded agar _tick dipanggil
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        // Verify getByIds dipanggil dengan ids yang benar
+        verify(() => wisdomQuoteRepository.getByIds(['quran_001'])).called(1);
+
+        // evaluate seharusnya dipanggil dengan activeQuotes non-kosong
+        expect(
+          callsWithWisdom,
+          greaterThan(0),
+          reason: 'evaluate harus menerima activeQuotes yang berisi 1 item',
+        );
+
+        cubit.close();
+      },
+    );
   });
 }

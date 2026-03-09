@@ -5,6 +5,7 @@ import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state_type.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
+import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
 
 class MockDailyPrayerTimes extends Mock implements DailyPrayerTimes {}
@@ -234,6 +235,291 @@ void main() {
             state.totalIqomahMinutes,
             equals(10),
             reason: "Durasi iqomah Jum'at harus 10 menit sesuai config",
+          );
+        },
+      );
+    });
+
+    // -------------------------------------------------------------------------
+    // Wisdom Quote window tests
+    // -------------------------------------------------------------------------
+
+    group('Wisdom Quote Window', () {
+      // Config wisdom: enabled, interval 15 min, duration 3 min, jam 6:00-21:00
+      // Siklus: [0-3 min = tampil] [3-18 min = jeda] [18-21 min = tampil] dst.
+      const wisdomConfig = TransitionConfig(
+        preAdzanMinutes: 10,
+        adzanDurationSeconds: 180,
+        sholatDurationMinutes: 10,
+        iqomahMinutes: {
+          'Subuh': 10,
+          'Dzuhur': 10,
+          'Ashar': 10,
+          'Maghrib': 10,
+          'Isya': 10,
+        },
+        isWisdomEnabled: true,
+        wisdomIntervalMinutes: 15,
+        wisdomDurationMinutes: 3,
+        wisdomStartHour: 6,
+        wisdomStartMinute: 0,
+        wisdomEndHour: 21,
+        wisdomEndMinute: 0,
+        wisdomShuffle: false,
+      );
+
+      final quoteA = const WisdomQuote(
+        id: 'quran_001',
+        type: 'quran',
+        label: 'Ayat Al-Quran',
+        translationText: 'Karena sesungguhnya bersama kesulitan ada kemudahan.',
+        reference: 'QS. Al-Insyirah [94]: 6',
+      );
+
+      final quoteB = const WisdomQuote(
+        id: 'hadith_001',
+        type: 'hadith',
+        label: 'Hadits',
+        translationText:
+            'Sesungguhnya setiap amal itu tergantung pada niatnya.',
+        reference: 'HR. Bukhari No. 1',
+      );
+
+      final activeQuotes = [quoteA, quoteB];
+
+      test(
+        'returns WisdomQuoteState saat berada dalam wisdom window aktif',
+        () {
+          // 06:00 adalah awal window. Siklus pertama: 06:00-06:03 → tampil.
+          final now = DateTime(2026, 2, 19, 6, 1, 30);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: wisdomConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          expect(result, isA<WisdomQuoteState>());
+          final state = result as WisdomQuoteState;
+          expect(state.type, DisplayStateType.wisdomQuote);
+          expect(
+            state.currentQuote,
+            quoteA,
+          ); // index 0 di siklus pertama (urut)
+          expect(state.currentIndex, 0);
+          expect(state.totalItems, 2);
+          expect(state.totalDurationSeconds, 3 * 60); // 3 menit
+          expect(state.remainingSeconds, greaterThan(0));
+        },
+      );
+
+      test(
+        'returns StandbyState saat dalam jeda wisdom (positionInCycle >= duration)',
+        () {
+          // 06:05 = 5 menit setelah windowStart.
+          // positionInCycle = 5 % 18 = 5. wisdomDuration = 3 → jeda!
+          final now = DateTime(2026, 2, 19, 6, 5);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: wisdomConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          expect(result, isA<StandbyState>());
+        },
+      );
+
+      test('returns StandbyState saat activeQuotes kosong (guard check)', () {
+        // Waktu berada dalam wisdom window, tapi tidak ada item terpilih.
+        final now = DateTime(2026, 2, 19, 6, 1);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: wisdomConfig,
+          activeQuotes: const [], // kosong!
+        );
+
+        expect(result, isA<StandbyState>());
+      });
+
+      test('returns StandbyState saat activeQuotes null', () {
+        final now = DateTime(2026, 2, 19, 6, 1);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: wisdomConfig,
+          activeQuotes: null, // null tidak ditangani!
+        );
+
+        expect(result, isA<StandbyState>());
+      });
+
+      test(
+        'prayer window lebih prioritas daripada wisdom window (PreAdzan menang)',
+        () {
+          // Sholat Dzuhur 12:00. PreAdzan window: 11:50-12:00.
+          // Wisdom siklus: 11:50 = 350 menit dari 06:00. 350 % 18 = 350 - (19*18) = 350-342 = 8 > 3 → jeda.
+          // Tapi kita ubah timing agar overlapping lebih jelas:
+          // Coba 06:01 — berada di wisdom window DAN tidak ada prayer window.
+          // Lalu coba 11:55 — PreAdzan window, meski wisdom mungkin aktif juga.
+          final now = DateTime(2026, 2, 19, 11, 55);
+          // 11:55 → PreAdzan Dzuhur window aktif (11:50-12:00).
+          // Wisdom check: 11:55 = 355 menit dari 06:00. 355 % 18 = 355-19*18=355-342=13 → jeda (>3).
+          // Jadi test ini lebih ke: prayer window sudah diproses duluan.
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: wisdomConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          expect(
+            result,
+            isA<PreAdzanState>(),
+            reason:
+                'PreAdzan harus menang ketika prayer window dan wisdom window overlap',
+          );
+        },
+      );
+
+      test(
+        'returns StandbyState saat isWisdomEnabled = false meski dalam window',
+        () {
+          const disabledWisdomConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isWisdomEnabled: false, // disabled!
+            wisdomIntervalMinutes: 15,
+            wisdomDurationMinutes: 3,
+            wisdomStartHour: 6,
+            wisdomStartMinute: 0,
+            wisdomEndHour: 21,
+            wisdomEndMinute: 0,
+          );
+
+          final now = DateTime(2026, 2, 19, 6, 1);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: disabledWisdomConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          expect(result, isA<StandbyState>());
+        },
+      );
+
+      test(
+        'mode urut: siklus ke-0 = item index 0, siklus ke-1 = item index 1',
+        () {
+          // cycleLength = (15 + 3) * 60 = 1080 detik (18 menit)
+          // Siklus 0: 06:00:00 - 06:03:00 → index 0 (quoteA)
+          // Siklus 1: 06:18:00 - 06:21:00 → index 1 (quoteB)
+          final nowCycle0 = DateTime(2026, 2, 19, 6, 0, 30);
+          when(
+            () => mockDailyPrayerTimes.nextPrayer(nowCycle0),
+          ).thenReturn(dzuhur);
+
+          final result0 = useCase.evaluate(
+            now: nowCycle0,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: wisdomConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          expect(result0, isA<WisdomQuoteState>());
+          expect((result0 as WisdomQuoteState).currentQuote, quoteA);
+          expect(result0.currentIndex, 0);
+
+          final nowCycle1 = DateTime(2026, 2, 19, 6, 18, 30);
+          when(
+            () => mockDailyPrayerTimes.nextPrayer(nowCycle1),
+          ).thenReturn(dzuhur);
+
+          final result1 = useCase.evaluate(
+            now: nowCycle1,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: wisdomConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          expect(result1, isA<WisdomQuoteState>());
+          expect((result1 as WisdomQuoteState).currentQuote, quoteB);
+          expect(result1.currentIndex, 1);
+        },
+      );
+
+      test(
+        'mode acak: seed yang sama menghasilkan urutan yang sama (deterministik)',
+        () {
+          const shuffleConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isWisdomEnabled: true,
+            wisdomIntervalMinutes: 15,
+            wisdomDurationMinutes: 3,
+            wisdomStartHour: 6,
+            wisdomStartMinute: 0,
+            wisdomEndHour: 21,
+            wisdomEndMinute: 0,
+            wisdomShuffle: true, // acak!
+          );
+
+          final now1 = DateTime(2026, 2, 19, 6, 0, 30);
+          final now2 = DateTime(2026, 2, 19, 6, 0, 45); // beda detik, hari sama
+          when(() => mockDailyPrayerTimes.nextPrayer(now1)).thenReturn(dzuhur);
+          when(() => mockDailyPrayerTimes.nextPrayer(now2)).thenReturn(dzuhur);
+
+          final result1 = useCase.evaluate(
+            now: now1,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: shuffleConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          final result2 = useCase.evaluate(
+            now: now2,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: shuffleConfig,
+            activeQuotes: activeQuotes,
+          );
+
+          // Seed = hari yang sama → indeks pertama harus sama
+          expect(result1, isA<WisdomQuoteState>());
+          expect(result2, isA<WisdomQuoteState>());
+          expect(
+            (result1 as WisdomQuoteState).currentIndex,
+            equals((result2 as WisdomQuoteState).currentIndex),
+            reason:
+                'Seed yang sama (hari yang sama) harus menghasilkan index sama',
           );
         },
       );

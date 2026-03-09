@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
+import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/prayer_time/prayer_time.dart';
 
@@ -18,20 +20,24 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   final EvaluateDisplayStateUseCase _evaluateUseCase;
   final PrayerTimeCubit _prayerTimeCubit;
   final SettingsRepository _settingsRepository;
+  final WisdomQuoteRepository _wisdomQuoteRepository;
 
   StreamSubscription? _prayerTimeSubscription;
   Timer? _tickTimer;
 
   DailyPrayerTimes? _currentPrayerTimes;
   TransitionConfig _currentConfig;
+  List<WisdomQuote> _activeQuotes = const [];
 
   DisplayStateCubit({
     required EvaluateDisplayStateUseCase evaluateUseCase,
     required PrayerTimeCubit prayerTimeCubit,
     required SettingsRepository settingsRepository,
+    required WisdomQuoteRepository wisdomQuoteRepository,
   }) : _evaluateUseCase = evaluateUseCase,
        _prayerTimeCubit = prayerTimeCubit,
        _settingsRepository = settingsRepository,
+       _wisdomQuoteRepository = wisdomQuoteRepository,
        // Default config, akan di-overwrite saat init()
        _currentConfig = const TransitionConfig(
          preAdzanMinutes: 10,
@@ -70,6 +76,9 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   Future<void> _loadConfig() async {
     final settings = await _settingsRepository.getSettings();
     _currentConfig = TransitionConfig.fromSettings(settings);
+    _activeQuotes = await _wisdomQuoteRepository.getByIds(
+      settings.wisdomSelectedIds,
+    );
   }
 
   void _startTickTimer() {
@@ -97,6 +106,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
       dailyPrayerTimes: dailyPrayerTimes,
       config: _currentConfig,
       hijriDate: dailyPrayerTimes.hijriDate,
+      activeQuotes: _activeQuotes,
     );
 
     // Smart Emit: Hanya emit jika ada perubahan yang relevan

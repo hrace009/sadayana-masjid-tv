@@ -19,9 +19,9 @@ void main() {
     });
 
     test('primary colors have correct hex values', () {
-      expect(IslamicColors.deepTeal.toARGB32(), equals(0xFF036666));
-      expect(IslamicColors.primaryTeal.toARGB32(), equals(0xFF248277));
-      expect(IslamicColors.lightTeal.toARGB32(), equals(0xFF3AA898));
+      expect(IslamicColors.deepTeal.toARGB32(), equals(0xFF075B5E));
+      expect(IslamicColors.primaryTeal.toARGB32(), equals(0xFF0E9296));
+      expect(IslamicColors.lightTeal.toARGB32(), equals(0xFF1CC0C5));
     });
   });
 

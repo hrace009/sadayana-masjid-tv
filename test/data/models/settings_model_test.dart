@@ -50,6 +50,15 @@ void main() {
     'treasury_balance': 0,
     'treasury_income': 0,
     'treasury_expense': 0,
+    'is_wisdom_enabled': 0,
+    'wisdom_interval_minutes': 15,
+    'wisdom_duration_minutes': 3,
+    'wisdom_start_hour': 6,
+    'wisdom_start_minute': 0,
+    'wisdom_end_hour': 21,
+    'wisdom_end_minute': 0,
+    'wisdom_selected_ids': '[]',
+    'wisdom_shuffle': 0,
     'created_at': '2026-01-01T00:00:00',
     'updated_at': '2026-01-01T00:00:00',
   };
@@ -90,6 +99,15 @@ void main() {
     'treasury_balance': 5000000,
     'treasury_income': 2500000,
     'treasury_expense': 750000,
+    'is_wisdom_enabled': 1,
+    'wisdom_interval_minutes': 20,
+    'wisdom_duration_minutes': 5,
+    'wisdom_start_hour': 7,
+    'wisdom_start_minute': 30,
+    'wisdom_end_hour': 20,
+    'wisdom_end_minute': 45,
+    'wisdom_selected_ids': '["quran_001","hadith_003"]',
+    'wisdom_shuffle': 1,
     'created_at': '2026-02-18T10:00:00',
     'updated_at': '2026-02-18T14:00:00',
   };
@@ -137,6 +155,16 @@ void main() {
       expect(model.treasuryBalance, equals(0));
       expect(model.treasuryIncome, equals(0));
       expect(model.treasuryExpense, equals(0));
+      // Wisdom fields — semua default OFF / nilai awal
+      expect(model.isWisdomEnabled, isFalse);
+      expect(model.wisdomIntervalMinutes, equals(15));
+      expect(model.wisdomDurationMinutes, equals(3));
+      expect(model.wisdomStartHour, equals(6));
+      expect(model.wisdomStartMinute, equals(0));
+      expect(model.wisdomEndHour, equals(21));
+      expect(model.wisdomEndMinute, equals(0));
+      expect(model.wisdomSelectedIds, isEmpty);
+      expect(model.wisdomShuffle, isFalse);
     });
 
     test(
@@ -175,6 +203,16 @@ void main() {
         expect(model.treasuryBalance, equals(5000000));
         expect(model.treasuryIncome, equals(2500000));
         expect(model.treasuryExpense, equals(750000));
+        // Wisdom fields — custom values
+        expect(model.isWisdomEnabled, isTrue);
+        expect(model.wisdomIntervalMinutes, equals(20));
+        expect(model.wisdomDurationMinutes, equals(5));
+        expect(model.wisdomStartHour, equals(7));
+        expect(model.wisdomStartMinute, equals(30));
+        expect(model.wisdomEndHour, equals(20));
+        expect(model.wisdomEndMinute, equals(45));
+        expect(model.wisdomSelectedIds, equals(['quran_001', 'hadith_003']));
+        expect(model.wisdomShuffle, isTrue);
       },
     );
   });
@@ -214,6 +252,16 @@ void main() {
       expect(map['treasury_balance'], equals(5000000));
       expect(map['treasury_income'], equals(2500000));
       expect(map['treasury_expense'], equals(750000));
+      // Wisdom fields
+      expect(map['is_wisdom_enabled'], equals(1));
+      expect(map['wisdom_interval_minutes'], equals(20));
+      expect(map['wisdom_duration_minutes'], equals(5));
+      expect(map['wisdom_start_hour'], equals(7));
+      expect(map['wisdom_start_minute'], equals(30));
+      expect(map['wisdom_end_hour'], equals(20));
+      expect(map['wisdom_end_minute'], equals(45));
+      expect(map['wisdom_selected_ids'], equals('["quran_001","hadith_003"]'));
+      expect(map['wisdom_shuffle'], equals(1));
 
       // toMap() should NOT include id, created_at, updated_at
       expect(map.containsKey('id'), isFalse);

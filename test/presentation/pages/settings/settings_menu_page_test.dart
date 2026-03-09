@@ -4,22 +4,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_state.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/settings_menu_page.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/ihtiyat_section.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/iqomah_section.dart';
 import 'package:miqotul_khoir_tv/presentation/widgets/dpad_stepper.dart';
-import 'package:flutter/services.dart';
 
 class MockSettingsCubit extends Mock implements SettingsCubit {}
 
+class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
+
 void main() {
   late MockSettingsCubit mockSettingsCubit;
+  late MockWisdomQuoteRepository mockWisdomRepo;
   late Settings mockSettings;
 
   setUp(() {
     mockSettingsCubit = MockSettingsCubit();
+    mockWisdomRepo = MockWisdomQuoteRepository();
     // Providing default settings using positional and required named properties.
     mockSettings = const Settings();
     when(
@@ -29,6 +33,11 @@ void main() {
       () => mockSettingsCubit.stream,
     ).thenAnswer((_) => Stream.value(SettingsLoaded(settings: mockSettings)));
     when(() => mockSettingsCubit.isPinEnabled).thenReturn(false);
+    // WisdomQuoteSection calls getAll() via didChangeDependencies.
+    when(() => mockWisdomRepo.getAll()).thenAnswer((_) async => const []);
+    when(
+      () => mockWisdomRepo.getByIds(any()),
+    ).thenAnswer((_) async => const []);
   });
 
   Widget createTestWidget() {
@@ -37,9 +46,12 @@ void main() {
       minTextAdapt: true,
       builder: (context, _) {
         return MaterialApp(
-          home: BlocProvider<SettingsCubit>.value(
-            value: mockSettingsCubit,
-            child: const SettingsMenuPage(),
+          home: RepositoryProvider<WisdomQuoteRepository>.value(
+            value: mockWisdomRepo,
+            child: BlocProvider<SettingsCubit>.value(
+              value: mockSettingsCubit,
+              child: const SettingsMenuPage(),
+            ),
           ),
         );
       },
@@ -77,7 +89,12 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
-      // Ihtiyat is the default selected section
+      // Tap menu item to navigate to IhtiyatSection (index 1).
+      // Uses .first because the same text appears as section header inside IndexedStack.
+      await tester.tap(find.text('Koreksi Waktu (Ihtiyat)').first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
       expect(
         find.descendant(
           of: find.byType(IhtiyatSection),
@@ -99,11 +116,9 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
-      // Navigate to Iqomah section
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 500));
-      await tester.sendKeyEvent(LogicalKeyboardKey.select);
+      // Tap menu item to navigate to IqomahSection (index 2).
+      // Uses .first because the same text appears as section header inside IndexedStack.
+      await tester.tap(find.text('Durasi Iqomah').first);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
@@ -112,7 +127,7 @@ void main() {
           of: find.byType(IqomahSection),
           matching: find.byType(DPadStepper),
         ),
-        findsNWidgets(5),
+        findsNWidgets(6),
       );
     });
   });

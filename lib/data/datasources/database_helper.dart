@@ -20,7 +20,7 @@ class DatabaseHelper {
   static const String _databaseName = 'miqotul_khoir.db';
 
   /// Versi database saat ini. Increment untuk setiap schema change.
-  static const int _databaseVersion = 6;
+  static const int _databaseVersion = 7;
 
   // ---------------------------------------------------------------------------
   // Singleton
@@ -142,6 +142,36 @@ class DatabaseHelper {
       );
       await db.execute(
         'ALTER TABLE settings ADD COLUMN treasury_expense INTEGER NOT NULL DEFAULT 0',
+      );
+    }
+    if (oldVersion < 7) {
+      // Tambah kolom Kata Mutiara Islam (fitur opsional, default OFF)
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_wisdom_enabled INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_interval_minutes INTEGER NOT NULL DEFAULT 15',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_duration_minutes INTEGER NOT NULL DEFAULT 3',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_start_hour INTEGER NOT NULL DEFAULT 6',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_start_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_end_hour INTEGER NOT NULL DEFAULT 21',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_end_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        "ALTER TABLE settings ADD COLUMN wisdom_selected_ids TEXT NOT NULL DEFAULT '[]'",
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN wisdom_shuffle INTEGER NOT NULL DEFAULT 0',
       );
     }
   }
@@ -289,6 +319,17 @@ class DatabaseHelper {
         treasury_balance INTEGER NOT NULL DEFAULT 0,
         treasury_income INTEGER NOT NULL DEFAULT 0,
         treasury_expense INTEGER NOT NULL DEFAULT 0,
+
+        -- Kata Mutiara Islam (fitur opsional, default OFF)
+        is_wisdom_enabled INTEGER NOT NULL DEFAULT 0,
+        wisdom_interval_minutes INTEGER NOT NULL DEFAULT 15,
+        wisdom_duration_minutes INTEGER NOT NULL DEFAULT 3,
+        wisdom_start_hour INTEGER NOT NULL DEFAULT 6,
+        wisdom_start_minute INTEGER NOT NULL DEFAULT 0,
+        wisdom_end_hour INTEGER NOT NULL DEFAULT 21,
+        wisdom_end_minute INTEGER NOT NULL DEFAULT 0,
+        wisdom_selected_ids TEXT NOT NULL DEFAULT '[]',
+        wisdom_shuffle INTEGER NOT NULL DEFAULT 0,
 
         -- Adzan Duration (Seconds)
         adzan_duration_seconds INTEGER NOT NULL DEFAULT 180,

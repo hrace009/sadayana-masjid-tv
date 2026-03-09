@@ -1,0 +1,509 @@
+00:00 +0: loading D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/analysis/kemenag_comparison_test.dart
+00:00 +0: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/analysis/kemenag_comparison_test.dart: Kemenag comparison analysis ΓÇö Bandung March 2026 (WITH DPL correction)
+DPL Correction for elevation 698m: 5 minutes
+
+=== ANALISIS PERBANDINGAN WAKTU SHOLAT ===
+Lokasi: Bandung (-6.9175, 107.6191)
+Bulan: Maret 2026
+Method: Kemenag SIHAT (Fajr 20┬░, Isha 18┬░, Ihtiyat +2 min)
+
+Tgl | Waktu     | App   | Kemenag | Selisih
+----|-----------|-------|---------|--------
+ 1  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:06 | 12:05   | +1 min
+    | Ashar     | 15:07 | 15:07   | +0 min
+    | Maghrib   | 18:16 | 18:16   | +0 min
+    | Isya      | 19:21 | 19:21   | +0 min
+----|-----------|-------|---------|--------
+ 2  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:06 | 12:05   | +1 min
+    | Ashar     | 15:06 | 15:06   | +0 min
+    | Maghrib   | 18:15 | 18:16   | -1 min
+    | Isya      | 19:20 | 19:21   | -1 min
+----|-----------|-------|---------|--------
+ 3  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:05 | 12:05   | +0 min
+    | Ashar     | 15:05 | 15:05   | +0 min
+    | Maghrib   | 18:15 | 18:15   | +0 min
+    | Isya      | 19:20 | 19:20   | +0 min
+----|-----------|-------|---------|--------
+ 4  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:05 | 12:05   | +0 min
+    | Ashar     | 15:05 | 15:06   | -1 min
+    | Maghrib   | 18:15 | 18:15   | +0 min
+    | Isya      | 19:19 | 19:20   | -1 min
+----|-----------|-------|---------|--------
+ 5  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:05 | 12:05   | +0 min
+    | Ashar     | 15:06 | 15:06   | +0 min
+    | Maghrib   | 18:14 | 18:15   | -1 min
+    | Isya      | 19:19 | 19:20   | -1 min
+----|-----------|-------|---------|--------
+ 6  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:05 | 12:04   | +1 min
+    | Ashar     | 15:06 | 15:07   | -1 min
+    | Maghrib   | 18:14 | 18:14   | +0 min
+    | Isya      | 19:18 | 19:19   | -1 min
+----|-----------|-------|---------|--------
+ 7  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:05 | 12:04   | +1 min
+    | Ashar     | 15:07 | 15:07   | +0 min
+    | Maghrib   | 18:13 | 18:14   | -1 min
+    | Isya      | 19:18 | 19:19   | -1 min
+----|-----------|-------|---------|--------
+ 8  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:04 | 12:04   | +0 min
+    | Ashar     | 15:07 | 15:08   | -1 min
+    | Maghrib   | 18:13 | 18:13   | +0 min
+    | Isya      | 19:18 | 19:18   | +0 min
+----|-----------|-------|---------|--------
+ 9  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:04 | 12:04   | +0 min
+    | Ashar     | 15:07 | 15:08   | -1 min
+    | Maghrib   | 18:13 | 18:13   | +0 min
+    | Isya      | 19:17 | 19:17   | +0 min
+----|-----------|-------|---------|--------
+10  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:04 | 12:03   | +1 min
+    | Ashar     | 15:08 | 15:08   | +0 min
+    | Maghrib   | 18:12 | 18:12   | +0 min
+    | Isya      | 19:17 | 19:17   | +0 min
+----|-----------|-------|---------|--------
+11  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:04 | 12:03   | +1 min
+    | Ashar     | 15:08 | 15:09   | -1 min
+    | Maghrib   | 18:12 | 18:11   | +1 min
+    | Isya      | 19:16 | 19:16   | +0 min
+----|-----------|-------|---------|--------
+12  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:03   | +0 min
+    | Ashar     | 15:08 | 15:09   | -1 min
+    | Maghrib   | 18:11 | 18:11   | +0 min
+    | Isya      | 19:16 | 19:16   | +0 min
+----|-----------|-------|---------|--------
+13  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:03   | +0 min
+    | Ashar     | 15:09 | 15:09   | +0 min
+    | Maghrib   | 18:11 | 18:10   | +1 min
+    | Isya      | 19:15 | 19:15   | +0 min
+----|-----------|-------|---------|--------
+14  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:02   | +1 min
+    | Ashar     | 15:09 | 15:10   | -1 min
+    | Maghrib   | 18:10 | 18:10   | +0 min
+    | Isya      | 19:15 | 19:15   | +0 min
+----|-----------|-------|---------|--------
+15  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:02   | +1 min
+    | Ashar     | 15:09 | 15:10   | -1 min
+    | Maghrib   | 18:10 | 18:10   | +0 min
+    | Isya      | 19:14 | 19:15   | -1 min
+----|-----------|-------|---------|--------
+16  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:02 | 12:02   | +0 min
+    | Ashar     | 15:09 | 15:10   | -1 min
+    | Maghrib   | 18:09 | 18:10   | -1 min
+    | Isya      | 19:14 | 19:14   | +0 min
+----|-----------|-------|---------|--------
+17  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:02 | 12:01   | +1 min
+    | Ashar     | 15:10 | 15:09   | +1 min
+    | Maghrib   | 18:09 | 18:09   | +0 min
+    | Isya      | 19:13 | 19:14   | -1 min
+----|-----------|-------|---------|--------
+18  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:02 | 12:01   | +1 min
+    | Ashar     | 15:10 | 15:10   | +0 min
+    | Maghrib   | 18:08 | 18:09   | -1 min
+    | Isya      | 19:13 | 19:13   | +0 min
+----|-----------|-------|---------|--------
+19  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:01 | 12:01   | +0 min
+    | Ashar     | 15:10 | 15:11   | -1 min
+    | Maghrib   | 18:08 | 18:08   | +0 min
+    | Isya      | 19:12 | 19:13   | -1 min
+----|-----------|-------|---------|--------
+20  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:47 | 05:46   | +1 min
+    | Dzuhur    | 12:01 | 12:01   | +0 min
+    | Ashar     | 15:10 | 15:11   | -1 min
+    | Maghrib   | 18:07 | 18:08   | -1 min
+    | Isya      | 19:12 | 19:12   | +0 min
+----|-----------|-------|---------|--------
+21  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:47 | 05:46   | +1 min
+    | Dzuhur    | 12:01 | 12:01   | +0 min
+    | Ashar     | 15:10 | 15:11   | -1 min
+    | Maghrib   | 18:07 | 18:08   | -1 min
+    | Isya      | 19:11 | 19:12   | -1 min
+----|-----------|-------|---------|--------
+22  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 12:00   | +0 min
+    | Ashar     | 15:10 | 15:12   | -2 min
+    | Maghrib   | 18:06 | 18:07   | -1 min
+    | Isya      | 19:11 | 19:12   | -1 min
+----|-----------|-------|---------|--------
+23  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 12:00   | +0 min
+    | Ashar     | 15:11 | 15:11   | +0 min
+    | Maghrib   | 18:06 | 18:06   | +0 min
+    | Isya      | 19:10 | 19:11   | -1 min
+----|-----------|-------|---------|--------
+24  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 11:59   | +1 min
+    | Ashar     | 15:11 | 15:11   | +0 min
+    | Maghrib   | 18:05 | 18:06   | -1 min
+    | Isya      | 19:10 | 19:10   | +0 min
+----|-----------|-------|---------|--------
+25  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 11:59   | +1 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:05 | 18:05   | +0 min
+    | Isya      | 19:09 | 19:10   | -1 min
+----|-----------|-------|---------|--------
+26  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 11:59 | 11:59   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:04 | 18:05   | -1 min
+    | Isya      | 19:09 | 19:09   | +0 min
+----|-----------|-------|---------|--------
+27  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 11:59 | 11:59   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:04 | 18:04   | +0 min
+    | Isya      | 19:08 | 19:09   | -1 min
+----|-----------|-------|---------|--------
+28  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 11:59 | 11:58   | +1 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:03 | 18:04   | -1 min
+    | Isya      | 19:08 | 19:08   | +0 min
+----|-----------|-------|---------|--------
+29  | Subuh     | 04:37 | 04:38   | -1 min
+    | Terbit    | 05:46 | 05:45   | +1 min
+    | Dzuhur    | 11:58 | 11:58   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:03 | 18:03   | +0 min
+    | Isya      | 19:07 | 19:08   | -1 min
+----|-----------|-------|---------|--------
+30  | Subuh     | 04:37 | 04:38   | -1 min
+    | Terbit    | 05:46 | 05:45   | +1 min
+    | Dzuhur    | 11:58 | 11:58   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:02 | 18:03   | -1 min
+    | Isya      | 19:07 | 19:07   | +0 min
+----|-----------|-------|---------|--------
+31  | Subuh     | 04:37 | 04:38   | -1 min
+    | Terbit    | 05:45 | 05:45   | +0 min
+    | Dzuhur    | 11:58 | 11:57   | +1 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:02 | 18:02   | +0 min
+    | Isya      | 19:06 | 19:07   | -1 min
+----|-----------|-------|---------|--------
+
+=== RINGKASAN SELISIH (App - Kemenag) ===
+Waktu     | Min | Max | Rata-rata | Dominan
+----------|-----|-----|-----------|--------
+Subuh     |  -1 |   0 |      -0.3 | 0 min (22/31 hari)
+Terbit    |   0 |   1 |       0.3 | 0 min (22/31 hari)
+Dzuhur    |   0 |   1 |       0.5 | 0 min (17/31 hari)
+Ashar     |  -2 |   1 |      -0.6 | -1 min (19/31 hari)
+Maghrib   |  -1 |   1 |      -0.3 | 0 min (17/31 hari)
+Isya      |  -1 |   0 |      -0.5 | 0 min (16/31 hari)
+
+=== REKOMENDASI KOREKSI ===
+Subuh: Sudah akurat (rata-rata selisih: -0.3 min)
+Terbit: Sudah akurat (rata-rata selisih: 0.3 min)
+Dzuhur: Sudah akurat (rata-rata selisih: 0.5 min)
+Ashar: Sudah akurat (rata-rata selisih: -0.6 min)
+Maghrib: Sudah akurat (rata-rata selisih: -0.3 min)
+Isya: Sudah akurat (rata-rata selisih: -0.5 min)
+00:00 +1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Primary Colors deepTeal, primaryTeal, lightTeal are defined
+00:00 +2: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Primary Colors primary colors have correct hex values
+00:00 +3: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Accent Colors goldAmber, lightGold, warmGold are defined
+00:00 +4: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Accent Colors accent colors have correct hex values
+00:00 +5: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Background Colors darkBackground, surfaceDark, surfaceLight are defined
+00:00 +6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Text Colors textPrimary, textSecondary, textMuted are defined
+00:00 +7: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glassWhite has ~10% opacity (alpha Γëê 26)
+00:00 +8: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glassBorder has ~20% opacity (alpha Γëê 51)
+00:00 +9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glassOverlay has ~5% opacity (alpha Γëê 13)
+00:00 +10: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glass colors are white-based (r=g=b=1.0)
+00:00 +11: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö State Colors success, error, warning, info are defined
+00:00 +12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors all 5 prayer state colors are defined
+00:00 +13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors standbyColor equals deepTeal
+00:00 +14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors adzanColor equals goldAmber
+00:00 +15: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors sholatColor equals deepTeal
+00:00 +16: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: (setUpAll)
+00:00 +16: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö Material3 & Brightness useMaterial3 is true
+00:00 +17: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +18: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +19: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +20: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +21: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +22: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +23: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +24: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +25: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +26: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +27: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +28: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +29: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +30: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +31: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +32: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +33: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSecondary is darkBackground
+00:01 +34: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSecondary is darkBackground
+00:01 +35: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSecondary is darkBackground
+00:01 +36: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle heading() returns TextStyle with Poppins and 48sp
+00:01 +37: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSurface is textPrimary
+00:01 +38: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle title() returns TextStyle with w600
+00:01 +39: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö TextTheme mapping all 7 TextTheme slots are non-null
+00:01 +40: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle subtitle() returns TextStyle with w500
+00:01 +41: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö AppBarTheme AppBar backgroundColor is transparent
+00:01 +42: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle body() returns TextStyle with w400 and textPrimary
+00:01 +43: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö AppBarTheme AppBar elevation is 0
+00:01 +44: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle caption() returns TextStyle with textSecondary color
+00:01 +45: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö AppBarTheme AppBar foregroundColor is textPrimary
+00:01 +46: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle overline() returns TextStyle with letterSpacing and textMuted
+00:01 +47: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö CardTheme Card color is surfaceDark
+00:01 +48: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides display() respects color override
+00:01 +49: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö CardTheme Card elevation is 0
+00:01 +50: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides heading() respects fontWeight override
+00:01 +51: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö CardTheme Card shape is RoundedRectangleBorder
+00:01 +52: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/settings_model_test.dart: SettingsModel.fromMap() maps default settings fields correctly (int ΓåÆ bool conversion)
+00:01 +53: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides body() respects both color and fontWeight overrides
+00:01 +54: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides body() respects both color and fontWeight overrides
+00:01 +55: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides body() respects both color and fontWeight overrides
+00:01 +56: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/settings_model_test.dart: SettingsModel round-trip fromMap ΓåÆ toMap ΓåÆ fromMap produces identical entity
+00:01 +57: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.fromJson() maps all fields dari item quran dengan benar
+00:01 +58: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.fromJson() maps all fields dari item hadith dengan benar
+00:01 +59: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.toEntity() menghasilkan WisdomQuote dengan field yang benar (quran)
+00:01 +60: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.toEntity() menghasilkan WisdomQuote dengan field yang benar (hadith)
+00:01 +61: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: Round-trip fromJson ΓåÆ toEntity entity equality berdasarkan id (Equatable props [id])
+00:01 +62: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: Round-trip fromJson ΓåÆ toEntity entity dari item berbeda tidak sama meski type dan label sama-sama hadith
+00:01 +63: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: (setUpAll)
+00:01 +63: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: getProvinces() returns distinct, alphabetically sorted province names
+00:01 +64: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: getCitiesByProvince("Jawa Barat") returns correct cities sorted alphabetically
+00:01 +65: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: searchCities("band") returns cities containing "band" (case-insensitive), including Bandung variants
+00:01 +66: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: getCityById() returns correct city for existing id, null for non-existing
+00:01 +67: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: (tearDownAll)
+00:01 +67: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: (setUpAll)
+00:01 +67: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: getSettings() returns default settings on fresh database (is_first_run = true, mosqueName = empty, latitude = -6.9175)
+00:01 +68: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: updateSettings() updates only mosque_name, other fields retain defaults
+00:01 +69: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: completeFirstRun() sets is_first_run to false
+00:01 +70: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: verifyPin() returns true when PIN is disabled (pin_hash empty)
+00:01 +71: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: setPin() hashes and saves PIN, verifyPin() validates correctly
+00:01 +72: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: (tearDownAll)
+00:02 +72: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getAll() mengembalikan tepat 11 item dari data source
+00:02 +73: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getAll() mendelegasikan panggilan ke data source
+00:02 +74: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() memfilter item dengan benar berdasarkan ids
+00:02 +75: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() getByIds([]) mengembalikan list kosong tanpa memanggil getAll
+00:02 +76: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() id yang tidak ditemukan diabaikan (tidak menyebabkan error)
+00:02 +77: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() mendelegasikan panggilan ke data source dengan ids yang tepat
+00:02 +78: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes allPrayers returns 7 prayers chronologically
+00:02 +79: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes mainPrayers returns 5 fard prayers
+00:02 +80: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns null before Subuh
+00:02 +81: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns Subuh during Subuh time
+00:02 +82: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns Dzuhur during Dzuhur time
+00:02 +83: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns Isya after Isya time
+00:02 +84: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns Subuh before Subuh time
+00:02 +85: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns Syuruq after Subuh
+00:02 +86: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns Ashar after Dzuhur
+00:02 +87: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns null after Isya
+00:02 +88: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState StandbyState has correct type
+00:02 +89: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState PreAdzanState has correct type and progress
+00:02 +90: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState AdzanState has correct type and progress
+00:02 +91: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState IqomahState has correct type and progress
+00:02 +92: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState SholatState has correct type and progress
+00:02 +93: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState Progress is clamped between 0.0 and 1.0
+00:02 +94: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/prayer_time_test.dart: PrayerTime props are correct for Equatable
+00:02 +95: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/prayer_time_test.dart: PrayerTime formattedTime returns HH:mm format
+00:02 +96: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData supports value comparisons
+00:02 +97: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isIdentityValid returns false when mosqueName is empty
+00:02 +98: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isIdentityValid returns false when mosqueName is too short (< 3 chars)
+00:02 +99: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isIdentityValid returns true when mosqueName is valid (>= 3 chars)
+00:02 +100: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isLocationValid returns false when cityName is empty
+00:02 +101: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isLocationValid returns false when coordinates are 0
+00:02 +102: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isLocationValid returns true when city and coordinates are populated
+00:02 +103: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isComplete returns false when identity is invalid
+00:02 +104: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isComplete returns false when location is invalid
+00:02 +105: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isComplete returns true when both are valid
+00:02 +106: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData copyWith creates new instance with updated values
+00:02 +107: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase execute returns valid DailyPrayerTimes with offsets applied
+00:03 +108: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase execute throws ArgumentError for invalid latitude
+00:03 +109: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase execute throws ArgumentError for invalid longitude
+00:03 +110: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase hijri date formatting with adjustment
+00:03 +111: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-007: Kemenag method applies built-in ihtiyat via methodAdjustments
+00:03 +112: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-008: Kemenag ihtiyat and user offset are additive (user offset applied on top of Kemenag built-in adjustments)
+00:03 +113: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-009: Unknown calculation method falls back to Kemenag parameters
+00:03 +114: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-011a: label Dzuhur berubah menjadi Jum'at pada hari Jumat
+00:03 +115: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-011b: label Dzuhur tetap 'Dzuhur' pada hari selain Jumat
+00:03 +116: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns StandbyState when outside all windows (11:00)
+00:03 +117: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns PreAdzanState when 5 mins before Dzuhur (11:55)
+00:03 +118: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns AdzanState at exactly Dzuhur time (12:00)
+00:03 +119: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns IqomahState after Adzan finishes (12:03:01)
+00:03 +120: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns SholatState after Iqomah finishes (12:13:01)
+00:03 +121: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns StandbyState after Sholat finishes (12:23:01)
+00:03 +122: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Sholat Jum'at ΓÇö durasi sholat dan iqomah khusus SholatState menggunakan sholatJumatDurationMinutes (45) saat prayer adalah Jum'at
+00:03 +123: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Sholat Jum'at ΓÇö durasi sholat dan iqomah khusus IqomahState menggunakan iqomahJumat (10) saat prayer adalah Jum'at
+00:03 +124: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns WisdomQuoteState saat berada dalam wisdom window aktif
+00:03 +125: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat dalam jeda wisdom (positionInCycle >= duration)
+00:03 +126: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat activeQuotes kosong (guard check)
+00:03 +127: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat activeQuotes null
+00:03 +128: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window prayer window lebih prioritas daripada wisdom window (PreAdzan menang)
+00:03 +129: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat isWisdomEnabled = false meski dalam window
+00:03 +130: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window mode urut: siklus ke-0 = item index 0, siklus ke-1 = item index 1
+00:03 +131: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window mode acak: seed yang sama menghasilkan urutan yang sama (deterministik)
+00:03 +132: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: (setUpAll)
+00:03 +132: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit initial state is StandbyState
+00:03 +133: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit updates state when PrayerTimeCubit emits Loaded
+00:03 +134: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +135: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +136: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +137: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +138: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +139: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +140: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +141: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +142: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +143: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +144: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +145: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +146: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +147: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +148: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +149: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +150: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +151: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +152: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +153: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +154: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:04 +155: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +156: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +157: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +158: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +159: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +160: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +161: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +162: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +163: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +164: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +165: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +166: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +167: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:05 +168: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:05 +169: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:05 +170: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:05 +171: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:05 +172: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:05 +173: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +174: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +175: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +176: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +177: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +178: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +179: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +180: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +181: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +182: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +183: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +184: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +185: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +186: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/wisdom_preview_page_test.dart: WisdomPreviewPage Widget Tests (TEST-010) render item pertama dari list (TEST-010)
+00:06 +187: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:06 +188: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:06 +189: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:06 +190: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:06 +191: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:06 +192: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +193: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +194: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +195: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +196: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +197: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +198: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +199: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +200: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +201: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +202: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +203: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +204: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +205: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +206: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +207: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +208: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +209: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +210: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +211: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +212: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +213: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +214: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +215: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:07 +216: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/glassmorphism_card_test.dart: GlassmorphismCard renders child widget correctly
+00:07 +217: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/glassmorphism_card_test.dart: GlassmorphismCard renders child widget correctly
+00:07 +218: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:07 +219: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:07 +220: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:07 +221: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:07 +222: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:07 +223: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:07 +224: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:08 +225: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Renders correct number of pin boxes
+00:08 +226: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryIncome menyimpan nilai valid setelah debounce
+00:08 +227: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +228: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +229: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +230: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +231: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +232: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +233: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +234: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +235: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +236: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +237: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +238: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +239: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +240: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +241: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +242: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +243: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:08 +244: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately
+00:09 +245: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/widget_test.dart: App smoke test
+00:09 +246: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryBalance diabaikan jika nilai negatif
+00:09 +247: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryBalance diabaikan jika nilai negatif
+00:09 +248: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryBalance diabaikan jika nilai negatif
+00:09 +249: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryBalance diabaikan jika nilai negatif
+00:09 +250: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryBalance diabaikan jika nilai melebihi batas (> 999.999.999.999)
+00:10 +251: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomEnabled(true) menyimpan langsung (tanpa debounce)
+00:10 +252: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomEnabled(false) menyimpan nilai 0
+00:10 +253: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce
+00:10 +254: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomSelectedIds menyimpan JSON-encoded string
+00:11 +255: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomSelectedIds dengan list kosong menyimpan "[]"
+00:12 +256: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomShuffle(true) menyimpan langsung (tanpa debounce)
+00:12 +257: All tests passed!

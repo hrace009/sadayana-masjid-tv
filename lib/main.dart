@@ -17,10 +17,13 @@ import 'core/theme/islamic_theme.dart';
 import 'data/datasources/city_local_data_source.dart';
 import 'data/datasources/database_helper.dart';
 import 'data/datasources/settings_local_data_source.dart';
+import 'data/datasources/wisdom_quote_local_data_source.dart';
 import 'data/repositories/city_repository_impl.dart';
 import 'data/repositories/settings_repository_impl.dart';
+import 'data/repositories/wisdom_quote_repository_impl.dart';
 import 'domain/repositories/city_repository.dart';
 import 'domain/repositories/settings_repository.dart';
+import 'domain/repositories/wisdom_quote_repository.dart';
 import 'domain/usecases/calculate_prayer_times_use_case.dart';
 import 'domain/usecases/evaluate_display_state_use_case.dart';
 import 'presentation/cubits/display_state/display_state_cubit.dart';
@@ -138,6 +141,10 @@ class MiqotulKhoirApp extends StatelessWidget {
     final settingsRepository = SettingsRepositoryImpl(settingsDataSource);
     final cityRepository = CityRepositoryImpl(cityDataSource);
 
+    // TASK-057: Instansiasi WisdomQuoteRepository (baca dari JSON asset)
+    final wisdomDataSource = WisdomQuoteLocalDataSource();
+    final wisdomQuoteRepository = WisdomQuoteRepositoryImpl(wisdomDataSource);
+
     // TASK-030: Wrap MaterialApp dengan ScreenUtilInit
     return ScreenUtilInit(
       // Design baseline: 1920×1080 (REQ-002)
@@ -153,6 +160,10 @@ class MiqotulKhoirApp extends StatelessWidget {
               value: settingsRepository,
             ),
             RepositoryProvider<CityRepository>.value(value: cityRepository),
+            // TASK-058: Provide WisdomQuoteRepository ke widget tree
+            RepositoryProvider<WisdomQuoteRepository>.value(
+              value: wisdomQuoteRepository,
+            ),
           ],
           child: Builder(
             builder: (context) {
@@ -168,6 +179,8 @@ class MiqotulKhoirApp extends StatelessWidget {
                 evaluateUseCase: evaluateUseCase,
                 prayerTimeCubit: prayerTimeCubit,
                 settingsRepository: context.read<SettingsRepository>(),
+                // TASK-059: Inject WisdomQuoteRepository ke DisplayStateCubit
+                wisdomQuoteRepository: context.read<WisdomQuoteRepository>(),
               );
               final settingsCubit = SettingsCubit(
                 settingsRepository: context.read<SettingsRepository>(),

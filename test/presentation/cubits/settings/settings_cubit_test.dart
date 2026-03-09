@@ -490,4 +490,193 @@ void main() {
       },
     );
   });
+
+  group('Wisdom Management', () {
+    blocTest<SettingsCubit, SettingsState>(
+      'updateWisdomEnabled(true) menyimpan langsung (tanpa debounce)',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateWisdomEnabled(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'wisdom_enabled',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'is_wisdom_enabled': 1}),
+        ).called(1);
+        verifyNever(
+          () => settingsRepository.updateSettings({'is_wisdom_enabled': 0}),
+        );
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateWisdomEnabled(false) menyimpan nilai 0',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateWisdomEnabled(false),
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'is_wisdom_enabled': 0}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateWisdomIntervalMinutes(20);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'wisdom_interval_minutes',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'wisdom_interval_minutes': 20,
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateWisdomSelectedIds menyimpan JSON-encoded string',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateWisdomSelectedIds(['quran_001', 'hadith_003']);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'wisdom_selected_ids',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'wisdom_selected_ids': '["quran_001","hadith_003"]',
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateWisdomSelectedIds dengan list kosong menyimpan "[]"',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateWisdomSelectedIds([]);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () =>
+              settingsRepository.updateSettings({'wisdom_selected_ids': '[]'}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateWisdomShuffle(true) menyimpan langsung (tanpa debounce)',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateWisdomShuffle(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'wisdom_shuffle',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'wisdom_shuffle': 1}),
+        ).called(1);
+      },
+    );
+  });
 }

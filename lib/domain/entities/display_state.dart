@@ -1,6 +1,7 @@
 ﻿import 'package:equatable/equatable.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
+import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 
 import 'display_state_type.dart';
 
@@ -178,5 +179,46 @@ class SholatState extends DisplayState {
     remainingDuration,
     totalSholatMinutes,
     dailyPrayerTimes,
+  ];
+}
+
+/// Keadaan saat Kata Mutiara Islam sedang ditampilkan secara periodik.
+final class WisdomQuoteState extends DisplayState {
+  final WisdomQuote currentQuote;
+
+  /// Indeks item yang sedang ditampilkan dalam daftar aktif (0-based).
+  final int currentIndex;
+
+  /// Total item aktif yang bisa ditampilkan.
+  final int totalItems;
+
+  final DateTime currentTime;
+
+  /// Total durasi tampilan wisdom dalam satu slot (dalam detik).
+  final int totalDurationSeconds;
+
+  /// Sisa waktu tampilan wisdom sebelum kembali ke Standby (dalam detik).
+  final int remainingSeconds;
+
+  const WisdomQuoteState({
+    required this.currentQuote,
+    required this.currentIndex,
+    required this.totalItems,
+    required this.currentTime,
+    required this.totalDurationSeconds,
+    required this.remainingSeconds,
+  });
+
+  @override
+  DisplayStateType get type => DisplayStateType.wisdomQuote;
+
+  @override
+  List<Object?> get props => [
+    currentQuote,
+    currentIndex,
+    totalItems,
+    currentTime,
+    totalDurationSeconds,
+    remainingSeconds,
   ];
 }

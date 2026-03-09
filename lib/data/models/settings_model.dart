@@ -1,4 +1,6 @@
-﻿import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
+﻿import 'dart:convert';
+
+import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
 
 /// Data model yang mengkonversi antara [Settings] entity dan SQLite map.
 ///
@@ -48,6 +50,15 @@ class SettingsModel extends Settings {
     super.treasuryBalance,
     super.treasuryIncome,
     super.treasuryExpense,
+    super.isWisdomEnabled,
+    super.wisdomIntervalMinutes,
+    super.wisdomDurationMinutes,
+    super.wisdomStartHour,
+    super.wisdomStartMinute,
+    super.wisdomEndHour,
+    super.wisdomEndMinute,
+    super.wisdomSelectedIds,
+    super.wisdomShuffle,
   });
 
   /// Membuat [SettingsModel] dari raw SQLite `Map<String, dynamic>`.
@@ -92,6 +103,17 @@ class SettingsModel extends Settings {
       treasuryBalance: map['treasury_balance'] as int? ?? 0,
       treasuryIncome: map['treasury_income'] as int? ?? 0,
       treasuryExpense: map['treasury_expense'] as int? ?? 0,
+      isWisdomEnabled: (map['is_wisdom_enabled'] as int? ?? 0) == 1,
+      wisdomIntervalMinutes: map['wisdom_interval_minutes'] as int? ?? 15,
+      wisdomDurationMinutes: map['wisdom_duration_minutes'] as int? ?? 3,
+      wisdomStartHour: map['wisdom_start_hour'] as int? ?? 6,
+      wisdomStartMinute: map['wisdom_start_minute'] as int? ?? 0,
+      wisdomEndHour: map['wisdom_end_hour'] as int? ?? 21,
+      wisdomEndMinute: map['wisdom_end_minute'] as int? ?? 0,
+      wisdomSelectedIds: List<String>.from(
+        jsonDecode(map['wisdom_selected_ids'] as String? ?? '[]') as List,
+      ),
+      wisdomShuffle: (map['wisdom_shuffle'] as int? ?? 0) == 1,
     );
   }
 
@@ -138,6 +160,15 @@ class SettingsModel extends Settings {
       'treasury_balance': treasuryBalance,
       'treasury_income': treasuryIncome,
       'treasury_expense': treasuryExpense,
+      'is_wisdom_enabled': isWisdomEnabled ? 1 : 0,
+      'wisdom_interval_minutes': wisdomIntervalMinutes,
+      'wisdom_duration_minutes': wisdomDurationMinutes,
+      'wisdom_start_hour': wisdomStartHour,
+      'wisdom_start_minute': wisdomStartMinute,
+      'wisdom_end_hour': wisdomEndHour,
+      'wisdom_end_minute': wisdomEndMinute,
+      'wisdom_selected_ids': jsonEncode(wisdomSelectedIds),
+      'wisdom_shuffle': wisdomShuffle ? 1 : 0,
     };
   }
 }

@@ -48,6 +48,7 @@ lib/presentation/cubits/
 | **Setup Wizard Logic** (Plan 09) | 2026-02-20 | Cubit tests ✅ | Production Ready |
 | **Setup Wizard UI** (Plan 10) | 2026-02-20 | Widget tests ✅ | Production Ready |
 | **Settings Logic** (Plan 11) | 2026-02-20 | Unit tests ✅ | Production Ready |
+| **Kata Mutiara Islam** (Wisdom Quote) | 2026-03-10 | 14 phases, 257 total tests ✅ | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
@@ -214,6 +215,41 @@ Dependencies yang digunakan:
 - `equatable`: State comparison
 - `bloc_test`: Testing utilities
 - `mocktail`: Mocking dependencies
+
+### Kata Mutiara Islam / Wisdom Quote (COMPLETED — 2026-03-10)
+
+Fitur tampilan full-screen periodik dengan ayat Al-Quran dan Hadits. Menambahkan `WisdomQuoteState`
+sebagai state ke-6 pada display state machine. 14 phase implementasi, selesai dengan 257 total tests.
+
+File baru yang dibuat:
+
+| File | Keterangan |
+|------|------------|
+| `assets/data/wisdom_quotes.json` | Katalog 11 item hardcoded (5 Quran + 6 Hadits) |
+| `lib/domain/entities/wisdom_quote.dart` | Immutable entity — `id`, `type`, `label`, `translationText`, `reference` |
+| `lib/domain/repositories/wisdom_quote_repository.dart` | Abstract interface |
+| `lib/data/models/wisdom_quote_model.dart` | `fromJson()`, `toEntity()` |
+| `lib/data/datasources/wisdom_quote_local_data_source.dart` | Loader JSON asset via `rootBundle` |
+| `lib/data/repositories/wisdom_quote_repository_impl.dart` | Implementasi konkret |
+| `lib/presentation/pages/main_display/layouts/wisdom_quote_layout.dart` | Layout full-screen — badge, tranSlasi, referensi, progress bar |
+| `lib/presentation/pages/wisdom_preview_page.dart` | Halaman pratinjau item terpilih |
+| `lib/presentation/pages/settings/sections/wisdom_quote_section.dart` | Section Settings UI — toggle, checklist, interval, durasi, waktu |
+| `lib/presentation/widgets/checklist_item_widget.dart` | Widget checklist reusable dengan badge tipe |
+
+File yang dimodifikasi:
+
+| File | Keterangan |
+|------|------------|
+| `lib/data/datasources/database_helper.dart` | Schema v7, migration DDL 9 kolom baru |
+| `lib/data/models/settings_model.dart` | `fromMap`/`toMap` untuk 9 field wisdom |
+| `lib/domain/entities/settings.dart` | 9 field baru (`isWisdomEnabled`, `wisdomIntervalMinutes`, dst.) |
+| `lib/domain/entities/transition_config.dart` | 7 field wisdom + `fromSettings()` mapping |
+| `lib/domain/entities/display_state_type.dart` | Tambah `wisdomQuote` |
+| `lib/domain/entities/display_state.dart` | Tambah `WisdomQuoteState` |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart` | Parameter `activeQuotes` + wisdom window logic |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart` | Load quotes, inject `activeQuotes` ke `evaluate()` |
+| `lib/presentation/pages/settings/settings_menu_page.dart` | Tambah `WisdomQuoteSection` di categories |
+| `lib/main.dart` | Instansiasi `WisdomQuoteRepositoryImpl`, `RepositoryProvider` |
 
 ## Local Workflow
 

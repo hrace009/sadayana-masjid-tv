@@ -1,0 +1,1511 @@
+00:00 +0: loading D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/analysis/kemenag_comparison_test.dart
+00:00 +0: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/analysis/kemenag_comparison_test.dart: Kemenag comparison analysis ΓÇö Bandung March 2026 (WITH DPL correction)
+DPL Correction for elevation 698m: 5 minutes
+
+=== ANALISIS PERBANDINGAN WAKTU SHOLAT ===
+Lokasi: Bandung (-6.9175, 107.6191)
+Bulan: Maret 2026
+Method: Kemenag SIHAT (Fajr 20┬░, Isha 18┬░, Ihtiyat +2 min)
+
+Tgl | Waktu     | App   | Kemenag | Selisih
+----|-----------|-------|---------|--------
+ 1  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:06 | 12:05   | +1 min
+    | Ashar     | 15:07 | 15:07   | +0 min
+    | Maghrib   | 18:16 | 18:16   | +0 min
+    | Isya      | 19:21 | 19:21   | +0 min
+----|-----------|-------|---------|--------
+ 2  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:06 | 12:05   | +1 min
+    | Ashar     | 15:06 | 15:06   | +0 min
+    | Maghrib   | 18:15 | 18:16   | -1 min
+    | Isya      | 19:20 | 19:21   | -1 min
+----|-----------|-------|---------|--------
+ 3  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:05 | 12:05   | +0 min
+    | Ashar     | 15:05 | 15:05   | +0 min
+    | Maghrib   | 18:15 | 18:15   | +0 min
+    | Isya      | 19:20 | 19:20   | +0 min
+----|-----------|-------|---------|--------
+ 4  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:05 | 12:05   | +0 min
+    | Ashar     | 15:05 | 15:06   | -1 min
+    | Maghrib   | 18:15 | 18:15   | +0 min
+    | Isya      | 19:19 | 19:20   | -1 min
+----|-----------|-------|---------|--------
+ 5  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:48   | +0 min
+    | Dzuhur    | 12:05 | 12:05   | +0 min
+    | Ashar     | 15:06 | 15:06   | +0 min
+    | Maghrib   | 18:14 | 18:15   | -1 min
+    | Isya      | 19:19 | 19:20   | -1 min
+----|-----------|-------|---------|--------
+ 6  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:05 | 12:04   | +1 min
+    | Ashar     | 15:06 | 15:07   | -1 min
+    | Maghrib   | 18:14 | 18:14   | +0 min
+    | Isya      | 19:18 | 19:19   | -1 min
+----|-----------|-------|---------|--------
+ 7  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:05 | 12:04   | +1 min
+    | Ashar     | 15:07 | 15:07   | +0 min
+    | Maghrib   | 18:13 | 18:14   | -1 min
+    | Isya      | 19:18 | 19:19   | -1 min
+----|-----------|-------|---------|--------
+ 8  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:04 | 12:04   | +0 min
+    | Ashar     | 15:07 | 15:08   | -1 min
+    | Maghrib   | 18:13 | 18:13   | +0 min
+    | Isya      | 19:18 | 19:18   | +0 min
+----|-----------|-------|---------|--------
+ 9  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:04 | 12:04   | +0 min
+    | Ashar     | 15:07 | 15:08   | -1 min
+    | Maghrib   | 18:13 | 18:13   | +0 min
+    | Isya      | 19:17 | 19:17   | +0 min
+----|-----------|-------|---------|--------
+10  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:48 | 05:47   | +1 min
+    | Dzuhur    | 12:04 | 12:03   | +1 min
+    | Ashar     | 15:08 | 15:08   | +0 min
+    | Maghrib   | 18:12 | 18:12   | +0 min
+    | Isya      | 19:17 | 19:17   | +0 min
+----|-----------|-------|---------|--------
+11  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:04 | 12:03   | +1 min
+    | Ashar     | 15:08 | 15:09   | -1 min
+    | Maghrib   | 18:12 | 18:11   | +1 min
+    | Isya      | 19:16 | 19:16   | +0 min
+----|-----------|-------|---------|--------
+12  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:03   | +0 min
+    | Ashar     | 15:08 | 15:09   | -1 min
+    | Maghrib   | 18:11 | 18:11   | +0 min
+    | Isya      | 19:16 | 19:16   | +0 min
+----|-----------|-------|---------|--------
+13  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:03   | +0 min
+    | Ashar     | 15:09 | 15:09   | +0 min
+    | Maghrib   | 18:11 | 18:10   | +1 min
+    | Isya      | 19:15 | 19:15   | +0 min
+----|-----------|-------|---------|--------
+14  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:02   | +1 min
+    | Ashar     | 15:09 | 15:10   | -1 min
+    | Maghrib   | 18:10 | 18:10   | +0 min
+    | Isya      | 19:15 | 19:15   | +0 min
+----|-----------|-------|---------|--------
+15  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:03 | 12:02   | +1 min
+    | Ashar     | 15:09 | 15:10   | -1 min
+    | Maghrib   | 18:10 | 18:10   | +0 min
+    | Isya      | 19:14 | 19:15   | -1 min
+----|-----------|-------|---------|--------
+16  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:02 | 12:02   | +0 min
+    | Ashar     | 15:09 | 15:10   | -1 min
+    | Maghrib   | 18:09 | 18:10   | -1 min
+    | Isya      | 19:14 | 19:14   | +0 min
+----|-----------|-------|---------|--------
+17  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:02 | 12:01   | +1 min
+    | Ashar     | 15:10 | 15:09   | +1 min
+    | Maghrib   | 18:09 | 18:09   | +0 min
+    | Isya      | 19:13 | 19:14   | -1 min
+----|-----------|-------|---------|--------
+18  | Subuh     | 04:39 | 04:39   | +0 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:02 | 12:01   | +1 min
+    | Ashar     | 15:10 | 15:10   | +0 min
+    | Maghrib   | 18:08 | 18:09   | -1 min
+    | Isya      | 19:13 | 19:13   | +0 min
+----|-----------|-------|---------|--------
+19  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:47 | 05:47   | +0 min
+    | Dzuhur    | 12:01 | 12:01   | +0 min
+    | Ashar     | 15:10 | 15:11   | -1 min
+    | Maghrib   | 18:08 | 18:08   | +0 min
+    | Isya      | 19:12 | 19:13   | -1 min
+----|-----------|-------|---------|--------
+20  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:47 | 05:46   | +1 min
+    | Dzuhur    | 12:01 | 12:01   | +0 min
+    | Ashar     | 15:10 | 15:11   | -1 min
+    | Maghrib   | 18:07 | 18:08   | -1 min
+    | Isya      | 19:12 | 19:12   | +0 min
+----|-----------|-------|---------|--------
+21  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:47 | 05:46   | +1 min
+    | Dzuhur    | 12:01 | 12:01   | +0 min
+    | Ashar     | 15:10 | 15:11   | -1 min
+    | Maghrib   | 18:07 | 18:08   | -1 min
+    | Isya      | 19:11 | 19:12   | -1 min
+----|-----------|-------|---------|--------
+22  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 12:00   | +0 min
+    | Ashar     | 15:10 | 15:12   | -2 min
+    | Maghrib   | 18:06 | 18:07   | -1 min
+    | Isya      | 19:11 | 19:12   | -1 min
+----|-----------|-------|---------|--------
+23  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 12:00   | +0 min
+    | Ashar     | 15:11 | 15:11   | +0 min
+    | Maghrib   | 18:06 | 18:06   | +0 min
+    | Isya      | 19:10 | 19:11   | -1 min
+----|-----------|-------|---------|--------
+24  | Subuh     | 04:38 | 04:39   | -1 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 11:59   | +1 min
+    | Ashar     | 15:11 | 15:11   | +0 min
+    | Maghrib   | 18:05 | 18:06   | -1 min
+    | Isya      | 19:10 | 19:10   | +0 min
+----|-----------|-------|---------|--------
+25  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 12:00 | 11:59   | +1 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:05 | 18:05   | +0 min
+    | Isya      | 19:09 | 19:10   | -1 min
+----|-----------|-------|---------|--------
+26  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 11:59 | 11:59   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:04 | 18:05   | -1 min
+    | Isya      | 19:09 | 19:09   | +0 min
+----|-----------|-------|---------|--------
+27  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 11:59 | 11:59   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:04 | 18:04   | +0 min
+    | Isya      | 19:08 | 19:09   | -1 min
+----|-----------|-------|---------|--------
+28  | Subuh     | 04:38 | 04:38   | +0 min
+    | Terbit    | 05:46 | 05:46   | +0 min
+    | Dzuhur    | 11:59 | 11:58   | +1 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:03 | 18:04   | -1 min
+    | Isya      | 19:08 | 19:08   | +0 min
+----|-----------|-------|---------|--------
+29  | Subuh     | 04:37 | 04:38   | -1 min
+    | Terbit    | 05:46 | 05:45   | +1 min
+    | Dzuhur    | 11:58 | 11:58   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:03 | 18:03   | +0 min
+    | Isya      | 19:07 | 19:08   | -1 min
+----|-----------|-------|---------|--------
+30  | Subuh     | 04:37 | 04:38   | -1 min
+    | Terbit    | 05:46 | 05:45   | +1 min
+    | Dzuhur    | 11:58 | 11:58   | +0 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:02 | 18:03   | -1 min
+    | Isya      | 19:07 | 19:07   | +0 min
+----|-----------|-------|---------|--------
+31  | Subuh     | 04:37 | 04:38   | -1 min
+    | Terbit    | 05:45 | 05:45   | +0 min
+    | Dzuhur    | 11:58 | 11:57   | +1 min
+    | Ashar     | 15:11 | 15:12   | -1 min
+    | Maghrib   | 18:02 | 18:02   | +0 min
+    | Isya      | 19:06 | 19:07   | -1 min
+----|-----------|-------|---------|--------
+
+=== RINGKASAN SELISIH (App - Kemenag) ===
+Waktu     | Min | Max | Rata-rata | Dominan
+----------|-----|-----|-----------|--------
+Subuh     |  -1 |   0 |      -0.3 | 0 min (22/31 hari)
+Terbit    |   0 |   1 |       0.3 | 0 min (22/31 hari)
+Dzuhur    |   0 |   1 |       0.5 | 0 min (17/31 hari)
+Ashar     |  -2 |   1 |      -0.6 | -1 min (19/31 hari)
+Maghrib   |  -1 |   1 |      -0.3 | 0 min (17/31 hari)
+Isya      |  -1 |   0 |      -0.5 | 0 min (16/31 hari)
+
+=== REKOMENDASI KOREKSI ===
+Subuh: Sudah akurat (rata-rata selisih: -0.3 min)
+Terbit: Sudah akurat (rata-rata selisih: 0.3 min)
+Dzuhur: Sudah akurat (rata-rata selisih: 0.5 min)
+Ashar: Sudah akurat (rata-rata selisih: -0.6 min)
+Maghrib: Sudah akurat (rata-rata selisih: -0.3 min)
+Isya: Sudah akurat (rata-rata selisih: -0.5 min)
+00:00 +1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Primary Colors deepTeal, primaryTeal, lightTeal are defined
+00:00 +2: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Primary Colors primary colors have correct hex values
+00:00 +2 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Primary Colors primary colors have correct hex values [E]
+  Expected: <4278412902>
+    Actual: <4278672222>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test\core\theme\islamic_colors_test.dart 22:7       main.<fn>.<fn>
+  
+00:00 +2 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Accent Colors goldAmber, lightGold, warmGold are defined
+00:00 +3 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Accent Colors accent colors have correct hex values
+00:00 +4 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Background Colors darkBackground, surfaceDark, surfaceLight are defined
+00:00 +5 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Text Colors textPrimary, textSecondary, textMuted are defined
+00:00 +6 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glassWhite has ~10% opacity (alpha Γëê 26)
+00:00 +7 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glassBorder has ~20% opacity (alpha Γëê 51)
+00:00 +8 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glassOverlay has ~5% opacity (alpha Γëê 13)
+00:00 +9 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Glassmorphism Colors (opacity validation) glass colors are white-based (r=g=b=1.0)
+00:00 +10 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö State Colors success, error, warning, info are defined
+00:00 +11 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors all 5 prayer state colors are defined
+00:00 +12 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors standbyColor equals deepTeal
+00:00 +13 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors adzanColor equals goldAmber
+00:00 +14 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_colors_test.dart: IslamicColors ΓÇö Prayer State Colors sholatColor equals deepTeal
+00:00 +15 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: (setUpAll)
+00:00 +15 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö Material3 & Brightness useMaterial3 is true
+00:00 +16 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +17 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +18 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +19 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +20 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +21 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +22 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:00 +23 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +24 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +25 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +26 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +27 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +28 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +29 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +30 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle display() returns TextStyle with Poppins and 72sp
+00:01 +31 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSecondary is darkBackground
+00:01 +32 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle heading() returns TextStyle with Poppins and 48sp
+00:01 +33 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle heading() returns TextStyle with Poppins and 48sp
+00:01 +34 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle heading() returns TextStyle with Poppins and 48sp
+00:01 +35 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSurface is textPrimary
+00:01 +36 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö ColorScheme onSurface is textPrimary
+00:01 +37 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle title() returns TextStyle with w600
+00:01 +38 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö TextTheme mapping all 7 TextTheme slots are non-null
+00:01 +39 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle subtitle() returns TextStyle with w500
+00:01 +40 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö AppBarTheme AppBar backgroundColor is transparent
+00:01 +41 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle body() returns TextStyle with w400 and textPrimary
+00:01 +42 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle body() returns TextStyle with w400 and textPrimary
+00:01 +43 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö AppBarTheme AppBar foregroundColor is textPrimary
+00:01 +44 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle caption() returns TextStyle with textSecondary color
+00:01 +45 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö CardTheme Card color is surfaceDark
+00:01 +46 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö all 7 methods return valid TextStyle overline() returns TextStyle with letterSpacing and textMuted
+00:01 +47 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: IslamicTheme.darkTheme() ΓÇö CardTheme Card elevation is 0
+00:01 +48 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides display() respects color override
+00:01 +49 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides display() respects color override
+00:01 +50 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_theme_test.dart: (tearDownAll)
+00:01 +50 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides heading() respects fontWeight override
+00:01 +51 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/core/theme/islamic_typography_test.dart: IslamicTypography ΓÇö optional parameter overrides body() respects both color and fontWeight overrides
+00:01 +52 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/settings_model_test.dart: SettingsModel.fromMap() maps default settings fields correctly (int ΓåÆ bool conversion)
+00:01 +53 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/settings_model_test.dart: SettingsModel.fromMap() maps custom settings fields correctly (is_first_run = 0 ΓåÆ false)
+00:01 +54 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/settings_model_test.dart: SettingsModel.toMap() converts entity to snake_case map with bool ΓåÆ int conversion
+00:01 +55 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/settings_model_test.dart: SettingsModel round-trip fromMap ΓåÆ toMap ΓåÆ fromMap produces identical entity
+00:01 +56 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.fromJson() maps all fields dari item quran dengan benar
+00:01 +57 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.fromJson() maps all fields dari item hadith dengan benar
+00:01 +58 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.toEntity() menghasilkan WisdomQuote dengan field yang benar (quran)
+00:01 +59 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: WisdomQuoteModel.toEntity() menghasilkan WisdomQuote dengan field yang benar (hadith)
+00:01 +60 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: Round-trip fromJson ΓåÆ toEntity entity equality berdasarkan id (Equatable props [id])
+00:01 +61 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/models/wisdom_quote_model_test.dart: Round-trip fromJson ΓåÆ toEntity entity dari item berbeda tidak sama meski type dan label sama-sama hadith
+00:01 +62 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: (setUpAll)
+00:01 +62 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: getProvinces() returns distinct, alphabetically sorted province names
+00:01 +63 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: getCitiesByProvince("Jawa Barat") returns correct cities sorted alphabetically
+00:01 +64 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: searchCities("band") returns cities containing "band" (case-insensitive), including Bandung variants
+00:01 +65 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: getCityById() returns correct city for existing id, null for non-existing
+00:01 +66 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/city_repository_impl_test.dart: (tearDownAll)
+00:01 +66 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: (setUpAll)
+00:01 +66 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: getSettings() returns default settings on fresh database (is_first_run = true, mosqueName = empty, latitude = -6.9175)
+00:01 +67 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: updateSettings() updates only mosque_name, other fields retain defaults
+00:01 +68 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: completeFirstRun() sets is_first_run to false
+00:01 +69 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: verifyPin() returns true when PIN is disabled (pin_hash empty)
+00:01 +70 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: setPin() hashes and saves PIN, verifyPin() validates correctly
+00:02 +71 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/settings_repository_impl_test.dart: (tearDownAll)
+00:02 +71 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getAll() mengembalikan tepat 11 item dari data source
+00:02 +72 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getAll() mendelegasikan panggilan ke data source
+00:02 +73 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() memfilter item dengan benar berdasarkan ids
+00:02 +74 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() getByIds([]) mengembalikan list kosong tanpa memanggil getAll
+00:02 +75 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() id yang tidak ditemukan diabaikan (tidak menyebabkan error)
+00:02 +76 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/data/repositories/wisdom_quote_repository_impl_test.dart: getByIds() mendelegasikan panggilan ke data source dengan ids yang tepat
+00:02 +77 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes allPrayers returns 7 prayers chronologically
+00:02 +78 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes mainPrayers returns 5 fard prayers
+00:02 +79 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns null before Subuh
+00:02 +80 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns Subuh during Subuh time
+00:02 +81 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns Dzuhur during Dzuhur time
+00:02 +82 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes currentPrayer returns Isya after Isya time
+00:02 +83 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns Subuh before Subuh time
+00:02 +84 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns Syuruq after Subuh
+00:02 +85 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns Ashar after Dzuhur
+00:02 +86 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/daily_prayer_times_test.dart: DailyPrayerTimes nextPrayer returns null after Isya
+00:02 +87 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState StandbyState has correct type
+00:02 +88 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState PreAdzanState has correct type and progress
+00:02 +89 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState AdzanState has correct type and progress
+00:02 +90 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState IqomahState has correct type and progress
+00:02 +91 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState SholatState has correct type and progress
+00:02 +92 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/display_state_test.dart: DisplayState Progress is clamped between 0.0 and 1.0
+00:02 +93 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/prayer_time_test.dart: PrayerTime props are correct for Equatable
+00:02 +94 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/prayer_time_test.dart: PrayerTime formattedTime returns HH:mm format
+00:02 +95 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData supports value comparisons
+00:02 +96 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isIdentityValid returns false when mosqueName is empty
+00:02 +97 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isIdentityValid returns false when mosqueName is too short (< 3 chars)
+00:02 +98 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isIdentityValid returns true when mosqueName is valid (>= 3 chars)
+00:02 +99 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isLocationValid returns false when cityName is empty
+00:02 +100 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isLocationValid returns false when coordinates are 0
+00:02 +101 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isLocationValid returns true when city and coordinates are populated
+00:02 +102 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isComplete returns false when identity is invalid
+00:02 +103 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isComplete returns false when location is invalid
+00:02 +104 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData isComplete returns true when both are valid
+00:02 +105 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/entities/setup_wizard_data_test.dart: SetupWizardData copyWith creates new instance with updated values
+00:02 +106 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase execute returns valid DailyPrayerTimes with offsets applied
+00:02 +107 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase execute throws ArgumentError for invalid latitude
+00:02 +108 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase execute throws ArgumentError for invalid longitude
+00:02 +109 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase hijri date formatting with adjustment
+00:02 +110 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-007: Kemenag method applies built-in ihtiyat via methodAdjustments
+00:02 +111 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-008: Kemenag ihtiyat and user offset are additive (user offset applied on top of Kemenag built-in adjustments)
+00:02 +112 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-009: Unknown calculation method falls back to Kemenag parameters
+00:02 +113 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-011a: label Dzuhur berubah menjadi Jum'at pada hari Jumat
+00:02 +114 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/calculate_prayer_times_use_case_test.dart: CalculatePrayerTimesUseCase TASK-011b: label Dzuhur tetap 'Dzuhur' pada hari selain Jumat
+00:02 +115 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns StandbyState when outside all windows (11:00)
+00:03 +116 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns PreAdzanState when 5 mins before Dzuhur (11:55)
+00:03 +117 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns AdzanState at exactly Dzuhur time (12:00)
+00:03 +118 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns IqomahState after Adzan finishes (12:03:01)
+00:03 +119 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns SholatState after Iqomah finishes (12:13:01)
+00:03 +120 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase returns StandbyState after Sholat finishes (12:23:01)
+00:03 +121 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Sholat Jum'at ΓÇö durasi sholat dan iqomah khusus SholatState menggunakan sholatJumatDurationMinutes (45) saat prayer adalah Jum'at
+00:03 +122 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Sholat Jum'at ΓÇö durasi sholat dan iqomah khusus IqomahState menggunakan iqomahJumat (10) saat prayer adalah Jum'at
+00:03 +123 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns WisdomQuoteState saat berada dalam wisdom window aktif
+00:03 +124 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat dalam jeda wisdom (positionInCycle >= duration)
+00:03 +125 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat activeQuotes kosong (guard check)
+00:03 +126 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat activeQuotes null
+00:03 +127 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window prayer window lebih prioritas daripada wisdom window (PreAdzan menang)
+00:03 +128 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window returns StandbyState saat isWisdomEnabled = false meski dalam window
+00:03 +129 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window mode urut: siklus ke-0 = item index 0, siklus ke-1 = item index 1
+00:03 +130 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/domain/usecases/evaluate_display_state_use_case_test.dart: EvaluateDisplayStateUseCase Wisdom Quote Window mode acak: seed yang sama menghasilkan urutan yang sama (deterministik)
+00:03 +131 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: (setUpAll)
+00:03 +131 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit initial state is StandbyState
+00:03 +132 -1: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit updates state when PrayerTimeCubit emits Loaded
+00:03 +132 -2: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit updates state when PrayerTimeCubit emits Loaded [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 62:9    DisplayStateCubit.init.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _StreamImpl.listen
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 58:55   DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 150:21                 main.<fn>.<fn>
+  
+00:03 +132 -2: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation
+00:03 +132 -3: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 62:9    DisplayStateCubit.init.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _StreamImpl.listen
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 58:55   DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 186:21                 main.<fn>.<fn>
+  
+  Expected: a value greater than <0>
+    Actual: <0>
+     Which: is not a value greater than <0>
+  Should evaluate immediately upon data load
+  
+  package:matcher                                                             expect
+  package:flutter_test/src/widget_tester.dart 473:18                          expect
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 208:7  main.<fn>.<fn>
+  
+00:03 +132 -3: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer
+00:03 +132 -4: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppPaused stops the timer [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 62:9    DisplayStateCubit.init.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _StreamImpl.listen
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 58:55   DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 229:21                 main.<fn>.<fn>
+  
+00:03 +132 -4: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart: PrayerTimeCubit initial state is PrayerTimeInitial
+00:03 +133 -4: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart: PrayerTimeCubit emits [PrayerTimeLoading, PrayerTimeLoaded] when initialized and use case succeeds
+00:03 +134 -4: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart: PrayerTimeCubit emits [PrayerTimeLoading, PrayerTimeError] when initialized and use case fails
+00:03 +135 -4: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart: PrayerTimeCubit recalculate() triggers reload sequence
+00:03 +135 -5: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart: PrayerTimeCubit recalculate() triggers reload sequence [E]
+  Expected: [<<Instance of 'PrayerTimeLoading'>>, <<Instance of 'PrayerTimeLoaded'>>]
+    Actual: [
+              PrayerTimeLoading:PrayerTimeLoading(),
+              PrayerTimeLoaded:PrayerTimeLoaded(MockDailyPrayerTimes, 2026-03-09 14:58:33.778429),
+              PrayerTimeLoaded:PrayerTimeLoaded(MockDailyPrayerTimes, 2026-03-09 14:58:33.779429)
+            ]
+     Which: at location [2] is [
+              PrayerTimeLoading:PrayerTimeLoading(),
+              PrayerTimeLoaded:PrayerTimeLoaded(MockDailyPrayerTimes, 2026-03-09 14:58:33.778429),
+              PrayerTimeLoaded:PrayerTimeLoaded(MockDailyPrayerTimes, 2026-03-09 14:58:33.779429)
+            ] which longer than expected
+  
+  package:matcher                              expect
+  package:bloc_test/src/bloc_test.dart 218:16  testBloc.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                   _Completer.completeError
+  package:bloc_test/src/bloc_test.dart 255:43  _runZonedGuarded.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                   _CustomZone.registerBinaryCallback
+  package:bloc_test/src/bloc_test.dart 252:5   _runZonedGuarded.<fn>
+  dart:async                                   runZonedGuarded
+  package:bloc_test/src/bloc_test.dart 251:3   _runZonedGuarded
+  package:bloc_test/src/bloc_test.dart 198:11  testBloc
+  package:bloc_test/src/bloc_test.dart 156:13  blocTest.<fn>
+  
+test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart:26:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 1,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart:150:9: Error: No named parameter with the name 'sortOrder'.
+        sortOrder: 2,
+        ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+00:03 +135 -5: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: auto-loads settings on creation ΓåÆ emits SettingsLoaded
+00:03 +135 -6: loading D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart [E]
+  Failed to load "D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart":
+  Compilation failed for testPath=D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart: test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart:26:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 1,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/main_display/layouts/wisdom_quote_layout_test.dart:150:9: Error: No named parameter with the name 'sortOrder'.
+          sortOrder: 2,
+          ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  .
+00:03 +136 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: loadSettings emits [SettingsLoading, SettingsLoaded] when successful
+00:03 +137 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: loadSettings emits [SettingsLoading, SettingsError] when repository throws
+00:03 +138 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +139 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +140 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +141 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +142 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +143 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +144 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +145 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +146 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:03 +147 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics updateIhtiyatOffset debounces and triggers save + recalculate
+00:04 +147 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 88:68   DisplayStateCubit._startTickTimer.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  new Timer.periodic
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 88:24   DisplayStateCubit._startTickTimer
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 73:5    DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 186:21                 main.<fn>.<fn>
+  
+00:04 +148 -6: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Auto-save mechanics multiple rapid updates only trigger one save (debounce)
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:56: Error: String starting with ' must end with '.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                       ^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:34: Error: Expected ',' before this.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                 ^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:38: Error: Expected ',' before this.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                     ^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:48: Error: Expected ',' before this.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                               ^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:56: Error: Expected ',' before this.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                       ^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:107:5: Error: Expected ',' before this.
+    sortOrder: 11,
+    ^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:27:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 1,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:35:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 2,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:43:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 3,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:51:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 4,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:59:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 5,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:67:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 6,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:75:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 7,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:83:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 8,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:91:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 9,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:99:5: Error: No named parameter with the name 'sortOrder'.
+    sortOrder: 10,
+    ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:34: Error: Undefined name 'jam'.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                 ^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:41: Error: Undefined name 'Awsath'.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                        ^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:38: Error: Undefined name 'Al'.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                     ^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:52: Error: Expected an identifier, but got '5787'.
+Try inserting an identifier before '5787'.
+    reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                   ^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:101:20: Error: Too many positional arguments: 0 allowed, but 4 found.
+Try removing the extra positional arguments.
+  const WisdomQuote(
+                   ^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:130:31: Error: A value of type 'List<dynamic>' can't be returned from an async function with return type 'Future<List<WisdomQuote>>'.
+ - 'List' is from 'dart:core'.
+ - 'Future' is from 'dart:async'.
+ - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+    ).thenAnswer((_) async => tAllQuotes);
+                              ^
+test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:285:16: Error: A value of type 'List<dynamic>' can't be returned from an async function with return type 'Future<List<WisdomQuote>>'.
+ - 'List' is from 'dart:core'.
+ - 'Future' is from 'dart:async'.
+ - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+        return tAllQuotes;
+               ^
+00:04 +148 -7: loading D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/wisdom_quote_section_test.dart [E]
+  Failed to load "D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/wisdom_quote_section_test.dart":
+  Compilation failed for testPath=D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/wisdom_quote_section_test.dart: test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:56: Error: String starting with ' must end with '.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                         ^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:34: Error: Expected ',' before this.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                   ^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:38: Error: Expected ',' before this.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                       ^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:48: Error: Expected ',' before this.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                 ^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:56: Error: Expected ',' before this.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                         ^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:107:5: Error: Expected ',' before this.
+      sortOrder: 11,
+      ^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:27:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 1,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:35:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 2,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:43:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 3,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:51:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 4,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:59:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 5,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:67:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 6,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:75:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 7,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:83:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 8,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:91:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 9,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:99:5: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 10,
+      ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:34: Error: Undefined name 'jam'.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                   ^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:41: Error: Undefined name 'Awsath'.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                          ^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:38: Error: Undefined name 'Al'.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                       ^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:106:52: Error: Expected an identifier, but got '5787'.
+  Try inserting an identifier before '5787'.
+      reference: 'HR. Ahmad, Al-Mu'jam Al-Awsath No. 5787',
+                                                     ^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:101:20: Error: Too many positional arguments: 0 allowed, but 4 found.
+  Try removing the extra positional arguments.
+    const WisdomQuote(
+                     ^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:130:31: Error: A value of type 'List<dynamic>' can't be returned from an async function with return type 'Future<List<WisdomQuote>>'.
+   - 'List' is from 'dart:core'.
+   - 'Future' is from 'dart:async'.
+   - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+      ).thenAnswer((_) async => tAllQuotes);
+                                ^
+  test/presentation/pages/settings/sections/wisdom_quote_section_test.dart:285:16: Error: A value of type 'List<dynamic>' can't be returned from an async function with return type 'Future<List<WisdomQuote>>'.
+   - 'List' is from 'dart:core'.
+   - 'Future' is from 'dart:async'.
+   - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+          return tAllQuotes;
+                 ^
+  .
+00:05 +149 -7: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+00:05 +150 -7: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+00:05 +151 -7: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+00:05 +152 -7: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+00:05 +152 -7: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit tick timer triggers regular evaluation [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 88:68   DisplayStateCubit._startTickTimer.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  new Timer.periodic
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 88:24   DisplayStateCubit._startTickTimer
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 73:5    DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 186:21                 main.<fn>.<fn>
+  
+00:05 +152 -8: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Renders PIN gate UI when PIN is enabled
+00:05 +152 -8: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 62:9    DisplayStateCubit.init.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _StreamImpl.listen
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 58:55   DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 267:21                 main.<fn>.<fn>
+  
+00:05 +153 -8: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/treasury_section_test.dart: TreasurySection menampilkan header "Informasi Kas Masjid"
+00:05 +153 -8: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onAppResumed restarts the timer and evaluates immediately [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 87:5    DisplayStateCubit._startTickTimer
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 129:5   DisplayStateCubit.onAppResumed
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 289:13                 main.<fn>.<fn>
+  
+00:05 +153 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/treasury_section_test.dart: TreasurySection menampilkan header "Informasi Kas Masjid"
+00:05 +153 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/display_state/display_state_cubit_test.dart: DisplayStateCubit onSettingsChanged reloads config and re-evaluates [E]
+  type 'Null' is not a subtype of type 'DisplayState'
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 18:7                   MockEvaluateDisplayStateUseCase.evaluate
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 104:39  DisplayStateCubit._tick
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 62:9    DisplayStateCubit.init.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _StreamImpl.listen
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 58:55   DisplayStateCubit.init
+  ===== asynchronous gap ===========================
+  dart:async                                                                                  _CustomZone.registerUnaryCallback
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 55:5    DisplayStateCubit.init
+  package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart 49:5    new DisplayStateCubit
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 312:21                 main.<fn>.<fn>
+  
+  Expected: a value greater than <0>
+    Actual: <0>
+     Which: is not a value greater than <0>
+  
+  package:matcher                                                             expect
+  package:flutter_test/src/widget_tester.dart 473:18                          expect
+  test\presentation\cubits\display_state\display_state_cubit_test.dart 332:7  main.<fn>.<fn>
+  
+00:05 +154 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/treasury_section_test.dart: TreasurySection menampilkan header "Informasi Kas Masjid"
+00:05 +155 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/treasury_section_test.dart: TreasurySection menampilkan header "Informasi Kas Masjid"
+00:05 +156 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/sections/treasury_section_test.dart: TreasurySection menampilkan header "Informasi Kas Masjid"
+00:05 +157 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:05 +158 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:05 +159 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:06 +160 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:06 +161 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:06 +162 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:06 +163 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Sholat Jum'at updateSholatJumatDuration diabaikan jika nilai di luar range [10, 90]
+00:06 +164 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN
+00:06 +165 -9: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY WIDGETS LIBRARY Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following ProviderNotFoundException was thrown building _FocusInheritedScope:
+Error: Could not find the correct Provider<WisdomQuoteRepository> above this WisdomQuoteSection
+Widget
+
+This happens because you used a `BuildContext` that does not include the provider
+of your choice. There are a few common scenarios:
+
+- You added a new provider in your `main.dart` and performed a hot-reload.
+  To fix, perform a hot-restart.
+
+- The provider you are trying to read is in a different route.
+
+  Providers are "scoped". So if you insert of provider inside a route, then
+  other routes will not be able to access that provider.
+
+- You used a `BuildContext` that is an ancestor of the provider you are trying to read.
+
+  Make sure that WisdomQuoteSection is under your MultiProvider/Provider<WisdomQuoteRepository>.
+  This usually happens when you are creating a provider and trying to read it immediately.
+
+  For example, instead of:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // Will throw a ProviderNotFoundError, because `context` is associated
+      // to the widget that is the parent of `Provider<Example>`
+      child: Text(context.watch<Example>().toString()),
+    );
+  }
+  ```
+
+  consider using `builder` like so:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // we use `builder` to obtain a new `BuildContext` that has access to the provider
+      builder: (context, child) {
+        // No longer throws
+        return Text(context.watch<Example>().toString());
+      }
+    );
+  }
+  ```
+
+If none of these solutions work, consider asking for help on StackOverflow:
+https://stackoverflow.com/questions/tagged/flutter
+
+The relevant error-causing widget was:
+  IndexedStack
+  IndexedStack:file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/lib/presentation/pages/settings/settings_menu_page.dart:192:26
+
+When the exception was thrown, this was the stack:
+#0      Provider._inheritedElementOf (package:provider/src/provider.dart:377:7)
+#1      Provider.of (package:provider/src/provider.dart:327:30)
+#2      ReadContext.read (package:provider/src/provider.dart:683:21)
+#3      _WisdomQuoteSectionState.didChangeDependencies (package:miqotul_khoir_tv/presentation/pages/settings/sections/wisdom_quote_section.dart:45:13)
+#4      StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5968:11)
+#5      ComponentElement.mount (package:flutter/src/widgets/framework.dart:5793:5)
+...     Normal element mounting (39 frames)
+#44     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#45     MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#46     MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (16 frames)
+#62     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#63     MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#64     MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (13 frames)
+#77     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#78     MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#79     MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (33 frames)
+#112    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#113    MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#114    MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (372 frames)
+#486    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#487    MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#488    Element.updateChild (package:flutter/src/widgets/framework.dart:4059:18)
+#489    Element.updateChildren (package:flutter/src/widgets/framework.dart:4255:32)
+#490    MultiChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7295:17)
+#491    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#492    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#493    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#494    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#495    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#496    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#497    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#498    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#499    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#500    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#501    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#502    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#503    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#504    _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#505    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#506    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#507    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#508    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#509    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#510    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#511    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#512    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#513    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#514    _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#515    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#516    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#517    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#518    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#519    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#520    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#521    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#522    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#523    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#524    StatefulElement.update (package:flutter/src/widgets/framework.dart:6007:5)
+#525    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#526    SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7122:14)
+#527    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#528    SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7122:14)
+#529    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#530    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#531    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#532    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#533    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#534    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#535    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#536    ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#537    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#538    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#539    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#540    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#541    BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2750:15)
+#542    BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2807:11)
+#543    BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3111:18)
+#544    AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2131:19)
+#545    RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+#546    SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#547    SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#548    AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1960:9)
+#551    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#552    AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#553    WidgetTester.pump.<anonymous closure> (package:flutter_test/src/widget_tester.dart:652:53)
+#556    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#557    WidgetTester.pump (package:flutter_test/src/widget_tester.dart:652:27)
+#558    main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart:136:20)
+<asynchronous suspension>
+#559    testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#560    TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY WIDGETS LIBRARY Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following ProviderNotFoundException was thrown building _FocusInheritedScope:
+Error: Could not find the correct Provider<WisdomQuoteRepository> above this WisdomQuoteSection
+Widget
+
+This happens because you used a `BuildContext` that does not include the provider
+of your choice. There are a few common scenarios:
+
+- You added a new provider in your `main.dart` and performed a hot-reload.
+  To fix, perform a hot-restart.
+
+- The provider you are trying to read is in a different route.
+
+  Providers are "scoped". So if you insert of provider inside a route, then
+  other routes will not be able to access that provider.
+
+- You used a `BuildContext` that is an ancestor of the provider you are trying to read.
+
+  Make sure that WisdomQuoteSection is under your MultiProvider/Provider<WisdomQuoteRepository>.
+  This usually happens when you are creating a provider and trying to read it immediately.
+
+  For example, instead of:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // Will throw a ProviderNotFoundError, because `context` is associated
+      // to the widget that is the parent of `Provider<Example>`
+      child: Text(context.watch<Example>().toString()),
+    );
+  }
+  ```
+
+  consider using `builder` like so:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // we use `builder` to obtain a new `BuildContext` that has access to the provider
+      builder: (context, child) {
+        // No longer throws
+        return Text(context.watch<Example>().toString());
+      }
+    );
+  }
+  ```
+
+If none of these solutions work, consider asking for help on StackOverflow:
+https://stackoverflow.com/questions/tagged/flutter
+
+The relevant error-causing widget was:
+  IndexedStack
+  IndexedStack:file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/lib/presentation/pages/settings/settings_menu_page.dart:192:26
+
+When the exception was thrown, this was the stack:
+#0      Provider._inheritedElementOf (package:provider/src/provider.dart:377:7)
+#1      Provider.of (package:provider/src/provider.dart:327:30)
+#2      ReadContext.read (package:provider/src/provider.dart:683:21)
+#3      _WisdomQuoteSectionState.didChangeDependencies (package:miqotul_khoir_tv/presentation/pages/settings/sections/wisdom_quote_section.dart:45:13)
+#4      StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5968:11)
+#5      ComponentElement.mount (package:flutter/src/widgets/framework.dart:5793:5)
+#6      Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#7      Element.updateChild (package:flutter/src/widgets/framework.dart:4053:20)
+#8      ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#9      Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#10     ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#11     _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#12     Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#13     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#14     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#15     Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#16     BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2750:15)
+#17     BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2807:11)
+#18     BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3111:18)
+#19     AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2131:19)
+#20     RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+#21     SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#22     SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#23     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1960:9)
+#26     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#27     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#28     WidgetTester.pump.<anonymous closure> (package:flutter_test/src/widget_tester.dart:652:53)
+#31     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#32     WidgetTester.pump (package:flutter_test/src/widget_tester.dart:652:27)
+#33     main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart:138:20)
+<asynchronous suspension>
+#34     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#35     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:06 +165 -10: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +165 -10: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu on valid PIN [E]
+  Test failed. See exception logs above.
+  The test description was: Navigates to menu on valid PIN
+  
+test/presentation/pages/wisdom_preview_page_test.dart:26:7: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 1,
+      ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/wisdom_preview_page_test.dart:34:7: Error: No named parameter with the name 'sortOrder'.
+      sortOrder: 2,
+      ^^^^^^^^^
+lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+  const WisdomQuote({
+        ^^^^^^^^^^^
+test/presentation/pages/wisdom_preview_page_test.dart:87:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+ - 'List' is from 'dart:core'.
+ - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+      await tester.pumpWidget(buildTestable(tQuotes));
+                                            ^
+test/presentation/pages/wisdom_preview_page_test.dart:106:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+ - 'List' is from 'dart:core'.
+ - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+      await tester.pumpWidget(buildTestable(tQuotes));
+                                            ^
+test/presentation/pages/wisdom_preview_page_test.dart:122:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+ - 'List' is from 'dart:core'.
+ - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+      await tester.pumpWidget(buildTestable(tQuotes));
+                                            ^
+test/presentation/pages/wisdom_preview_page_test.dart:149:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+ - 'List' is from 'dart:core'.
+ - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+      await tester.pumpWidget(buildTestable(tQuotes));
+                                            ^
+00:06 +166 -10: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +166 -11: loading D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/wisdom_preview_page_test.dart [E]
+  Failed to load "D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/wisdom_preview_page_test.dart":
+  Compilation failed for testPath=D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/wisdom_preview_page_test.dart: test/presentation/pages/wisdom_preview_page_test.dart:26:7: Error: No named parameter with the name 'sortOrder'.
+        sortOrder: 1,
+        ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/wisdom_preview_page_test.dart:34:7: Error: No named parameter with the name 'sortOrder'.
+        sortOrder: 2,
+        ^^^^^^^^^
+  lib/domain/entities/wisdom_quote.dart:30:9: Context: Found this candidate, but the arguments don't match.
+    const WisdomQuote({
+          ^^^^^^^^^^^
+  test/presentation/pages/wisdom_preview_page_test.dart:87:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+   - 'List' is from 'dart:core'.
+   - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+        await tester.pumpWidget(buildTestable(tQuotes));
+                                              ^
+  test/presentation/pages/wisdom_preview_page_test.dart:106:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+   - 'List' is from 'dart:core'.
+   - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+        await tester.pumpWidget(buildTestable(tQuotes));
+                                              ^
+  test/presentation/pages/wisdom_preview_page_test.dart:122:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+   - 'List' is from 'dart:core'.
+   - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+        await tester.pumpWidget(buildTestable(tQuotes));
+                                              ^
+  test/presentation/pages/wisdom_preview_page_test.dart:149:45: Error: The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<WisdomQuote>'.
+   - 'List' is from 'dart:core'.
+   - 'WisdomQuote' is from 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart' ('lib/domain/entities/wisdom_quote.dart').
+        await tester.pumpWidget(buildTestable(tQuotes));
+                                              ^
+  .
+00:06 +166 -11: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +166 -11: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu immediately if PIN is disabled
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY WIDGETS LIBRARY Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following ProviderNotFoundException was thrown building _FocusInheritedScope:
+Error: Could not find the correct Provider<WisdomQuoteRepository> above this WisdomQuoteSection
+Widget
+
+This happens because you used a `BuildContext` that does not include the provider
+of your choice. There are a few common scenarios:
+
+- You added a new provider in your `main.dart` and performed a hot-reload.
+  To fix, perform a hot-restart.
+
+- The provider you are trying to read is in a different route.
+
+  Providers are "scoped". So if you insert of provider inside a route, then
+  other routes will not be able to access that provider.
+
+- You used a `BuildContext` that is an ancestor of the provider you are trying to read.
+
+  Make sure that WisdomQuoteSection is under your MultiProvider/Provider<WisdomQuoteRepository>.
+  This usually happens when you are creating a provider and trying to read it immediately.
+
+  For example, instead of:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // Will throw a ProviderNotFoundError, because `context` is associated
+      // to the widget that is the parent of `Provider<Example>`
+      child: Text(context.watch<Example>().toString()),
+    );
+  }
+  ```
+
+  consider using `builder` like so:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // we use `builder` to obtain a new `BuildContext` that has access to the provider
+      builder: (context, child) {
+        // No longer throws
+        return Text(context.watch<Example>().toString());
+      }
+    );
+  }
+  ```
+
+If none of these solutions work, consider asking for help on StackOverflow:
+https://stackoverflow.com/questions/tagged/flutter
+
+The relevant error-causing widget was:
+  IndexedStack
+  IndexedStack:file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/lib/presentation/pages/settings/settings_menu_page.dart:192:26
+
+When the exception was thrown, this was the stack:
+#0      Provider._inheritedElementOf (package:provider/src/provider.dart:377:7)
+#1      Provider.of (package:provider/src/provider.dart:327:30)
+#2      ReadContext.read (package:provider/src/provider.dart:683:21)
+#3      _WisdomQuoteSectionState.didChangeDependencies (package:miqotul_khoir_tv/presentation/pages/settings/sections/wisdom_quote_section.dart:45:13)
+#4      StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5968:11)
+#5      ComponentElement.mount (package:flutter/src/widgets/framework.dart:5793:5)
+...     Normal element mounting (39 frames)
+#44     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#45     MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#46     MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (16 frames)
+#62     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#63     MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#64     MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (13 frames)
+#77     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#78     MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#79     MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (33 frames)
+#112    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#113    MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#114    MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7279:32)
+...     Normal element mounting (372 frames)
+#486    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#487    MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7264:36)
+#488    Element.updateChild (package:flutter/src/widgets/framework.dart:4059:18)
+#489    Element.updateChildren (package:flutter/src/widgets/framework.dart:4255:32)
+#490    MultiChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7295:17)
+#491    Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#492    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#493    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#494    Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#495    BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2750:15)
+#496    BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2807:11)
+#497    BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3111:18)
+#498    AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2131:19)
+#499    RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+#500    SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#501    SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#502    AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1960:9)
+#505    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#506    AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#507    WidgetTester.pump.<anonymous closure> (package:flutter_test/src/widget_tester.dart:652:53)
+#510    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#511    WidgetTester.pump (package:flutter_test/src/widget_tester.dart:652:27)
+#512    main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart:158:20)
+<asynchronous suspension>
+#513    testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#514    TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY WIDGETS LIBRARY Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following ProviderNotFoundException was thrown building _FocusInheritedScope:
+Error: Could not find the correct Provider<WisdomQuoteRepository> above this WisdomQuoteSection
+Widget
+
+This happens because you used a `BuildContext` that does not include the provider
+of your choice. There are a few common scenarios:
+
+- You added a new provider in your `main.dart` and performed a hot-reload.
+  To fix, perform a hot-restart.
+
+- The provider you are trying to read is in a different route.
+
+  Providers are "scoped". So if you insert of provider inside a route, then
+  other routes will not be able to access that provider.
+
+- You used a `BuildContext` that is an ancestor of the provider you are trying to read.
+
+  Make sure that WisdomQuoteSection is under your MultiProvider/Provider<WisdomQuoteRepository>.
+  This usually happens when you are creating a provider and trying to read it immediately.
+
+  For example, instead of:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // Will throw a ProviderNotFoundError, because `context` is associated
+      // to the widget that is the parent of `Provider<Example>`
+      child: Text(context.watch<Example>().toString()),
+    );
+  }
+  ```
+
+  consider using `builder` like so:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // we use `builder` to obtain a new `BuildContext` that has access to the provider
+      builder: (context, child) {
+        // No longer throws
+        return Text(context.watch<Example>().toString());
+      }
+    );
+  }
+  ```
+
+If none of these solutions work, consider asking for help on StackOverflow:
+https://stackoverflow.com/questions/tagged/flutter
+
+The relevant error-causing widget was:
+  IndexedStack
+  IndexedStack:file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/lib/presentation/pages/settings/settings_menu_page.dart:192:26
+
+When the exception was thrown, this was the stack:
+#0      Provider._inheritedElementOf (package:provider/src/provider.dart:377:7)
+#1      Provider.of (package:provider/src/provider.dart:327:30)
+#2      ReadContext.read (package:provider/src/provider.dart:683:21)
+#3      _WisdomQuoteSectionState.didChangeDependencies (package:miqotul_khoir_tv/presentation/pages/settings/sections/wisdom_quote_section.dart:45:13)
+#4      StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5968:11)
+#5      ComponentElement.mount (package:flutter/src/widgets/framework.dart:5793:5)
+#6      Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#7      Element.updateChild (package:flutter/src/widgets/framework.dart:4053:20)
+#8      ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#9      Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#10     ProxyElement.update (package:flutter/src/widgets/framework.dart:6149:5)
+#11     _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#12     Element.updateChild (package:flutter/src/widgets/framework.dart:4037:15)
+#13     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5841:16)
+#14     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5982:11)
+#15     Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#16     BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2750:15)
+#17     BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2807:11)
+#18     BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3111:18)
+#19     AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:2131:19)
+#20     RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+#21     SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1430:15)
+#22     SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1345:9)
+#23     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1960:9)
+#26     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#27     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#28     WidgetTester.pump.<anonymous closure> (package:flutter_test/src/widget_tester.dart:652:53)
+#31     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#32     WidgetTester.pump (package:flutter_test/src/widget_tester.dart:652:27)
+#33     main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart:159:20)
+<asynchronous suspension>
+#34     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#35     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:06 +166 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +166 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/pin_gate_page_test.dart: PinGatePage Tests Navigates to menu immediately if PIN is disabled [E]
+  Test failed. See exception logs above.
+  The test description was: Navigates to menu immediately if PIN is disabled
+  
+00:06 +167 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:06 +168 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:07 +169 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:07 +170 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:07 +171 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Renders categories correctly
+00:07 +172 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Treasury Management updateTreasuryBalance menyimpan nilai valid setelah debounce
+00:07 +173 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/setup_wizard/setup_wizard_page_test.dart: SetupWizardPage Widget Tests Renders LocationStep at step 2
+00:07 +174 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+00:07 +175 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+00:07 +176 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+00:08 +177 -12: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly 7 matching candidates
+  Actual: _DescendantWidgetFinder:<Found 0 widgets with type "DPadStepper" descending from widgets
+with type "IhtiyatSection": []>
+   Which: means none were found but some were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart:94:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart line 94
+The test description was:
+  Ihtiyat section shows 7 DPadSteppers
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:08 +177 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/checklist_item_widget_test.dart: ChecklistItemWidget Tests (TEST-009) isChecked: true menampilkan ikon centang (check_circle_outline)
+00:08 +177 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Ihtiyat section shows 7 DPadSteppers [E]
+  Test failed. See exception logs above.
+  The test description was: Ihtiyat section shows 7 DPadSteppers
+  
+00:08 +178 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/checklist_item_widget_test.dart: ChecklistItemWidget Tests (TEST-009) isChecked: true menampilkan ikon centang (check_circle_outline)
+00:08 +179 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Renders label, value, and suffix correctly
+00:08 +180 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Renders label, value, and suffix correctly
+00:09 +181 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Renders label, value, and suffix correctly
+00:09 +182 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/dpad_stepper_test.dart: DPadStepper Widget Tests Renders label, value, and suffix correctly
+00:09 +183 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/focusable_widget_test.dart: FocusableWidget calls builder(false) when not focused initially
+00:09 +184 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/focusable_widget_test.dart: FocusableWidget calls builder(false) when not focused initially
+00:09 +185 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +186 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +187 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +188 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +189 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +190 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +191 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +192 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +193 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +194 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +195 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +196 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +197 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +198 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +199 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +200 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +201 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +202 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +203 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +204 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +205 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+00:09 +206 -13: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly 5 matching candidates
+  Actual: _DescendantWidgetFinder:<Found 6 widgets with type "DPadStepper" descending from widgets
+with type "IqomahSection": [
+            DPadStepper(state: _DPadStepperState#94ac2(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#6b8b8(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#883e9(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#bdaa9(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#82f45(ticker inactive)),
+            DPadStepper(state: _DPadStepperState#2e1b9(ticker inactive)),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart:125:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart line 125
+The test description was:
+  Iqomah section shows 5 DPadSteppers
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:09 +206 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/running_text_widget_test.dart: RunningTextWidget renders Marquee widget when text is not empty
+00:09 +206 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/pages/settings/settings_menu_page_test.dart: SettingsMenuPage Tests Iqomah section shows 5 DPadSteppers [E]
+  Test failed. See exception logs above.
+  The test description was: Iqomah section shows 5 DPadSteppers
+  
+00:10 +207 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/running_text_widget_test.dart: RunningTextWidget renders Marquee widget when text is not empty
+00:10 +208 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/running_text_widget_test.dart: RunningTextWidget renders Marquee widget when text is not empty
+00:10 +209 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/running_text_widget_test.dart: RunningTextWidget renders Marquee widget when text is not empty
+00:10 +210 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/pin_input_widget_test.dart: PinInputWidget Tests Entering digits calls onCompleted
+00:10 +211 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +212 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +213 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +214 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +215 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +216 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +217 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/widgets/treasury_info_widget_test.dart: TreasuryInfoWidget menampilkan title "Kas Masjid"
+00:10 +218 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce
+00:10 +219 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce
+00:10 +220 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce
+00:10 +221 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce
+00:10 +222 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomIntervalMinutes menyimpan nilai valid setelah debounce
+00:10 +223 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/widget_test.dart: App smoke test
+00:10 +224 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/widget_test.dart: App smoke test
+00:10 +225 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/widget_test.dart: App smoke test
+00:10 +226 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/widget_test.dart: App smoke test
+00:11 +227 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomSelectedIds menyimpan JSON-encoded string
+00:11 +228 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomSelectedIds dengan list kosong menyimpan "[]"
+00:11 +229 -14: D:/AndroidProject/LatihanFlutter/sadayana-masjid-tv/test/presentation/cubits/settings/settings_cubit_test.dart: Wisdom Management updateWisdomShuffle(true) menyimpan langsung (tanpa debounce)
+00:11 +230 -14: Some tests failed.

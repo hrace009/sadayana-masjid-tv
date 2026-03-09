@@ -14,4 +14,7 @@ enum DisplayStateType {
 
   /// Sedang berlangsung Sholat (layar gelap/silent).
   sholat,
+
+  /// Menampilkan Kata Mutiara Islam secara periodik.
+  wisdomQuote,
 }

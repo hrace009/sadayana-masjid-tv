@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_state.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/pin_gate_page.dart';
@@ -13,11 +14,15 @@ import 'package:flutter/services.dart';
 
 class MockSettingsCubit extends Mock implements SettingsCubit {}
 
+class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
+
 void main() {
   late MockSettingsCubit mockSettingsCubit;
+  late MockWisdomQuoteRepository mockWisdomRepo;
 
   setUp(() {
     mockSettingsCubit = MockSettingsCubit();
+    mockWisdomRepo = MockWisdomQuoteRepository();
     final mockSettings = const Settings();
     when(
       () => mockSettingsCubit.state,
@@ -25,6 +30,11 @@ void main() {
     when(
       () => mockSettingsCubit.stream,
     ).thenAnswer((_) => Stream.value(SettingsLoaded(settings: mockSettings)));
+    // WisdomQuoteSection needs these stubs when SettingsMenuPage is pushed.
+    when(() => mockWisdomRepo.getAll()).thenAnswer((_) async => const []);
+    when(
+      () => mockWisdomRepo.getByIds(any()),
+    ).thenAnswer((_) async => const []);
   });
 
   Widget createTestWidget() {
@@ -33,10 +43,14 @@ void main() {
       minTextAdapt: true,
       builder: (context, _) {
         return MaterialApp(
-          builder: (context, child) => BlocProvider<SettingsCubit>.value(
-            value: mockSettingsCubit,
-            child: child!,
-          ),
+          builder: (context, child) =>
+              RepositoryProvider<WisdomQuoteRepository>.value(
+                value: mockWisdomRepo,
+                child: BlocProvider<SettingsCubit>.value(
+                  value: mockSettingsCubit,
+                  child: child!,
+                ),
+              ),
           home: const PinGatePage(),
         );
       },

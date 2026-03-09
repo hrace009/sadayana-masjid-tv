@@ -85,9 +85,78 @@ Implementasi UI Setup Wizard (4 langkah) selesai:
 - **Features**: auto-save debounce, PIN management, update logic
 - **Testing**: Comprehensive unit tests passing
 
-### Plan 12 dan seterusnya — BELUM DIMULAI
+### Plan 12 dan seterusnya — SEBAGIAN SELESAI (2026-03-10)
 
-Fase berikutnya: Settings UI, Main Display UI, dan fitur lainnya.
+Fitur yang sudah selesai di luar urutan Plan 01–11:
+
+- **Kata Mutiara Islam (Wisdom Quote)** — 14 phases, 257 total tests ✅. State ke-6 pada display state machine.
+  Lihat `AGENTS.md` section "Kata Mutiara Islam / Wisdom Quote" untuk detail file.
+
+## Fase yang masih BELUM DIMULAI: Settings UI, Main Display UI, dan fitur lainnya.
+
+## Flutter Testing Patterns (2026-03-10)
+
+### Pattern: DateFormat Locale di Widget Test
+
+`DateFormat('...', 'id_ID')` di dalam widget membutuhkan locale data saat test.
+Tanpa inisialisasi, test akan throw `LocaleDataException`.
+
+**Fix**: Tambah `setUpAll` di test file yang merender widget tersebut:
+
+```dart
+import 'package:intl/date_symbol_data_local.dart';
+
+setUpAll(() async {
+  await initializeDateFormatting('id_ID', null);
+});
+```
+
+**Kapan berlaku**: Semua widget test yang merender `WisdomQuoteLayout` atau widget lain
+yang memanggil `DateFormat` dengan locale non-default.
+
+### Pattern: Mocktail Stub — Semua Named Arg Harus Disebutkan
+
+Jika sebuah method dipanggil dengan optional named parameter yang bernilai **non-null**,
+stub `when()` harus mengikutsertakan parameter tersebut. Jika tidak, stub tidak cocok
+(≠ recorded call) → `MissingStubError`.
+
+```dart
+// ❌ SALAH — evaluate() dipanggil dengan activeQuotes: const []
+// tapi stub tidak menyebutkan activeQuotes → stub miss, return null
+when(() => mockEvaluate.evaluate(...)).thenReturn(StandbyState());
+
+// ✅ BENAR — sebutkan semua named params yang digunakan, atau pakai any(named:)
+when(() => mockEvaluate.evaluate(
+  config: any(named: 'config'),
+  currentTime: any(named: 'currentTime'),
+  prayerTimes: any(named: 'prayerTimes'),
+  hijriDate: any(named: 'hijriDate'),
+  activeQuotes: any(named: 'activeQuotes'),  // ← WAJIB jika cubit memanggilnya
+)).thenReturn(StandbyState());
+```
+
+**Root cause**: Mocktail merekam SEMUA argumen call (termasuk optional yang di-pass).
+Stub yang tidak menyebut argumen tersebut memiliki matcher berbeda → tidak match.
+
+### Pattern: IndexedStack + Offstage + ListView Lazy
+
+`IndexedStack` menyimpan semua children di-tree, tapi yang tidak aktif dibungkus
+`Offstage(offstage: true)`. `ListView` di dalamnya **tidak membangun children** karena
+offstage = tidak dirender → `find.byType(SomeWidget)` akan menemukan 0 hasil.
+
+**Fix di widget test**: Navigasi ke section terlebih dahulu sebelum melakukan assertion:
+
+```dart
+// ❌ SALAH — Iqomah section bukan default, ListView-nya tidak build
+expect(find.byType(DPadStepper), findsNWidgets(6));
+
+// ✅ BENAR — tap label menu untuk navigate ke section, baru assert
+await tester.tap(find.text('Durasi Iqomah').first);
+await tester.pumpAndSettle();
+expect(find.byType(DPadStepper), findsNWidgets(6));
+```
+
+**Berlaku untuk**: `SettingsMenuPage` (IndexedStack categories) dan halaman serupa.
 
 ## Known Bugs & Fixes
 

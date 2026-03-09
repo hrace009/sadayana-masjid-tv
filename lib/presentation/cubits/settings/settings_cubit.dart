@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/repositories/settings_repository.dart';
@@ -203,6 +204,86 @@ class SettingsCubit extends Cubit<SettingsState> {
   void updateTreasuryExpense(int amount) {
     if (amount < 0 || amount > 999999999999) return;
     _debounceSave('treasury_expense', {'treasury_expense': amount});
+  }
+
+  // --- Kata Mutiara Islam ---
+
+  /// Toggle aktif/nonaktif fitur Kata Mutiara Islam.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updateWisdomEnabled(bool enabled) {
+    return _saveField('wisdom_enabled', {
+      'is_wisdom_enabled': enabled ? 1 : 0,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update interval kemunculan Kata Mutiara (menit).
+  /// Validasi: 5–30 menit sesuai REQ-003.
+  void updateWisdomIntervalMinutes(int minutes) {
+    if (minutes < 5 || minutes > 30) return;
+    _debounceSave('wisdom_interval_minutes', {
+      'wisdom_interval_minutes': minutes,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update durasi tampil per item Kata Mutiara (menit).
+  /// Validasi: 1–10 menit sesuai REQ-004.
+  void updateWisdomDurationMinutes(int minutes) {
+    if (minutes < 1 || minutes > 10) return;
+    _debounceSave('wisdom_duration_minutes', {
+      'wisdom_duration_minutes': minutes,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam mulai jendela aktif Kata Mutiara.
+  /// Validasi: 0–23.
+  void updateWisdomStartHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('wisdom_start_hour', {
+      'wisdom_start_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit mulai jendela aktif Kata Mutiara.
+  /// Validasi: 0–59.
+  void updateWisdomStartMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('wisdom_start_minute', {
+      'wisdom_start_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam selesai jendela aktif Kata Mutiara.
+  /// Validasi: 0–23.
+  void updateWisdomEndHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('wisdom_end_hour', {
+      'wisdom_end_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit selesai jendela aktif Kata Mutiara.
+  /// Validasi: 0–59.
+  void updateWisdomEndMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('wisdom_end_minute', {
+      'wisdom_end_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update daftar ID item Kata Mutiara yang aktif.
+  /// [ids] di-encode sebagai JSON string sebelum disimpan ke SQLite.
+  void updateWisdomSelectedIds(List<String> ids) {
+    _debounceSave('wisdom_selected_ids', {
+      'wisdom_selected_ids': jsonEncode(ids),
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Toggle mode urut/acak tampilan Kata Mutiara.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updateWisdomShuffle(bool shuffle) {
+    return _saveField('wisdom_shuffle', {
+      'wisdom_shuffle': shuffle ? 1 : 0,
+    }, triggerConfigUpdate: true);
   }
 
   // --- Phase 4: PIN Management ---

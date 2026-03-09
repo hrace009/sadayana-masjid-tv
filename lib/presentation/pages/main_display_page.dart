@@ -16,6 +16,7 @@ import 'main_display/layouts/iqomah_layout.dart';
 import 'main_display/layouts/pre_adzan_layout.dart';
 import 'main_display/layouts/sholat_layout.dart';
 import 'main_display/layouts/standby_layout.dart';
+import 'main_display/layouts/wisdom_quote_layout.dart';
 import 'settings/pin_gate_page.dart';
 
 class MainDisplayPage extends StatefulWidget {
@@ -126,6 +127,12 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
                           layoutWidget = SholatLayout(
                             key: const ValueKey('sholat'),
                             state: state as SholatState,
+                          );
+                          break;
+                        case DisplayStateType.wisdomQuote:
+                          layoutWidget = WisdomQuoteLayout(
+                            key: const ValueKey('wisdom_quote'),
+                            state: state as WisdomQuoteState,
                           );
                           break;
                       }

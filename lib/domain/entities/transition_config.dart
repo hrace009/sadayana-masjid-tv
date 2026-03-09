@@ -11,12 +11,30 @@ class TransitionConfig extends Equatable {
   final int sholatJumatDurationMinutes;
   final Map<String, int> iqomahMinutes;
 
+  // Kata Mutiara Islam
+  final bool isWisdomEnabled;
+  final int wisdomIntervalMinutes;
+  final int wisdomDurationMinutes;
+  final int wisdomStartHour;
+  final int wisdomStartMinute;
+  final int wisdomEndHour;
+  final int wisdomEndMinute;
+  final bool wisdomShuffle;
+
   const TransitionConfig({
     required this.preAdzanMinutes,
     required this.adzanDurationSeconds,
     required this.sholatDurationMinutes,
     this.sholatJumatDurationMinutes = 45,
     required this.iqomahMinutes,
+    this.isWisdomEnabled = false,
+    this.wisdomIntervalMinutes = 15,
+    this.wisdomDurationMinutes = 3,
+    this.wisdomStartHour = 6,
+    this.wisdomStartMinute = 0,
+    this.wisdomEndHour = 21,
+    this.wisdomEndMinute = 0,
+    this.wisdomShuffle = false,
   });
 
   /// Factory method untuk membuat [TransitionConfig] dari [Settings].
@@ -34,6 +52,14 @@ class TransitionConfig extends Equatable {
         'Maghrib': settings.iqomahMaghrib,
         'Isya': settings.iqomahIsya,
       },
+      isWisdomEnabled: settings.isWisdomEnabled,
+      wisdomIntervalMinutes: settings.wisdomIntervalMinutes,
+      wisdomDurationMinutes: settings.wisdomDurationMinutes,
+      wisdomStartHour: settings.wisdomStartHour,
+      wisdomStartMinute: settings.wisdomStartMinute,
+      wisdomEndHour: settings.wisdomEndHour,
+      wisdomEndMinute: settings.wisdomEndMinute,
+      wisdomShuffle: settings.wisdomShuffle,
     );
   }
 
@@ -58,5 +84,13 @@ class TransitionConfig extends Equatable {
     sholatDurationMinutes,
     sholatJumatDurationMinutes,
     iqomahMinutes,
+    isWisdomEnabled,
+    wisdomIntervalMinutes,
+    wisdomDurationMinutes,
+    wisdomStartHour,
+    wisdomStartMinute,
+    wisdomEndHour,
+    wisdomEndMinute,
+    wisdomShuffle,
   ];
 }

@@ -1,0 +1,79 @@
+[
+    {
+        "id": "quran_001",
+        "type": "quran",
+        "label": "Ayat Al-Quran",
+        "translation_text": "Karena sesungguhnya bersama kesulitan ada kemudahan.",
+        "reference": "QS. Al-Insyirah [94]: 6"
+    },
+    {
+        "id": "quran_002",
+        "type": "quran",
+        "label": "Ayat Al-Quran",
+        "translation_text": "Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya.",
+        "reference": "QS. Al-Baqarah [2]: 286"
+    },
+    {
+        "id": "quran_003",
+        "type": "quran",
+        "label": "Ayat Al-Quran",
+        "translation_text": "Janganlah kamu berputus asa dari rahmat Allah. Sesungguhnya Allah mengampuni dosa-dosa semuanya.",
+        "reference": "QS. Az-Zumar [39]: 53"
+    },
+    {
+        "id": "quran_004",
+        "type": "quran",
+        "label": "Ayat Al-Quran",
+        "translation_text": "Hai orang-orang yang beriman, mintalah pertolongan kepada Allah dengan sabar dan sholat. Sesungguhnya Allah beserta orang-orang yang sabar.",
+        "reference": "QS. Al-Baqarah [2]: 153"
+    },
+    {
+        "id": "quran_005",
+        "type": "quran",
+        "label": "Ayat Al-Quran",
+        "translation_text": "Ingatlah kepada-Ku, maka Aku pun akan ingat kepadamu. Bersyukurlah kepada-Ku, dan janganlah kamu mengingkari nikmat-Ku.",
+        "reference": "QS. Al-Baqarah [2]: 152"
+    },
+    {
+        "id": "hadith_001",
+        "type": "hadith",
+        "label": "Hadits",
+        "translation_text": "Sesungguhnya setiap amal itu tergantung pada niatnya, dan setiap orang hanya mendapatkan apa yang ia niatkan.",
+        "reference": "HR. Bukhari No. 1"
+    },
+    {
+        "id": "hadith_002",
+        "type": "hadith",
+        "label": "Hadits",
+        "translation_text": "Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia lainnya.",
+        "reference": "HR. Ahmad (Hasan)"
+    },
+    {
+        "id": "hadith_003",
+        "type": "hadith",
+        "label": "Hadits",
+        "translation_text": "Menuntut ilmu adalah kewajiban bagi setiap Muslim.",
+        "reference": "HR. Ibnu Majah No. 224 (Hasan)"
+    },
+    {
+        "id": "hadith_004",
+        "type": "hadith",
+        "label": "Hadits",
+        "translation_text": "Berbuat baiklah kepada kedua orang tuamu, sesungguhnya surga ada di bawah telapak kaki ibumu.",
+        "reference": "HR. Tirmidzi No. 1956 (Shahih)"
+    },
+    {
+        "id": "hadith_005",
+        "type": "hadith",
+        "label": "Hadits",
+        "translation_text": "Tidak termasuk golongan kami orang yang tidak menyayangi yang lebih muda dan tidak menghormati yang lebih tua.",
+        "reference": "HR. Bukhari No. 6018"
+    },
+    {
+        "id": "hadith_006",
+        "type": "hadith",
+        "label": "Hadits",
+        "translation_text": "Orang-orang yang penyayang akan disayangi oleh Allah Yang Maha Penyayang. Sayangilah siapa saja yang ada di bumi, niscaya Yang ada di langit akan menyayangi kalian.",
+        "reference": "HR. Tirmidzi No. 1924 & Abu Dawud No. 4941 (Hasan Shahih)"
+    }
+]

@@ -73,6 +73,17 @@ class Settings extends Equatable {
   final int treasuryIncome;
   final int treasuryExpense;
 
+  // Kata Mutiara Islam (fitur opsional, default OFF)
+  final bool isWisdomEnabled;
+  final int wisdomIntervalMinutes;
+  final int wisdomDurationMinutes;
+  final int wisdomStartHour;
+  final int wisdomStartMinute;
+  final int wisdomEndHour;
+  final int wisdomEndMinute;
+  final List<String> wisdomSelectedIds;
+  final bool wisdomShuffle;
+
   const Settings({
     this.isFirstRun = true,
     this.mosqueName = '',
@@ -109,6 +120,15 @@ class Settings extends Equatable {
     this.treasuryBalance = 0,
     this.treasuryIncome = 0,
     this.treasuryExpense = 0,
+    this.isWisdomEnabled = false,
+    this.wisdomIntervalMinutes = 15,
+    this.wisdomDurationMinutes = 3,
+    this.wisdomStartHour = 6,
+    this.wisdomStartMinute = 0,
+    this.wisdomEndHour = 21,
+    this.wisdomEndMinute = 0,
+    this.wisdomSelectedIds = const <String>[],
+    this.wisdomShuffle = false,
   });
 
   /// Membuat salinan [Settings] dengan field tertentu di-override.
@@ -148,6 +168,15 @@ class Settings extends Equatable {
     int? treasuryBalance,
     int? treasuryIncome,
     int? treasuryExpense,
+    bool? isWisdomEnabled,
+    int? wisdomIntervalMinutes,
+    int? wisdomDurationMinutes,
+    int? wisdomStartHour,
+    int? wisdomStartMinute,
+    int? wisdomEndHour,
+    int? wisdomEndMinute,
+    List<String>? wisdomSelectedIds,
+    bool? wisdomShuffle,
   }) {
     return Settings(
       isFirstRun: isFirstRun ?? this.isFirstRun,
@@ -187,6 +216,17 @@ class Settings extends Equatable {
       treasuryBalance: treasuryBalance ?? this.treasuryBalance,
       treasuryIncome: treasuryIncome ?? this.treasuryIncome,
       treasuryExpense: treasuryExpense ?? this.treasuryExpense,
+      isWisdomEnabled: isWisdomEnabled ?? this.isWisdomEnabled,
+      wisdomIntervalMinutes:
+          wisdomIntervalMinutes ?? this.wisdomIntervalMinutes,
+      wisdomDurationMinutes:
+          wisdomDurationMinutes ?? this.wisdomDurationMinutes,
+      wisdomStartHour: wisdomStartHour ?? this.wisdomStartHour,
+      wisdomStartMinute: wisdomStartMinute ?? this.wisdomStartMinute,
+      wisdomEndHour: wisdomEndHour ?? this.wisdomEndHour,
+      wisdomEndMinute: wisdomEndMinute ?? this.wisdomEndMinute,
+      wisdomSelectedIds: wisdomSelectedIds ?? this.wisdomSelectedIds,
+      wisdomShuffle: wisdomShuffle ?? this.wisdomShuffle,
     );
   }
 
@@ -227,5 +267,14 @@ class Settings extends Equatable {
     treasuryBalance,
     treasuryIncome,
     treasuryExpense,
+    isWisdomEnabled,
+    wisdomIntervalMinutes,
+    wisdomDurationMinutes,
+    wisdomStartHour,
+    wisdomStartMinute,
+    wisdomEndHour,
+    wisdomEndMinute,
+    wisdomSelectedIds,
+    wisdomShuffle,
   ];
 }

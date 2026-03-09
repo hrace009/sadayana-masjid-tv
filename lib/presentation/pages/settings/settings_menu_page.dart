@@ -16,6 +16,7 @@ import 'sections/reset_section.dart';
 import 'sections/running_text_section.dart';
 import 'sections/security_section.dart';
 import 'sections/treasury_section.dart';
+import 'sections/wisdom_quote_section.dart';
 import 'sections/about_section.dart';
 
 class SettingsMenuPage extends StatefulWidget {
@@ -37,6 +38,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     "Running Text",
     "Keamanan (PIN)",
     "Informasi Kas",
+    "Kata Mutiara",
     "Reset Data",
     "Tentang Aplikasi",
   ];
@@ -50,6 +52,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     RunningTextSection(),
     SecuritySection(),
     TreasurySection(),
+    WisdomQuoteSection(),
     ResetSection(),
     AboutSection(),
   ];
