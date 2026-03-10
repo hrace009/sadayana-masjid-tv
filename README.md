@@ -117,13 +117,13 @@ lib/
 | 04 | UI Components | GlassmorphismCard, FocusableWidget, IslamicBackground, RunningText | ✅ |
 | 05 | Prayer Calculation | PrayerTime entities, CalculateUseCase, Kemenag SIHAT, DPL | ✅ |
 | 06 | Prayer Cubit | PrayerTimeCubit, states, midnight timer | ✅ |
-| 07 | State Evaluation | DisplayState classes (5 states), EvaluateUseCase | ✅ |
+| 07 | State Evaluation | DisplayState classes (6 states), EvaluateUseCase | ✅ |
 | 08 | Display State Machine | DisplayStateCubit, tick timer, power recovery | ✅ |
 | 09 | Setup Wizard Logic | SetupWizardCubit, validation, step navigation | ✅ |
 | 10 | Setup Wizard UI | 4 step pages, city picker, prayer preview | ✅ |
 | 11 | Settings Logic | SettingsCubit, auto-save, PIN management | ✅ |
-| 12 | Settings UI | Menu pages, DPadStepper, PinInput, 9 categories | ✅ |
-| 13 | Main Display UI | 5 layout states, AnimatedSwitcher, D-Pad menu access | ✅ |
+| 12 | Settings UI | Menu pages, DPadStepper, PinInput, 10 categories | ✅ |
+| 13 | Main Display UI | 6 layout states, AnimatedSwitcher, D-Pad menu access | ✅ |
 | — | Kemenag Method Fix | Ganti MUIS → SIHAT, fix ihtiyat bawaan +2 menit | ✅ |
 | — | Elevation/DPL | Koreksi ketinggian tempat untuk akurasi Maghrib/Syuruq | ✅ |
 | — | Jum'at Handling | Label dinamis, durasi layar & iqomah khusus Jum'at | ✅ |

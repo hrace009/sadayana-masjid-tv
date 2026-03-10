@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: February 20, 2026
+**Last Updated**: March 10, 2026
 
 <!-- markdownlint-disable -->
 
@@ -48,6 +48,8 @@ lib/presentation/cubits/
 | **Setup Wizard Logic** (Plan 09) | 2026-02-20 | Cubit tests ✅ | Production Ready |
 | **Setup Wizard UI** (Plan 10) | 2026-02-20 | Widget tests ✅ | Production Ready |
 | **Settings Logic** (Plan 11) | 2026-02-20 | Unit tests ✅ | Production Ready |
+| **Settings UI** (Plan 12) | 2026-02-20 | Widget tests ✅ | Production Ready |
+| **Main Display UI** (Plan 13) | 2026-02-20 | Widget tests ✅ | Production Ready |
 | **Kata Mutiara Islam** (Wisdom Quote) | 2026-03-10 | 14 phases, 257 total tests ✅ | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
@@ -283,7 +285,7 @@ Untuk detailed implementation guidance, lihat dokumentasi specialized kami:
 
 | Pattern | Description | When to Use |
 |---------|-------------|-------------|
-| **State Machine Pattern** | 5-state display transition (STANDBY → PRE-ADZAN → ADZAN → IQOMAH → SHOLAT) | Core display logic |
+| **State Machine Pattern** | 6-state display transition (STANDBY → PRE-ADZAN → ADZAN → IQOMAH → SHOLAT → KATA MUTIARA) | Core display logic |
 | **Offline-First Data** | SQLite sebagai single source of truth | Semua data persistence |
 | **Prayer Time Calculation** | Astronomical calculation dengan adhan-dart + manual correction | Jadwal sholat |
 | **Timer Management** | Countdown timers dengan lifecycle management | Adzan, Iqomah countdowns |
@@ -987,8 +989,8 @@ Ensure `AndroidManifest.xml` includes:
 
 ---
 
-**Last Updated**: February 20, 2026
-**Version**: 2.0.0
+**Last Updated**: March 10, 2026
+**Version**: 2.1.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV
 **Related Docs**: [ARCHITECTURE_PATTERNS.md](docs/ARCHITECTURE_PATTERNS.md), [Product_Requirement_Document.md](Product_Requirement_Document.md)
