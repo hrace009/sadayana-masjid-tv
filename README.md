@@ -1,4 +1,4 @@
-# 🕌 Miqotul Khoir TV
+﻿# 🕌 Miqotul Khoir TV
 
 ![Platform: Android TV](https://img.shields.io/badge/platform-Android%20TV-green)
 ![Framework: Flutter](https://img.shields.io/badge/framework-Flutter-blue)
@@ -24,7 +24,7 @@ Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi s
 - **Penanganan Jum'at** — label, durasi iqomah, dan durasi layar mati khusus hari Jumat
 - Konversi tanggal Hijriah dengan adjustment manual (H-1 / H+1)
 
-### 🔄 State Machine — 5 Mode Tampilan Otomatis
+### 🔄 State Machine — 6 Mode Tampilan Otomatis
 
 | State | Trigger | Tampilan |
 |-------|---------|----------|
@@ -33,6 +33,7 @@ Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi s
 | **Adzan** | Waktu sholat tiba | Visual "SAATNYA ADZAN" + audio opsional |
 | **Iqomah** | Setelah adzan selesai | Countdown timer iqomah (durasi per sholat) |
 | **Sholat** | Timer iqomah habis | Layar gelap / jam redup (OLED safe) |
+| **Kata Mutiara** | Periodik sesuai interval | Full-screen ayat Al-Quran / Hadits terjemahan |
 
 ### 📺 Dioptimalkan untuk Android TV
 
@@ -52,7 +53,7 @@ Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi s
 
 - **4-step first-run wizard**: Welcome → Identitas Masjid → Lokasi → Konfirmasi
 - Pilih kota dari database **514 kota, 34 provinsi** Indonesia (pre-populated, termasuk data elevasi)
-- Menu settings dengan 9 kategori: Identitas, Ihtiyat, Iqomah, Dhuha, Timing, Running Text, Kas Masjid, Keamanan, Reset
+- Menu settings dengan 10 kategori: Identitas, Ihtiyat, Iqomah, Dhuha, Timing, Running Text, Kata Mutiara, Kas Masjid, Keamanan, Reset
 - Menu settings dilindungi PIN opsional (SHA-256)
 - **Informasi Kas Masjid** — tampilkan saldo, pemasukan, pengeluaran di layar utama (opsional)
 - Running text (marquee) yang dapat diedit
@@ -128,6 +129,7 @@ lib/
 | — | Jum'at Handling | Label dinamis, durasi layar & iqomah khusus Jum'at | ✅ |
 | — | Treasury/Kas Masjid | Widget informasi saldo kas di Standby Layout | ✅ |
 | — | Rebranding | SMD → Miqotul Khoir TV, seluruh dokumen & kode | ✅ |
+| — | Kata Mutiara Islam | WisdomQuoteState (state ke-6), katalog 11 item Quran & Hadits, Settings UI, preview page | ✅ |
 
 > **Legend**: ✅ Completed
 
@@ -135,11 +137,11 @@ lib/
 
 | Layer | Tests |
 |-------|:-----:|
-| Data (models, repositories, database) | 22 |
+| Data (models, repositories, database) | 27 |
 | Theme (colors, typography, theme) | 42 |
-| Domain & Business Logic (Prayer, State, Setup, Settings, Jum'at) | 80+ |
+| Domain & Business Logic (Prayer, State, Setup, Settings, Jum'at, Wisdom) | 90+ |
 | Widgets & Presentation (Cubit, UI components, widgets) | 62+ |
-| **Total** | **206** |
+| **Total** | **257** |
 
 ---
 
@@ -203,7 +205,7 @@ silahkan donasi seikhlasnya melalui Saweria berikut ini.
 
 ---
 
-## �📄 License
+## 📄 License
 
 Proyek ini dilisensikan di bawah **GNU General Public License v3.0 (GPL-3.0)**.
 
