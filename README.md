@@ -190,7 +190,7 @@ flutter run
 
 ---
 
-## � Dukung Pengembangan
+## 🫶 Dukung Pengembangan
 
 Jika kamu menyukai aplikasi ini dan ingin tetap berlanjut pengembangannya,
 silahkan donasi seikhlasnya melalui Saweria berikut ini.
