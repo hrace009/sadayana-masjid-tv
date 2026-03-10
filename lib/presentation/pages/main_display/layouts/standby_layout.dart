@@ -62,10 +62,16 @@ class StandbyLayout extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Kiri: Jam Besar
+                  // RepaintBoundary mengisolasi jam dari repaint area body lain
+                  // saat update detik setiap 1 detik (GUD-001).
                   Expanded(
                     flex: 5,
                     child: Center(
-                      child: DigitalClockWidget(currentTime: state.currentTime),
+                      child: RepaintBoundary(
+                        // TASK-010: DigitalClockWidget kini self-contained (StatefulWidget),
+                        // tidak lagi menerima currentTime dari state cubit.
+                        child: DigitalClockWidget(),
+                      ),
                     ),
                   ),
 
@@ -94,25 +100,9 @@ class StandbyLayout extends StatelessWidget {
             SizedBox(height: 24.h),
 
             // FOOTER / RUNNING TEXT
-            if (runningText != null && runningText.isNotEmpty)
-              SizedBox(
-                height: 60.h,
-                child: GlassmorphismCard(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Center(
-                    child: RunningTextWidget(
-                      text: runningText,
-                      textStyle: IslamicTypography.body().copyWith(
-                        color: IslamicColors.goldAmber,
-                        fontSize: 28.sp,
-                      ),
-                      scrollSpeed: 40.0,
-                    ),
-                  ),
-                ),
-              )
-            else
-              SizedBox(height: 60.h),
+            // Diekstrak ke _StandbyRunningTextFooter agar terisolasi dari
+            // rebuild timer 1-detik DisplayStateCubit (TASK-008, TASK-009).
+            _StandbyRunningTextFooter(runningText: runningText),
           ],
         );
       },
@@ -210,6 +200,57 @@ class StandbyLayout extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+/// Widget footer running text yang terisolasi dari rebuild [DisplayStateCubit].
+///
+/// Menerima [runningText] sebagai `final` parameter — Flutter element
+/// reconciliation mempertahankan elemen `RepaintBoundary` dan `Marquee`
+/// (via [ValueKey]) selama nilai teks tidak berubah, sehingga animasi
+/// marquee tidak terganggu oleh timer tick 1-detik dari [DisplayStateCubit].
+///
+/// Ref: Plan refactor-running-text-performance-1 TASK-008, TASK-009.
+class _StandbyRunningTextFooter extends StatelessWidget {
+  final String? runningText;
+
+  const _StandbyRunningTextFooter({required this.runningText});
+
+  @override
+  Widget build(BuildContext context) {
+    // Jika tidak ada teks, tampilkan spacer dengan tinggi sama agar layout
+    // Column tidak bergeser saat teks kosong.
+    if (runningText == null || runningText!.isEmpty) {
+      return SizedBox(height: 60.h);
+    }
+
+    // RepaintBoundary mengisolasi animasi marquee dari repaint area statis
+    // di atasnya (prayer cards, header). Container solid menggantikan
+    // GlassmorphismCard agar tidak ada BackdropFilter di atas animasi (GUD-002).
+    return RepaintBoundary(
+      child: SizedBox(
+        height: 60.h,
+        child: Container(
+          decoration: BoxDecoration(
+            color: IslamicColors.glassWhite,
+            borderRadius: BorderRadius.circular(16.r),
+            border: Border.all(color: IslamicColors.glassBorder, width: 1.w),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Center(
+            child: RunningTextWidget(
+              text: runningText!,
+              showBackground: false,
+              textStyle: IslamicTypography.body().copyWith(
+                color: IslamicColors.goldAmber,
+                fontSize: 28.sp,
+              ),
+              scrollSpeed: 30.0,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

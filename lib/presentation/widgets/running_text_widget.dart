@@ -21,7 +21,7 @@ class RunningTextWidget extends StatelessWidget {
   /// Style teks. Default: [IslamicTypography.body()].
   final TextStyle? textStyle;
 
-  /// Kecepatan scroll dalam pixel per detik. Default: 50.0.
+  /// Kecepatan scroll dalam pixel per detik. Default: 30.0 (Phase 3).
   final double scrollSpeed;
 
   /// Jarak kosong setelah teks sebelum teks diulang. Default: 100.w.
@@ -40,7 +40,7 @@ class RunningTextWidget extends StatelessWidget {
     super.key,
     required this.text,
     this.textStyle,
-    this.scrollSpeed = 50.0,
+    this.scrollSpeed = 30.0, // Phase 3: default scrollSpeed lebih rendah
     this.blankSpace,
     this.pauseDuration = Duration.zero,
     this.showBackground = true,

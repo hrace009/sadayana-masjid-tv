@@ -92,7 +92,19 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
               child: Stack(
                 children: [
                   // Layer utama: layout berdasarkan display state
+                  // TASK-011 (Phase 5): buildWhen mencegah rebuild StandbyLayout setiap detik.
+                  // StandbyLayout hanya di-rebuild saat menit berganti atau type state berubah.
+                  // State lain (PreAdzan/Adzan/Iqomah/Sholat/WisdomQuote) selalu rebuild
+                  // karena menampilkan countdown dalam satuan detik.
                   BlocBuilder<DisplayStateCubit, DisplayState>(
+                    buildWhen: (prev, next) {
+                      if (prev.type != next.type) return true;
+                      if (next.type == DisplayStateType.standby) {
+                        return (prev as StandbyState).currentTime.minute !=
+                            (next as StandbyState).currentTime.minute;
+                      }
+                      return true;
+                    },
                     builder: (context, state) {
                       Widget layoutWidget;
 

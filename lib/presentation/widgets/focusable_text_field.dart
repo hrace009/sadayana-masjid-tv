@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/theme/islamic_colors.dart';
@@ -53,7 +52,9 @@ class _FocusableTextFieldState extends State<FocusableTextField> {
   void initState() {
     super.initState();
     _containerFocusNode = FocusNode();
-    _textFieldFocusNode = FocusNode();
+    // skipTraversal: true — D-pad tidak auto-landing di sini,
+    // tapi requestFocus() programatik via addPostFrameCallback tetap berfungsi.
+    _textFieldFocusNode = FocusNode(skipTraversal: true);
 
     // Ketika textField mendapat atau kehilangan fokus
     _textFieldFocusNode.addListener(() {
@@ -95,9 +96,12 @@ class _FocusableTextFieldState extends State<FocusableTextField> {
       focusNode: _containerFocusNode,
       autofocus: widget.autofocus,
       onSelect: () {
-        // Saat D-Pad Select/Tengah ditekan, minta fokus ke text field dan paksa buka keyboard
-        _textFieldFocusNode.requestFocus();
-        SystemChannels.textInput.invokeMethod('TextInput.show');
+        // WAJIB addPostFrameCallback: synchronous requestFocus() di dalam
+        // key-event handler tidak membuka IME di Android TV karena event
+        // belum selesai diproses Flutter saat callback ini dipanggil.
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _textFieldFocusNode.requestFocus();
+        });
       },
       builder: (isContainerFocused) {
         // Highlight border berwarna Gold/Emerald jika container terpilih ATAU sedang mengetik

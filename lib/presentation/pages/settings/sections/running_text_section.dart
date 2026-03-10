@@ -89,6 +89,7 @@ class _RunningTextSectionState extends State<RunningTextSection> {
                   text: _controller.text.isEmpty
                       ? settings.runningText
                       : _controller.text,
+                  showBackground: false,
                 ),
               ),
             ),

@@ -26,8 +26,8 @@ class SholatLayout extends StatelessWidget {
         child: Center(
           child: Opacity(
             opacity: 0.85,
+            // TASK-010: currentTime dihapus — widget mengelola timer sendiri.
             child: DigitalClockWidget(
-              currentTime: DateTime.now(),
               customStyle: IslamicTypography.heading(color: Colors.white),
             ),
           ),

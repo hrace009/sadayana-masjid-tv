@@ -42,6 +42,11 @@ class GlassmorphismCard extends StatelessWidget {
   /// Digunakan untuk menandai focused state (GUD-001).
   final bool isFocused;
 
+  /// Jika false, menonaktifkan [BackdropFilter] blur untuk menghemat GPU.
+  /// Gunakan pada widget yang dianimasikan secara kontinu (misal: marquee,
+  /// running text) di perangkat Android TV spesifikasi rendah. Default: true.
+  final bool useBlur;
+
   const GlassmorphismCard({
     super.key,
     required this.child,
@@ -52,10 +57,37 @@ class GlassmorphismCard extends StatelessWidget {
     this.padding,
     this.margin,
     this.isFocused = false,
+    this.useBlur = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final decoration = BoxDecoration(
+      color: backgroundColor,
+      borderRadius: BorderRadius.circular(borderRadius.r),
+      border: Border.all(color: borderColor, width: 1.w),
+      boxShadow: isFocused
+          ? [
+              BoxShadow(
+                color: IslamicColors.goldAmber.withValues(alpha: 0.3),
+                blurRadius: 12.r,
+                spreadRadius: 2.r,
+              ),
+            ]
+          : null,
+    );
+
+    // Tanpa blur: render Container solid langsung, tanpa ClipRRect + BackdropFilter.
+    // Digunakan untuk widget animasi kontinu agar tidak membebani GPU TV (GUD-002).
+    if (!useBlur) {
+      return Container(
+        margin: margin,
+        decoration: decoration,
+        padding: padding ?? EdgeInsets.all(16.w),
+        child: child,
+      );
+    }
+
     return Container(
       margin: margin,
       child: ClipRRect(
@@ -66,20 +98,7 @@ class GlassmorphismCard extends StatelessWidget {
             sigmaY: blurIntensity,
           ),
           child: Container(
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(borderRadius.r),
-              border: Border.all(color: borderColor, width: 1.w),
-              boxShadow: isFocused
-                  ? [
-                      BoxShadow(
-                        color: IslamicColors.goldAmber.withValues(alpha: 0.3),
-                        blurRadius: 12.r,
-                        spreadRadius: 2.r,
-                      ),
-                    ]
-                  : null,
-            ),
+            decoration: decoration,
             padding: padding ?? EdgeInsets.all(16.w),
             child: child,
           ),

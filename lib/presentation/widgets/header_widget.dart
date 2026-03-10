@@ -6,7 +6,9 @@ import '../../core/theme/islamic_colors.dart';
 import '../../core/theme/islamic_typography.dart';
 import 'glassmorphism_card.dart';
 
-class HeaderWidget extends StatelessWidget {
+// TASK-012 (Phase 5): Dikonversi ke StatefulWidget untuk meng-cache masehiDate.
+// DateFormat('id_ID') hanya dijalankan saat hari berganti, bukan setiap detik.
+class HeaderWidget extends StatefulWidget {
   final String mosqueName;
   final String mosqueAddress;
   final String hijriDate;
@@ -23,19 +25,45 @@ class HeaderWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Format tanggal Masehi, contoh: "Senin, 24 Februari 2026"
-    final masehiDate = DateFormat(
-      'EEEE, dd MMMM yyyy',
-      'id_ID',
-    ).format(currentTime);
+  State<HeaderWidget> createState() => _HeaderWidgetState();
+}
 
+class _HeaderWidgetState extends State<HeaderWidget> {
+  String _masehiDate = '';
+  int _cachedDay = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateDateIfNeeded();
+  }
+
+  @override
+  void didUpdateWidget(HeaderWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _updateDateIfNeeded();
+  }
+
+  // Jalankan DateFormat hanya saat tanggal (hari) benar-benar berubah.
+  void _updateDateIfNeeded() {
+    final day = widget.currentTime.day;
+    if (day != _cachedDay) {
+      _cachedDay = day;
+      _masehiDate = DateFormat(
+        'EEEE, dd MMMM yyyy',
+        'id_ID',
+      ).format(widget.currentTime);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // Animated right padding: reserves space when settings icon is visible,
     // fills in when icon is hidden — smooth slide transition.
     return AnimatedPadding(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      padding: EdgeInsets.only(right: isSettingsVisible ? 100.w : 0),
+      padding: EdgeInsets.only(right: widget.isSettingsVisible ? 100.w : 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,15 +89,17 @@ class HeaderWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        mosqueName.isNotEmpty ? mosqueName : 'Masjid Anda',
+                        widget.mosqueName.isNotEmpty
+                            ? widget.mosqueName
+                            : 'Masjid Anda',
                         style: IslamicTypography.heading(),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        mosqueAddress.isNotEmpty
-                            ? mosqueAddress
+                        widget.mosqueAddress.isNotEmpty
+                            ? widget.mosqueAddress
                             : 'Menunggu Pengaturan',
                         style: IslamicTypography.body(),
                         maxLines: 3,
@@ -92,8 +122,8 @@ class HeaderWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  hijriDate.isNotEmpty
-                      ? hijriDate
+                  widget.hijriDate.isNotEmpty
+                      ? widget.hijriDate
                       : 'Memuat Tanggal Hijriah...',
                   style: IslamicTypography.subtitle().copyWith(
                     color: IslamicColors.goldAmber,
@@ -103,7 +133,7 @@ class HeaderWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  masehiDate,
+                  _masehiDate,
                   style: IslamicTypography.body().copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 28.sp,
