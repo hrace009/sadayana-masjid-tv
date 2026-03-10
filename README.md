@@ -190,7 +190,20 @@ flutter run
 
 ---
 
-## 📄 License
+## � Dukung Pengembangan
+
+Jika kamu menyukai aplikasi ini dan ingin tetap berlanjut pengembangannya,
+silahkan donasi seikhlasnya melalui Saweria berikut ini.
+
+<a href="https://saweria.co/GulajavaMinistudio" target="_blank">
+  <img src="assets/images/saweria_png_yellow.png" alt="QR Code Donasi Saweria - Gulajava Ministudio" width="280">
+</a>
+
+[☕ Donasi via Saweria — saweria.co/GulajavaMinistudio](https://saweria.co/GulajavaMinistudio)
+
+---
+
+## �📄 License
 
 Proyek ini dilisensikan di bawah **GNU General Public License v3.0 (GPL-3.0)**.
 

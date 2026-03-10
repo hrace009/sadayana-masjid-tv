@@ -237,3 +237,97 @@ Offstage(
 `maxLines > 1` otomatis set `TextInputAction.newline`.
 
 **Fix**: `textInputAction: TextInputAction.done` + `onSubmitted: (_) => focusNode.unfocus()`.
+
+---
+
+## Android TV — Performance Optimization Patterns (2026-03-10)
+
+Ditemukan saat optimasi `RunningTextWidget` di device Android TV Android 11.
+
+### Pattern: BackdropFilter + Animated Widget = GPU Jank
+
+`BackdropFilter(ImageFilter.blur)` memaksa GPU re-capture seluruh layer di belakangnya di
+**setiap frame**. Dikombinasikan dengan continuous animation (Marquee), menyebabkan severe
+GPU jank di device low-end.
+
+**Fix**:
+
+```dart
+// ❌ JANGAN — BackdropFilter pada widget yang terus beranimasi
+ClipRRect(
+  child: BackdropFilter(
+    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+    child: Marquee(text: longRunningText), // animasi konstan
+  ),
+)
+
+// ✅ BENAR — Hapus BackdropFilter, gunakan solid semi-transparent
+RunningTextWidget(showBackground: false)
+
+// ✅ BENAR — Atau isolasi layer dengan RepaintBoundary
+RepaintBoundary(child: RunningTextWidget(...))
+```
+
+**Real Case**: `RunningTextWidget` di `StandbyLayout` — GPU jank di Android TV Android 11.
+
+### Pattern: BlocBuilder buildWhen — Kurangi CPU Rebuild
+
+`DisplayStateCubit` tick setiap detik. `StandbyLayout` (jam, jadwal sholat) hanya perlu
+update per menit — bukan per detik.
+
+```dart
+BlocBuilder<DisplayStateCubit, DisplayState>(
+  buildWhen: (prev, next) {
+    if (next is StandbyState && prev is StandbyState) {
+      return next.currentTime.minute != prev.currentTime.minute;
+    }
+    return true; // Adzan, Iqomah countdown tetap rebuild per detik
+  },
+  builder: (context, state) { ... },
+)
+```
+
+### Pattern: Self-Contained Timer di StatefulWidget
+
+Jam digital yang update setiap detik: jangan terima `currentTime` dari parent/cubit.
+Letakkan `Timer.periodic` di dalam widget sendiri → mencegah parent rebuild 60x/menit.
+
+```dart
+class _DigitalClockWidgetState extends State<DigitalClockWidget> {
+  Timer? _timer;
+  DateTime _now = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted) setState(() => _now = DateTime.now());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+}
+```
+
+### Pattern: Cache DateFormat Locale
+
+`DateFormat('EEEE, d MMMM yyyy', 'id_ID').format(date)` mahal jika dipanggil setiap detik.
+Simpan hasil di `StatefulWidget` state, update hanya saat hari berganti:
+
+```dart
+void _updateDateIfNeeded(DateTime now) {
+  if (now.day != _cachedDay) {
+    _masehiDate = DateFormat('EEEE, d MMMM yyyy', 'id_ID').format(now);
+    _cachedDay = now.day;
+  }
+}
+```
+
+### Pattern: adhan Prayer Calculation — No Isolate Needed
+
+`adhan` library ~1ms (pure math, no I/O). Overhead `compute()`/`Isolate` ~100ms >> waktu kalkulasi.
+Jangan pakai `compute()` — cukup `async/await` biasa untuk akses SQLite settings.

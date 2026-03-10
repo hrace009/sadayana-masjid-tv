@@ -711,6 +711,105 @@ Future<void> _loadCities(String provinceName, {String? preselectCityName}) async
 
 **Real Case**: `LocationStep` – back navigation dari Preview ke Location step di Setup Wizard.
 
+### 7. IME Tidak Muncul saat TextField Dibuka via D-Pad
+
+**Issue**: Soft keyboard (IME) tidak muncul saat user menekan SELECT/ENTER pada
+`FocusableWidget` yang membungkus `TextField`, meskipun `requestFocus()` terpanggil.
+
+**Root Cause**: `requestFocus()` dipanggil secara synchronous di dalam key-event handler
+(`onSelect`). Pada Android TV, Flutter belum selesai memproses key event saat
+`requestFocus()` dieksekusi sehingga IME tidak ter-trigger.
+
+**Problem**:
+```dart
+// ❌ WRONG - requestFocus() synchronous di dalam key-event handler
+FocusableWidget(
+  onSelect: () {
+    _textFieldFocusNode.requestFocus(); // ← IME tidak muncul!
+    SystemChannels.textInput.invokeMethod('TextInput.show'); // ← juga tidak membantu
+  },
+  builder: (isFocused) => TextField(focusNode: _textFieldFocusNode),
+)
+```
+
+**Solution**:
+```dart
+// ✅ CORRECT - requestFocus() via addPostFrameCallback
+// skipTraversal: true — D-pad tidak auto-landing di TextField,
+// tapi requestFocus() programatik tetap berfungsi
+final _textFieldFocusNode = FocusNode(skipTraversal: true);
+
+FocusableWidget(
+  onSelect: () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _textFieldFocusNode.requestFocus();
+    });
+  },
+  builder: (isFocused) => TextField(focusNode: _textFieldFocusNode),
+)
+```
+
+**Why This Works**:
+- `addPostFrameCallback` menunda `requestFocus()` sampai frame berikutnya — setelah
+  key event selesai diproses Flutter
+- `skipTraversal: true` mencegah D-pad "terdampar" langsung di TextField
+- `SystemChannels.textInput.invokeMethod('TextInput.show')` tidak reliable di Android TV,
+  hapus saja
+
+**Prevention**:
+1. **Semua custom widget** yang membuka TextField via `onSelect` WAJIB pakai `addPostFrameCallback`
+2. **Inner `FocusNode`** harus `skipTraversal: true` agar D-pad tidak bypass outer widget
+3. **Jangan gunakan** `SystemChannels.textInput` secara manual
+
+**Real Case**: `FocusableTextField` widget di Settings page — tombol ✏️ ditekan via D-pad
+tapi keyboard tidak muncul sama sekali.
+
+### 8. BackdropFilter pada Animated Widget — GPU Jank di Android TV
+
+**Issue**: Jank (frame drops, stuttering) pada `RunningTextWidget` / `Marquee`
+yang menggunakan `BackdropFilter` (glassmorphism blur) di device Android TV low-end.
+
+**Root Cause**: `BackdropFilter` dengan `ImageFilter.blur` memaksa GPU men-capture snapshot
+seluruh layer di belakangnya di **setiap frame**. Dikombinasikan dengan continuous animation
+(marquee scroll), GPU terbebani sangat berat karena harus re-blur setiap frame.
+
+**Problem**:
+```dart
+// ❌ WRONG - BackdropFilter pada widget yang terus beranimasi
+ClipRRect(
+  child: BackdropFilter(
+    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // re-evaluated tiap frame!
+    child: Marquee(text: longRunningText),             // animasi konstan ↑
+  ),
+)
+```
+
+**Solution**:
+```dart
+// ✅ CORRECT — Option 1: Hapus BackdropFilter, gunakan solid semi-transparent
+RunningTextWidget(showBackground: false) // atau pakai Container solid
+
+// ✅ CORRECT — Option 2: Wrap dengan RepaintBoundary untuk isolasi layer
+RepaintBoundary(
+  child: RunningTextWidget(...),
+)
+```
+
+**Why This Works**:
+- Menghapus `BackdropFilter` menghilangkan per-frame GPU cost terbesar pada layer blur
+- `RepaintBoundary` membuat Flutter cache layer terpisah → hanya footer yang direpaint,
+  bukan seluruh layar
+- Solid semi-transparent `Container` jauh lebih murah secara GPU daripada blur effect
+
+**Prevention**:
+1. **Hindari `BackdropFilter`** pada semua widget yang memiliki internal animation
+   (`Marquee`, countdown timer, animasi lain yang berjalan terus)
+2. **Selalu `RepaintBoundary`** pada widget yang sering repaint (footer marquee, jam digital)
+3. Test performance di device low-end sejak awal, bukan hanya emulator
+
+**Real Case**: `RunningTextWidget` di `StandbyLayout` — glassmorphism background dengan
+`BackdropFilter` + `Marquee` → severe GPU jank di Android TV low-end (Android 11).
+
 ## Flutter Architecture Guidelines
 
 - Follow Clean Architecture principles dengan clear layer separation
@@ -784,6 +883,64 @@ Key performance principles:
 - Optimize SQLite queries dengan proper indexing
 - Monitor performance dengan Flutter DevTools
 - **Target**: 60 FPS rendering pada Android TV devices
+
+### Android TV Performance Patterns (Low-End Device)
+
+Pattern-pattern ini ditemukan saat optimasi `RunningTextWidget` di device Android TV Android 11:
+
+- **`BackdropFilter` + animated widget = GPU jank**: Jangan gunakan `ImageFilter.blur` pada
+  widget yang memiliki continuous animation (marquee, countdown, dll). Ganti dengan solid
+  semi-transparent `Container`. Lihat pitfall #8.
+
+- **`RepaintBoundary`**: Wrap widget yang sering repaint (footer marquee, jam digital) agar
+  Flutter membuat compositing layer terpisah. Tanpa ini, setiap tick jam → full-screen repaint.
+
+- **`buildWhen` pada `BlocBuilder`**: Untuk layout yang hanya perlu update per menit (Standby),
+  gunakan `buildWhen: (prev, next) => next.currentTime.minute != prev.currentTime.minute`.
+  Hindari rebuild 60x/menit hanya karena cubit tick setiap detik.
+
+- **Self-contained timer di `StatefulWidget`**: Jika sebuah widget hanya perlu update dirinya
+  sendiri (contoh: jam digital per detik), letakkan `Timer.periodic` di dalam widget — bukan
+  di cubit. Widget memanggil `DateTime.now()` langsung, tidak menerima `currentTime` dari parent.
+
+```dart
+// ✅ CORRECT — DigitalClockWidget mengelola timer sendiri
+class _DigitalClockWidgetState extends State<DigitalClockWidget> {
+  Timer? _timer;
+  DateTime _now = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted) setState(() => _now = DateTime.now());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+}
+```
+
+- **Cache `DateFormat` locale**: `DateFormat('EEEE, d MMMM yyyy', 'id_ID').format(date)` mahal
+  bila dipanggil setiap detik. Simpan hasil format di state, update hanya saat tanggal berubah:
+
+```dart
+// ✅ CORRECT — update hanya saat hari berganti
+void _updateDateIfNeeded(DateTime now) {
+  if (now.day != _cachedDay) {
+    _masehiDate = DateFormat('EEEE, d MMMM yyyy', 'id_ID').format(now);
+    _cachedDay = now.day;
+  }
+}
+```
+
+- **`adhan` prayer calculation — no Isolate needed**: Kalkulasi waktu sholat dengan library
+  `adhan` ~1ms (pure math, no I/O). Overhead spawn `Isolate`/`compute()` ~100ms >> calculation
+  time. Cukup `async/await` untuk akses SQLite settings.
 
 ## UI/UX
 
