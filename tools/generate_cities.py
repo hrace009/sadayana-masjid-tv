@@ -29,13 +29,11 @@ def main():
     provinces_raw = urllib.request.urlopen(f"{BASE_URL}/provinces.json").read()
     provinces_list = json.loads(provinces_raw)
     province_map = {p["id"]: title_case_city(p["name"]) for p in provinces_list}
-    print(f"  -> {len(province_map)} provinces")
 
     # Download regencies (kota/kabupaten)
     print("Downloading regencies...")
     regencies_raw = urllib.request.urlopen(f"{BASE_URL}/regencies.json").read()
     regencies_list = json.loads(regencies_raw)
-    print(f"  -> {len(regencies_list)} regencies")
 
     # Transform to our format
     cities = []
@@ -59,14 +57,9 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(cities, f, indent=2, ensure_ascii=False)
 
-    print(f"\nGenerated {len(cities)} cities -> {out_path}")
-    print(f"File size: {os.path.getsize(out_path) / 1024:.1f} KB")
-
     # Validate
     provinces_in_data = set(c["province_name"] for c in cities)
-    print(f"Provinces covered: {len(provinces_in_data)}")
     assert len(cities) >= 500, f"Expected >= 500 cities, got {len(cities)}"
-    print("Validation passed!")
 
 if __name__ == "__main__":
     main()

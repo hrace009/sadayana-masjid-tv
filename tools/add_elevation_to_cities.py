@@ -84,7 +84,6 @@ def main():
     print(f"Loading cities from {cities_path}...")
     with open(cities_path, "r", encoding="utf-8") as f:
         cities = json.load(f)
-    print(f"  -> {len(cities)} cities loaded")
 
     # Check if elevation already exists
     has_elevation = all("elevation" in c for c in cities)
@@ -121,31 +120,6 @@ def main():
     # Write updated cities.json
     with open(cities_path, "w", encoding="utf-8") as f:
         json.dump(cities, f, indent=2, ensure_ascii=False)
-
-    print(f"\nUpdated {len(cities)} cities -> {cities_path}")
-    print(f"File size: {os.path.getsize(cities_path) / 1024:.1f} KB")
-
-    # Spot-check known cities
-    print("\n=== SPOT CHECK ===")
-    spot_checks = {
-        "Kota Bandung": 768,
-        "Kota Jakarta Pusat": 8,
-        "Kota Semarang": 2,
-        "Kota Malang": 476,
-        "Kota Surabaya": 5,
-        "Kota Bogor": 265,
-    }
-
-    for city in cities:
-        name = city["city_name"]
-        if name in spot_checks:
-            expected = spot_checks[name]
-            actual = city["elevation"]
-            delta = abs(actual - expected)
-            status = "✓" if delta <= 100 else "⚠"
-            print(f"  {status} {name}: {actual}m (expected ~{expected}m, delta={delta}m)")
-
-    print("\nDone!")
 
 
 if __name__ == "__main__":

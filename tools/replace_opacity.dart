@@ -13,10 +13,8 @@ void main() {
           return '.withValues(alpha: ${match.group(1)})';
         });
         entity.writeAsStringSync(newContent);
-        print('Updated ${entity.path}');
         count++;
       }
     }
   }
-  print('Updated \$count files.');
 }
