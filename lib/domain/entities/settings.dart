@@ -84,6 +84,13 @@ class Settings extends Equatable {
   final List<String> wisdomSelectedIds;
   final bool wisdomShuffle;
 
+  // Mode Hemat Daya Malam (fitur opsional, default OFF)
+  final bool isMidnightModeEnabled;
+  final int midnightStartHour;
+  final int midnightStartMinute;
+  final int midnightEndHour;
+  final int midnightEndMinute;
+
   const Settings({
     this.isFirstRun = true,
     this.mosqueName = '',
@@ -129,6 +136,11 @@ class Settings extends Equatable {
     this.wisdomEndMinute = 0,
     this.wisdomSelectedIds = const <String>[],
     this.wisdomShuffle = false,
+    this.isMidnightModeEnabled = false,
+    this.midnightStartHour = 23,
+    this.midnightStartMinute = 0,
+    this.midnightEndHour = 3,
+    this.midnightEndMinute = 30,
   });
 
   /// Membuat salinan [Settings] dengan field tertentu di-override.
@@ -177,6 +189,11 @@ class Settings extends Equatable {
     int? wisdomEndMinute,
     List<String>? wisdomSelectedIds,
     bool? wisdomShuffle,
+    bool? isMidnightModeEnabled,
+    int? midnightStartHour,
+    int? midnightStartMinute,
+    int? midnightEndHour,
+    int? midnightEndMinute,
   }) {
     return Settings(
       isFirstRun: isFirstRun ?? this.isFirstRun,
@@ -227,6 +244,12 @@ class Settings extends Equatable {
       wisdomEndMinute: wisdomEndMinute ?? this.wisdomEndMinute,
       wisdomSelectedIds: wisdomSelectedIds ?? this.wisdomSelectedIds,
       wisdomShuffle: wisdomShuffle ?? this.wisdomShuffle,
+      isMidnightModeEnabled:
+          isMidnightModeEnabled ?? this.isMidnightModeEnabled,
+      midnightStartHour: midnightStartHour ?? this.midnightStartHour,
+      midnightStartMinute: midnightStartMinute ?? this.midnightStartMinute,
+      midnightEndHour: midnightEndHour ?? this.midnightEndHour,
+      midnightEndMinute: midnightEndMinute ?? this.midnightEndMinute,
     );
   }
 
@@ -276,5 +299,10 @@ class Settings extends Equatable {
     wisdomEndMinute,
     wisdomSelectedIds,
     wisdomShuffle,
+    isMidnightModeEnabled,
+    midnightStartHour,
+    midnightStartMinute,
+    midnightEndHour,
+    midnightEndMinute,
   ];
 }

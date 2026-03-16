@@ -164,7 +164,9 @@ class _TreasurySectionState extends State<TreasurySection> {
                                 value: settings.isTreasuryEnabled,
                                 onChanged: (val) =>
                                     cubit.updateTreasuryEnabled(val),
-                                activeColor: IslamicColors.goldAmber,
+                                activeThumbColor: IslamicColors.goldAmber,
+                                activeTrackColor: IslamicColors.goldAmber
+                                    .withValues(alpha: 0.5),
                               ),
                             ],
                           ),

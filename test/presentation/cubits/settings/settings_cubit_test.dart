@@ -679,4 +679,249 @@ void main() {
       },
     );
   });
+
+  group('Midnight Mode Management', () {
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightModeEnabled(true) menyimpan langsung (tanpa debounce)',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateMidnightModeEnabled(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'midnight_mode_enabled',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'is_midnight_mode_enabled': 1,
+          }),
+        ).called(1);
+        verifyNever(
+          () => settingsRepository.updateSettings({
+            'is_midnight_mode_enabled': 0,
+          }),
+        );
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightModeEnabled(false) menyimpan nilai 0',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateMidnightModeEnabled(false),
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'is_midnight_mode_enabled': 0,
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightModeEnabled memanggil triggerConfigUpdate (onSettingsChanged)',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateMidnightModeEnabled(true),
+      verify: (_) {
+        verify(() => displayStateCubit.onSettingsChanged()).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightStartHour menyimpan nilai valid setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateMidnightStartHour(22);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'midnight_start_hour',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'midnight_start_hour': 22}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightStartHour diabaikan untuk nilai di luar range (24)',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateMidnightStartHour(24); // Invalid — harus diabaikan
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [], // Tidak ada perubahan state
+      verify: (_) {
+        verifyNever(() => settingsRepository.updateSettings(any()));
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightEndHour menyimpan nilai valid setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateMidnightEndHour(4);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'midnight_end_hour',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'midnight_end_hour': 4}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightStartMinute menyimpan nilai valid setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateMidnightStartMinute(30);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'midnight_start_minute',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () =>
+              settingsRepository.updateSettings({'midnight_start_minute': 30}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateMidnightEndMinute menyimpan nilai valid setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateMidnightEndMinute(0);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'midnight_end_minute',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'midnight_end_minute': 0}),
+        ).called(1);
+      },
+    );
+  });
 }

@@ -222,3 +222,31 @@ final class WisdomQuoteState extends DisplayState {
     remainingSeconds,
   ];
 }
+
+/// Keadaan saat Mode Hemat Daya Malam aktif (layar hitam hemat daya).
+///
+/// Ditampilkan saat waktu berada dalam window [midnightStartHour]–[midnightEndHour]
+/// yang dikonfigurasi DKM. Memuat jam digital dan info jadwal Subuh
+/// untuk tetap informatif. Posisi teks bergerak lambat untuk mencegah burn-in.
+final class MidnightStandbyState extends DisplayState {
+  /// Waktu saat ini — digunakan untuk menampilkan jam digital.
+  final DateTime currentTime;
+
+  /// Waktu Subuh hari ini — ditampilkan sebagai info "Subuh - HH:mm".
+  final DateTime subuhTime;
+
+  /// Label waktu Subuh yang sudah diformat, misal "Subuh - 04:30".
+  final String subuhLabel;
+
+  const MidnightStandbyState({
+    required this.currentTime,
+    required this.subuhTime,
+    required this.subuhLabel,
+  });
+
+  @override
+  DisplayStateType get type => DisplayStateType.midnightStandby;
+
+  @override
+  List<Object?> get props => [currentTime, subuhTime, subuhLabel];
+}

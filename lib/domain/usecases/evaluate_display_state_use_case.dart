@@ -89,7 +89,18 @@ class EvaluateDisplayStateUseCase {
       }
     }
 
-    // 3. Wisdom Quote window check (sebelum fallback ke Standby)
+    // 3. Midnight Mode window check (setelah sholat, sebelum Wisdom Quote)
+    // Siklus sholat tetap diprioritaskan — midnight hanya aktif di luar sholat.
+    if (config.isMidnightModeEnabled) {
+      final midnightState = _evaluateMidnightWindow(
+        now: now,
+        config: config,
+        dailyPrayerTimes: dailyPrayerTimes,
+      );
+      if (midnightState != null) return midnightState;
+    }
+
+    // 4. Wisdom Quote window check (sebelum fallback ke Standby)
     if (config.isWisdomEnabled &&
         activeQuotes != null &&
         activeQuotes.isNotEmpty) {
@@ -101,7 +112,7 @@ class EvaluateDisplayStateUseCase {
       if (wisdomState != null) return wisdomState;
     }
 
-    // 4. Fallback: Standby State
+    // 5. Fallback: Standby State
     final nextPrayer = dailyPrayerTimes.nextPrayer(now);
     Duration? timeToNext;
 
@@ -116,6 +127,45 @@ class EvaluateDisplayStateUseCase {
       runningText: runningText,
       hijriDate: hijriDate,
       currentTime: now,
+    );
+  }
+
+  /// Evaluasi apakah waktu [now] berada dalam window midnight mode.
+  ///
+  /// Mendukung window **cross-midnight** (misal 23:00 – 03:30): jika
+  /// `startMinutes > endMinutes`, digunakan logika OR.
+  /// Window non-cross-midnight (misal 01:00 – 03:00) menggunakan logika AND.
+  ///
+  /// Mengembalikan [MidnightStandbyState] jika dalam window, null jika tidak.
+  MidnightStandbyState? _evaluateMidnightWindow({
+    required DateTime now,
+    required TransitionConfig config,
+    required DailyPrayerTimes dailyPrayerTimes,
+  }) {
+    final nowMinutes = now.hour * 60 + now.minute;
+    final startMinutes =
+        config.midnightStartHour * 60 + config.midnightStartMinute;
+    final endMinutes = config.midnightEndHour * 60 + config.midnightEndMinute;
+
+    final bool isInWindow;
+    if (startMinutes > endMinutes) {
+      // Cross-midnight window: misal 23:00 – 03:30
+      isInWindow = nowMinutes >= startMinutes || nowMinutes < endMinutes;
+    } else {
+      // Window dalam satu hari: misal 01:00 – 03:00
+      isInWindow = nowMinutes >= startMinutes && nowMinutes < endMinutes;
+    }
+
+    if (!isInWindow) return null;
+
+    final subuh = dailyPrayerTimes.subuh;
+    final subuhHour = subuh.time.hour.toString().padLeft(2, '0');
+    final subuhMinute = subuh.time.minute.toString().padLeft(2, '0');
+
+    return MidnightStandbyState(
+      currentTime: now,
+      subuhTime: subuh.time,
+      subuhLabel: 'Subuh - $subuhHour:$subuhMinute',
     );
   }
 

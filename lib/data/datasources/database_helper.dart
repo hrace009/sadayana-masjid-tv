@@ -20,7 +20,7 @@ class DatabaseHelper {
   static const String _databaseName = 'miqotul_khoir.db';
 
   /// Versi database saat ini. Increment untuk setiap schema change.
-  static const int _databaseVersion = 7;
+  static const int _databaseVersion = 8;
 
   // ---------------------------------------------------------------------------
   // Singleton
@@ -172,6 +172,24 @@ class DatabaseHelper {
       );
       await db.execute(
         'ALTER TABLE settings ADD COLUMN wisdom_shuffle INTEGER NOT NULL DEFAULT 0',
+      );
+    }
+    if (oldVersion < 8) {
+      // Tambah kolom Mode Hemat Daya Tengah Malam (fitur opsional, default OFF)
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_midnight_mode_enabled INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN midnight_start_hour INTEGER NOT NULL DEFAULT 23',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN midnight_start_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN midnight_end_hour INTEGER NOT NULL DEFAULT 3',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN midnight_end_minute INTEGER NOT NULL DEFAULT 30',
       );
     }
   }
@@ -330,6 +348,13 @@ class DatabaseHelper {
         wisdom_end_minute INTEGER NOT NULL DEFAULT 0,
         wisdom_selected_ids TEXT NOT NULL DEFAULT '[]',
         wisdom_shuffle INTEGER NOT NULL DEFAULT 0,
+
+        -- Mode Hemat Daya Tengah Malam (fitur opsional, default OFF)
+        is_midnight_mode_enabled INTEGER NOT NULL DEFAULT 0,
+        midnight_start_hour INTEGER NOT NULL DEFAULT 23,
+        midnight_start_minute INTEGER NOT NULL DEFAULT 0,
+        midnight_end_hour INTEGER NOT NULL DEFAULT 3,
+        midnight_end_minute INTEGER NOT NULL DEFAULT 30,
 
         -- Adzan Duration (Seconds)
         adzan_duration_seconds INTEGER NOT NULL DEFAULT 180,

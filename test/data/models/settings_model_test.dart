@@ -59,6 +59,11 @@ void main() {
     'wisdom_end_minute': 0,
     'wisdom_selected_ids': '[]',
     'wisdom_shuffle': 0,
+    'is_midnight_mode_enabled': 0,
+    'midnight_start_hour': 23,
+    'midnight_start_minute': 0,
+    'midnight_end_hour': 3,
+    'midnight_end_minute': 30,
     'created_at': '2026-01-01T00:00:00',
     'updated_at': '2026-01-01T00:00:00',
   };
@@ -108,6 +113,11 @@ void main() {
     'wisdom_end_minute': 45,
     'wisdom_selected_ids': '["quran_001","hadith_003"]',
     'wisdom_shuffle': 1,
+    'is_midnight_mode_enabled': 1,
+    'midnight_start_hour': 22,
+    'midnight_start_minute': 30,
+    'midnight_end_hour': 4,
+    'midnight_end_minute': 0,
     'created_at': '2026-02-18T10:00:00',
     'updated_at': '2026-02-18T14:00:00',
   };
@@ -165,6 +175,12 @@ void main() {
       expect(model.wisdomEndMinute, equals(0));
       expect(model.wisdomSelectedIds, isEmpty);
       expect(model.wisdomShuffle, isFalse);
+      // Midnight mode fields — semua default OFF / nilai awal
+      expect(model.isMidnightModeEnabled, isFalse);
+      expect(model.midnightStartHour, equals(23));
+      expect(model.midnightStartMinute, equals(0));
+      expect(model.midnightEndHour, equals(3));
+      expect(model.midnightEndMinute, equals(30));
     });
 
     test(
@@ -213,6 +229,12 @@ void main() {
         expect(model.wisdomEndMinute, equals(45));
         expect(model.wisdomSelectedIds, equals(['quran_001', 'hadith_003']));
         expect(model.wisdomShuffle, isTrue);
+        // Midnight mode fields — custom values
+        expect(model.isMidnightModeEnabled, isTrue);
+        expect(model.midnightStartHour, equals(22));
+        expect(model.midnightStartMinute, equals(30));
+        expect(model.midnightEndHour, equals(4));
+        expect(model.midnightEndMinute, equals(0));
       },
     );
   });
@@ -262,6 +284,12 @@ void main() {
       expect(map['wisdom_end_minute'], equals(45));
       expect(map['wisdom_selected_ids'], equals('["quran_001","hadith_003"]'));
       expect(map['wisdom_shuffle'], equals(1));
+      // Midnight mode fields
+      expect(map['is_midnight_mode_enabled'], equals(1));
+      expect(map['midnight_start_hour'], equals(22));
+      expect(map['midnight_start_minute'], equals(30));
+      expect(map['midnight_end_hour'], equals(4));
+      expect(map['midnight_end_minute'], equals(0));
 
       // toMap() should NOT include id, created_at, updated_at
       expect(map.containsKey('id'), isFalse);

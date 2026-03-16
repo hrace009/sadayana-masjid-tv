@@ -85,14 +85,57 @@ Implementasi UI Setup Wizard (4 langkah) selesai:
 - **Features**: auto-save debounce, PIN management, update logic
 - **Testing**: Comprehensive unit tests passing
 
-### Plan 12 dan seterusnya — SEBAGIAN SELESAI (2026-03-10)
+### Plan 12 dan seterusnya — SELESAI (2026-03-16)
 
 Fitur yang sudah selesai di luar urutan Plan 01–11:
 
 - **Kata Mutiara Islam (Wisdom Quote)** — 14 phases, 257 total tests ✅. State ke-6 pada display state machine.
   Lihat `AGENTS.md` section "Kata Mutiara Islam / Wisdom Quote" untuk detail file.
+- **Mode Hemat Daya Tengah Malam (Midnight Mode)** — 7 phases, 306 total tests ✅. State ke-7 pada display state machine.
+  Lihat `AGENTS.md` section "Mode Hemat Daya Tengah Malam / Midnight Mode" untuk detail file.
 
-## Fase yang masih BELUM DIMULAI: Settings UI, Main Display UI, dan fitur lainnya.
+> Catatan: Settings UI (Plan 12) dan Main Display UI (Plan 13) juga sudah selesai sejak 2026-02-20.
+> Lihat `AGENTS.md` tabel "Completed Features" untuk daftar lengkap.
+
+## Flutter UI Patterns — Deprecated APIs (2026-03-16)
+
+### Pattern: Switch.adaptive — activeColor Deprecated
+
+`activeColor` deprecated sejak Flutter v3.31.0. Penggantinya adalah dua property terpisah.
+
+```dart
+// ❌ SALAH — deprecated
+Switch.adaptive(
+  value: isEnabled,
+  onChanged: null,
+  activeColor: IslamicColors.goldAmber,
+)
+
+// ✅ BENAR — Flutter v3.31+
+Switch.adaptive(
+  value: isEnabled,
+  onChanged: null,
+  activeThumbColor: IslamicColors.goldAmber,           // warna lingkaran thumb saat ON
+  activeTrackColor: IslamicColors.goldAmber.withValues(alpha: 0.5), // warna track saat ON
+)
+```
+
+**File yang sudah diperbaiki**: `midnight_mode_section.dart`, `wisdom_quote_section.dart`,
+`treasury_section.dart`.
+
+### Pattern: Color.withOpacity() Deprecated (Dart 3.6 / Flutter 3.27+)
+
+`Color.withOpacity(x)` deprecated. Gunakan `Color.withValues(alpha: x)` sebagai gantinya.
+
+```dart
+// ❌ SALAH
+color.withOpacity(0.5)
+
+// ✅ BENAR
+color.withValues(alpha: 0.5)
+```
+
+---
 
 ## Flutter Testing Patterns (2026-03-10)
 

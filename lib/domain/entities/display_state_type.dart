@@ -17,4 +17,7 @@ enum DisplayStateType {
 
   /// Menampilkan Kata Mutiara Islam secara periodik.
   wisdomQuote,
+
+  /// Layar hemat daya tengah malam — hitam mutlak dengan jam dan info Subuh.
+  midnightStandby,
 }

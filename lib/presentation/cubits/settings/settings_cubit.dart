@@ -286,6 +286,52 @@ class SettingsCubit extends Cubit<SettingsState> {
     }, triggerConfigUpdate: true);
   }
 
+  // --- Mode Hemat Daya Tengah Malam ---
+
+  /// Toggle aktif/nonaktif Mode Hemat Daya Tengah Malam.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updateMidnightModeEnabled(bool enabled) {
+    return _saveField('midnight_mode_enabled', {
+      'is_midnight_mode_enabled': enabled ? 1 : 0,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam mulai window midnight mode.
+  /// Validasi: 0–23.
+  void updateMidnightStartHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('midnight_start_hour', {
+      'midnight_start_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit mulai window midnight mode.
+  /// Validasi: 0–59.
+  void updateMidnightStartMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('midnight_start_minute', {
+      'midnight_start_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam berakhir window midnight mode.
+  /// Validasi: 0–23.
+  void updateMidnightEndHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('midnight_end_hour', {
+      'midnight_end_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit berakhir window midnight mode.
+  /// Validasi: 0–59.
+  void updateMidnightEndMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('midnight_end_minute', {
+      'midnight_end_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
   // --- Phase 4: PIN Management ---
 
   Future<bool> verifyPin(String inputPin) async {

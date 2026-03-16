@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: March 10, 2026
+**Last Updated**: March 16, 2026
 
 <!-- markdownlint-disable -->
 
@@ -51,6 +51,7 @@ lib/presentation/cubits/
 | **Settings UI** (Plan 12) | 2026-02-20 | Widget tests ✅ | Production Ready |
 | **Main Display UI** (Plan 13) | 2026-02-20 | Widget tests ✅ | Production Ready |
 | **Kata Mutiara Islam** (Wisdom Quote) | 2026-03-10 | 14 phases, 257 total tests ✅ | Production Ready |
+| **Mode Hemat Daya Tengah Malam** (Midnight Mode) | 2026-03-16 | 7 phases, 306 total tests ✅ | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
@@ -218,6 +219,38 @@ Dependencies yang digunakan:
 - `bloc_test`: Testing utilities
 - `mocktail`: Mocking dependencies
 
+### Mode Hemat Daya Tengah Malam / Midnight Mode (COMPLETED — 2026-03-16)
+
+Fitur screensaver hemat daya yang menampilkan layar hitam dengan jam digital dan jadwal Subuh
+pada jam-jam malam. Menambahkan `MidnightStandbyState` sebagai state ke-7 pada display state machine.
+Dilengkapi anti burn-in drift animation dan konfigurasi window waktu cross-midnight.
+7 phase implementasi, selesai dengan 306 total tests.
+
+File baru yang dibuat:
+
+| File | Keterangan |
+|------|------------|
+| `lib/presentation/pages/main_display/layouts/midnight_standby_layout.dart` | Layout screensaver — background hitam, jam digital hijau-redup, info Subuh, anti burn-in drift |
+| `lib/presentation/pages/settings/sections/midnight_mode_section.dart` | Section Settings UI — toggle, stepper jam/menit mulai & berakhir, info bar |
+| `test/presentation/pages/main_display/layouts/midnight_standby_layout_test.dart` | 4 widget tests: layout hitam, jam digital, info Subuh, AnimationController |
+| `test/presentation/pages/main_display_page_test.dart` | 2 integration tests: MidnightStandbyLayout rendered, key OK → Settings |
+| `test/presentation/pages/settings/sections/midnight_mode_section_test.dart` | 6 widget tests: toggle ON/OFF, 4 stepper visible, info bar format, ExcludeFocus |
+
+File yang dimodifikasi:
+
+| File | Keterangan |
+|------|------------|
+| `lib/data/datasources/database_helper.dart` | Schema v8, migration DDL 5 kolom midnight baru |
+| `lib/data/models/settings_model.dart` | `fromMap`/`toMap` untuk 5 field midnight |
+| `lib/domain/entities/settings.dart` | 5 field baru (`isMidnightModeEnabled`, `midnightStart/EndHour/Minute`) |
+| `lib/domain/entities/transition_config.dart` | 5 field midnight + `fromSettings()` mapping |
+| `lib/domain/entities/display_state_type.dart` | Tambah `midnightStandby` |
+| `lib/domain/entities/display_state.dart` | Tambah `MidnightStandbyState` (currentTime, subuhTime, subuhLabel) |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart` | `_evaluateMidnightWindow()` + cross-midnight comparison (CON-002) |
+| `lib/presentation/cubits/settings/settings_cubit.dart` | 5 method update midnight (updateMidnightModeEnabled, Start/EndHour/Minute) |
+| `lib/presentation/pages/main_display_page.dart` | Case `midnightStandby` di switch + import layout |
+| `lib/presentation/pages/settings/settings_menu_page.dart` | Tambah `MidnightModeSection` di categories + import |
+
 ### Kata Mutiara Islam / Wisdom Quote (COMPLETED — 2026-03-10)
 
 Fitur tampilan full-screen periodik dengan ayat Al-Quran dan Hadits. Menambahkan `WisdomQuoteState`
@@ -285,7 +318,7 @@ Untuk detailed implementation guidance, lihat dokumentasi specialized kami:
 
 | Pattern | Description | When to Use |
 |---------|-------------|-------------|
-| **State Machine Pattern** | 6-state display transition (STANDBY → PRE-ADZAN → ADZAN → IQOMAH → SHOLAT → KATA MUTIARA) | Core display logic |
+| **State Machine Pattern** | 7-state display transition (STANDBY → PRE-ADZAN → ADZAN → IQOMAH → SHOLAT → KATA MUTIARA → MIDNIGHT STANDBY) | Core display logic |
 | **Offline-First Data** | SQLite sebagai single source of truth | Semua data persistence |
 | **Prayer Time Calculation** | Astronomical calculation dengan adhan-dart + manual correction | Jadwal sholat |
 | **Timer Management** | Countdown timers dengan lifecycle management | Adzan, Iqomah countdowns |
@@ -314,6 +347,8 @@ Untuk detailed implementation guidance, lihat dokumentasi specialized kami:
 - Implement proper error handling dengan try-catch blocks
 - Gunakan `async`/`await` untuk asynchronous operations
 - **Android TV Specific**: Semua interactive elements harus accessible via D-Pad
+- **Switch.adaptive colors**: Jangan gunakan `activeColor` (deprecated sejak Flutter v3.31). Gunakan `activeThumbColor` untuk thumb dan `activeTrackColor` untuk track. Gunakan `withValues(alpha: 0.5)` bukan `withOpacity()` (deprecated Dart 3.6+) untuk track color.
+- **Color opacity**: Gunakan `Color.withValues(alpha: x)` bukan `Color.withOpacity(x)` (deprecated sejak Dart 3.6 / Flutter 3.27).
 
 ### Islamic Glassmorphism Theme
 
@@ -989,7 +1024,7 @@ Ensure `AndroidManifest.xml` includes:
 
 ---
 
-**Last Updated**: March 10, 2026
+**Last Updated**: March 16, 2026
 **Version**: 2.1.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV

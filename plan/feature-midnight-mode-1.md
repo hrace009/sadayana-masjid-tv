@@ -1,16 +1,16 @@
 ---
 goal: "Implementasi Mode Hemat Daya Tengah Malam (Midnight Screensaver)"
-version: 1.0
+version: 1.1
 date_created: 2026-03-16
 last_updated: 2026-03-16
 owner: "Gulajava Ministudio"
-status: "Planned"
+status: "Completed"
 tags: [feature, display, power-saving, screensaver, state-machine, settings]
 ---
 
 ## Introduction
 
-![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+![Status: Completed](https://img.shields.io/badge/status-Completed-brightgreen)
 
 Dokumen ini mendefinisikan rencana implementasi fitur **Mode Hemat Daya Tengah Malam** (*Midnight Screensaver*) untuk aplikasi Miqotul Khoir TV. Fitur ini menampilkan layar hitam hemat daya dengan informasi esensial (jam + jadwal Subuh) pada jam-jam malam saat masjid kosong, sekaligus mencegah *screen burn-in* melalui animasi pergeseran teks yang lambat. Fitur ini bersifat opsional, default OFF, dan DKM memiliki kendali penuh melalui menu Pengaturan.
 
@@ -56,13 +56,13 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-001 | Tambahkan value `midnightStandby` di `DisplayStateType` enum (`lib/domain/entities/display_state_type.dart`). | | |
-| TASK-002 | Buat class `MidnightStandbyState extends DisplayState` di `lib/domain/entities/display_state.dart` dengan field: `currentTime` (DateTime), `subuhTime` (DateTime), `subuhLabel` (String). Property `type` return `DisplayStateType.midnightStandby`. | | |
-| TASK-003 | Tambahkan 5 field midnight ke `Settings` entity (`lib/domain/entities/settings.dart`): `isMidnightModeEnabled` (bool, default false), `midnightStartHour` (int, default 23), `midnightStartMinute` (int, default 0), `midnightEndHour` (int, default 3), `midnightEndMinute` (int, default 30). Update `copyWith()`, `props`, dan constructor defaults. | | |
-| TASK-004 | Tambahkan 5 field midnight ke `TransitionConfig` (`lib/domain/entities/transition_config.dart`): `isMidnightModeEnabled`, `midnightStartHour`, `midnightStartMinute`, `midnightEndHour`, `midnightEndMinute`. Update `fromSettings()` factory, constructor, dan `props`. | | |
-| TASK-005 | Tambahkan method `_evaluateMidnightWindow()` di `EvaluateDisplayStateUseCase` (`lib/domain/usecases/evaluate_display_state_use_case.dart`). Method menerima `now`, `config`, `dailyPrayerTimes`. Return `MidnightStandbyState` jika `isMidnightModeEnabled == true` DAN `now` berada dalam window (cross-midnight safe). Return `null` jika tidak. Ambil jadwal Subuh dari `dailyPrayerTimes` untuk field `subuhTime` dan `subuhLabel`. | | |
-| TASK-006 | Panggil `_evaluateMidnightWindow()` di method `evaluate()` — sisipkan **setelah** loop `for (final prayer in mainPrayers)` (setelah semua pengecekan siklus sholat) tapi **sebelum** pengecekan Wisdom Quote (`_evaluateWisdomWindow`). Jika return non-null, langsung return hasilnya. | | |
-| TASK-007 | Tulis unit test untuk `_evaluateMidnightWindow` di `test/domain/usecases/evaluate_display_state_use_case_test.dart`. Skenario: (a) fitur OFF → return null, (b) fitur ON + dalam window 23:00–03:30 → return `MidnightStandbyState`, (c) fitur ON + di luar window → return null, (d) fitur ON + dalam window TAPI siklus sholat aktif (misal Isya Adzan jam 19:15) → siklus sholat didahulukan, (e) cross-midnight boundary test (23:59 → 00:01), (f) window non-cross-midnight (misal 01:00–03:00). | | |
+| TASK-001 | Tambahkan value `midnightStandby` di `DisplayStateType` enum (`lib/domain/entities/display_state_type.dart`). | ✅ | 2025 |
+| TASK-002 | Buat class `MidnightStandbyState extends DisplayState` di `lib/domain/entities/display_state.dart` dengan field: `currentTime` (DateTime), `subuhTime` (DateTime), `subuhLabel` (String). Property `type` return `DisplayStateType.midnightStandby`. | ✅ | 2025 |
+| TASK-003 | Tambahkan 5 field midnight ke `Settings` entity (`lib/domain/entities/settings.dart`): `isMidnightModeEnabled` (bool, default false), `midnightStartHour` (int, default 23), `midnightStartMinute` (int, default 0), `midnightEndHour` (int, default 3), `midnightEndMinute` (int, default 30). Update `copyWith()`, `props`, dan constructor defaults. | ✅ | 2025 |
+| TASK-004 | Tambahkan 5 field midnight ke `TransitionConfig` (`lib/domain/entities/transition_config.dart`): `isMidnightModeEnabled`, `midnightStartHour`, `midnightStartMinute`, `midnightEndHour`, `midnightEndMinute`. Update `fromSettings()` factory, constructor, dan `props`. | ✅ | 2025 |
+| TASK-005 | Tambahkan method `_evaluateMidnightWindow()` di `EvaluateDisplayStateUseCase` (`lib/domain/usecases/evaluate_display_state_use_case.dart`). Method menerima `now`, `config`, `dailyPrayerTimes`. Return `MidnightStandbyState` jika `isMidnightModeEnabled == true` DAN `now` berada dalam window (cross-midnight safe). Return `null` jika tidak. Ambil jadwal Subuh dari `dailyPrayerTimes` untuk field `subuhTime` dan `subuhLabel`. | ✅ | 2025 |
+| TASK-006 | Panggil `_evaluateMidnightWindow()` di method `evaluate()` — sisipkan **setelah** loop `for (final prayer in mainPrayers)` (setelah semua pengecekan siklus sholat) tapi **sebelum** pengecekan Wisdom Quote (`_evaluateWisdomWindow`). Jika return non-null, langsung return hasilnya. | ✅ | 2025 |
+| TASK-007 | Tulis unit test untuk `_evaluateMidnightWindow` di `test/domain/usecases/evaluate_display_state_use_case_test.dart`. Skenario: (a) fitur OFF → return null, (b) fitur ON + dalam window 23:00–03:30 → return `MidnightStandbyState`, (c) fitur ON + di luar window → return null, (d) fitur ON + dalam window TAPI siklus sholat aktif (misal Isya Adzan jam 19:15) → siklus sholat didahulukan, (e) cross-midnight boundary test (23:59 → 00:01), (f) window non-cross-midnight (misal 01:00–03:00). | ✅ | 2025 |
 
 ### Phase 2 — Data Layer: Database & Model
 
@@ -70,11 +70,11 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-008 | Naikkan `_databaseVersion` dari `7` ke `8` di `DatabaseHelper` (`lib/data/datasources/database_helper.dart`). | | |
-| TASK-009 | Tambahkan migration block `if (oldVersion < 8)` di `_onUpgrade()` dengan 5 `ALTER TABLE settings ADD COLUMN`: `is_midnight_mode_enabled INTEGER NOT NULL DEFAULT 0`, `midnight_start_hour INTEGER NOT NULL DEFAULT 23`, `midnight_start_minute INTEGER NOT NULL DEFAULT 0`, `midnight_end_hour INTEGER NOT NULL DEFAULT 3`, `midnight_end_minute INTEGER NOT NULL DEFAULT 30`. | | |
-| TASK-010 | Tambahkan 5 kolom yang sama di DDL `_createTables()` (blok `CREATE TABLE settings`) untuk fresh install. | | |
-| TASK-011 | Update `SettingsModel` (`lib/data/models/settings_model.dart`): tambah 5 field midnight di constructor `super.*`, `fromMap()` mapping (snake_case → camelCase, int→bool untuk `is_midnight_mode_enabled`), dan `toMap()` mapping (camelCase → snake_case, bool→int). | | |
-| TASK-012 | Update unit test `SettingsModel` (`test/data/models/settings_model_test.dart`): tambahkan assertion untuk 5 field midnight baru di test `fromMap`, `toMap`, dan round-trip. | | |
+| TASK-008 | Naikkan `_databaseVersion` dari `7` ke `8` di `DatabaseHelper` (`lib/data/datasources/database_helper.dart`). | ✅ | 2026 |
+| TASK-009 | Tambahkan migration block `if (oldVersion < 8)` di `_onUpgrade()` dengan 5 `ALTER TABLE settings ADD COLUMN`: `is_midnight_mode_enabled INTEGER NOT NULL DEFAULT 0`, `midnight_start_hour INTEGER NOT NULL DEFAULT 23`, `midnight_start_minute INTEGER NOT NULL DEFAULT 0`, `midnight_end_hour INTEGER NOT NULL DEFAULT 3`, `midnight_end_minute INTEGER NOT NULL DEFAULT 30`. | ✅ | 2026 |
+| TASK-010 | Tambahkan 5 kolom yang sama di DDL `_createTables()` (blok `CREATE TABLE settings`) untuk fresh install. | ✅ | 2026 |
+| TASK-011 | Update `SettingsModel` (`lib/data/models/settings_model.dart`): tambah 5 field midnight di constructor `super.*`, `fromMap()` mapping (snake_case → camelCase, int→bool untuk `is_midnight_mode_enabled`), dan `toMap()` mapping (camelCase → snake_case, bool→int). | ✅ | 2026 |
+| TASK-012 | Update unit test `SettingsModel` (`test/data/models/settings_model_test.dart`): tambahkan assertion untuk 5 field midnight baru di test `fromMap`, `toMap`, dan round-trip. | ✅ | 2026 |
 
 ### Phase 3 — Presentation Layer: Cubit Update
 
@@ -82,9 +82,9 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-013 | Tambahkan 5 method update di `SettingsCubit` (`lib/presentation/cubits/settings/settings_cubit.dart`): `updateMidnightModeEnabled(bool)` — menggunakan `_saveField` dengan `triggerConfigUpdate: true`; `updateMidnightStartHour(int)`, `updateMidnightStartMinute(int)`, `updateMidnightEndHour(int)`, `updateMidnightEndMinute(int)` — menggunakan `_debounceSave` dengan `triggerConfigUpdate: true`. | | |
-| TASK-014 | Verifikasi bahwa `DisplayStateCubit.onSettingsChanged()` sudah memanggil `_loadConfig()` → `TransitionConfig.fromSettings()` → `_tick()`. Tidak perlu modifikasi jika flow ini sudah ada (konfirmasi saja). | | |
-| TASK-015 | Tulis unit test untuk `SettingsCubit` method baru di `test/presentation/cubits/settings/settings_cubit_test.dart`: (a) `updateMidnightModeEnabled` toggle ON/OFF persists ke repository, (b) `updateMidnightStartHour` debounce save, (c) verifikasi `triggerConfigUpdate` dipanggil. | | |
+| TASK-013 | Tambahkan 5 method update di `SettingsCubit` (`lib/presentation/cubits/settings/settings_cubit.dart`): `updateMidnightModeEnabled(bool)` — menggunakan `_saveField` dengan `triggerConfigUpdate: true`; `updateMidnightStartHour(int)`, `updateMidnightStartMinute(int)`, `updateMidnightEndHour(int)`, `updateMidnightEndMinute(int)` — menggunakan `_debounceSave` dengan `triggerConfigUpdate: true`. | ✅ | 2026 |
+| TASK-014 | Verifikasi bahwa `DisplayStateCubit.onSettingsChanged()` sudah memanggil `_loadConfig()` → `TransitionConfig.fromSettings()` → `_tick()`. Tidak perlu modifikasi jika flow ini sudah ada (konfirmasi saja). | ✅ | 2026 |
+| TASK-015 | Tulis unit test untuk `SettingsCubit` method baru di `test/presentation/cubits/settings/settings_cubit_test.dart`: (a) `updateMidnightModeEnabled` toggle ON/OFF persists ke repository, (b) `updateMidnightStartHour` debounce save, (c) verifikasi `triggerConfigUpdate` dipanggil. | ✅ | 2026 |
 
 ### Phase 4 — Presentation Layer: UI Layout (Midnight Screensaver)
 
@@ -92,11 +92,11 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-016 | Buat file `lib/presentation/pages/main_display/layouts/midnight_standby_layout.dart`. Widget `MidnightStandbyLayout` sebagai `StatefulWidget` menerima prop `MidnightStandbyState state`. | | |
-| TASK-017 | Implementasi layout: `OverflowBox` fullscreen (pattern `SholatLayout`) → `Container(color: Colors.black)` → `AnimatedBuilder(animation: _driftAnimation, builder: (_, __) => Align(alignment: _driftAnimation.value, child: Column([...])))` berisi jam digital (`DigitalClockWidget` dengan custom style putih/hijau redup, opacity 0.85) dan teks info Subuh ("Subuh - HH:mm"). Gunakan `AnimatedBuilder` + `Align` (bukan `AnimatedAlign`) agar posisi dikontrol penuh oleh `AnimationController` eksplisit dari TASK-018. | | |
-| TASK-018 | Implementasi anti burn-in drift: `AnimationController` di `initState()` dengan duration ~30 detik, repeat mode `reverse`. Gunakan `Tween<Alignment>` untuk menggerakkan posisi blok teks secara acak dalam batas layar. Seed posisi awal random deterministik (berdasarkan waktu). Transisi harus sangat lambat dan halus (~10-15 detik per gerakan). | | |
-| TASK-019 | Pastikan `MidnightStandbyLayout` TIDAK merender running text, countdown timer, atau background glassmorphism — hanya layar hitam + content minimal. Ini otomatis terjadi karena widget hanya digunakan saat state `midnightStandby`. | | |
-| TASK-020 | Tulis widget test di `test/presentation/pages/main_display/layouts/midnight_standby_layout_test.dart`: (a) verifikasi Container hitam fullscreen rendered, (b) verifikasi jam digital ditampilkan, (c) verifikasi info Subuh ditampilkan dengan waktu yang benar, (d) verifikasi AnimationController initialized dan running. | | |
+| TASK-016 | Buat file `lib/presentation/pages/main_display/layouts/midnight_standby_layout.dart`. Widget `MidnightStandbyLayout` sebagai `StatefulWidget` menerima prop `MidnightStandbyState state`. | ✅ | 2026 |
+| TASK-017 | Implementasi layout: `OverflowBox` fullscreen (pattern `SholatLayout`) → `Container(color: Colors.black)` → `AnimatedBuilder(animation: _driftAnimation, builder: (_, __) => Align(alignment: _driftAnimation.value, child: Column([...])))` berisi jam digital (`DigitalClockWidget` dengan custom style putih/hijau redup, opacity 0.85) dan teks info Subuh ("Subuh - HH:mm"). Gunakan `AnimatedBuilder` + `Align` (bukan `AnimatedAlign`) agar posisi dikontrol penuh oleh `AnimationController` eksplisit dari TASK-018. | ✅ | 2026 |
+| TASK-018 | Implementasi anti burn-in drift: `AnimationController` di `initState()` dengan duration ~30 detik, repeat mode `reverse`. Gunakan `Tween<Alignment>` untuk menggerakkan posisi blok teks secara acak dalam batas layar. Seed posisi awal random deterministik (berdasarkan waktu). Transisi harus sangat lambat dan halus (~10-15 detik per gerakan). | ✅ | 2026 |
+| TASK-019 | Pastikan `MidnightStandbyLayout` TIDAK merender running text, countdown timer, atau background glassmorphism — hanya layar hitam + content minimal. Ini otomatis terjadi karena widget hanya digunakan saat state `midnightStandby`. | ✅ | 2026 |
+| TASK-020 | Tulis widget test di `test/presentation/pages/main_display/layouts/midnight_standby_layout_test.dart`: (a) verifikasi Container hitam fullscreen rendered, (b) verifikasi jam digital ditampilkan, (c) verifikasi info Subuh ditampilkan dengan waktu yang benar, (d) verifikasi AnimationController initialized dan running. | ✅ | 2026 |
 
 ### Phase 5 — Presentation Layer: Main Display Integration
 
@@ -104,10 +104,10 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-021 | Tambahkan case `DisplayStateType.midnightStandby` di `switch (state.type)` pada `MainDisplayPage` (`lib/presentation/pages/main_display_page.dart`). Assign `layoutWidget = MidnightStandbyLayout(key: const ValueKey('midnight_standby'), state: state as MidnightStandbyState)`. | | |
-| TASK-022 | Import `midnight_standby_layout.dart` di `main_display_page.dart`. | | |
-| TASK-023 | Verifikasi bahwa `onKeyEvent` handler (OK/Enter/Escape → `_openSettings()`) tetap berfungsi saat `MidnightStandbyState` aktif. Handler berada di level parent, jadi seharusnya tidak terpengaruh — konfirmasi melalui manual test atau widget test. | | |
-| TASK-024 | Tulis widget test integrasi di `test/presentation/pages/main_display_page_test.dart`: (a) saat cubit emit `MidnightStandbyState`, pastikan `MidnightStandbyLayout` rendered, (b) tekan key OK → navigasi ke Settings tetap jalan. | | |
+| TASK-021 | Tambahkan case `DisplayStateType.midnightStandby` di `switch (state.type)` pada `MainDisplayPage` (`lib/presentation/pages/main_display_page.dart`). Assign `layoutWidget = MidnightStandbyLayout(key: const ValueKey('midnight_standby'), state: state as MidnightStandbyState)`. | ✅ | 2026 |
+| TASK-022 | Import `midnight_standby_layout.dart` di `main_display_page.dart`. | ✅ | 2026 |
+| TASK-023 | Verifikasi bahwa `onKeyEvent` handler (OK/Enter/Escape → `_openSettings()`) tetap berfungsi saat `MidnightStandbyState` aktif. Handler berada di level parent, jadi seharusnya tidak terpengaruh — konfirmasi melalui manual test atau widget test. | ✅ | 2026 |
+| TASK-024 | Tulis widget test integrasi di `test/presentation/pages/main_display_page_test.dart`: (a) saat cubit emit `MidnightStandbyState`, pastikan `MidnightStandbyLayout` rendered, (b) tekan key OK → navigasi ke Settings tetap jalan. | ✅ | 2026 |
 
 ### Phase 6 — Presentation Layer: Settings UI Section
 
@@ -115,10 +115,10 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-025 | Buat file `lib/presentation/pages/settings/sections/midnight_mode_section.dart`. Widget `MidnightModeSection` sebagai `StatelessWidget`, menggunakan `BlocBuilder<SettingsCubit, SettingsState>`. Ikuti struktur `WisdomQuoteSection` secara langsung. Lihat wireframe di **Section 3** dokumen ini. | | |
-| TASK-026 | Implementasi UI section sesuai wireframe Section 3: **(a)** Toggle row: `FocusableWidget(autofocus: true, onSelect: () => cubit.updateMidnightModeEnabled(!s.isMidnightModeEnabled), builder: (f) => Container(border: f ? goldAmber : glassBorder, child: Row([Text('Aktifkan...'), Switch.adaptive(value: s.isMidnightModeEnabled, onChanged: null)])))`. **(b)** Jam Mulai + Menit Mulai: `Row([Expanded(DPadStepper(label:'Jam Mulai', value:s.midnightStartHour, maxValue:23, onChanged:cubit.updateMidnightStartHour)), SizedBox(width:16.w), Expanded(DPadStepper(label:'Menit', value:s.midnightStartMinute, maxValue:59, step:5, onChanged:cubit.updateMidnightStartMinute))])`. **(c)** Jam Berakhir + Menit Berakhir dengan Row identik. **(d)** Area keempat stepper dibungkus: `ExcludeFocus(excluding: !s.isMidnightModeEnabled, child: IgnorePointer(ignoring: !s.isMidnightModeEnabled, child: Opacity(opacity: s.isMidnightModeEnabled ? 1.0 : 0.4, child: Column([...]))))`. **(e)** Info bar: `'ℹ Aktif setiap hari: ${h(s.midnightStartHour)}:${m(s.midnightStartMinute)} – ${h(s.midnightEndHour)}:${m(s.midnightEndMinute)}'` dengan helper `h/m` = `n.toString().padLeft(2,'0')`. | | |
-| TASK-027 | Daftarkan `MidnightModeSection` di `SettingsMenuPage` (`lib/presentation/pages/settings/settings_menu_page.dart`): (a) Tambahkan string "Mode Hemat Daya" di `_categories` list (sebelum "Reset Data"), (b) Tambahkan `const MidnightModeSection()` di `_sections` list pada posisi yang sama, (c) Import file section baru. | | |
-| TASK-028 | Tulis widget test di `test/presentation/pages/settings/sections/midnight_mode_section_test.dart`: (a) toggle ON/OFF memanggil `updateMidnightModeEnabled`, (b) stepper jam mulai/berakhir visible dan interactable, (c) stepper disabled saat toggle OFF. | | |
+| TASK-025 | Buat file `lib/presentation/pages/settings/sections/midnight_mode_section.dart`. Widget `MidnightModeSection` sebagai `StatelessWidget`, menggunakan `BlocBuilder<SettingsCubit, SettingsState>`. Ikuti struktur `WisdomQuoteSection` secara langsung. Lihat wireframe di **Section 3** dokumen ini. | ✅ | 2026-03-16 |
+| TASK-026 | Implementasi UI section sesuai wireframe Section 3: **(a)** Toggle row: `FocusableWidget(autofocus: true, onSelect: () => cubit.updateMidnightModeEnabled(!s.isMidnightModeEnabled), builder: (f) => Container(border: f ? goldAmber : glassBorder, child: Row([Text('Aktifkan...'), Switch.adaptive(value: s.isMidnightModeEnabled, onChanged: null)])))`. **(b)** Jam Mulai + Menit Mulai: `Row([Expanded(DPadStepper(label:'Jam Mulai', value:s.midnightStartHour, maxValue:23, onChanged:cubit.updateMidnightStartHour)), SizedBox(width:16.w), Expanded(DPadStepper(label:'Menit', value:s.midnightStartMinute, maxValue:59, step:5, onChanged:cubit.updateMidnightStartMinute))])`. **(c)** Jam Berakhir + Menit Berakhir dengan Row identik. **(d)** Area keempat stepper dibungkus: `ExcludeFocus(excluding: !s.isMidnightModeEnabled, child: IgnorePointer(ignoring: !s.isMidnightModeEnabled, child: Opacity(opacity: s.isMidnightModeEnabled ? 1.0 : 0.4, child: Column([...]))))`. **(e)** Info bar: `'ℹ Aktif setiap hari: ${h(s.midnightStartHour)}:${m(s.midnightStartMinute)} – ${h(s.midnightEndHour)}:${m(s.midnightEndMinute)}'` dengan helper `h/m` = `n.toString().padLeft(2,'0')`. | ✅ | 2026-03-16 |
+| TASK-027 | Daftarkan `MidnightModeSection` di `SettingsMenuPage` (`lib/presentation/pages/settings/settings_menu_page.dart`): (a) Tambahkan string "Mode Hemat Daya" di `_categories` list (sebelum "Reset Data"), (b) Tambahkan `const MidnightModeSection()` di `_sections` list pada posisi yang sama, (c) Import file section baru. | ✅ | 2026-03-16 |
+| TASK-028 | Tulis widget test di `test/presentation/pages/settings/sections/midnight_mode_section_test.dart`: (a) toggle ON/OFF memanggil `updateMidnightModeEnabled`, (b) stepper jam mulai/berakhir visible dan interactable, (c) stepper disabled saat toggle OFF. | ✅ | 2026-03-16 |
 
 ### Phase 7 — Testing & Integration Verification
 
@@ -126,9 +126,9 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-029 | Jalankan seluruh test suite (`flutter test`) dan pastikan tidak ada regresi pada test yang sudah ada — terutama `evaluate_display_state_use_case_test.dart` dan `display_state_cubit_test.dart`. | | |
-| TASK-030 | Verifikasi skenario end-to-end: (a) Kondisi bawaan — fitur OFF, layar tidak berubah saat tengah malam, (b) Aktifkan fitur + set 23:00–03:30, layar hitam muncul saat jam masuk window, (c) Jam melewati 03:30 → kembali ke Standby, (d) Saat midnight mode aktif tapi ada sholat Isya → siklus sholat didahulukan, (e) Tekan OK saat layar hitam → Settings terbuka. | | |
-| TASK-031 | Update `AGENTS.md` di section "Completed Features" untuk menambahkan entry fitur Midnight Mode setelah semua task selesai. | | |
+| TASK-029 | Jalankan seluruh test suite (`flutter test`) dan pastikan tidak ada regresi pada test yang sudah ada — terutama `evaluate_display_state_use_case_test.dart` dan `display_state_cubit_test.dart`. | ✅ | 2026-03-16 |
+| TASK-030 | Verifikasi skenario end-to-end: (a) Kondisi bawaan — fitur OFF, layar tidak berubah saat tengah malam, (b) Aktifkan fitur + set 23:00–03:30, layar hitam muncul saat jam masuk window, (c) Jam melewati 03:30 → kembali ke Standby, (d) Saat midnight mode aktif tapi ada sholat Isya → siklus sholat didahulukan, (e) Tekan OK saat layar hitam → Settings terbuka. | ✅ | 2026-03-16 |
+| TASK-031 | Update `AGENTS.md` di section "Completed Features" untuk menambahkan entry fitur Midnight Mode setelah semua task selesai. | ✅ | 2026-03-16 |
 
 ## 3. Settings UI Mockup
 
@@ -236,7 +236,13 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 - **ASSUMPTION-002**: DKM memahami bahwa default OFF berarti fitur tidak aktif sampai mereka mengonfigurasinya secara eksplisit.
 - **ASSUMPTION-003**: `DigitalClockWidget` yang sudah ada dapat digunakan kembali dengan custom style (warna putih/hijau redup) tanpa modifikasi widget itu sendiri.
 
-## 9. Related Specifications / Further Reading
+## 9. Post-Completion Fixes
+
+| Fix | File Terdampak | Tanggal |
+|-----|----------------|---------|
+| `Switch.adaptive` — `activeColor` deprecated (sejak Flutter v3.31). Diganti dengan `activeThumbColor` (thumb) + `activeTrackColor` (track, alpha 0.5). Berlaku juga untuk `wisdom_quote_section.dart` dan `treasury_section.dart`. | `midnight_mode_section.dart`, `wisdom_quote_section.dart`, `treasury_section.dart` | 2026-03-16 |
+
+## 10. Related Specifications / Further Reading
 
 - [PRD: Mode Hemat Daya Tengah Malam](prd-plan-midnight-feature.md)
 - [Spec: Display State Machine](../spec/spec-process-state-machine.md)

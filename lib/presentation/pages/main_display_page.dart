@@ -13,6 +13,7 @@ import '../widgets/islamic_background.dart';
 import '../../../core/theme/tv_safe_area.dart';
 import 'main_display/layouts/adzan_layout.dart';
 import 'main_display/layouts/iqomah_layout.dart';
+import 'main_display/layouts/midnight_standby_layout.dart';
 import 'main_display/layouts/pre_adzan_layout.dart';
 import 'main_display/layouts/sholat_layout.dart';
 import 'main_display/layouts/standby_layout.dart';
@@ -145,6 +146,12 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
                           layoutWidget = WisdomQuoteLayout(
                             key: const ValueKey('wisdom_quote'),
                             state: state as WisdomQuoteState,
+                          );
+                          break;
+                        case DisplayStateType.midnightStandby:
+                          layoutWidget = MidnightStandbyLayout(
+                            key: const ValueKey('midnight_standby'),
+                            state: state as MidnightStandbyState,
                           );
                           break;
                       }

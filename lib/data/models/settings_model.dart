@@ -59,6 +59,11 @@ class SettingsModel extends Settings {
     super.wisdomEndMinute,
     super.wisdomSelectedIds,
     super.wisdomShuffle,
+    super.isMidnightModeEnabled,
+    super.midnightStartHour,
+    super.midnightStartMinute,
+    super.midnightEndHour,
+    super.midnightEndMinute,
   });
 
   /// Membuat [SettingsModel] dari raw SQLite `Map<String, dynamic>`.
@@ -114,6 +119,12 @@ class SettingsModel extends Settings {
         jsonDecode(map['wisdom_selected_ids'] as String? ?? '[]') as List,
       ),
       wisdomShuffle: (map['wisdom_shuffle'] as int? ?? 0) == 1,
+      isMidnightModeEnabled:
+          (map['is_midnight_mode_enabled'] as int? ?? 0) == 1,
+      midnightStartHour: map['midnight_start_hour'] as int? ?? 23,
+      midnightStartMinute: map['midnight_start_minute'] as int? ?? 0,
+      midnightEndHour: map['midnight_end_hour'] as int? ?? 3,
+      midnightEndMinute: map['midnight_end_minute'] as int? ?? 30,
     );
   }
 
@@ -169,6 +180,11 @@ class SettingsModel extends Settings {
       'wisdom_end_minute': wisdomEndMinute,
       'wisdom_selected_ids': jsonEncode(wisdomSelectedIds),
       'wisdom_shuffle': wisdomShuffle ? 1 : 0,
+      'is_midnight_mode_enabled': isMidnightModeEnabled ? 1 : 0,
+      'midnight_start_hour': midnightStartHour,
+      'midnight_start_minute': midnightStartMinute,
+      'midnight_end_hour': midnightEndHour,
+      'midnight_end_minute': midnightEndMinute,
     };
   }
 }

@@ -120,7 +120,10 @@ class _WisdomQuoteSectionState extends State<WisdomQuoteSection> {
                     Switch.adaptive(
                       value: settings.isWisdomEnabled,
                       onChanged: (_) {},
-                      activeColor: IslamicColors.goldAmber,
+                      activeThumbColor: IslamicColors.goldAmber,
+                      activeTrackColor: IslamicColors.goldAmber.withValues(
+                        alpha: 0.5,
+                      ),
                     ),
                   ],
                 ),

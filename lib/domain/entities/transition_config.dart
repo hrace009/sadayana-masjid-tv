@@ -21,6 +21,13 @@ class TransitionConfig extends Equatable {
   final int wisdomEndMinute;
   final bool wisdomShuffle;
 
+  // Mode Hemat Daya Malam
+  final bool isMidnightModeEnabled;
+  final int midnightStartHour;
+  final int midnightStartMinute;
+  final int midnightEndHour;
+  final int midnightEndMinute;
+
   const TransitionConfig({
     required this.preAdzanMinutes,
     required this.adzanDurationSeconds,
@@ -35,6 +42,11 @@ class TransitionConfig extends Equatable {
     this.wisdomEndHour = 21,
     this.wisdomEndMinute = 0,
     this.wisdomShuffle = false,
+    this.isMidnightModeEnabled = false,
+    this.midnightStartHour = 23,
+    this.midnightStartMinute = 0,
+    this.midnightEndHour = 3,
+    this.midnightEndMinute = 30,
   });
 
   /// Factory method untuk membuat [TransitionConfig] dari [Settings].
@@ -60,6 +72,11 @@ class TransitionConfig extends Equatable {
       wisdomEndHour: settings.wisdomEndHour,
       wisdomEndMinute: settings.wisdomEndMinute,
       wisdomShuffle: settings.wisdomShuffle,
+      isMidnightModeEnabled: settings.isMidnightModeEnabled,
+      midnightStartHour: settings.midnightStartHour,
+      midnightStartMinute: settings.midnightStartMinute,
+      midnightEndHour: settings.midnightEndHour,
+      midnightEndMinute: settings.midnightEndMinute,
     );
   }
 
@@ -92,5 +109,10 @@ class TransitionConfig extends Equatable {
     wisdomEndHour,
     wisdomEndMinute,
     wisdomShuffle,
+    isMidnightModeEnabled,
+    midnightStartHour,
+    midnightStartMinute,
+    midnightEndHour,
+    midnightEndMinute,
   ];
 }

@@ -524,5 +524,305 @@ void main() {
         },
       );
     });
+
+    // -------------------------------------------------------------------------
+    // Midnight Mode window tests
+    // -------------------------------------------------------------------------
+
+    group('Midnight Mode', () {
+      // Config dasar dengan midnight enabled, window 23:00 – 03:30 (cross-midnight)
+      const midnightConfig = TransitionConfig(
+        preAdzanMinutes: 10,
+        adzanDurationSeconds: 180,
+        sholatDurationMinutes: 10,
+        iqomahMinutes: {
+          'Subuh': 10,
+          'Dzuhur': 10,
+          'Ashar': 10,
+          'Maghrib': 10,
+          'Isya': 10,
+        },
+        isMidnightModeEnabled: true,
+        midnightStartHour: 23,
+        midnightStartMinute: 0,
+        midnightEndHour: 3,
+        midnightEndMinute: 30,
+      );
+
+      // Skenario (a): fitur OFF → tidak pernah return MidnightStandbyState
+      test(
+        'fitur OFF: returns StandbyState meskipun waktu dalam window (23:30)',
+        () {
+          const offConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isMidnightModeEnabled: false, // OFF
+            midnightStartHour: 23,
+            midnightStartMinute: 0,
+            midnightEndHour: 3,
+            midnightEndMinute: 30,
+          );
+
+          final now = DateTime(2026, 2, 19, 23, 30);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: offConfig,
+          );
+
+          expect(result, isA<StandbyState>());
+        },
+      );
+
+      // Skenario (b): fitur ON + dalam window → return MidnightStandbyState
+      test('fitur ON + dalam window (23:30): returns MidnightStandbyState', () {
+        final now = DateTime(2026, 2, 19, 23, 30);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+        when(() => mockDailyPrayerTimes.subuh).thenReturn(subuh);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: midnightConfig,
+        );
+
+        expect(result, isA<MidnightStandbyState>());
+        final state = result as MidnightStandbyState;
+        expect(state.type, DisplayStateType.midnightStandby);
+        expect(state.currentTime, now);
+        expect(state.subuhTime, subuhTime);
+        expect(state.subuhLabel, 'Subuh - 04:30');
+      });
+
+      // Skenario (b lanjut): dalam window setelah tengah malam (02:00)
+      test(
+        'fitur ON + dalam window setelah tengah malam (02:00): returns MidnightStandbyState',
+        () {
+          final now = DateTime(2026, 2, 20, 2, 0); // hari berikutnya
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+          when(() => mockDailyPrayerTimes.subuh).thenReturn(subuh);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: midnightConfig,
+          );
+
+          expect(result, isA<MidnightStandbyState>());
+        },
+      );
+
+      // Skenario (c): fitur ON + di luar window → StandbyState
+      test('fitur ON + di luar window (10:00): returns StandbyState', () {
+        final now = DateTime(2026, 2, 19, 10, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: midnightConfig,
+        );
+
+        expect(result, isA<StandbyState>());
+      });
+
+      // Skenario (c lanjut): tepat di batas akhir window (03:30) → sudah di luar
+      test(
+        'fitur ON + tepat batas akhir window (03:30): returns StandbyState',
+        () {
+          final now = DateTime(2026, 2, 19, 3, 30);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: midnightConfig,
+          );
+
+          // 03:30 adalah endMinutes → nowMinutes < endMinutes → false → di luar window
+          expect(result, isA<StandbyState>());
+        },
+      );
+
+      // Skenario (d): fitur ON + dalam window TAPI siklus sholat aktif → sholat menang
+      test(
+        'fitur ON + dalam window TAPI Isya sedang Adzan (19:30): sholat menang',
+        () {
+          // Isya adzan mulai 19:30, durasi 3 menit
+          // midnight window 23:00–03:30 → 19:30 sebenarnya di luar window, tapi
+          // test ini membuktikan bahwa evaluasi sholat berjalan lebih dulu
+          const lateNightConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isMidnightModeEnabled: true,
+            midnightStartHour: 19, // window mulai jam 19 untuk test ini
+            midnightStartMinute: 0,
+            midnightEndHour: 3,
+            midnightEndMinute: 30,
+          );
+
+          // Isya adzan jam 19:30, now = 19:30 (tepat mulai adzan)
+          final now = DateTime(2026, 2, 19, 19, 30);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+          when(() => mockDailyPrayerTimes.subuh).thenReturn(subuh);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: lateNightConfig,
+          );
+
+          // Sholat (AdzanState) lebih prioritas dari midnight
+          expect(result, isA<AdzanState>());
+          expect((result as AdzanState).currentPrayer.name, 'Isya');
+        },
+      );
+
+      // Skenario (e): cross-midnight boundary — 23:59 dalam window
+      test('cross-midnight boundary: 23:59 dalam window', () {
+        final now = DateTime(2026, 2, 19, 23, 59);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+        when(() => mockDailyPrayerTimes.subuh).thenReturn(subuh);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: midnightConfig,
+        );
+
+        expect(result, isA<MidnightStandbyState>());
+      });
+
+      // Skenario (e lanjut): cross-midnight boundary — 00:01 dalam window
+      test('cross-midnight boundary: 00:01 dalam window', () {
+        final now = DateTime(2026, 2, 20, 0, 1);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+        when(() => mockDailyPrayerTimes.subuh).thenReturn(subuh);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: midnightConfig,
+        );
+
+        expect(result, isA<MidnightStandbyState>());
+      });
+
+      // Skenario (f): window non-cross-midnight (01:00 – 03:00)
+      test('window non-cross-midnight: 01:30 dalam window (01:00–03:00)', () {
+        const nonCrossConfig = TransitionConfig(
+          preAdzanMinutes: 10,
+          adzanDurationSeconds: 180,
+          sholatDurationMinutes: 10,
+          iqomahMinutes: {
+            'Subuh': 10,
+            'Dzuhur': 10,
+            'Ashar': 10,
+            'Maghrib': 10,
+            'Isya': 10,
+          },
+          isMidnightModeEnabled: true,
+          midnightStartHour: 1,
+          midnightStartMinute: 0,
+          midnightEndHour: 3,
+          midnightEndMinute: 0,
+        );
+
+        final now = DateTime(2026, 2, 20, 1, 30);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+        when(() => mockDailyPrayerTimes.subuh).thenReturn(subuh);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: nonCrossConfig,
+        );
+
+        expect(result, isA<MidnightStandbyState>());
+      });
+
+      // Skenario (f lanjut): di luar window non-cross-midnight
+      test('window non-cross-midnight: 23:30 di luar window (01:00–03:00)', () {
+        const nonCrossConfig = TransitionConfig(
+          preAdzanMinutes: 10,
+          adzanDurationSeconds: 180,
+          sholatDurationMinutes: 10,
+          iqomahMinutes: {
+            'Subuh': 10,
+            'Dzuhur': 10,
+            'Ashar': 10,
+            'Maghrib': 10,
+            'Isya': 10,
+          },
+          isMidnightModeEnabled: true,
+          midnightStartHour: 1,
+          midnightStartMinute: 0,
+          midnightEndHour: 3,
+          midnightEndMinute: 0,
+        );
+
+        final now = DateTime(2026, 2, 19, 23, 30);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: nonCrossConfig,
+        );
+
+        // 23:30 tidak dalam window 01:00–03:00
+        expect(result, isA<StandbyState>());
+      });
+
+      // Verifikasi subuhLabel formatted correctly
+      test('subuhLabel ter-format HH:mm dengan padding nol', () {
+        // Ganti subuh ke jam yang perlu padding (04:05)
+        final subuhWithPadding = createPT('Subuh', DateTime(2026, 2, 19, 4, 5));
+        final mainPrayersWithPadding = [
+          subuhWithPadding,
+          dzuhur,
+          ashar,
+          maghrib,
+          isya,
+        ];
+        when(
+          () => mockDailyPrayerTimes.mainPrayers,
+        ).thenReturn(mainPrayersWithPadding);
+        when(() => mockDailyPrayerTimes.subuh).thenReturn(subuhWithPadding);
+
+        final now = DateTime(2026, 2, 19, 23, 30);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(subuh);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: midnightConfig,
+        );
+
+        expect(result, isA<MidnightStandbyState>());
+        expect((result as MidnightStandbyState).subuhLabel, 'Subuh - 04:05');
+
+        // Restore main prayers untuk test lain
+        when(() => mockDailyPrayerTimes.mainPrayers).thenReturn(mainPrayers);
+      });
+    });
   });
 }
