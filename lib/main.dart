@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'dart:io';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -43,6 +44,11 @@ import 'presentation/pages/splash_page.dart';
 void main() async {
   // TASK-032: Pastikan binding sudah diinisialisasi sebelum runApp
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Nonaktifkan runtime fetching Google Fonts — app ini 100% offline (REQ-offline).
+  // Font Poppins sudah di-bundle via pubspec.yaml (assets/fonts/).
+  // Tanpa ini, google_fonts mencoba download dari fonts.gstatic.com → crash di device tanpa internet.
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   // Init ErrorStack — harus dipanggil setelah ensureInitialized
   await ErrorStack.init(
