@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: March 16, 2026
+**Last Updated**: March 17, 2026
 
 <!-- markdownlint-disable -->
 
@@ -52,6 +52,7 @@ lib/presentation/cubits/
 | **Main Display UI** (Plan 13) | 2026-02-20 | Widget tests ✅ | Production Ready |
 | **Kata Mutiara Islam** (Wisdom Quote) | 2026-03-10 | 14 phases, 257 total tests ✅ | Production Ready |
 | **Mode Hemat Daya Tengah Malam** (Midnight Mode) | 2026-03-16 | 7 phases, 306 total tests ✅ | Production Ready |
+| **Alarm Tanda Waktu** (Pre-Adzan & Pre-Iqomah Alert) | 2026-03-17 | 6 phases, 20 new alarm tests ✅ | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
@@ -218,6 +219,54 @@ Dependencies yang digunakan:
 - `equatable`: State comparison
 - `bloc_test`: Testing utilities
 - `mocktail`: Mocking dependencies
+
+### Alarm Tanda Waktu / Pre-Adzan & Pre-Iqomah Alert (COMPLETED — 2026-03-17)
+
+Fitur alarm audio otomatis yang membunyikan suara tanda peringatan beberapa detik sebelum waktu Adzan
+dan sebelum Iqomah dimulai. Konfigurasi independen untuk Pre-Adzan dan Pre-Iqomah (enable/disable
+dan durasi countdown 10–120 detik). Menggunakan `audioplayers` dengan abstract service pattern.
+6 phase implementasi, 20 new alarm tests.
+
+File baru yang dibuat:
+
+| File | Keterangan |
+|------|------------|
+| `lib/domain/services/audio_alert_service.dart` | Abstract interface `AudioAlertService` (playAlert, stopAlert, dispose) |
+| `lib/data/services/audio_alert_service_impl.dart` | `AudioAlertServiceImpl` — audioplayers `AssetSource`, singleton-safe |
+| `lib/presentation/pages/settings/sections/alert_settings_section.dart` | Section Settings UI — 2 toggle + 2 DPadStepper countdown seconds |
+| `test/presentation/pages/settings/sections/alert_settings_section_test.dart` | 6 widget tests: toggle ON/OFF, 2 stepper visible, callback wiring |
+
+File yang dimodifikasi:
+
+| File | Keterangan |
+|------|------------|
+| `lib/data/datasources/database_helper.dart` | Schema v9, migration DDL 4 kolom alarm baru |
+| `lib/data/models/settings_model.dart` | `fromMap`/`toMap` untuk 4 field alarm (snake_case) |
+| `lib/domain/entities/settings.dart` | 4 field baru: `isPreAdzanAlertEnabled`, `isPreIqomahAlertEnabled`, `preAdzanAlertSeconds`(10), `preIqomahAlertSeconds`(10) |
+| `lib/domain/entities/transition_config.dart` | 4 field alarm + `fromSettings()` mapping |
+| `lib/presentation/cubits/settings/settings_cubit.dart` | 4 method update: `updatePreAdzanAlertEnabled`, `updatePreIqomahAlertEnabled`, `updatePreAdzanAlertSeconds`, `updatePreIqomahAlertSeconds` |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart` | `_audioAlertService`, `_preAdzanAlertFired`, `_preIqomahAlertFired`; `_checkAlertTrigger()`, `_checkAlertStop()` di `_tick()` |
+| `lib/presentation/pages/settings/settings_menu_page.dart` | Tambah `AlertSettingsSection` sebagai kategori ke-6 |
+| `lib/main.dart` | `AudioAlertServiceImpl` di-instantiate dan di-inject ke `DisplayStateCubit` |
+
+Test yang dimodifikasi:
+
+| File | Keterangan |
+|------|------------|
+| `test/data/models/settings_model_test.dart` | +4 tests: serialisasi 4 field alarm baru |
+| `test/presentation/cubits/settings/settings_cubit_test.dart` | +4 tests: update enable/disable + seconds alarm |
+| `test/presentation/cubits/display_state/display_state_cubit_test.dart` | +6 tests: trigger/stop Pre-Adzan & Pre-Iqomah alert lifecycle |
+
+Dependencies yang ditambahkan:
+
+```yaml
+dependencies:
+  audioplayers: ^6.1.0
+```
+
+Planning doc: `plan/feature-alarm-alert-1.md` (v1.5, status: Completed)
+
+---
 
 ### Mode Hemat Daya Tengah Malam / Midnight Mode (COMPLETED — 2026-03-16)
 
@@ -1026,7 +1075,7 @@ Ensure `AndroidManifest.xml` includes:
 
 ---
 
-**Last Updated**: March 16, 2026
+**Last Updated**: March 17, 2026
 **Version**: 2.1.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV

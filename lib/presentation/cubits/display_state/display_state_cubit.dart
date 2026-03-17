@@ -8,6 +8,7 @@ import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
+import 'package:miqotul_khoir_tv/domain/services/audio_alert_service.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/prayer_time/prayer_time.dart';
 
 /// Cubit yang mengelola [DisplayState] aplikasi (Standby, Adzan, Sholat, dll).
@@ -21,6 +22,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   final PrayerTimeCubit _prayerTimeCubit;
   final SettingsRepository _settingsRepository;
   final WisdomQuoteRepository _wisdomQuoteRepository;
+  final AudioAlertService _audioAlertService;
 
   StreamSubscription? _prayerTimeSubscription;
   Timer? _tickTimer;
@@ -29,15 +31,20 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   TransitionConfig _currentConfig;
   List<WisdomQuote> _activeQuotes = const [];
 
+  bool _preAdzanAlertFired = false;
+  bool _preIqomahAlertFired = false;
+
   DisplayStateCubit({
     required EvaluateDisplayStateUseCase evaluateUseCase,
     required PrayerTimeCubit prayerTimeCubit,
     required SettingsRepository settingsRepository,
     required WisdomQuoteRepository wisdomQuoteRepository,
+    required AudioAlertService audioAlertService,
   }) : _evaluateUseCase = evaluateUseCase,
        _prayerTimeCubit = prayerTimeCubit,
        _settingsRepository = settingsRepository,
        _wisdomQuoteRepository = wisdomQuoteRepository,
+       _audioAlertService = audioAlertService,
        // Default config, akan di-overwrite saat init()
        _currentConfig = const TransitionConfig(
          preAdzanMinutes: 10,
@@ -101,6 +108,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
       return;
     }
 
+    final previous = state;
     final newState = _evaluateUseCase.evaluate(
       now: DateTime.now(),
       dailyPrayerTimes: dailyPrayerTimes,
@@ -109,11 +117,9 @@ class DisplayStateCubit extends Cubit<DisplayState> {
       activeQuotes: _activeQuotes,
     );
 
-    // Smart Emit: Hanya emit jika ada perubahan yang relevan
-    // Note: Untuk countdown (PreAdzan, Adzan, Iqomah, Sholat),
-    // remainingDuration berubah setiap detik, jadi kita perlu emit terus.
-    // Optimization: Bisa cek jika duration changes only seconds, tapi UI butuh itu.
+    _checkAlertStop(previous, newState);
     emit(newState);
+    _checkAlertTrigger(newState);
   }
 
   // --- App Lifecycle Handlers (Dipanggil dari UI/Observer) ---
@@ -134,10 +140,44 @@ class DisplayStateCubit extends Cubit<DisplayState> {
     _tick(); // Immediate re-evaluation dengan config baru
   }
 
+  /// Menghentikan alarm jika state bertransisi keluar dari PreAdzan atau Iqomah,
+  /// dan me-reset flag agar siklus berikutnya dapat membunyikan alarm kembali.
+  void _checkAlertStop(DisplayState previous, DisplayState next) {
+    if (previous is PreAdzanState && next is! PreAdzanState) {
+      _audioAlertService.stopAlert();
+      _preAdzanAlertFired = false;
+    }
+    if (previous is IqomahState && next is! IqomahState) {
+      _audioAlertService.stopAlert();
+      _preIqomahAlertFired = false;
+    }
+  }
+
+  /// Membunyikan alarm satu kali saat threshold waktu tercapai dan toggle aktif.
+  void _checkAlertTrigger(DisplayState newState) {
+    if (newState is PreAdzanState &&
+        !_preAdzanAlertFired &&
+        _currentConfig.isPreAdzanAlertEnabled &&
+        newState.remainingDuration.inSeconds <=
+            _currentConfig.preAdzanAlertSeconds) {
+      _audioAlertService.playAlert();
+      _preAdzanAlertFired = true;
+    } else if (newState is IqomahState &&
+        !_preIqomahAlertFired &&
+        _currentConfig.isPreIqomahAlertEnabled &&
+        newState.remainingDuration.inSeconds <=
+            _currentConfig.preIqomahAlertSeconds) {
+      _audioAlertService.playAlert();
+      _preIqomahAlertFired = true;
+    }
+  }
+
   @override
   Future<void> close() {
     _stopTickTimer();
     _prayerTimeSubscription?.cancel();
+    _audioAlertService.stopAlert();
+    _audioAlertService.dispose();
     return super.close();
   }
 }

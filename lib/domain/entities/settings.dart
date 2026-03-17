@@ -91,6 +91,12 @@ class Settings extends Equatable {
   final int midnightEndHour;
   final int midnightEndMinute;
 
+  // Alarm Tanda Waktu (fitur opsional, default OFF)
+  final bool isPreAdzanAlertEnabled;
+  final bool isPreIqomahAlertEnabled;
+  final int preAdzanAlertSeconds;
+  final int preIqomahAlertSeconds;
+
   const Settings({
     this.isFirstRun = true,
     this.mosqueName = '',
@@ -141,6 +147,10 @@ class Settings extends Equatable {
     this.midnightStartMinute = 0,
     this.midnightEndHour = 3,
     this.midnightEndMinute = 30,
+    this.isPreAdzanAlertEnabled = false,
+    this.isPreIqomahAlertEnabled = false,
+    this.preAdzanAlertSeconds = 10,
+    this.preIqomahAlertSeconds = 10,
   });
 
   /// Membuat salinan [Settings] dengan field tertentu di-override.
@@ -194,6 +204,10 @@ class Settings extends Equatable {
     int? midnightStartMinute,
     int? midnightEndHour,
     int? midnightEndMinute,
+    bool? isPreAdzanAlertEnabled,
+    bool? isPreIqomahAlertEnabled,
+    int? preAdzanAlertSeconds,
+    int? preIqomahAlertSeconds,
   }) {
     return Settings(
       isFirstRun: isFirstRun ?? this.isFirstRun,
@@ -250,6 +264,13 @@ class Settings extends Equatable {
       midnightStartMinute: midnightStartMinute ?? this.midnightStartMinute,
       midnightEndHour: midnightEndHour ?? this.midnightEndHour,
       midnightEndMinute: midnightEndMinute ?? this.midnightEndMinute,
+      isPreAdzanAlertEnabled:
+          isPreAdzanAlertEnabled ?? this.isPreAdzanAlertEnabled,
+      isPreIqomahAlertEnabled:
+          isPreIqomahAlertEnabled ?? this.isPreIqomahAlertEnabled,
+      preAdzanAlertSeconds: preAdzanAlertSeconds ?? this.preAdzanAlertSeconds,
+      preIqomahAlertSeconds:
+          preIqomahAlertSeconds ?? this.preIqomahAlertSeconds,
     );
   }
 
@@ -304,5 +325,9 @@ class Settings extends Equatable {
     midnightStartMinute,
     midnightEndHour,
     midnightEndMinute,
+    isPreAdzanAlertEnabled,
+    isPreIqomahAlertEnabled,
+    preAdzanAlertSeconds,
+    preIqomahAlertSeconds,
   ];
 }

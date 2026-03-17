@@ -64,6 +64,10 @@ void main() {
     'midnight_start_minute': 0,
     'midnight_end_hour': 3,
     'midnight_end_minute': 30,
+    'is_pre_adzan_alert_enabled': 0,
+    'is_pre_iqomah_alert_enabled': 0,
+    'pre_adzan_alert_seconds': 10,
+    'pre_iqomah_alert_seconds': 10,
     'created_at': '2026-01-01T00:00:00',
     'updated_at': '2026-01-01T00:00:00',
   };
@@ -118,6 +122,10 @@ void main() {
     'midnight_start_minute': 30,
     'midnight_end_hour': 4,
     'midnight_end_minute': 0,
+    'is_pre_adzan_alert_enabled': 1,
+    'is_pre_iqomah_alert_enabled': 0,
+    'pre_adzan_alert_seconds': 8,
+    'pre_iqomah_alert_seconds': 12,
     'created_at': '2026-02-18T10:00:00',
     'updated_at': '2026-02-18T14:00:00',
   };
@@ -181,6 +189,11 @@ void main() {
       expect(model.midnightStartMinute, equals(0));
       expect(model.midnightEndHour, equals(3));
       expect(model.midnightEndMinute, equals(30));
+      // Alert fields — semua default OFF / nilai awal
+      expect(model.isPreAdzanAlertEnabled, isFalse);
+      expect(model.isPreIqomahAlertEnabled, isFalse);
+      expect(model.preAdzanAlertSeconds, equals(10));
+      expect(model.preIqomahAlertSeconds, equals(10));
     });
 
     test(
@@ -235,6 +248,11 @@ void main() {
         expect(model.midnightStartMinute, equals(30));
         expect(model.midnightEndHour, equals(4));
         expect(model.midnightEndMinute, equals(0));
+        // Alert fields — custom values
+        expect(model.isPreAdzanAlertEnabled, isTrue);
+        expect(model.isPreIqomahAlertEnabled, isFalse);
+        expect(model.preAdzanAlertSeconds, equals(8));
+        expect(model.preIqomahAlertSeconds, equals(12));
       },
     );
   });
@@ -290,6 +308,11 @@ void main() {
       expect(map['midnight_start_minute'], equals(30));
       expect(map['midnight_end_hour'], equals(4));
       expect(map['midnight_end_minute'], equals(0));
+      // Alert fields
+      expect(map['is_pre_adzan_alert_enabled'], equals(1));
+      expect(map['is_pre_iqomah_alert_enabled'], equals(0));
+      expect(map['pre_adzan_alert_seconds'], equals(8));
+      expect(map['pre_iqomah_alert_seconds'], equals(12));
 
       // toMap() should NOT include id, created_at, updated_at
       expect(map.containsKey('id'), isFalse);

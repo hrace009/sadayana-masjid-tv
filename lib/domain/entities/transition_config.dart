@@ -28,6 +28,12 @@ class TransitionConfig extends Equatable {
   final int midnightEndHour;
   final int midnightEndMinute;
 
+  // Alarm Tanda Waktu
+  final bool isPreAdzanAlertEnabled;
+  final bool isPreIqomahAlertEnabled;
+  final int preAdzanAlertSeconds;
+  final int preIqomahAlertSeconds;
+
   const TransitionConfig({
     required this.preAdzanMinutes,
     required this.adzanDurationSeconds,
@@ -47,6 +53,10 @@ class TransitionConfig extends Equatable {
     this.midnightStartMinute = 0,
     this.midnightEndHour = 3,
     this.midnightEndMinute = 30,
+    this.isPreAdzanAlertEnabled = false,
+    this.isPreIqomahAlertEnabled = false,
+    this.preAdzanAlertSeconds = 10,
+    this.preIqomahAlertSeconds = 10,
   });
 
   /// Factory method untuk membuat [TransitionConfig] dari [Settings].
@@ -77,6 +87,10 @@ class TransitionConfig extends Equatable {
       midnightStartMinute: settings.midnightStartMinute,
       midnightEndHour: settings.midnightEndHour,
       midnightEndMinute: settings.midnightEndMinute,
+      isPreAdzanAlertEnabled: settings.isPreAdzanAlertEnabled,
+      isPreIqomahAlertEnabled: settings.isPreIqomahAlertEnabled,
+      preAdzanAlertSeconds: settings.preAdzanAlertSeconds,
+      preIqomahAlertSeconds: settings.preIqomahAlertSeconds,
     );
   }
 
@@ -114,5 +128,9 @@ class TransitionConfig extends Equatable {
     midnightStartMinute,
     midnightEndHour,
     midnightEndMinute,
+    isPreAdzanAlertEnabled,
+    isPreIqomahAlertEnabled,
+    preAdzanAlertSeconds,
+    preIqomahAlertSeconds,
   ];
 }

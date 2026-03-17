@@ -64,6 +64,10 @@ class SettingsModel extends Settings {
     super.midnightStartMinute,
     super.midnightEndHour,
     super.midnightEndMinute,
+    super.isPreAdzanAlertEnabled,
+    super.isPreIqomahAlertEnabled,
+    super.preAdzanAlertSeconds,
+    super.preIqomahAlertSeconds,
   });
 
   /// Membuat [SettingsModel] dari raw SQLite `Map<String, dynamic>`.
@@ -125,6 +129,12 @@ class SettingsModel extends Settings {
       midnightStartMinute: map['midnight_start_minute'] as int? ?? 0,
       midnightEndHour: map['midnight_end_hour'] as int? ?? 3,
       midnightEndMinute: map['midnight_end_minute'] as int? ?? 30,
+      isPreAdzanAlertEnabled:
+          (map['is_pre_adzan_alert_enabled'] as int? ?? 0) == 1,
+      isPreIqomahAlertEnabled:
+          (map['is_pre_iqomah_alert_enabled'] as int? ?? 0) == 1,
+      preAdzanAlertSeconds: map['pre_adzan_alert_seconds'] as int? ?? 10,
+      preIqomahAlertSeconds: map['pre_iqomah_alert_seconds'] as int? ?? 10,
     );
   }
 
@@ -185,6 +195,10 @@ class SettingsModel extends Settings {
       'midnight_start_minute': midnightStartMinute,
       'midnight_end_hour': midnightEndHour,
       'midnight_end_minute': midnightEndMinute,
+      'is_pre_adzan_alert_enabled': isPreAdzanAlertEnabled ? 1 : 0,
+      'is_pre_iqomah_alert_enabled': isPreIqomahAlertEnabled ? 1 : 0,
+      'pre_adzan_alert_seconds': preAdzanAlertSeconds,
+      'pre_iqomah_alert_seconds': preIqomahAlertSeconds,
     };
   }
 }

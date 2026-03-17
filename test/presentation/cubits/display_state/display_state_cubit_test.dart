@@ -10,6 +10,7 @@ import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
+import 'package:miqotul_khoir_tv/domain/services/audio_alert_service.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/display_state/display_state.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/prayer_time/prayer_time.dart';
@@ -24,6 +25,8 @@ class MockSettingsRepository extends Mock implements SettingsRepository {}
 
 class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
 
+class MockAudioAlertService extends Mock implements AudioAlertService {}
+
 class MockDailyPrayerTimes extends Mock implements DailyPrayerTimes {}
 
 class MockPrayerTime extends Mock implements PrayerTime {}
@@ -36,6 +39,7 @@ void main() {
   late PrayerTimeCubit prayerTimeCubit;
   late SettingsRepository settingsRepository;
   late WisdomQuoteRepository wisdomQuoteRepository;
+  late AudioAlertService audioAlertService;
   late DailyPrayerTimes dailyPrayerTimes;
   late StreamController<PrayerTimeState> prayerTimeStreamController;
 
@@ -99,8 +103,14 @@ void main() {
     prayerTimeCubit = MockPrayerTimeCubit();
     settingsRepository = MockSettingsRepository();
     wisdomQuoteRepository = MockWisdomQuoteRepository();
+    audioAlertService = MockAudioAlertService();
     dailyPrayerTimes = MockDailyPrayerTimes();
     prayerTimeStreamController = StreamController<PrayerTimeState>();
+
+    // Stub AudioAlertService — semua methods harus di-stub agar tidak crash saat close()
+    when(() => audioAlertService.playAlert()).thenAnswer((_) async {});
+    when(() => audioAlertService.stopAlert()).thenAnswer((_) async {});
+    when(() => audioAlertService.dispose()).thenAnswer((_) async {});
 
     // Default Mocks
     when(
@@ -142,6 +152,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
       expect(cubit.state, isA<StandbyState>());
       cubit.close();
@@ -153,6 +164,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
 
       // Verify initialization
@@ -191,6 +203,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
 
       // Verify initialization
@@ -234,6 +247,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
 
       await Future.delayed(const Duration(milliseconds: 50));
@@ -272,6 +286,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
 
       await Future.delayed(const Duration(milliseconds: 50));
@@ -317,6 +332,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
 
       // Verify initialization
@@ -358,6 +374,7 @@ void main() {
         prayerTimeCubit: prayerTimeCubit,
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
       );
 
       await Future.delayed(const Duration(milliseconds: 50));
@@ -423,6 +440,7 @@ void main() {
           prayerTimeCubit: prayerTimeCubit,
           settingsRepository: settingsRepository,
           wisdomQuoteRepository: wisdomQuoteRepository,
+          audioAlertService: audioAlertService,
         );
 
         await Future.delayed(const Duration(milliseconds: 50));
@@ -449,5 +467,296 @@ void main() {
         cubit.close();
       },
     );
+  });
+
+  group('Alarm Alert', () {
+    late PrayerTime tPrayerTime;
+
+    setUp(() {
+      tPrayerTime = PrayerTime(
+        name: 'Subuh',
+        time: DateTime.now(),
+        originalTime: DateTime.now(),
+        ihtiyatMinutes: 0,
+      );
+    });
+
+    test(
+      'playAlert() dipanggil saat PreAdzanState remaining <= threshold dan toggle ON',
+      () async {
+        const alertSettings = Settings(
+          isPreAdzanAlertEnabled: true,
+          preAdzanAlertSeconds: 10,
+        );
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => alertSettings);
+        when(
+          () => evaluateUseCase.evaluate(
+            now: any(named: 'now'),
+            dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
+            config: any(named: 'config'),
+            hijriDate: any(named: 'hijriDate'),
+            activeQuotes: any(named: 'activeQuotes'),
+          ),
+        ).thenReturn(
+          PreAdzanState(
+            upcomingPrayer: tPrayerTime,
+            remainingDuration: const Duration(seconds: 8), // 8 <= 10
+            totalPreAdzanMinutes: 10,
+            dailyPrayerTimes: dailyPrayerTimes,
+          ),
+        );
+
+        final cubit = DisplayStateCubit(
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          audioAlertService: audioAlertService,
+        );
+
+        await Future.delayed(const Duration(milliseconds: 50));
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        verify(() => audioAlertService.playAlert()).called(1);
+        cubit.close();
+      },
+    );
+
+    test(
+      'playAlert() tidak dipanggil saat isPreAdzanAlertEnabled = false (toggle OFF)',
+      () async {
+        // Default Settings: isPreAdzanAlertEnabled = false
+        when(
+          () => evaluateUseCase.evaluate(
+            now: any(named: 'now'),
+            dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
+            config: any(named: 'config'),
+            hijriDate: any(named: 'hijriDate'),
+            activeQuotes: any(named: 'activeQuotes'),
+          ),
+        ).thenReturn(
+          PreAdzanState(
+            upcomingPrayer: tPrayerTime,
+            remainingDuration: const Duration(seconds: 5),
+            totalPreAdzanMinutes: 10,
+            dailyPrayerTimes: dailyPrayerTimes,
+          ),
+        );
+
+        final cubit = DisplayStateCubit(
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          audioAlertService: audioAlertService,
+        );
+
+        await Future.delayed(const Duration(milliseconds: 50));
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        verifyNever(() => audioAlertService.playAlert());
+        cubit.close();
+      },
+    );
+
+    test(
+      'playAlert() hanya dipanggil sekali meski tick berulang (fired flag guard)',
+      () async {
+        const alertSettings = Settings(
+          isPreAdzanAlertEnabled: true,
+          preAdzanAlertSeconds: 10,
+        );
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => alertSettings);
+        when(
+          () => evaluateUseCase.evaluate(
+            now: any(named: 'now'),
+            dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
+            config: any(named: 'config'),
+            hijriDate: any(named: 'hijriDate'),
+            activeQuotes: any(named: 'activeQuotes'),
+          ),
+        ).thenReturn(
+          PreAdzanState(
+            upcomingPrayer: tPrayerTime,
+            remainingDuration: const Duration(seconds: 8),
+            totalPreAdzanMinutes: 10,
+            dailyPrayerTimes: dailyPrayerTimes,
+          ),
+        );
+
+        final cubit = DisplayStateCubit(
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          audioAlertService: audioAlertService,
+        );
+
+        await Future.delayed(const Duration(milliseconds: 50));
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        // Tunggu 2+ detik agar timer periodic fire beberapa kali
+        await Future.delayed(const Duration(milliseconds: 2100));
+
+        // Meski ada banyak ticks, playAlert hanya boleh dipanggil 1 kali
+        verify(() => audioAlertService.playAlert()).called(1);
+        cubit.close();
+      },
+    );
+
+    test(
+      'stopAlert() dan flag reset saat transisi PreAdzanState → AdzanState',
+      () async {
+        const alertSettings = Settings(
+          isPreAdzanAlertEnabled: true,
+          preAdzanAlertSeconds: 10,
+        );
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => alertSettings);
+
+        var tickCount = 0;
+        when(
+          () => evaluateUseCase.evaluate(
+            now: any(named: 'now'),
+            dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
+            config: any(named: 'config'),
+            hijriDate: any(named: 'hijriDate'),
+            activeQuotes: any(named: 'activeQuotes'),
+          ),
+        ).thenAnswer((_) {
+          tickCount++;
+          if (tickCount == 1) {
+            return PreAdzanState(
+              upcomingPrayer: tPrayerTime,
+              remainingDuration: const Duration(seconds: 8),
+              totalPreAdzanMinutes: 10,
+              dailyPrayerTimes: dailyPrayerTimes,
+            );
+          }
+          return AdzanState(
+            currentPrayer: tPrayerTime,
+            remainingDuration: const Duration(seconds: 180),
+            totalAdzanSeconds: 180,
+            dailyPrayerTimes: dailyPrayerTimes,
+          );
+        });
+
+        final cubit = DisplayStateCubit(
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          audioAlertService: audioAlertService,
+        );
+
+        await Future.delayed(const Duration(milliseconds: 50));
+        cubit.onAppPaused(); // Hentikan timer agar tick hanya dari stream
+
+        // Tick 1: PreAdzanState → playAlert() dipanggil
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        // Tick 2: AdzanState → _checkAlertStop() → stopAlert() dan flag reset
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        verify(() => audioAlertService.stopAlert()).called(1);
+        cubit.close();
+      },
+    );
+
+    test(
+      'playAlert() dipanggil saat IqomahState remaining <= threshold dan toggle ON',
+      () async {
+        const alertSettings = Settings(
+          isPreIqomahAlertEnabled: true,
+          preIqomahAlertSeconds: 10,
+        );
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => alertSettings);
+        when(
+          () => evaluateUseCase.evaluate(
+            now: any(named: 'now'),
+            dailyPrayerTimes: any(named: 'dailyPrayerTimes'),
+            config: any(named: 'config'),
+            hijriDate: any(named: 'hijriDate'),
+            activeQuotes: any(named: 'activeQuotes'),
+          ),
+        ).thenReturn(
+          IqomahState(
+            currentPrayer: tPrayerTime,
+            remainingDuration: const Duration(seconds: 7), // 7 <= 10
+            totalIqomahMinutes: 10,
+            dailyPrayerTimes: dailyPrayerTimes,
+          ),
+        );
+
+        final cubit = DisplayStateCubit(
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          audioAlertService: audioAlertService,
+        );
+
+        await Future.delayed(const Duration(milliseconds: 50));
+        prayerTimeStreamController.add(
+          PrayerTimeLoaded(
+            dailyPrayerTimes: dailyPrayerTimes,
+            lastCalculatedAt: DateTime.now(),
+          ),
+        );
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        verify(() => audioAlertService.playAlert()).called(1);
+        cubit.close();
+      },
+    );
+
+    test('dispose() dipanggil pada AudioAlertService saat cubit di-close', () {
+      final cubit = DisplayStateCubit(
+        evaluateUseCase: evaluateUseCase,
+        prayerTimeCubit: prayerTimeCubit,
+        settingsRepository: settingsRepository,
+        wisdomQuoteRepository: wisdomQuoteRepository,
+        audioAlertService: audioAlertService,
+      );
+
+      cubit.close();
+
+      verify(() => audioAlertService.dispose()).called(1);
+    });
   });
 }

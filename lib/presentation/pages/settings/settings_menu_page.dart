@@ -16,6 +16,7 @@ import 'sections/reset_section.dart';
 import 'sections/running_text_section.dart';
 import 'sections/security_section.dart';
 import 'sections/treasury_section.dart';
+import 'sections/alert_settings_section.dart';
 import 'sections/midnight_mode_section.dart';
 import 'sections/wisdom_quote_section.dart';
 import 'sections/about_section.dart';
@@ -36,6 +37,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     "Durasi Iqomah",
     "Pengaturan Dhuha",
     "Durasi Tampilan",
+    "Alarm Tanda Waktu",
     "Running Text",
     "Keamanan (PIN)",
     "Informasi Kas",
@@ -51,6 +53,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     IqomahSection(),
     DhuhaSection(),
     DisplayTimingSection(),
+    AlertSettingsSection(),
     RunningTextSection(),
     SecuritySection(),
     TreasurySection(),

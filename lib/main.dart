@@ -22,6 +22,7 @@ import 'data/datasources/wisdom_quote_local_data_source.dart';
 import 'data/repositories/city_repository_impl.dart';
 import 'data/repositories/settings_repository_impl.dart';
 import 'data/repositories/wisdom_quote_repository_impl.dart';
+import 'data/services/audio_alert_service_impl.dart';
 import 'domain/repositories/city_repository.dart';
 import 'domain/repositories/settings_repository.dart';
 import 'domain/repositories/wisdom_quote_repository.dart';
@@ -181,12 +182,14 @@ class MiqotulKhoirApp extends StatelessWidget {
 
               // Cubit instances — dibuat sekali, dikelola di sini
               final prayerTimeCubit = PrayerTimeCubit(calculateUseCase);
+              final audioAlertService = AudioAlertServiceImpl();
               final displayStateCubit = DisplayStateCubit(
                 evaluateUseCase: evaluateUseCase,
                 prayerTimeCubit: prayerTimeCubit,
                 settingsRepository: context.read<SettingsRepository>(),
                 // TASK-059: Inject WisdomQuoteRepository ke DisplayStateCubit
                 wisdomQuoteRepository: context.read<WisdomQuoteRepository>(),
+                audioAlertService: audioAlertService,
               );
               final settingsCubit = SettingsCubit(
                 settingsRepository: context.read<SettingsRepository>(),

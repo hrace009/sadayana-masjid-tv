@@ -20,7 +20,7 @@ class DatabaseHelper {
   static const String _databaseName = 'miqotul_khoir.db';
 
   /// Versi database saat ini. Increment untuk setiap schema change.
-  static const int _databaseVersion = 8;
+  static const int _databaseVersion = 9;
 
   // ---------------------------------------------------------------------------
   // Singleton
@@ -192,6 +192,21 @@ class DatabaseHelper {
         'ALTER TABLE settings ADD COLUMN midnight_end_minute INTEGER NOT NULL DEFAULT 30',
       );
     }
+    if (oldVersion < 9) {
+      // Tambah kolom Alarm Tanda Waktu (fitur opsional, default OFF)
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_pre_adzan_alert_enabled INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_pre_iqomah_alert_enabled INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN pre_adzan_alert_seconds INTEGER NOT NULL DEFAULT 10',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN pre_iqomah_alert_seconds INTEGER NOT NULL DEFAULT 10',
+      );
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -355,6 +370,12 @@ class DatabaseHelper {
         midnight_start_minute INTEGER NOT NULL DEFAULT 0,
         midnight_end_hour INTEGER NOT NULL DEFAULT 3,
         midnight_end_minute INTEGER NOT NULL DEFAULT 30,
+
+        -- Alarm Tanda Waktu (fitur opsional, default OFF)
+        is_pre_adzan_alert_enabled INTEGER NOT NULL DEFAULT 0,
+        is_pre_iqomah_alert_enabled INTEGER NOT NULL DEFAULT 0,
+        pre_adzan_alert_seconds INTEGER NOT NULL DEFAULT 10,
+        pre_iqomah_alert_seconds INTEGER NOT NULL DEFAULT 10,
 
         -- Adzan Duration (Seconds)
         adzan_duration_seconds INTEGER NOT NULL DEFAULT 180,

@@ -1,16 +1,16 @@
 ---
 goal: "Implementasi Alarm Tanda Waktu (Pre-Adzan & Pre-Iqomah Alert)"
-version: 1.0
+version: 1.5
 date_created: 2026-03-17
 last_updated: 2026-03-17
 owner: "Gulajava Ministudio"
-status: "Planned"
+status: "Completed"
 tags: [feature, audio, alarm, settings, state-machine, display, notification]
 ---
 
 ## Introduction
 
-![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+![Status: Completed](https://img.shields.io/badge/status-Completed-brightgreen)
 
 Dokumen ini mendefinisikan rencana implementasi fitur **Alarm Tanda Waktu** untuk aplikasi
 Miqotul Khoir TV. Fitur ini membunyikan suara alarm pendek beberapa detik **sebelum masuk
@@ -99,9 +99,9 @@ dengan state berikutnya.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-001 | Tambahkan 4 field baru ke `Settings` entity (`lib/domain/entities/settings.dart`): `isPreAdzanAlertEnabled` (bool, default `false`), `isPreIqomahAlertEnabled` (bool, default `false`), `preAdzanAlertSeconds` (int, default `10`), `preIqomahAlertSeconds` (int, default `10`). Update constructor defaults, `copyWith()`, dan `props`. | | |
-| TASK-002 | Tambahkan 4 field baru ke `TransitionConfig` (`lib/domain/entities/transition_config.dart`): `isPreAdzanAlertEnabled`, `isPreIqomahAlertEnabled`, `preAdzanAlertSeconds`, `preIqomahAlertSeconds`. Update constructor, `fromSettings()` factory, dan `props`. | | |
-| TASK-003 | Buat file baru `lib/domain/services/audio_alert_service.dart` — abstract class `AudioAlertService` dengan 3 method: `Future<void> playAlert()`, `Future<void> stopAlert()`, `Future<void> dispose()`. Zero infrastructure import (domain-pure). | | |
+| TASK-001 | Tambahkan 4 field baru ke `Settings` entity (`lib/domain/entities/settings.dart`): `isPreAdzanAlertEnabled` (bool, default `false`), `isPreIqomahAlertEnabled` (bool, default `false`), `preAdzanAlertSeconds` (int, default `10`), `preIqomahAlertSeconds` (int, default `10`). Update constructor defaults, `copyWith()`, dan `props`. | ✅ | 2026-03-17 |
+| TASK-002 | Tambahkan 4 field baru ke `TransitionConfig` (`lib/domain/entities/transition_config.dart`): `isPreAdzanAlertEnabled`, `isPreIqomahAlertEnabled`, `preAdzanAlertSeconds`, `preIqomahAlertSeconds`. Update constructor, `fromSettings()` factory, dan `props`. | ✅ | 2026-03-17 |
+| TASK-003 | Buat file baru `lib/domain/services/audio_alert_service.dart` — abstract class `AudioAlertService` dengan 3 method: `Future<void> playAlert()`, `Future<void> stopAlert()`, `Future<void> dispose()`. Zero infrastructure import (domain-pure). | ✅ | 2026-03-17 |
 
 ### Phase 2 — Data Layer: Database Migration, SettingsModel & AudioAlertServiceImpl
 
@@ -110,14 +110,14 @@ dengan state berikutnya.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-004 | Naikkan `_databaseVersion` dari `8` ke `9` di `DatabaseHelper` (`lib/data/datasources/database_helper.dart`). | | |
-| TASK-005 | Tambahkan migration block `if (oldVersion < 9)` di `_onUpgrade()` dengan 4 `ALTER TABLE settings ADD COLUMN`: `is_pre_adzan_alert_enabled INTEGER NOT NULL DEFAULT 0`, `is_pre_iqomah_alert_enabled INTEGER NOT NULL DEFAULT 0`, `pre_adzan_alert_seconds INTEGER NOT NULL DEFAULT 10`, `pre_iqomah_alert_seconds INTEGER NOT NULL DEFAULT 10`. | | |
-| TASK-006 | Tambahkan 4 kolom yang sama di DDL `_createTables()` (blok `CREATE TABLE settings`) untuk fresh install. | | |
-| TASK-007 | Update `SettingsModel` (`lib/data/models/settings_model.dart`): tambah 4 field baru di `fromMap()` (snake_case → camelCase, int→bool untuk flag) dan `toMap()` (camelCase → snake_case, bool→int). | | |
-| TASK-008 | Update unit test `SettingsModel` (`test/data/models/settings_model_test.dart`): tambah assertion untuk 4 field baru di test `fromMap` default, `fromMap` custom, `toMap`, dan round-trip. | | |
-| TASK-009 | Buat file baru `lib/data/services/audio_alert_service_impl.dart` — class `AudioAlertServiceImpl implements AudioAlertService`. Gunakan `AudioPlayer` dari package `audioplayers`. `playAlert()` memanggil `player.play(AssetSource('sound/alarm_before_adhan_and_iqamah.mp3'))`. `stopAlert()` memanggil `player.stop()`. `dispose()` memanggil `player.dispose()`. | | |
-| TASK-010 | Tambahkan dependency `audioplayers` ke `pubspec.yaml` (section `dependencies`). Gunakan versi stabil terbaru yang kompatibel dengan Flutter 3.x (misal `audioplayers: ^6.1.0`). | | |
-| TASK-011 | Daftarkan `assets/sound/` di `pubspec.yaml` section `flutter.assets` agar `AudioPlayer` dapat mengakses file melalui `AssetSource`. | | |
+| TASK-004 | Naikkan `_databaseVersion` dari `8` ke `9` di `DatabaseHelper` (`lib/data/datasources/database_helper.dart`). | ✅ | 2026-03-17 |
+| TASK-005 | Tambahkan migration block `if (oldVersion < 9)` di `_onUpgrade()` dengan 4 `ALTER TABLE settings ADD COLUMN`: `is_pre_adzan_alert_enabled INTEGER NOT NULL DEFAULT 0`, `is_pre_iqomah_alert_enabled INTEGER NOT NULL DEFAULT 0`, `pre_adzan_alert_seconds INTEGER NOT NULL DEFAULT 10`, `pre_iqomah_alert_seconds INTEGER NOT NULL DEFAULT 10`. | ✅ | 2026-03-17 |
+| TASK-006 | Tambahkan 4 kolom yang sama di DDL `_createTables()` (blok `CREATE TABLE settings`) untuk fresh install. | ✅ | 2026-03-17 |
+| TASK-007 | Update `SettingsModel` (`lib/data/models/settings_model.dart`): tambah 4 field baru di `fromMap()` (snake_case → camelCase, int→bool untuk flag) dan `toMap()` (camelCase → snake_case, bool→int). | ✅ | 2026-03-17 |
+| TASK-008 | Update unit test `SettingsModel` (`test/data/models/settings_model_test.dart`): tambah assertion untuk 4 field baru di test `fromMap` default, `fromMap` custom, `toMap`, dan round-trip. | ✅ | 2026-03-17 |
+| TASK-009 | Buat file baru `lib/data/services/audio_alert_service_impl.dart` — class `AudioAlertServiceImpl implements AudioAlertService`. Gunakan `AudioPlayer` dari package `audioplayers`. `playAlert()` memanggil `player.play(AssetSource('sound/alarm_before_adhan_and_iqamah.mp3'))`. `stopAlert()` memanggil `player.stop()`. `dispose()` memanggil `player.dispose()`. | ✅ | 2026-03-17 |
+| TASK-010 | Tambahkan dependency `audioplayers` ke `pubspec.yaml` (section `dependencies`). Gunakan versi stabil terbaru yang kompatibel dengan Flutter 3.x (misal `audioplayers: ^6.1.0`). | ✅ | 2026-03-17 |
+| TASK-011 | Daftarkan `assets/sound/` di `pubspec.yaml` section `flutter.assets` agar `AudioPlayer` dapat mengakses file melalui `AssetSource`. | ✅ | 2026-03-17 |
 
 ### Phase 3 — Presentation Layer: SettingsCubit Update
 
@@ -126,8 +126,8 @@ dengan state berikutnya.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-012 | Tambahkan 4 method ke `SettingsCubit` (`lib/presentation/cubits/settings/settings_cubit.dart`): `void updatePreAdzanAlertEnabled(bool value)`, `void updatePreIqomahAlertEnabled(bool value)`, `void updatePreAdzanAlertSeconds(int seconds)`, `void updatePreIqomahAlertSeconds(int seconds)`. Ikuti pola method update yang sudah ada (auto-save debounce). | | |
-| TASK-013 | Update unit test `SettingsCubit` (`test/presentation/cubits/settings/settings_cubit_test.dart`): tambah 4 test case untuk method update baru — verifikasi state diperbarui dengan benar dan auto-save dipicu. | | |
+| TASK-012 | Tambahkan 4 method ke `SettingsCubit` (`lib/presentation/cubits/settings/settings_cubit.dart`): `void updatePreAdzanAlertEnabled(bool value)`, `void updatePreIqomahAlertEnabled(bool value)`, `void updatePreAdzanAlertSeconds(int seconds)`, `void updatePreIqomahAlertSeconds(int seconds)`. Ikuti pola method update yang sudah ada (auto-save debounce). | ✅ | 2026-03-17 |
+| TASK-013 | Update unit test `SettingsCubit` (`test/presentation/cubits/settings/settings_cubit_test.dart`): tambah 4 test case untuk method update baru — verifikasi state diperbarui dengan benar dan auto-save dipicu. | ✅ | 2026-03-17 |
 
 ### Phase 4 — Presentation Layer: DisplayStateCubit Update
 
@@ -137,13 +137,13 @@ dengan state berikutnya.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-014 | Tambahkan `AudioAlertService` sebagai parameter wajib di constructor `DisplayStateCubit` (`lib/presentation/cubits/display_state/display_state_cubit.dart`). Simpan sebagai field `final AudioAlertService _audioAlertService`. | | |
-| TASK-015 | Tambahkan dua field flag di `DisplayStateCubit`: `bool _preAdzanAlertFired = false` dan `bool _preIqomahAlertFired = false`. | | |
-| TASK-016 | Tambahkan method private `void _checkAlertStop(DisplayState previous, DisplayState next)`. Method ini: (a) jika `previous is PreAdzanState` dan `next is! PreAdzanState` → panggil `_audioAlertService.stopAlert()`, reset `_preAdzanAlertFired = false`; (b) jika `previous is IqomahState` dan `next is! IqomahState` → panggil `_audioAlertService.stopAlert()`, reset `_preIqomahAlertFired = false`. | | |
-| TASK-017 | Tambahkan method private `void _checkAlertTrigger(DisplayState newState)`. Method ini: (a) jika `newState is PreAdzanState` dan `remaining.inSeconds <= config.preAdzanAlertSeconds` dan `!_preAdzanAlertFired` dan `config.isPreAdzanAlertEnabled` → panggil `_audioAlertService.playAlert()`, set `_preAdzanAlertFired = true`; (b) kondisi simetris untuk `IqomahState` dan `_preIqomahAlertFired`. | | |
-| TASK-018 | Update method `_tick()` di `DisplayStateCubit`: simpan `previous = state` sebelum evaluasi, setelah mendapat `newState` panggil `_checkAlertStop(previous, newState)`, lalu `emit(newState)`, lalu `_checkAlertTrigger(newState)`. | | |
-| TASK-019 | Override method `close()` di `DisplayStateCubit`: panggil `_audioAlertService.stopAlert()` dan `_audioAlertService.dispose()` sebelum `super.close()`. | | |
-| TASK-020 | Update unit test `DisplayStateCubit` (`test/presentation/cubits/display_state/display_state_cubit_test.dart`): tambah mock `MockAudioAlertService` via `mocktail`. Skenario test: (a) alert Pre-Adzan dipanggil saat `remaining <= threshold` dan toggle ON; (b) alert tidak dipanggil saat toggle OFF; (c) alert tidak dipanggil ganda (fired flag); (d) `stopAlert()` dipanggil saat transisi PreAdzan→Adzan; (e) kondisi simetris untuk Pre-Iqomah; (f) `dispose()` dipanggil saat cubit close. | | |
+| TASK-014 | Tambahkan `AudioAlertService` sebagai parameter wajib di constructor `DisplayStateCubit` (`lib/presentation/cubits/display_state/display_state_cubit.dart`). Simpan sebagai field `final AudioAlertService _audioAlertService`. | ✅ | 2026-03-17 |
+| TASK-015 | Tambahkan dua field flag di `DisplayStateCubit`: `bool _preAdzanAlertFired = false` dan `bool _preIqomahAlertFired = false`. | ✅ | 2026-03-17 |
+| TASK-016 | Tambahkan method private `void _checkAlertStop(DisplayState previous, DisplayState next)`. Method ini: (a) jika `previous is PreAdzanState` dan `next is! PreAdzanState` → panggil `_audioAlertService.stopAlert()`, reset `_preAdzanAlertFired = false`; (b) jika `previous is IqomahState` dan `next is! IqomahState` → panggil `_audioAlertService.stopAlert()`, reset `_preIqomahAlertFired = false`. | ✅ | 2026-03-17 |
+| TASK-017 | Tambahkan method private `void _checkAlertTrigger(DisplayState newState)`. Method ini: (a) jika `newState is PreAdzanState` dan `remaining.inSeconds <= config.preAdzanAlertSeconds` dan `!_preAdzanAlertFired` dan `config.isPreAdzanAlertEnabled` → panggil `_audioAlertService.playAlert()`, set `_preAdzanAlertFired = true`; (b) kondisi simetris untuk `IqomahState` dan `_preIqomahAlertFired`. | ✅ | 2026-03-17 |
+| TASK-018 | Update method `_tick()` di `DisplayStateCubit`: simpan `previous = state` sebelum evaluasi, setelah mendapat `newState` panggil `_checkAlertStop(previous, newState)`, lalu `emit(newState)`, lalu `_checkAlertTrigger(newState)`. | ✅ | 2026-03-17 |
+| TASK-019 | Override method `close()` di `DisplayStateCubit`: panggil `_audioAlertService.stopAlert()` dan `_audioAlertService.dispose()` sebelum `super.close()`. | ✅ | 2026-03-17 |
+| TASK-020 | Update unit test `DisplayStateCubit` (`test/presentation/cubits/display_state/display_state_cubit_test.dart`): tambah mock `MockAudioAlertService` via `mocktail`. Skenario test: (a) alert Pre-Adzan dipanggil saat `remaining <= threshold` dan toggle ON; (b) alert tidak dipanggil saat toggle OFF; (c) alert tidak dipanggil ganda (fired flag); (d) `stopAlert()` dipanggil saat transisi PreAdzan→Adzan; (e) kondisi simetris untuk Pre-Iqomah; (f) `dispose()` dipanggil saat cubit close. | ✅ | 2026-03-17 |
 
 ### Phase 5 — Presentation Layer: Settings UI Section
 
@@ -152,9 +152,9 @@ dengan state berikutnya.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-021 | Buat file baru `lib/presentation/pages/settings/sections/alert_settings_section.dart` — class `AlertSettingsSection extends StatelessWidget`. Berisi: dua blok toggle (`FocusableWidget` + `Switch.adaptive` visual-only) masing-masing diikuti satu `DPadStepper` (5–15 detik, step 1, conditional `ExcludeFocus`/`IgnorePointer`/`Opacity`). Ikuti struktur dan style `MidnightModeSection` sebagai referensi. | | |
-| TASK-022 | Update `SettingsMenuPage` (`lib/presentation/pages/settings/settings_menu_page.dart`): tambahkan `'Alarm Tanda Waktu'` ke list `_categories` di posisi ke-6 (setelah "Durasi Tampilan"), dan `AlertSettingsSection()` ke list `_sections` di posisi yang sama. Import file section baru. | | |
-| TASK-023 | Buat widget test `test/presentation/pages/settings/sections/alert_settings_section_test.dart`. Skenario: (a) kedua toggle OFF saat default; (b) tap toggle Pre-Adzan → memanggil `updatePreAdzanAlertEnabled(true)`; (c) tap toggle Pre-Iqomah → memanggil `updatePreIqomahAlertEnabled(true)`; (d) DPadStepper tersembunyi saat toggle OFF; (e) DPadStepper muncul dan aktif saat toggle ON; (f) DPadStepper memanggil `updatePreAdzanAlertSeconds` / `updatePreIqomahAlertSeconds` dengan nilai yang benar. | | |
+| TASK-021 | Buat file baru `lib/presentation/pages/settings/sections/alert_settings_section.dart` — class `AlertSettingsSection extends StatelessWidget`. Berisi: dua blok toggle (`FocusableWidget` + `Switch.adaptive` visual-only) masing-masing diikuti satu `DPadStepper` (5–15 detik, step 1, conditional `ExcludeFocus`/`IgnorePointer`/`Opacity`). Ikuti struktur dan style `MidnightModeSection` sebagai referensi. | ✅ | 2026-03-17 |
+| TASK-022 | Update `SettingsMenuPage` (`lib/presentation/pages/settings/settings_menu_page.dart`): tambahkan `'Alarm Tanda Waktu'` ke list `_categories` di posisi ke-6 (setelah "Durasi Tampilan"), dan `AlertSettingsSection()` ke list `_sections` di posisi yang sama. Import file section baru. | ✅ | 2026-03-17 |
+| TASK-023 | Buat widget test `test/presentation/pages/settings/sections/alert_settings_section_test.dart`. Skenario: (a) kedua toggle OFF saat default; (b) tap toggle Pre-Adzan → memanggil `updatePreAdzanAlertEnabled(true)`; (c) tap toggle Pre-Iqomah → memanggil `updatePreIqomahAlertEnabled(true)`; (d) DPadStepper tersembunyi saat toggle OFF; (e) DPadStepper muncul dan aktif saat toggle ON; (f) DPadStepper memanggil `updatePreAdzanAlertSeconds` / `updatePreIqomahAlertSeconds` dengan nilai yang benar. | ✅ | 2026-03-17 |
 
 ### Phase 6 — Wiring & DI: main.dart
 
@@ -163,8 +163,8 @@ dengan state berikutnya.
 
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
-| TASK-024 | Update `main.dart`: import `AudioAlertServiceImpl` dari `lib/data/services/audio_alert_service_impl.dart`. Instansiasi `final audioAlertService = AudioAlertServiceImpl()` di dalam `builder` function `ScreenUtilInit`, bersamaan dengan use case dan cubit lainnya. | | |
-| TASK-025 | Update instantiasi `DisplayStateCubit` di `main.dart`: tambahkan parameter `audioAlertService: audioAlertService` pada constructor call. | | |
+| TASK-024 | Update `main.dart`: import `AudioAlertServiceImpl` dari `lib/data/services/audio_alert_service_impl.dart`. Instansiasi `final audioAlertService = AudioAlertServiceImpl()` di dalam `builder` function `ScreenUtilInit`, bersamaan dengan use case dan cubit lainnya. | ✅ | 2026-03-17 |
+| TASK-025 | Update instantiasi `DisplayStateCubit` di `main.dart`: tambahkan parameter `audioAlertService: audioAlertService` pada constructor call. | ✅ | 2026-03-17 |
 
 ## 3. Alternatives
 

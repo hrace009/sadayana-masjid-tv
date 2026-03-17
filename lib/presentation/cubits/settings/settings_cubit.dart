@@ -332,6 +332,42 @@ class SettingsCubit extends Cubit<SettingsState> {
     }, triggerConfigUpdate: true);
   }
 
+  // --- Alarm Tanda Waktu ---
+
+  /// Toggle aktif/nonaktif Alarm Tanda Waktu sebelum Adzan.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updatePreAdzanAlertEnabled(bool value) {
+    return _saveField('pre_adzan_alert_enabled', {
+      'is_pre_adzan_alert_enabled': value ? 1 : 0,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Toggle aktif/nonaktif Alarm Tanda Waktu sebelum Iqomah.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updatePreIqomahAlertEnabled(bool value) {
+    return _saveField('pre_iqomah_alert_enabled', {
+      'is_pre_iqomah_alert_enabled': value ? 1 : 0,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update durasi alarm sebelum Adzan (detik).
+  /// Validasi: 5–15 detik sesuai REQ-002.
+  void updatePreAdzanAlertSeconds(int seconds) {
+    if (seconds < 5 || seconds > 15) return;
+    _debounceSave('pre_adzan_alert_seconds', {
+      'pre_adzan_alert_seconds': seconds,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update durasi alarm sebelum Iqomah (detik).
+  /// Validasi: 5–15 detik sesuai REQ-002.
+  void updatePreIqomahAlertSeconds(int seconds) {
+    if (seconds < 5 || seconds > 15) return;
+    _debounceSave('pre_iqomah_alert_seconds', {
+      'pre_iqomah_alert_seconds': seconds,
+    }, triggerConfigUpdate: true);
+  }
+
   // --- Phase 4: PIN Management ---
 
   Future<bool> verifyPin(String inputPin) async {

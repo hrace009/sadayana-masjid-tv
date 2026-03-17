@@ -924,4 +924,121 @@ void main() {
       },
     );
   });
+
+  group('Alarm Alert Management', () {
+    blocTest<SettingsCubit, SettingsState>(
+      'updatePreAdzanAlertEnabled(true) menyimpan langsung (tanpa debounce), nilai 1',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updatePreAdzanAlertEnabled(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'pre_adzan_alert_enabled',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'is_pre_adzan_alert_enabled': 1,
+          }),
+        ).called(1);
+        verify(() => displayStateCubit.onSettingsChanged()).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updatePreIqomahAlertEnabled(false) menyimpan nilai 0',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updatePreIqomahAlertEnabled(false),
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'is_pre_iqomah_alert_enabled': 0,
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updatePreAdzanAlertSeconds menyimpan nilai valid setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updatePreAdzanAlertSeconds(8);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'pre_adzan_alert_seconds',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () =>
+              settingsRepository.updateSettings({'pre_adzan_alert_seconds': 8}),
+        ).called(1);
+        verify(() => displayStateCubit.onSettingsChanged()).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updatePreIqomahAlertSeconds diabaikan jika nilai di luar range [5, 15]',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updatePreIqomahAlertSeconds(4); // terlalu kecil (< 5)
+        cubit.updatePreIqomahAlertSeconds(16); // terlalu besar (> 15)
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [],
+      verify: (_) {
+        verifyNever(() => settingsRepository.updateSettings(any()));
+      },
+    );
+  });
 }
