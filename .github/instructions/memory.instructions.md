@@ -137,6 +137,38 @@ color.withValues(alpha: 0.5)
 
 ---
 
+## Android TV — DPadStepper Layout Constraint (2026-03-17)
+
+### Bug: DPadStepper dalam Row — D-Pad Kanan Tidak Pindah Fokus
+
+`DPadStepper` mengonsumsi `ArrowRight` (increment) dan `ArrowLeft` (decrement) dengan
+`KeyEventResult.handled`. Ketika dua `DPadStepper` ditempatkan dalam `Row`, event Right
+tidak pernah sampai ke Flutter focus traversal → fokus stuck di stepper pertama.
+
+```dart
+// ❌ SALAH — D-Pad kanan hanya increment Jam, tidak bisa ke Menit
+Row(
+  children: [
+    Expanded(child: DPadStepper(label: 'Jam', ...)),
+    SizedBox(width: 16.w),
+    Expanded(child: DPadStepper(label: 'Menit', ...)),
+  ],
+)
+
+// ✅ BENAR — D-Pad bawah dari Jam pindah ke Menit secara natural
+DPadStepper(label: 'Jam', ...),
+SizedBox(height: 12.h),
+DPadStepper(label: 'Menit', ...),
+```
+
+**Prinsip**: `DPadStepper` dirancang untuk layout **vertikal saja**. ArrowUp/Down sengaja
+TIDAK dikonsumsi agar Flutter focus traversal bisa berpindah antar-stepper. Selalu gunakan
+`Column` untuk pair Jam+Menit, bukan `Row`.
+
+**File yang sudah diperbaiki**: `midnight_mode_section.dart`, `wisdom_quote_section.dart`.
+
+---
+
 ## Flutter Testing Patterns (2026-03-10)
 
 ### Pattern: DateFormat Locale di Widget Test

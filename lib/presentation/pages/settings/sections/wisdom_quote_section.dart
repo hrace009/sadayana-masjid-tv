@@ -179,60 +179,44 @@ class _WisdomQuoteSectionState extends State<WisdomQuoteSection> {
                           SizedBox(height: 12.h),
 
                           // Jam mulai — TASK-049
-                          Row(
-                            children: [
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Dari Jam',
-                                  value: settings.wisdomStartHour,
-                                  minValue: 0,
-                                  maxValue: 23,
-                                  suffix: '',
-                                  onChanged: cubit.updateWisdomStartHour,
-                                ),
-                              ),
-                              SizedBox(width: 16.w),
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Menit',
-                                  value: settings.wisdomStartMinute,
-                                  minValue: 0,
-                                  maxValue: 59,
-                                  step: 5,
-                                  suffix: '',
-                                  onChanged: cubit.updateWisdomStartMinute,
-                                ),
-                              ),
-                            ],
+                          DPadStepper(
+                            label: 'Dari Jam',
+                            value: settings.wisdomStartHour,
+                            minValue: 0,
+                            maxValue: 23,
+                            suffix: '',
+                            onChanged: cubit.updateWisdomStartHour,
+                          ),
+                          SizedBox(height: 12.h),
+                          DPadStepper(
+                            label: 'Menit Mulai',
+                            value: settings.wisdomStartMinute,
+                            minValue: 0,
+                            maxValue: 59,
+                            step: 5,
+                            suffix: '',
+                            onChanged: cubit.updateWisdomStartMinute,
                           ),
                           SizedBox(height: 16.h),
 
                           // Jam selesai — TASK-049
-                          Row(
-                            children: [
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Sampai Jam',
-                                  value: settings.wisdomEndHour,
-                                  minValue: 0,
-                                  maxValue: 23,
-                                  suffix: '',
-                                  onChanged: cubit.updateWisdomEndHour,
-                                ),
-                              ),
-                              SizedBox(width: 16.w),
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Menit',
-                                  value: settings.wisdomEndMinute,
-                                  minValue: 0,
-                                  maxValue: 59,
-                                  step: 5,
-                                  suffix: '',
-                                  onChanged: cubit.updateWisdomEndMinute,
-                                ),
-                              ),
-                            ],
+                          DPadStepper(
+                            label: 'Sampai Jam',
+                            value: settings.wisdomEndHour,
+                            minValue: 0,
+                            maxValue: 23,
+                            suffix: '',
+                            onChanged: cubit.updateWisdomEndHour,
+                          ),
+                          SizedBox(height: 12.h),
+                          DPadStepper(
+                            label: 'Menit Selesai',
+                            value: settings.wisdomEndMinute,
+                            minValue: 0,
+                            maxValue: 59,
+                            step: 5,
+                            suffix: '',
+                            onChanged: cubit.updateWisdomEndMinute,
                           ),
                           SizedBox(height: 24.h),
 

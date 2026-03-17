@@ -1,6 +1,6 @@
 ---
 goal: "Implementasi Mode Hemat Daya Tengah Malam (Midnight Screensaver)"
-version: 1.1
+version: 1.2
 date_created: 2026-03-16
 last_updated: 2026-03-16
 owner: "Gulajava Ministudio"
@@ -42,7 +42,7 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 - **GUD-003**: Timer animasi drift posisi teks harus self-contained di dalam `MidnightStandbyLayout` (pattern `DigitalClockWidget` — timer internal, bukan dari parent).
 - **GUD-004**: `buildWhen` pada `BlocBuilder` di `MainDisplayPage` tidak perlu optimasi khusus untuk `midnightStandby` — cukup selalu rebuild (sama seperti state countdown lainnya, karena `currentTime` berubah tiap detik untuk memperbarui tampilan **jam digital**). Animasi drift posisi teks bersifat self-contained dan tidak bergantung pada rebuild dari parent (lihat GUD-003).
 - **GUD-005**: **D-Pad Toggle Pattern** — Toggle "Aktifkan" menggunakan `FocusableWidget(onSelect: () => cubit.updateMidnightModeEnabled(!settings.isMidnightModeEnabled))`. `Switch.adaptive` di dalam boks toggle bersifat **visual-only** (`onChanged: null`), tidak menerima focus D-Pad. Pattern identik dengan `WisdomQuoteSection`.
-- **GUD-006**: **D-Pad Stepper Disable Pattern** — Keempat `DPadStepper` waktu dibungkus satu blok `ExcludeFocus(excluding: !isMidnightModeEnabled)` + `IgnorePointer(ignoring: !isMidnightModeEnabled)` + `Opacity(opacity: enabled ? 1.0 : 0.4)`. Jam + Menit di-pair dalam `Row([Expanded(DPadStepper(...)), SizedBox(width: 16.w), Expanded(DPadStepper(step: 5, ...))])`. Pattern identik dengan `WisdomQuoteSection`.
+- **GUD-006**: **D-Pad Stepper Disable Pattern** — Keempat `DPadStepper` waktu dibungkus satu blok `ExcludeFocus(excluding: !isMidnightModeEnabled)` + `IgnorePointer(ignoring: !isMidnightModeEnabled)` + `Opacity(opacity: enabled ? 1.0 : 0.4)`. Jam + Menit di-pair dalam `Column([DPadStepper(...), SizedBox(height: 12.h), DPadStepper(step: 5, ...)])`. ⚠️ **JANGAN** letakkan 2 `DPadStepper` dalam `Row` — `ArrowRight` dikonsumsi untuk increment sehingga focus traversal horizontal tidak berfungsi. *(Diperbarui 2026-03-16: Row → Column)*
 
 - **PAT-001**: Sealed class pattern — `MidnightStandbyState` extends `DisplayState`, Dart exhaustive switch memberikan compile-time safety.
 - **PAT-002**: Cross-midnight time comparison: `if (start > end) → now >= start || now < end`.
@@ -116,7 +116,7 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 | Task | Description | Completed | Date |
 |------|-------------|-----------|------|
 | TASK-025 | Buat file `lib/presentation/pages/settings/sections/midnight_mode_section.dart`. Widget `MidnightModeSection` sebagai `StatelessWidget`, menggunakan `BlocBuilder<SettingsCubit, SettingsState>`. Ikuti struktur `WisdomQuoteSection` secara langsung. Lihat wireframe di **Section 3** dokumen ini. | ✅ | 2026-03-16 |
-| TASK-026 | Implementasi UI section sesuai wireframe Section 3: **(a)** Toggle row: `FocusableWidget(autofocus: true, onSelect: () => cubit.updateMidnightModeEnabled(!s.isMidnightModeEnabled), builder: (f) => Container(border: f ? goldAmber : glassBorder, child: Row([Text('Aktifkan...'), Switch.adaptive(value: s.isMidnightModeEnabled, onChanged: null)])))`. **(b)** Jam Mulai + Menit Mulai: `Row([Expanded(DPadStepper(label:'Jam Mulai', value:s.midnightStartHour, maxValue:23, onChanged:cubit.updateMidnightStartHour)), SizedBox(width:16.w), Expanded(DPadStepper(label:'Menit', value:s.midnightStartMinute, maxValue:59, step:5, onChanged:cubit.updateMidnightStartMinute))])`. **(c)** Jam Berakhir + Menit Berakhir dengan Row identik. **(d)** Area keempat stepper dibungkus: `ExcludeFocus(excluding: !s.isMidnightModeEnabled, child: IgnorePointer(ignoring: !s.isMidnightModeEnabled, child: Opacity(opacity: s.isMidnightModeEnabled ? 1.0 : 0.4, child: Column([...]))))`. **(e)** Info bar: `'ℹ Aktif setiap hari: ${h(s.midnightStartHour)}:${m(s.midnightStartMinute)} – ${h(s.midnightEndHour)}:${m(s.midnightEndMinute)}'` dengan helper `h/m` = `n.toString().padLeft(2,'0')`. | ✅ | 2026-03-16 |
+| TASK-026 | Implementasi UI section sesuai wireframe Section 3: **(a)** Toggle row: `FocusableWidget(autofocus: true, onSelect: () => cubit.updateMidnightModeEnabled(!s.isMidnightModeEnabled), builder: (f) => Container(border: f ? goldAmber : glassBorder, child: Row([Text('Aktifkan...'), Switch.adaptive(value: s.isMidnightModeEnabled, onChanged: null)])))`. **(b)** Jam Mulai + Menit Mulai dalam Column: `DPadStepper(label:'Jam Mulai', value:s.midnightStartHour, maxValue:23, onChanged:cubit.updateMidnightStartHour)`, `SizedBox(height:12.h)`, `DPadStepper(label:'Menit Mulai', value:s.midnightStartMinute, maxValue:59, step:5, onChanged:cubit.updateMidnightStartMinute)`. **(c)** Jam Berakhir + Menit Berakhir dengan Column identik. ⚠️ **JANGAN** gunakan `Row` untuk pasangan stepper — `ArrowRight` dikonsumsi untuk increment. *(Diperbarui 2026-03-16)* **(d)** Area keempat stepper dibungkus: `ExcludeFocus(excluding: !s.isMidnightModeEnabled, child: IgnorePointer(ignoring: !s.isMidnightModeEnabled, child: Opacity(opacity: s.isMidnightModeEnabled ? 1.0 : 0.4, child: Column([...]))))`. **(e)** Info bar: `'ℹ Aktif setiap hari: ${h(s.midnightStartHour)}:${m(s.midnightStartMinute)} – ${h(s.midnightEndHour)}:${m(s.midnightEndMinute)}'` dengan helper `h/m` = `n.toString().padLeft(2,'0')`. | ✅ | 2026-03-16 |
 | TASK-027 | Daftarkan `MidnightModeSection` di `SettingsMenuPage` (`lib/presentation/pages/settings/settings_menu_page.dart`): (a) Tambahkan string "Mode Hemat Daya" di `_categories` list (sebelum "Reset Data"), (b) Tambahkan `const MidnightModeSection()` di `_sections` list pada posisi yang sama, (c) Import file section baru. | ✅ | 2026-03-16 |
 | TASK-028 | Tulis widget test di `test/presentation/pages/settings/sections/midnight_mode_section_test.dart`: (a) toggle ON/OFF memanggil `updateMidnightModeEnabled`, (b) stepper jam mulai/berakhir visible dan interactable, (c) stepper disabled saat toggle OFF. | ✅ | 2026-03-16 |
 
@@ -146,7 +146,7 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 │  └──────────────────────┘  │  └──────────────────────────────┘   │  │
 │                             │  ── Konfigurasi Waktu ─────────────  │  │
 │                             │  ┌────────────────┐ ┌────────────┐  │  │
-│                             │  │  Jam Mulai     │ │ Menit Mulai│  │  │  ← Row([Expanded, SizedBox(16.w), Expanded])
+│                             │  │  Jam Mulai     │ │ Menit Mulai│  │  │  ← Column([DPadStepper, SizedBox(12.h), DPadStepper])
 │                             │  │  [◀]  23  [▶]  │ │ [◀] 00 [▶]│  │  │  ← DPadStepper (step:1 / step:5)
 │                             │  └────────────────┘ └────────────┘  │  │
 │                             │  ┌────────────────┐ ┌────────────┐  │  │
@@ -162,7 +162,7 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 
 1. **Toggle Row — `FocusableWidget`**: Baris "Aktifkan Mode Hemat Daya" adalah satu `FocusableWidget` penuh. `Switch.adaptive` di dalamnya adalah **visual-only** (`onChanged: null`). Aksi toggle dipicu oleh `FocusableWidget.onSelect` → `cubit.updateMidnightModeEnabled(!settings.isMidnightModeEnabled)`. Pattern identik dengan toggle di `WisdomQuoteSection`.
 
-2. **Konfigurasi Jam/Menit — Pair Pattern**: Setiap pasang Jam + Menit menggunakan satu `Row([Expanded(DPadStepper(label:'Jam...', maxValue:23)), SizedBox(width:16.w), Expanded(DPadStepper(label:'Menit...', maxValue:59, step:5))])`. Parameter `step:5` pada menit mengikuti pattern `WisdomQuoteSection`.
+2. **Konfigurasi Jam/Menit — Layout Vertikal**: Setiap pasang Jam + Menit menggunakan `Column([DPadStepper(label:'Jam...', maxValue:23), SizedBox(height:12.h), DPadStepper(label:'Menit...', maxValue:59, step:5)])`. ⚠️ **JANGAN** gunakan `Row` untuk dua `DPadStepper` — `ArrowRight` dikonsumsi untuk increment (bukan focus traversal) sehingga navigasi D-Pad horizontal tidak berfungsi. Parameter `step:5` pada menit mengikuti pattern `WisdomQuoteSection`. *(Diperbarui 2026-03-16: Row → Column)*
 
 3. **Disable Area saat Toggle OFF**: Keempat `DPadStepper` dibungkus dalam satu blok `ExcludeFocus(excluding: !enabled)` + `IgnorePointer(ignoring: !enabled)` + `Opacity(opacity: enabled ? 1.0 : 0.4)`. Ini mencegah D-Pad traverse ke stepper saat mode OFF — identik dengan `WisdomQuoteSection`.
 
@@ -241,6 +241,7 @@ Referensi PRD: [prd-plan-midnight-feature.md](prd-plan-midnight-feature.md)
 | Fix | File Terdampak | Tanggal |
 |-----|----------------|---------|
 | `Switch.adaptive` — `activeColor` deprecated (sejak Flutter v3.31). Diganti dengan `activeThumbColor` (thumb) + `activeTrackColor` (track, alpha 0.5). Berlaku juga untuk `wisdom_quote_section.dart` dan `treasury_section.dart`. | `midnight_mode_section.dart`, `wisdom_quote_section.dart`, `treasury_section.dart` | 2026-03-16 |
+| `DPadStepper` Row → Column — Dua `DPadStepper` berdampingan dalam `Row` tidak dapat dinavigasi dengan D-Pad: `ArrowRight` dikonsumsi untuk increment, bukan traversal. Fix: ubah `Row([Expanded(DPadStepper), SizedBox(width:16.w), Expanded(DPadStepper)])` menjadi `Column([DPadStepper, SizedBox(height:12.h), DPadStepper])`. | `midnight_mode_section.dart`, `wisdom_quote_section.dart` | 2026-03-16 |
 
 ## 10. Related Specifications / Further Reading
 

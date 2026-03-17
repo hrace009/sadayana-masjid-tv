@@ -124,7 +124,7 @@ Dependencies yang ditambahkan:
 ```yaml
 dependencies:
   flutter_screenutil: ^5.9.3  # Responsive scaling (.sp, .w, .h, .r)
-  google_fonts: ^8.0.1        # Dynamic font loading (Poppins)
+  google_fonts: ^8.0.2        # Poppins font — bundled offline (assets/fonts/), allowRuntimeFetching = false
 ```
 
 
@@ -200,7 +200,7 @@ File yang dibuat:
 Dependencies yang digunakan:
 - `flutter_bloc`: State management
 - `flutter_screenutil`: Responsive layout
-- `google_fonts`: Typography
+- `google_fonts`: Typography (bundled offline — lihat catatan di bawah)
 
 ### Plan 11 — Settings Logic (COMPLETED)
 
@@ -337,6 +337,7 @@ Untuk detailed implementation guidance, lihat dokumentasi specialized kami:
 | **Glassmorphism Card** | Semi-transparent cards dengan blur effect | Prayer time cards |
 | **Screen Burn-in Prevention** | Auto-dimming dan blank screen saat sholat | SHOLAT state |
 | **ScreenUtil Responsive** | Proportional scaling via `flutter_screenutil` (design size 1920×1080) | Semua sizing dan font |
+| **DPadStepper Vertical-Only Layout** | `DPadStepper` mengonsumsi ArrowLeft/Right untuk decrement/increment. **JANGAN** tempatkan dua `DPadStepper` dalam `Row` — fokus tidak bisa berpindah horizontal. Günakan `Column` agar ArrowDown/Up bekerja antar-stepper. | Semua section dengan pair Jam+Menit |
 
 ## Style Notes
 
@@ -349,6 +350,7 @@ Untuk detailed implementation guidance, lihat dokumentasi specialized kami:
 - **Android TV Specific**: Semua interactive elements harus accessible via D-Pad
 - **Switch.adaptive colors**: Jangan gunakan `activeColor` (deprecated sejak Flutter v3.31). Gunakan `activeThumbColor` untuk thumb dan `activeTrackColor` untuk track. Gunakan `withValues(alpha: 0.5)` bukan `withOpacity()` (deprecated Dart 3.6+) untuk track color.
 - **Color opacity**: Gunakan `Color.withValues(alpha: x)` bukan `Color.withOpacity(x)` (deprecated sejak Dart 3.6 / Flutter 3.27).
+- **google_fonts offline**: Set `GoogleFonts.config.allowRuntimeFetching = false` di `main()` sebelum `runApp`. Seluruh font TTF harus ada di `assets/fonts/` DAN terdaftar di **dua section** pubspec.yaml: `assets:` (untuk `rootBundle`) dan `fonts:` (untuk Flutter font engine). Audit semua `FontWeight` di seluruh `lib/` sebelum bundling.
 
 ### Islamic Glassmorphism Theme
 

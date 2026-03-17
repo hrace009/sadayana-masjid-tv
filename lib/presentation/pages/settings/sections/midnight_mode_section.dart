@@ -125,31 +125,23 @@ class MidnightModeSection extends StatelessWidget {
                           SizedBox(height: 12.h),
 
                           // Jam & Menit Mulai — TASK-026
-                          Row(
-                            children: [
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Jam Mulai',
-                                  value: settings.midnightStartHour,
-                                  minValue: 0,
-                                  maxValue: 23,
-                                  suffix: '',
-                                  onChanged: cubit.updateMidnightStartHour,
-                                ),
-                              ),
-                              SizedBox(width: 16.w),
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Menit',
-                                  value: settings.midnightStartMinute,
-                                  minValue: 0,
-                                  maxValue: 59,
-                                  step: 5,
-                                  suffix: '',
-                                  onChanged: cubit.updateMidnightStartMinute,
-                                ),
-                              ),
-                            ],
+                          DPadStepper(
+                            label: 'Jam Mulai',
+                            value: settings.midnightStartHour,
+                            minValue: 0,
+                            maxValue: 23,
+                            suffix: '',
+                            onChanged: cubit.updateMidnightStartHour,
+                          ),
+                          SizedBox(height: 12.h),
+                          DPadStepper(
+                            label: 'Menit Mulai',
+                            value: settings.midnightStartMinute,
+                            minValue: 0,
+                            maxValue: 59,
+                            step: 5,
+                            suffix: '',
+                            onChanged: cubit.updateMidnightStartMinute,
                           ),
                           SizedBox(height: 24.h),
 
@@ -166,31 +158,23 @@ class MidnightModeSection extends StatelessWidget {
                           SizedBox(height: 12.h),
 
                           // Jam & Menit Berakhir — TASK-026
-                          Row(
-                            children: [
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Jam Berakhir',
-                                  value: settings.midnightEndHour,
-                                  minValue: 0,
-                                  maxValue: 23,
-                                  suffix: '',
-                                  onChanged: cubit.updateMidnightEndHour,
-                                ),
-                              ),
-                              SizedBox(width: 16.w),
-                              Expanded(
-                                child: DPadStepper(
-                                  label: 'Menit',
-                                  value: settings.midnightEndMinute,
-                                  minValue: 0,
-                                  maxValue: 59,
-                                  step: 5,
-                                  suffix: '',
-                                  onChanged: cubit.updateMidnightEndMinute,
-                                ),
-                              ),
-                            ],
+                          DPadStepper(
+                            label: 'Jam Berakhir',
+                            value: settings.midnightEndHour,
+                            minValue: 0,
+                            maxValue: 23,
+                            suffix: '',
+                            onChanged: cubit.updateMidnightEndHour,
+                          ),
+                          SizedBox(height: 12.h),
+                          DPadStepper(
+                            label: 'Menit Berakhir',
+                            value: settings.midnightEndMinute,
+                            minValue: 0,
+                            maxValue: 59,
+                            step: 5,
+                            suffix: '',
+                            onChanged: cubit.updateMidnightEndMinute,
                           ),
                           SizedBox(height: 24.h),
 
