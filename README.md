@@ -24,16 +24,17 @@ Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi s
 - **Penanganan Jum'at** — label, durasi iqomah, dan durasi layar mati khusus hari Jumat
 - Konversi tanggal Hijriah dengan adjustment manual (H-1 / H+1)
 
-### 🔄 State Machine — 6 Mode Tampilan Otomatis
+### 🔄 State Machine — 7 Mode Tampilan Otomatis
 
 | State | Trigger | Tampilan |
 |-------|---------|----------|
 | **Standby** | Default | Jam besar, tanggal, jadwal sholat, running text |
-| **Pre-Adzan** | H-10 menit sebelum waktu sholat | Countdown timer + highlight jadwal terkait |
-| **Adzan** | Waktu sholat tiba | Visual "SAATNYA ADZAN" + audio opsional |
+| **Pre-Adzan** | H-N menit sebelum waktu sholat (default 10, dapat diatur) | Countdown timer + highlight jadwal terkait |
+| **Adzan** | Waktu sholat tiba | Visual "SAATNYA ADZAN" |
 | **Iqomah** | Setelah adzan selesai | Countdown timer iqomah (durasi per sholat) |
 | **Sholat** | Timer iqomah habis | Layar gelap / jam redup (OLED safe) |
 | **Kata Mutiara** | Periodik sesuai interval | Full-screen ayat Al-Quran / Hadits terjemahan |
+| **Mode Hemat Daya** | Jam malam yang dikonfigurasi (cross-midnight support) | Layar hitam, jam digital redup, info Subuh, anti burn-in drift |
 
 ### 📺 Dioptimalkan untuk Android TV
 
@@ -53,9 +54,15 @@ Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi s
 
 - **4-step first-run wizard**: Welcome → Identitas Masjid → Lokasi → Konfirmasi
 - Pilih kota dari database **514 kota, 34 provinsi** Indonesia (pre-populated, termasuk data elevasi)
-- Menu settings dengan 10 kategori: Identitas, Ihtiyat, Iqomah, Dhuha, Timing, Running Text, Kata Mutiara, Kas Masjid, Keamanan, Reset
+- Menu settings dengan **13 kategori**: Identitas Masjid, Koreksi Waktu (Ihtiyat), Durasi Iqomah,
+  Pengaturan Dhuha, Durasi Tampilan, Alarm Tanda Waktu, Running Text, Keamanan (PIN),
+  Informasi Kas, Kata Mutiara, Mode Hemat Daya, Reset Data, Tentang Aplikasi
 - Menu settings dilindungi PIN opsional (SHA-256)
 - **Informasi Kas Masjid** — tampilkan saldo, pemasukan, pengeluaran di layar utama (opsional)
+- **Alarm Tanda Waktu** — bunyi alarm otomatis beberapa detik sebelum Adzan dan/atau Iqomah
+  (5–15 detik, konfigurasi independen untuk Pre-Adzan dan Pre-Iqomah)
+- **Mode Hemat Daya Tengah Malam** — screensaver otomatis jam malam dengan anti burn-in drift,
+  window waktu lintas tengah malam dapat dikonfigurasi
 - Running text (marquee) yang dapat diedit
 
 ---
@@ -71,11 +78,16 @@ lib/
 ├── data/              # SQLite models, repositories, data sources
 │   ├── datasources/   # DatabaseHelper, local data sources
 │   ├── models/        # Data models (fromMap/toMap)
-│   └── repositories/  # Repository implementations
-├── domain/            # Business logic (pure Dart)
+│   ├── repositories/  # Repository implementations
+│   └── services/      # AudioAlertServiceImpl dan service konkret lain
+├── domain/            # Business logic (pure Dart, zero infra imports)
 │   ├── entities/      # Immutable domain entities
-│   └── repositories/  # Abstract repository interfaces
+│   ├── repositories/  # Abstract repository interfaces
+│   ├── services/      # Abstract service interfaces (AudioAlertService)
+│   └── usecases/      # Business use cases
 └── presentation/      # UI layer
+    ├── cubits/        # State management (Cubit)
+    ├── pages/         # Screen layouts dan halaman settings
     └── widgets/       # Reusable UI components
 ```
 
@@ -98,12 +110,14 @@ lib/
 | **Prayer Calculation** | `adhan` | Kalkulasi astronomi |
 | **Calendar** | `hijri` | Konversi tanggal Hijriah |
 | **UI Scaling** | `flutter_screenutil` | Responsive (1920×1080 baseline) |
-| **Typography** | `google_fonts` | Poppins font |
+| **Typography** | `google_fonts` | Poppins font (bundled offline, no runtime fetch) |
 | **Running Text** | `marquee` | Horizontal scrolling ticker |
 | **Formatting** | `intl` | Format tanggal & angka Rupiah (id_ID) |
 | **Equality** | `equatable` | Value equality untuk entities |
 | **Security** | `crypto` | SHA-256 PIN hashing |
-| **Anti-Sleep** | `wakelock_plus` | Mencegah layar TV sleep ⚠️ *belum ditambahkan* |
+| **Audio** | `audioplayers` | Alarm audio pre-adzan & pre-iqomah |
+| **Analytics** | `firebase_analytics` + `firebase_crashlytics` | Usage analytics & crash reporting |
+| **Error Handling** | `error_stack` | Formatted stack trace logging |
 
 ---
 
@@ -111,25 +125,27 @@ lib/
 
 | # | Plan | Scope | Status |
 |:-:|------|-------|:------:|
-| 01 | Database Infrastructure | DatabaseHelper, DDL, migration v1-v6, seed 514 kota | ✅ |
+| 01 | Database Infrastructure | DatabaseHelper, DDL, migration v1-v9, seed 514 kota | ✅ |
 | 02 | Data Layer | Entities, models, repositories, PIN hashing | ✅ |
 | 03 | Theme System | Colors, typography, ThemeData, ScreenUtil, TV safe area | ✅ |
 | 04 | UI Components | GlassmorphismCard, FocusableWidget, IslamicBackground, RunningText | ✅ |
 | 05 | Prayer Calculation | PrayerTime entities, CalculateUseCase, Kemenag SIHAT, DPL | ✅ |
 | 06 | Prayer Cubit | PrayerTimeCubit, states, midnight timer | ✅ |
-| 07 | State Evaluation | DisplayState classes (6 states), EvaluateUseCase | ✅ |
+| 07 | State Evaluation | DisplayState classes (7 states), EvaluateUseCase | ✅ |
 | 08 | Display State Machine | DisplayStateCubit, tick timer, power recovery | ✅ |
 | 09 | Setup Wizard Logic | SetupWizardCubit, validation, step navigation | ✅ |
 | 10 | Setup Wizard UI | 4 step pages, city picker, prayer preview | ✅ |
 | 11 | Settings Logic | SettingsCubit, auto-save, PIN management | ✅ |
-| 12 | Settings UI | Menu pages, DPadStepper, PinInput, 10 categories | ✅ |
-| 13 | Main Display UI | 6 layout states, AnimatedSwitcher, D-Pad menu access | ✅ |
+| 12 | Settings UI | Menu pages, DPadStepper, PinInput, 13 categories | ✅ |
+| 13 | Main Display UI | 7 layout states, AnimatedSwitcher, D-Pad menu access | ✅ |
 | — | Kemenag Method Fix | Ganti MUIS → SIHAT, fix ihtiyat bawaan +2 menit | ✅ |
 | — | Elevation/DPL | Koreksi ketinggian tempat untuk akurasi Maghrib/Syuruq | ✅ |
 | — | Jum'at Handling | Label dinamis, durasi layar & iqomah khusus Jum'at | ✅ |
 | — | Treasury/Kas Masjid | Widget informasi saldo kas di Standby Layout | ✅ |
 | — | Rebranding | SMD → Miqotul Khoir TV, seluruh dokumen & kode | ✅ |
 | — | Kata Mutiara Islam | WisdomQuoteState (state ke-6), katalog 11 item Quran & Hadits, Settings UI, preview page | ✅ |
+| — | Mode Hemat Daya Tengah Malam | MidnightStandbyState (state ke-7), screensaver, anti burn-in, window konfigurasi cross-midnight | ✅ |
+| — | Alarm Tanda Waktu | Audio alert pre-adzan & pre-iqomah, AudioAlertService (DIP), konfigurasi 5–15 detik | ✅ |
 
 > **Legend**: ✅ Completed
 
@@ -137,11 +153,11 @@ lib/
 
 | Layer | Tests |
 |-------|:-----:|
-| Data (models, repositories, database) | 27 |
+| Data (models, repositories, database) | 35+ |
 | Theme (colors, typography, theme) | 42 |
-| Domain & Business Logic (Prayer, State, Setup, Settings, Jum'at, Wisdom) | 90+ |
-| Widgets & Presentation (Cubit, UI components, widgets) | 62+ |
-| **Total** | **257** |
+| Domain & Business Logic (Prayer, State, Setup, Settings, Jum'at, Wisdom, Alarm) | 110+ |
+| Widgets & Presentation (Cubit, UI components, widgets) | 115+ |
+| **Total** | **302** |
 
 ---
 
