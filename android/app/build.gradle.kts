@@ -46,6 +46,12 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
+        ndk {
+            // Flutter 3.29+ telah menghapus dukungan armeabi-v7a (32-bit ARM).
+            // Batasi eksplisit ke 64-bit agar Play Store menolak instalasi di device 32-bit,
+            // sehingga user mendapat pesan "incompatible" alih-alih crash saat runtime.
+            abiFilters += listOf("arm64-v8a", "x86_64")
+        }
     }
 
     signingConfigs {
@@ -71,6 +77,15 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("boolean", "LOG_ENABLED", "false")
             signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
+    packaging {
+        jniLibs {
+            // Buang semua native library 32-bit dari APK final.
+            // Dependency pihak ketiga (audioplayers, sqflite, dll) mungkin menyertakan
+            // versi armeabi-v7a yang tidak diperlukan dan menambah ukuran APK sia-sia.
+            excludes += setOf("lib/armeabi-v7a/**", "lib/armeabi/**")
         }
     }
 }
