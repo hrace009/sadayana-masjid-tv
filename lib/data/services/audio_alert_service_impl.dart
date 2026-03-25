@@ -1,4 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:miqotul_khoir_tv/domain/services/audio_alert_service.dart';
 
 /// Implementasi konkret [AudioAlertService] menggunakan package `audioplayers`.
@@ -9,9 +11,16 @@ import 'package:miqotul_khoir_tv/domain/services/audio_alert_service.dart';
 /// Instance ini dikelola oleh `DisplayStateCubit` dan wajib di-[dispose]
 /// saat cubit di-close untuk mencegah memory leak (CON-006).
 ///
+/// Error handling:
+/// - Semua platform exception dari MediaPlayer ditangkap secara lokal
+///   sehingga tidak menjadi unhandled Future error / fatal crash di Crashlytics.
+/// - Jika [playAlert] gagal, [AudioPlayer] di-recreate agar siklus alarm
+///   berikutnya tetap bisa berjalan (self-healing).
+///
 /// Ref: plan/feature-alarm-alert-1.md — TASK-009, CON-004, CON-006
 class AudioAlertServiceImpl implements AudioAlertService {
-  final AudioPlayer _player = AudioPlayer();
+  // Mutable agar bisa di-recreate setelah platform error.
+  AudioPlayer _player = AudioPlayer();
 
   /// Path audio relatif terhadap direktori `assets/`.
   ///
@@ -22,16 +31,52 @@ class AudioAlertServiceImpl implements AudioAlertService {
 
   @override
   Future<void> playAlert() async {
-    await _player.play(AssetSource(_alertAssetPath));
+    try {
+      await _player.play(AssetSource(_alertAssetPath));
+    } catch (e, stackTrace) {
+      // Laporkan ke Crashlytics sebagai non-fatal agar DKM bisa memantau
+      // frekuensi kegagalan alarm di dashboard Firebase (bukan fatal crash).
+      FirebaseCrashlytics.instance.recordError(
+        e,
+        stackTrace,
+        reason:
+            'AudioAlertService: playAlert gagal — MediaPlayer platform error',
+        fatal: false,
+      );
+      // Player masuk error state setelah PlatformException — recreate untuk recovery
+      // agar siklus alarm berikutnya (waktu sholat berikutnya) tetap bisa berbunyi.
+      await _recreatePlayer();
+    }
   }
 
   @override
   Future<void> stopAlert() async {
-    await _player.stop();
+    try {
+      await _player.stop();
+    } catch (e) {
+      debugPrint('AudioAlertService: stopAlert gagal ($e).');
+    }
   }
 
   @override
   Future<void> dispose() async {
-    await _player.dispose();
+    try {
+      await _player.dispose();
+    } catch (e) {
+      debugPrint('AudioAlertService: dispose gagal ($e).');
+    }
+  }
+
+  /// Dispose player yang rusak lalu buat instance baru.
+  ///
+  /// Dipanggil saat [playAlert] gagal dengan PlatformException,
+  /// sehingga [AudioPlayer] tidak terjebak dalam error state permanen.
+  Future<void> _recreatePlayer() async {
+    try {
+      await _player.dispose();
+    } catch (_) {
+      // Abaikan error dispose pada player yang sudah rusak.
+    }
+    _player = AudioPlayer();
   }
 }

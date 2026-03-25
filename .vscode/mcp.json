@@ -1,0 +1,13 @@
+{
+    "servers": {
+        "firebase": {
+            "type": "stdio",
+            "command": "npx",
+            "args": [
+                "-y",
+                "firebase-tools@latest",
+                "mcp"
+            ]
+        }
+    }
+}

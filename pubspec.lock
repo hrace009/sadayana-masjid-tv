@@ -65,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.1"
+  audioplayers_android_exo:
+    dependency: "direct main"
+    description:
+      name: audioplayers_android_exo
+      sha256: "93fab493d8baa9584b6d62a2ac184f918c46f421be1b3d01750dbb0e8e51f8aa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   audioplayers_darwin:
     dependency: transitive
     description:
