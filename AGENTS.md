@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: March 17, 2026
+**Last Updated**: March 26, 2026
 
 <!-- markdownlint-disable -->
 
@@ -1065,6 +1065,9 @@ Core security dan data integrity practices:
 - **Orientation**: Locked to Landscape
 - **Navigation**: D-Pad/Remote control only (no touch)
 - **Launcher**: Configured as TV launcher atau boot on startup
+- **CPU Architecture**: ARM 64-bit (`arm64-v8a`) atau x86_64 **only** — Flutter 3.29+ telah
+  menghapus dukungan `armeabi-v7a` (32-bit ARM). APK dikonfigurasi dengan `abiFilters`
+  eksplisit di `android/app/build.gradle.kts` untuk mencegah instalasi di device 32-bit.
 
 ### Manifest Configuration
 
@@ -1075,7 +1078,7 @@ Ensure `AndroidManifest.xml` includes:
 
 ---
 
-**Last Updated**: March 17, 2026
+**Last Updated**: March 26, 2026
 **Version**: 2.1.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV

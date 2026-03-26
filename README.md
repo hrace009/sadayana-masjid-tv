@@ -168,6 +168,8 @@ lib/
 - Flutter SDK ^3.11.0
 - Android Studio / VS Code
 - Android TV emulator atau perangkat fisik
+- **Perangkat ARM 64-bit (arm64-v8a)** — Flutter 3.29+ tidak mendukung arsitektur 32-bit (armeabi-v7a).
+  TV Box dengan chip 32-bit lama tidak kompatibel dengan versi ini.
 
 ### Instalasi
 
