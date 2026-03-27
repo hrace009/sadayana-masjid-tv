@@ -14,8 +14,8 @@ class _AppInfo {
   const _AppInfo._();
 
   static const String appName = 'Miqotul Khoir TV';
-  static const String version = '1.2.1';
-  static const String buildNumber = '4';
+  static const String version = '1.2.2';
+  static const String buildNumber = '5';
   static const String license = 'GPL v3';
 
   static const String description =
