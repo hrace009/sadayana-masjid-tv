@@ -21,11 +21,9 @@ class _SecuritySectionState extends State<SecuritySection> {
   bool _isDisablingPin = false;
   final bool _showError = false;
 
-  void _handlePinSubmit(
-    BuildContext context,
-    SettingsCubit cubit,
-    String pin,
-  ) async {
+  Future<void> _handlePinSubmit(SettingsCubit cubit, String pin) async {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+
     // If we're setting a new PIN (regardless if disabling or enabling/changing)
     // Actually, PIN verification should be required to change or disable.
     // However, the user already passed the PinGatePage to enter settings.
@@ -34,10 +32,12 @@ class _SecuritySectionState extends State<SecuritySection> {
     if (_isDisablingPin) {
       // In this state, we assume the input was maybe a confirmation, but let's just use cubit.removePin()
       await cubit.removePin();
+      if (!mounted) return;
+
       setState(() {
         _isDisablingPin = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger?.showSnackBar(
         SnackBar(
           content: Text(
             'PIN Keamanan telah dinonaktifkan.',
@@ -48,10 +48,12 @@ class _SecuritySectionState extends State<SecuritySection> {
       );
     } else if (_isChangingPin) {
       await cubit.setPin(pin);
+      if (!mounted) return;
+
       setState(() {
         _isChangingPin = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
+      messenger?.showSnackBar(
         SnackBar(
           content: Text(
             'PIN Keamanan baru berhasil disimpan.',
@@ -74,94 +76,53 @@ class _SecuritySectionState extends State<SecuritySection> {
         final cubit = context.read<SettingsCubit>();
         final bool isPinEnabled = cubit.isPinEnabled;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Keamanan (PIN)', style: IslamicTypography.heading()),
-            SizedBox(height: 8.h),
-            Text(
-              'Gunakan PIN 6 digit untuk mengunci menu pengaturan layar ini.',
-              style: IslamicTypography.subtitle(
-                color: IslamicColors.textSecondary,
-              ),
-            ),
-            SizedBox(height: 32.h),
-
-            // Status Indicator
-            Row(
-              children: [
-                Icon(
-                  isPinEnabled ? Icons.lock : Icons.lock_open,
-                  color: isPinEnabled
-                      ? IslamicColors.goldAmber
-                      : IslamicColors.textMuted,
-                  size: 32.sp,
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Keamanan (PIN)', style: IslamicTypography.heading()),
+              SizedBox(height: 8.h),
+              Text(
+                'Gunakan PIN 6 digit untuk mengunci menu pengaturan layar ini.',
+                style: IslamicTypography.subtitle(
+                  color: IslamicColors.textSecondary,
                 ),
-                SizedBox(width: 16.w),
-                Text(
-                  isPinEnabled ? 'PIN Aktif' : 'PIN Tidak Aktif',
-                  style: IslamicTypography.title(
+              ),
+              SizedBox(height: 32.h),
+
+              // Status Indicator
+              Row(
+                children: [
+                  Icon(
+                    isPinEnabled ? Icons.lock : Icons.lock_open,
                     color: isPinEnabled
                         ? IslamicColors.goldAmber
                         : IslamicColors.textMuted,
+                    size: 32.sp,
                   ),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 32.h),
-
-            if (!_isChangingPin && !_isDisablingPin) ...[
-              // Action Buttons
-              IntrinsicHeight(
-                child: FocusableWidget(
-                  onSelect: () {
-                    setState(() {
-                      _isChangingPin = true;
-                      _isDisablingPin = false;
-                    });
-                  },
-                  builder: (isFocused) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 150),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 24.w,
-                        vertical: 12.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: IslamicColors.primaryTeal,
-                        border: Border.all(
-                          color: isFocused
-                              ? IslamicColors.goldAmber
-                              : IslamicColors.primaryTeal,
-                          width: isFocused ? 2.0 : 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: Text(
-                        isPinEnabled ? 'Ubah PIN' : 'Buat PIN',
-                        style: IslamicTypography.title(
-                          color: IslamicColors.textPrimary,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                  SizedBox(width: 16.w),
+                  Text(
+                    isPinEnabled ? 'PIN Aktif' : 'PIN Tidak Aktif',
+                    style: IslamicTypography.title(
+                      color: isPinEnabled
+                          ? IslamicColors.goldAmber
+                          : IslamicColors.textMuted,
+                    ),
+                  ),
+                ],
               ),
 
-              if (isPinEnabled) ...[
-                SizedBox(height: 16.h),
+              SizedBox(height: 32.h),
+
+              if (!_isChangingPin && !_isDisablingPin) ...[
+                // Action Buttons
                 IntrinsicHeight(
                   child: FocusableWidget(
                     onSelect: () {
                       setState(() {
-                        _isDisablingPin = true;
-                        _isChangingPin = false;
+                        _isChangingPin = true;
+                        _isDisablingPin = false;
                       });
-
-                      // Directly disable (since user is already authenticated to be in Settings)
-                      _handlePinSubmit(context, cubit, '');
                     },
                     builder: (isFocused) {
                       return AnimatedContainer(
@@ -172,17 +133,17 @@ class _SecuritySectionState extends State<SecuritySection> {
                           vertical: 12.h,
                         ),
                         decoration: BoxDecoration(
-                          color: IslamicColors.error,
+                          color: IslamicColors.primaryTeal,
                           border: Border.all(
                             color: isFocused
                                 ? IslamicColors.goldAmber
-                                : IslamicColors.error,
+                                : IslamicColors.primaryTeal,
                             width: isFocused ? 2.0 : 1.0,
                           ),
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
-                          'Nonaktifkan PIN',
+                          isPinEnabled ? 'Ubah PIN' : 'Buat PIN',
                           style: IslamicTypography.title(
                             color: IslamicColors.textPrimary,
                           ),
@@ -191,58 +152,101 @@ class _SecuritySectionState extends State<SecuritySection> {
                     },
                   ),
                 ),
+
+                if (isPinEnabled) ...[
+                  SizedBox(height: 16.h),
+                  IntrinsicHeight(
+                    child: FocusableWidget(
+                      onSelect: () {
+                        setState(() {
+                          _isDisablingPin = true;
+                          _isChangingPin = false;
+                        });
+
+                        // Directly disable (since user is already authenticated to be in Settings)
+                        _handlePinSubmit(cubit, '');
+                      },
+                      builder: (isFocused) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24.w,
+                            vertical: 12.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: IslamicColors.error,
+                            border: Border.all(
+                              color: isFocused
+                                  ? IslamicColors.goldAmber
+                                  : IslamicColors.error,
+                              width: isFocused ? 2.0 : 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Text(
+                            'Nonaktifkan PIN',
+                            style: IslamicTypography.title(
+                              color: IslamicColors.textPrimary,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ],
+
+              if (_isChangingPin) ...[
+                Text(
+                  'Masukkan 6-digit PIN Baru',
+                  style: IslamicTypography.title(),
+                ),
+                SizedBox(height: 24.h),
+                PinInputWidget(
+                  onCompleted: (pin) => _handlePinSubmit(cubit, pin),
+                  showError: _showError,
+                ),
+                SizedBox(height: 32.h),
+                IntrinsicHeight(
+                  child: FocusableWidget(
+                    onSelect: () {
+                      setState(() {
+                        _isChangingPin = false;
+                      });
+                    },
+                    builder: (isFocused) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 150),
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.w,
+                          vertical: 12.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isFocused
+                              ? IslamicColors.glassWhite
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                            color: isFocused
+                                ? IslamicColors.textPrimary
+                                : IslamicColors.textMuted,
+                          ),
+                        ),
+                        child: Text(
+                          'Batal',
+                          style: IslamicTypography.title(
+                            color: IslamicColors.textMuted,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ],
-
-            if (_isChangingPin) ...[
-              Text(
-                'Masukkan 6-digit PIN Baru',
-                style: IslamicTypography.title(),
-              ),
-              SizedBox(height: 24.h),
-              PinInputWidget(
-                onCompleted: (pin) => _handlePinSubmit(context, cubit, pin),
-                showError: _showError,
-              ),
-              SizedBox(height: 32.h),
-              IntrinsicHeight(
-                child: FocusableWidget(
-                  onSelect: () {
-                    setState(() {
-                      _isChangingPin = false;
-                    });
-                  },
-                  builder: (isFocused) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 150),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 24.w,
-                        vertical: 12.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isFocused
-                            ? IslamicColors.glassWhite
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(
-                          color: isFocused
-                              ? IslamicColors.textPrimary
-                              : IslamicColors.textMuted,
-                        ),
-                      ),
-                      child: Text(
-                        'Batal',
-                        style: IslamicTypography.title(
-                          color: IslamicColors.textMuted,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ],
+          ),
         );
       },
     );

@@ -95,73 +95,77 @@ class _IdentitySectionState extends State<IdentitySection> {
           _initControllers(state);
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Identitas Masjid',
-              style: IslamicTypography.title(
-                color: IslamicColors.goldAmber,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              'Nama dan alamat akan ditampilkan di pojok kiri atas layar.',
-              style: IslamicTypography.body(color: IslamicColors.textSecondary),
-            ),
-            SizedBox(height: 32.h),
-
-            // Nama Masjid
-            _buildInputGroup(
-              label: 'Nama Masjid *',
-              controller: _nameController,
-              focusNode: _nameFocusNode,
-              hint: 'contoh: Masjid Al-Ikhlas',
-              maxLines: 1,
-            ),
-            SizedBox(height: 24.h),
-
-            // Alamat Masjid
-            _buildInputGroup(
-              label: 'Alamat Masjid',
-              controller: _addressController,
-              focusNode: _addressFocusNode,
-              hint: 'contoh: Jl. Raya No. 1, Bandung',
-              maxLines: 2,
-              textInputAction: TextInputAction.done,
-            ),
-            SizedBox(height: 40.h),
-
-            // Tombol Simpan
-            SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: ElevatedButton(
-                onPressed: _isSaving ? null : () => _save(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: IslamicColors.goldAmber,
-                  foregroundColor: IslamicColors.deepTeal,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Identitas Masjid',
+                style: IslamicTypography.title(
+                  color: IslamicColors.goldAmber,
+                  fontWeight: FontWeight.bold,
                 ),
-                child: _isSaving
-                    ? const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : Text(
-                        'Simpan Identitas',
-                        style: IslamicTypography.body(
-                          color: IslamicColors.deepTeal,
-                          fontWeight: FontWeight.bold,
-                        ).copyWith(fontSize: 32.sp),
-                      ),
               ),
-            ),
-          ],
+              SizedBox(height: 8.h),
+              Text(
+                'Nama dan alamat akan ditampilkan di pojok kiri atas layar.',
+                style: IslamicTypography.body(
+                  color: IslamicColors.textSecondary,
+                ),
+              ),
+              SizedBox(height: 32.h),
+
+              // Nama Masjid
+              _buildInputGroup(
+                label: 'Nama Masjid *',
+                controller: _nameController,
+                focusNode: _nameFocusNode,
+                hint: 'contoh: Masjid Al-Ikhlas',
+                maxLines: 1,
+              ),
+              SizedBox(height: 24.h),
+
+              // Alamat Masjid
+              _buildInputGroup(
+                label: 'Alamat Masjid',
+                controller: _addressController,
+                focusNode: _addressFocusNode,
+                hint: 'contoh: Jl. Raya No. 1, Bandung',
+                maxLines: 2,
+                textInputAction: TextInputAction.done,
+              ),
+              SizedBox(height: 40.h),
+
+              // Tombol Simpan
+              SizedBox(
+                width: double.infinity,
+                height: 56.h,
+                child: ElevatedButton(
+                  onPressed: _isSaving ? null : () => _save(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: IslamicColors.goldAmber,
+                    foregroundColor: IslamicColors.deepTeal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                  ),
+                  child: _isSaving
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text(
+                          'Simpan Identitas',
+                          style: IslamicTypography.body(
+                            color: IslamicColors.deepTeal,
+                            fontWeight: FontWeight.bold,
+                          ).copyWith(fontSize: 32.sp),
+                        ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

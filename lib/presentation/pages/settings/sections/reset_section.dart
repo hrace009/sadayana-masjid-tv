@@ -162,54 +162,56 @@ class ResetSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Reset Data',
-          style: IslamicTypography.title(
-            color: IslamicColors.error,
-            fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Reset Data',
+            style: IslamicTypography.title(
+              color: IslamicColors.error,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        SizedBox(height: 8.h),
-        Text(
-          'Hapus semua pengaturan dan kembali ke wizard pengaturan awal.',
-          style: IslamicTypography.caption(color: IslamicColors.textMuted),
-        ),
-        SizedBox(height: 32.h),
+          SizedBox(height: 8.h),
+          Text(
+            'Hapus semua pengaturan dan kembali ke wizard pengaturan awal.',
+            style: IslamicTypography.caption(color: IslamicColors.textMuted),
+          ),
+          SizedBox(height: 32.h),
 
-        // Tombol Reset
-        SizedBox(
-          width: double.infinity,
-          height: 64.h,
-          child: ElevatedButton(
-            onPressed: () => _confirmReset(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: IslamicColors.glassWhite,
-              foregroundColor: IslamicColors.error,
-              side: const BorderSide(color: IslamicColors.error, width: 2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
+          // Tombol Reset
+          SizedBox(
+            width: double.infinity,
+            height: 64.h,
+            child: ElevatedButton(
+              onPressed: () => _confirmReset(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: IslamicColors.glassWhite,
+                foregroundColor: IslamicColors.error,
+                side: const BorderSide(color: IslamicColors.error, width: 2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.restore_page_outlined, size: 28.w),
+                  SizedBox(width: 12.w),
+                  Text(
+                    'Reset ke Pengaturan Awal',
+                    style: IslamicTypography.body(
+                      color: IslamicColors.error,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.restore_page_outlined, size: 28.w),
-                SizedBox(width: 12.w),
-                Text(
-                  'Reset ke Pengaturan Awal',
-                  style: IslamicTypography.body(
-                    color: IslamicColors.error,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

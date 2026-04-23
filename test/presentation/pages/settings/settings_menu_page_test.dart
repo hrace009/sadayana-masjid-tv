@@ -10,7 +10,9 @@ import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_state.dar
 import 'package:miqotul_khoir_tv/presentation/pages/settings/settings_menu_page.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/ihtiyat_section.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/iqomah_section.dart';
+import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/security_section.dart';
 import 'package:miqotul_khoir_tv/presentation/widgets/dpad_stepper.dart';
+import 'package:miqotul_khoir_tv/presentation/widgets/pin_input_widget.dart';
 
 class MockSettingsCubit extends Mock implements SettingsCubit {}
 
@@ -129,6 +131,52 @@ void main() {
         ),
         findsNWidgets(6),
       );
+    });
+
+    testWidgets('Does not throw layout overflow on small landscape viewport', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1600, 720);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(createTestWidget());
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('Security section can show PIN form', (tester) async {
+      tester.view.physicalSize = const Size(1920, 1080);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(createTestWidget());
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      await tester.tap(find.text('Keamanan (PIN)').first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(find.byType(SecuritySection), findsOneWidget);
+      expect(find.text('PIN Tidak Aktif'), findsOneWidget);
+      expect(find.text('Buat PIN'), findsOneWidget);
+
+      await tester.tap(find.text('Buat PIN'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(find.text('Masukkan 6-digit PIN Baru'), findsOneWidget);
+      expect(find.byType(PinInputWidget), findsOneWidget);
+      expect(find.text('Batal'), findsOneWidget);
     });
   });
 }
