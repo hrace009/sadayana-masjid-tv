@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:error_stack/error_stack.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,42 +49,6 @@ void main() async {
   // Font Poppins sudah di-bundle via pubspec.yaml (assets/fonts/).
   // Tanpa ini, google_fonts mencoba download dari fonts.gstatic.com → crash di device tanpa internet.
   GoogleFonts.config.allowRuntimeFetching = false;
-
-  // Init ErrorStack — harus dipanggil setelah ensureInitialized
-  await ErrorStack.init(
-    level: ErrorStackLogLevel.verbose,
-    initialRoute: '/',
-    enableDevPanel: false,
-    devPanelConfig: DevPanelConfig(
-      enableApiLogging: true,
-      enableConsoleLogging: true,
-      enableRouteTracking: true,
-    ),
-    errorWidget: (errorDetails) {
-      return Scaffold(
-        backgroundColor: const Color(0xFF0D1B2A),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, color: Colors.amber, size: 64),
-              const SizedBox(height: 16),
-              const Text(
-                'Terjadi kesalahan pada aplikasi.',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                errorDetails.exception.toString(),
-                style: const TextStyle(color: Colors.white54, fontSize: 14),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 
   // Init SQLite FFI khusus untuk Windows/Desktop environment
   // Di Android real device ini tidak diperlukan, tapi app ini target Windows juga
@@ -210,8 +173,6 @@ class MiqotulKhoirApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   // TASK-031: Gunakan Islamic Glassmorphism dark theme
                   theme: IslamicTheme.darkTheme(),
-                  // ErrorStack.builder — aktifkan Dev Panel & UI debug overlays
-                  builder: ErrorStack.builder,
                   // Route awal ke SplashPage untuk check first-run
                   home: const SplashPage(),
                 ),
