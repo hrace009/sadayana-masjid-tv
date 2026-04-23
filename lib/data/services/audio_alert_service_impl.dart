@@ -26,6 +26,11 @@ class AudioAlertServiceImpl implements AudioAlertService {
   // Mutable agar bisa di-recreate setelah platform error.
   late AudioPlayer _player;
 
+  // Serialisasi command player untuk mencegah race condition play/stop/dispose.
+  Future<void> _operationQueue = Future<void>.value();
+
+  bool _isDisposed = false;
+
   // Subscription untuk eventStream error listener.
   // Wajib di-cancel saat player di-dispose atau di-recreate.
   StreamSubscription<AudioEvent>? _eventSubscription;
@@ -48,6 +53,10 @@ class AudioAlertServiceImpl implements AudioAlertService {
   /// secara asinkron dari platform Android naik ke `PlatformDispatcher.onError`
   /// sebagai fatal crash. Error tetap dicatat di Crashlytics sebagai non-fatal.
   void _initPlayer() {
+    if (_isDisposed) {
+      return;
+    }
+
     _player = AudioPlayer();
     _eventSubscription = _player.eventStream.listen(
       null, // data events tidak diproses
@@ -70,42 +79,123 @@ class AudioAlertServiceImpl implements AudioAlertService {
 
   @override
   Future<void> playAlert() async {
-    try {
-      await _player.play(AssetSource(_alertAssetPath));
-    } catch (e, stackTrace) {
-      // Tangkap PlatformException synchronous dari play().
-      // Laporkan ke Crashlytics sebagai non-fatal.
-      FirebaseCrashlytics.instance.recordError(
-        e,
-        stackTrace,
-        reason:
-            'AudioAlertService: playAlert gagal — MediaPlayer platform error',
-        fatal: false,
-      );
-      // Player masuk error state setelah PlatformException — recreate untuk recovery
-      // agar siklus alarm berikutnya (waktu sholat berikutnya) tetap bisa berbunyi.
-      await _recreatePlayer();
-    }
+    await _enqueueOperation(() async {
+      if (_isDisposed) {
+        return;
+      }
+
+      try {
+        await _playOnce();
+      } catch (e, stackTrace) {
+        await _recordPlayError(
+          e,
+          stackTrace,
+          isRetryAttempt: false,
+          reason:
+              'AudioAlertService: playAlert gagal — MediaPlayer platform error',
+        );
+
+        // Timeout 30 detik adalah known pattern di audioplayers Android.
+        // Lakukan recreate + retry sekali untuk recovery transient failure.
+        if (_isTimeoutPreparationError(e)) {
+          await _recreatePlayer();
+          try {
+            await _playOnce();
+            return;
+          } catch (retryError, retryStackTrace) {
+            await _recordPlayError(
+              retryError,
+              retryStackTrace,
+              isRetryAttempt: true,
+              reason:
+                  'AudioAlertService: retry playAlert gagal setelah timeout preparation',
+            );
+          }
+        } else {
+          // Untuk non-timeout error tetap recreate agar cycle berikutnya sehat.
+          await _recreatePlayer();
+        }
+      }
+    });
   }
 
   @override
   Future<void> stopAlert() async {
-    try {
-      await _player.stop();
-    } catch (e) {
-      debugPrint('AudioAlertService: stopAlert gagal ($e).');
-    }
+    await _enqueueOperation(() async {
+      if (_isDisposed) {
+        return;
+      }
+
+      try {
+        await _player.stop();
+      } catch (e) {
+        debugPrint('AudioAlertService: stopAlert gagal ($e).');
+      }
+    });
   }
 
   @override
   Future<void> dispose() async {
-    await _eventSubscription?.cancel();
-    _eventSubscription = null;
-    try {
-      await _player.dispose();
-    } catch (e) {
-      debugPrint('AudioAlertService: dispose gagal ($e).');
+    if (_isDisposed) {
+      return;
     }
+    _isDisposed = true;
+
+    await _enqueueOperation(() async {
+      await _eventSubscription?.cancel();
+      _eventSubscription = null;
+      try {
+        await _player.dispose();
+      } catch (e) {
+        debugPrint('AudioAlertService: dispose gagal ($e).');
+      }
+    });
+  }
+
+  Future<void> _playOnce() {
+    return _player.play(AssetSource(_alertAssetPath));
+  }
+
+  bool _isTimeoutPreparationError(Object error) {
+    return error is TimeoutException ||
+        error.toString().contains('TimeoutException after 0:00:30.000000');
+  }
+
+  Future<void> _recordPlayError(
+    Object error,
+    StackTrace stackTrace, {
+    required bool isRetryAttempt,
+    required String reason,
+  }) async {
+    FirebaseCrashlytics.instance.setCustomKey(
+      'audio_alert_error_type',
+      error.runtimeType.toString(),
+    );
+    FirebaseCrashlytics.instance.setCustomKey(
+      'audio_alert_retry',
+      isRetryAttempt,
+    );
+    FirebaseCrashlytics.instance.setCustomKey(
+      'audio_alert_timeout_signature',
+      _isTimeoutPreparationError(error),
+    );
+
+    await FirebaseCrashlytics.instance.recordError(
+      error,
+      stackTrace,
+      reason: reason,
+      fatal: false,
+    );
+  }
+
+  Future<void> _enqueueOperation(Future<void> Function() operation) {
+    _operationQueue = _operationQueue.then((_) => operation()).catchError((
+      Object _,
+      StackTrace _,
+    ) {
+      // Jaga queue tetap hidup meskipun ada operasi yang gagal.
+    });
+    return _operationQueue;
   }
 
   /// Cancel subscription lama, dispose player yang rusak, lalu buat instance baru.
@@ -113,6 +203,10 @@ class AudioAlertServiceImpl implements AudioAlertService {
   /// Dipanggil saat [playAlert] gagal dengan PlatformException,
   /// sehingga [AudioPlayer] tidak terjebak dalam error state permanen.
   Future<void> _recreatePlayer() async {
+    if (_isDisposed) {
+      return;
+    }
+
     await _eventSubscription?.cancel();
     _eventSubscription = null;
     try {
