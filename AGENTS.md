@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: March 27, 2026
+**Last Updated**: April 26, 2026
 
 <!-- markdownlint-disable -->
 
@@ -36,34 +36,34 @@ lib/presentation/cubits/
 
 ## Completed Features (Production Ready)
 
-| Feature | Completion Date | Tests | Status |
-|---------|----------------|-------|--------|
-| **Database Infrastructure** (Plan 01) | 2026-02-18 | 6 unit tests ✅ | Production Ready |
-| **Data Layer** (Plan 02) | 2026-02-18 | 16 unit tests ✅ (total: 22) | Production Ready |
-| **Theme System** (Plan 03) | 2026-02-18 | 42 unit tests ✅ (total: 64) | Production Ready |
-| **Prayer Time Logic** (Plan 05) | 2026-02-19 | Unit tests ✅ | Production Ready |
-| **Prayer Time State** (Plan 06) | 2026-02-19 | Cubit tests ✅ | Production Ready |
-| **Display State Logic** (Plan 07) | 2026-02-19 | Unit tests ✅ | Production Ready |
-| **Display State Machine** (Plan 08) | 2026-02-19 | Cubit tests ✅ | Production Ready |
-| **Setup Wizard Logic** (Plan 09) | 2026-02-20 | Cubit tests ✅ | Production Ready |
-| **Setup Wizard UI** (Plan 10) | 2026-02-20 | Widget tests ✅ | Production Ready |
-| **Settings Logic** (Plan 11) | 2026-02-20 | Unit tests ✅ | Production Ready |
-| **Settings UI** (Plan 12) | 2026-02-20 | Widget tests ✅ | Production Ready |
-| **Main Display UI** (Plan 13) | 2026-02-20 | Widget tests ✅ | Production Ready |
-| **Kata Mutiara Islam** (Wisdom Quote) | 2026-03-10 | 14 phases, 257 total tests ✅ | Production Ready |
-| **Mode Hemat Daya Tengah Malam** (Midnight Mode) | 2026-03-16 | 7 phases, 306 total tests ✅ | Production Ready |
-| **Alarm Tanda Waktu** (Pre-Adzan & Pre-Iqomah Alert) | 2026-03-17 | 6 phases, 20 new alarm tests ✅ | Production Ready |
+| Feature                                              | Completion Date | Tests                          | Status           |
+| ---------------------------------------------------- | --------------- | ------------------------------ | ---------------- |
+| **Database Infrastructure** (Plan 01)                | 2026-02-18      | 6 unit tests ✅                 | Production Ready |
+| **Data Layer** (Plan 02)                             | 2026-02-18      | 16 unit tests ✅ (total: 22)    | Production Ready |
+| **Theme System** (Plan 03)                           | 2026-02-18      | 42 unit tests ✅ (total: 64)    | Production Ready |
+| **Prayer Time Logic** (Plan 05)                      | 2026-02-19      | Unit tests ✅                   | Production Ready |
+| **Prayer Time State** (Plan 06)                      | 2026-02-19      | Cubit tests ✅                  | Production Ready |
+| **Display State Logic** (Plan 07)                    | 2026-02-19      | Unit tests ✅                   | Production Ready |
+| **Display State Machine** (Plan 08)                  | 2026-02-19      | Cubit tests ✅                  | Production Ready |
+| **Setup Wizard Logic** (Plan 09)                     | 2026-02-20      | Cubit tests ✅                  | Production Ready |
+| **Setup Wizard UI** (Plan 10)                        | 2026-02-20      | Widget tests ✅                 | Production Ready |
+| **Settings Logic** (Plan 11)                         | 2026-02-20      | Unit tests ✅                   | Production Ready |
+| **Settings UI** (Plan 12)                            | 2026-02-20      | Widget tests ✅                 | Production Ready |
+| **Main Display UI** (Plan 13)                        | 2026-02-20      | Widget tests ✅                 | Production Ready |
+| **Kata Mutiara Islam** (Wisdom Quote)                | 2026-03-10      | 14 phases, 257 total tests ✅   | Production Ready |
+| **Mode Hemat Daya Tengah Malam** (Midnight Mode)     | 2026-03-16      | 7 phases, 306 total tests ✅    | Production Ready |
+| **Alarm Tanda Waktu** (Pre-Adzan & Pre-Iqomah Alert) | 2026-03-17      | 6 phases, 20 new alarm tests ✅ | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
 File yang dibuat/dimodifikasi:
 
-| File | Keterangan |
-|------|------------|
-| `lib/data/datasources/database_helper.dart` | Singleton `DatabaseHelper` — schema DDL, seed, migration, testing hooks |
-| `assets/data/cities.json` | 514 kota/kabupaten, 34 provinsi Indonesia (71.7 KB) |
-| `tools/generate_cities.py` | Script generator dataset kota dari BPS/wilayah-indonesia |
-| `test/data/datasources/database_helper_test.dart` | 6 unit tests dengan `sqflite_common_ffi` in-memory |
+| File                                              | Keterangan                                                              |
+| ------------------------------------------------- | ----------------------------------------------------------------------- |
+| `lib/data/datasources/database_helper.dart`       | Singleton `DatabaseHelper` — schema DDL, seed, migration, testing hooks |
+| `assets/data/cities.json`                         | 514 kota/kabupaten, 34 provinsi Indonesia (71.7 KB)                     |
+| `tools/generate_cities.py`                        | Script generator dataset kota dari BPS/wilayah-indonesia                |
+| `test/data/datasources/database_helper_test.dart` | 6 unit tests dengan `sqflite_common_ffi` in-memory                      |
 
 Dependencies yang ditambahkan:
 
@@ -80,22 +80,22 @@ dev_dependencies:
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/domain/entities/settings.dart` | Immutable `Settings` entity — 27 fields, `Equatable`, `copyWith()` |
-| `lib/domain/entities/city.dart` | Immutable `City` entity — 5 fields, `Equatable` |
-| `lib/domain/repositories/settings_repository.dart` | Abstract `SettingsRepository` interface (zero infra imports) |
-| `lib/domain/repositories/city_repository.dart` | Abstract `CityRepository` interface (zero infra imports) |
-| `lib/data/models/settings_model.dart` | `SettingsModel` — `fromMap`/`toMap`, snake_case ↔ camelCase, int ↔ bool |
-| `lib/data/models/city_model.dart` | `CityModel` — `fromMap`/`toMap` |
-| `lib/data/datasources/settings_local_data_source.dart` | SQLite ops — transactional writes, auto `updated_at` |
-| `lib/data/datasources/city_local_data_source.dart` | SQLite ops — LIKE search dengan input sanitization |
-| `lib/data/repositories/settings_repository_impl.dart` | Concrete impl — SHA-256 PIN hashing via `crypto` |
-| `lib/data/repositories/city_repository_impl.dart` | Concrete impl — pure delegation ke data source |
-| `test/data/models/settings_model_test.dart` | 4 tests: fromMap default/custom, toMap, round-trip |
-| `test/data/models/city_model_test.dart` | 3 tests: fromMap, toMap, round-trip |
-| `test/data/repositories/settings_repository_impl_test.dart` | 5 tests: defaults, update, firstRun, PIN lifecycle |
-| `test/data/repositories/city_repository_impl_test.dart` | 4 tests: provinces, citiesByProvince, search, getById |
+| File                                                        | Keterangan                                                              |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `lib/domain/entities/settings.dart`                         | Immutable `Settings` entity — 27 fields, `Equatable`, `copyWith()`      |
+| `lib/domain/entities/city.dart`                             | Immutable `City` entity — 5 fields, `Equatable`                         |
+| `lib/domain/repositories/settings_repository.dart`          | Abstract `SettingsRepository` interface (zero infra imports)            |
+| `lib/domain/repositories/city_repository.dart`              | Abstract `CityRepository` interface (zero infra imports)                |
+| `lib/data/models/settings_model.dart`                       | `SettingsModel` — `fromMap`/`toMap`, snake_case ↔ camelCase, int ↔ bool |
+| `lib/data/models/city_model.dart`                           | `CityModel` — `fromMap`/`toMap`                                         |
+| `lib/data/datasources/settings_local_data_source.dart`      | SQLite ops — transactional writes, auto `updated_at`                    |
+| `lib/data/datasources/city_local_data_source.dart`          | SQLite ops — LIKE search dengan input sanitization                      |
+| `lib/data/repositories/settings_repository_impl.dart`       | Concrete impl — SHA-256 PIN hashing via `crypto`                        |
+| `lib/data/repositories/city_repository_impl.dart`           | Concrete impl — pure delegation ke data source                          |
+| `test/data/models/settings_model_test.dart`                 | 4 tests: fromMap default/custom, toMap, round-trip                      |
+| `test/data/models/city_model_test.dart`                     | 3 tests: fromMap, toMap, round-trip                                     |
+| `test/data/repositories/settings_repository_impl_test.dart` | 5 tests: defaults, update, firstRun, PIN lifecycle                      |
+| `test/data/repositories/city_repository_impl_test.dart`     | 4 tests: provinces, citiesByProvince, search, getById                   |
 
 Dependencies yang ditambahkan:
 
@@ -109,16 +109,16 @@ dependencies:
 
 File yang dibuat/dimodifikasi:
 
-| File | Keterangan |
-|------|------------|
-| `lib/core/theme/islamic_colors.dart` | 21 color constants — Primary, Accent, Background, Text, Glass, State, Prayer |
-| `lib/core/theme/islamic_typography.dart` | 7 text styles — Poppins font, `.sp` responsive, optional overrides |
-| `lib/core/theme/islamic_theme.dart` | Material3 `ThemeData` — ColorScheme, TextTheme, AppBar, Card |
-| `lib/core/theme/tv_safe_area.dart` | `TVSafeArea` widget — 5% margin, `ignoreSafeArea` bypass |
-| `lib/main.dart` | `ScreenUtilInit` (1920×1080), landscape lock, `IslamicTheme.darkTheme()` |
-| `test/core/theme/islamic_colors_test.dart` | 15 tests: hex values, opacity validation, prayer state aliases |
-| `test/core/theme/islamic_typography_test.dart` | 10 tests: all 7 methods + optional parameter overrides |
-| `test/core/theme/islamic_theme_test.dart` | 17 tests: Material3, ColorScheme, TextTheme, AppBar, Card |
+| File                                           | Keterangan                                                                   |
+| ---------------------------------------------- | ---------------------------------------------------------------------------- |
+| `lib/core/theme/islamic_colors.dart`           | 21 color constants — Primary, Accent, Background, Text, Glass, State, Prayer |
+| `lib/core/theme/islamic_typography.dart`       | 7 text styles — Poppins font, `.sp` responsive, optional overrides           |
+| `lib/core/theme/islamic_theme.dart`            | Material3 `ThemeData` — ColorScheme, TextTheme, AppBar, Card                 |
+| `lib/core/theme/tv_safe_area.dart`             | `TVSafeArea` widget — 5% margin, `ignoreSafeArea` bypass                     |
+| `lib/main.dart`                                | `ScreenUtilInit` (1920×1080), landscape lock, `IslamicTheme.darkTheme()`     |
+| `test/core/theme/islamic_colors_test.dart`     | 15 tests: hex values, opacity validation, prayer state aliases               |
+| `test/core/theme/islamic_typography_test.dart` | 10 tests: all 7 methods + optional parameter overrides                       |
+| `test/core/theme/islamic_theme_test.dart`      | 17 tests: Material3, ColorScheme, TextTheme, AppBar, Card                    |
 
 Dependencies yang ditambahkan:
 
@@ -133,11 +133,11 @@ dependencies:
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/domain/usecases/calculate_prayer_times_use_case.dart` | Core calculation logic |
-| `lib/domain/entities/prayer_time.dart` | Entity definition |
-| `test/domain/usecases/calculate_prayer_times_use_case_test.dart` | Unit tests |
+| File                                                             | Keterangan             |
+| ---------------------------------------------------------------- | ---------------------- |
+| `lib/domain/usecases/calculate_prayer_times_use_case.dart`       | Core calculation logic |
+| `lib/domain/entities/prayer_time.dart`                           | Entity definition      |
+| `test/domain/usecases/calculate_prayer_times_use_case_test.dart` | Unit tests             |
 
 Dependencies: `adhan`, `hijri`, `intl`
 
@@ -145,11 +145,11 @@ Dependencies: `adhan`, `hijri`, `intl`
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/presentation/cubits/prayer_time/prayer_time_cubit.dart` | State management |
-| `lib/presentation/cubits/prayer_time/prayer_time_state.dart` | State definition |
-| `test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart` | Cubit tests |
+| File                                                               | Keterangan       |
+| ------------------------------------------------------------------ | ---------------- |
+| `lib/presentation/cubits/prayer_time/prayer_time_cubit.dart`       | State management |
+| `lib/presentation/cubits/prayer_time/prayer_time_state.dart`       | State definition |
+| `test/presentation/cubits/prayer_time/prayer_time_cubit_test.dart` | Cubit tests      |
 
 Dependencies: `flutter_bloc`, `bloc_test`, `mocktail`
 
@@ -157,46 +157,46 @@ Dependencies: `flutter_bloc`, `bloc_test`, `mocktail`
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/domain/usecases/evaluate_display_state_use_case.dart` | Core state transition logic |
-| `lib/domain/entities/display_state.dart` | Entity definition |
-| `test/domain/usecases/evaluate_display_state_use_case_test.dart` | Unit tests |
+| File                                                             | Keterangan                  |
+| ---------------------------------------------------------------- | --------------------------- |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart`       | Core state transition logic |
+| `lib/domain/entities/display_state.dart`                         | Entity definition           |
+| `test/domain/usecases/evaluate_display_state_use_case_test.dart` | Unit tests                  |
 
 ### Plan 08 — Display State Machine (COMPLETED)
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/presentation/cubits/display_state/display_state_cubit.dart` | State machine implementation |
-| `lib/presentation/cubits/display_state/display_state.dart` | State definition |
-| `test/presentation/cubits/display_state/display_state_cubit_test.dart` | Cubit tests |
+| File                                                                   | Keterangan                   |
+| ---------------------------------------------------------------------- | ---------------------------- |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart`       | State machine implementation |
+| `lib/presentation/cubits/display_state/display_state.dart`             | State definition             |
+| `test/presentation/cubits/display_state/display_state_cubit_test.dart` | Cubit tests                  |
 
 ### Plan 09 — Setup Wizard Logic (COMPLETED)
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/presentation/cubits/setup_wizard/setup_wizard_cubit.dart` | Setup flow logic |
-| `lib/presentation/cubits/setup_wizard/setup_wizard_state.dart` | Wizard states |
-| `test/presentation/cubits/setup_wizard/setup_wizard_cubit_test.dart` | Cubit tests |
+| File                                                                 | Keterangan       |
+| -------------------------------------------------------------------- | ---------------- |
+| `lib/presentation/cubits/setup_wizard/setup_wizard_cubit.dart`       | Setup flow logic |
+| `lib/presentation/cubits/setup_wizard/setup_wizard_state.dart`       | Wizard states    |
+| `test/presentation/cubits/setup_wizard/setup_wizard_cubit_test.dart` | Cubit tests      |
 
 ### Plan 10 — Setup Wizard UI (COMPLETED)
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/presentation/pages/setup_wizard/setup_wizard_page.dart` | Root container, step navigation, step indicator |
-| `lib/presentation/pages/setup_wizard/steps/welcome_step.dart` | Step 1: Branding & Welcome screen |
-| `lib/presentation/pages/setup_wizard/steps/identity_step.dart` | Step 2: Input Nama & Alamat Masjid |
-| `lib/presentation/pages/setup_wizard/steps/location_step.dart` | Step 3: Cascading Province → City Picker |
-| `lib/presentation/pages/setup_wizard/steps/preview_step.dart` | Step 4: Summary data & prayer time preview |
-| `lib/presentation/widgets/step_indicator_widget.dart` | Visual progress indicator (1-4) |
-| `lib/presentation/pages/splash_page.dart` | Startup logic: check `isFirstRun` → route to Wizard/Main |
-| `test/presentation/pages/setup_wizard/setup_wizard_page_test.dart` | Comprehensive widget tests for all steps |
+| File                                                               | Keterangan                                               |
+| ------------------------------------------------------------------ | -------------------------------------------------------- |
+| `lib/presentation/pages/setup_wizard/setup_wizard_page.dart`       | Root container, step navigation, step indicator          |
+| `lib/presentation/pages/setup_wizard/steps/welcome_step.dart`      | Step 1: Branding & Welcome screen                        |
+| `lib/presentation/pages/setup_wizard/steps/identity_step.dart`     | Step 2: Input Nama & Alamat Masjid                       |
+| `lib/presentation/pages/setup_wizard/steps/location_step.dart`     | Step 3: Cascading Province → City Picker                 |
+| `lib/presentation/pages/setup_wizard/steps/preview_step.dart`      | Step 4: Summary data & prayer time preview               |
+| `lib/presentation/widgets/step_indicator_widget.dart`              | Visual progress indicator (1-4)                          |
+| `lib/presentation/pages/splash_page.dart`                          | Startup logic: check `isFirstRun` → route to Wizard/Main |
+| `test/presentation/pages/setup_wizard/setup_wizard_page_test.dart` | Comprehensive widget tests for all steps                 |
 
 Dependencies yang digunakan:
 - `flutter_bloc`: State management
@@ -207,11 +207,11 @@ Dependencies yang digunakan:
 
 File yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/presentation/cubits/settings/settings_cubit.dart` | `SettingsCubit` implementasi auto-save & PIN logic |
-| `lib/presentation/cubits/settings/settings_state.dart` | State definitions (Initial, Loading, Loaded, Error) |
-| `lib/presentation/cubits/settings/settings.dart` | Barrel export file |
+| File                                                         | Keterangan                                                       |
+| ------------------------------------------------------------ | ---------------------------------------------------------------- |
+| `lib/presentation/cubits/settings/settings_cubit.dart`       | `SettingsCubit` implementasi auto-save & PIN logic               |
+| `lib/presentation/cubits/settings/settings_state.dart`       | State definitions (Initial, Loading, Loaded, Error)              |
+| `lib/presentation/cubits/settings/settings.dart`             | Barrel export file                                               |
 | `test/presentation/cubits/settings/settings_cubit_test.dart` | Comprehensive unit tests (auto-save debounce, PIN, update logic) |
 
 Dependencies yang digunakan:
@@ -229,32 +229,32 @@ dan durasi countdown 10–120 detik). Menggunakan `audioplayers` dengan abstract
 
 File baru yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/domain/services/audio_alert_service.dart` | Abstract interface `AudioAlertService` (playAlert, stopAlert, dispose) |
-| `lib/data/services/audio_alert_service_impl.dart` | `AudioAlertServiceImpl` — audioplayers `AssetSource`, singleton-safe |
-| `lib/presentation/pages/settings/sections/alert_settings_section.dart` | Section Settings UI — 2 toggle + 2 DPadStepper countdown seconds |
-| `test/presentation/pages/settings/sections/alert_settings_section_test.dart` | 6 widget tests: toggle ON/OFF, 2 stepper visible, callback wiring |
+| File                                                                         | Keterangan                                                             |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `lib/domain/services/audio_alert_service.dart`                               | Abstract interface `AudioAlertService` (playAlert, stopAlert, dispose) |
+| `lib/data/services/audio_alert_service_impl.dart`                            | `AudioAlertServiceImpl` — audioplayers `AssetSource`, singleton-safe   |
+| `lib/presentation/pages/settings/sections/alert_settings_section.dart`       | Section Settings UI — 2 toggle + 2 DPadStepper countdown seconds       |
+| `test/presentation/pages/settings/sections/alert_settings_section_test.dart` | 6 widget tests: toggle ON/OFF, 2 stepper visible, callback wiring      |
 
 File yang dimodifikasi:
 
-| File | Keterangan |
-|------|------------|
-| `lib/data/datasources/database_helper.dart` | Schema v9, migration DDL 4 kolom alarm baru |
-| `lib/data/models/settings_model.dart` | `fromMap`/`toMap` untuk 4 field alarm (snake_case) |
-| `lib/domain/entities/settings.dart` | 4 field baru: `isPreAdzanAlertEnabled`, `isPreIqomahAlertEnabled`, `preAdzanAlertSeconds`(10), `preIqomahAlertSeconds`(10) |
-| `lib/domain/entities/transition_config.dart` | 4 field alarm + `fromSettings()` mapping |
-| `lib/presentation/cubits/settings/settings_cubit.dart` | 4 method update: `updatePreAdzanAlertEnabled`, `updatePreIqomahAlertEnabled`, `updatePreAdzanAlertSeconds`, `updatePreIqomahAlertSeconds` |
-| `lib/presentation/cubits/display_state/display_state_cubit.dart` | `_audioAlertService`, `_preAdzanAlertFired`, `_preIqomahAlertFired`; `_checkAlertTrigger()`, `_checkAlertStop()` di `_tick()` |
-| `lib/presentation/pages/settings/settings_menu_page.dart` | Tambah `AlertSettingsSection` sebagai kategori ke-6 |
-| `lib/main.dart` | `AudioAlertServiceImpl` di-instantiate dan di-inject ke `DisplayStateCubit` |
+| File                                                             | Keterangan                                                                                                                                |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `lib/data/datasources/database_helper.dart`                      | Schema v9, migration DDL 4 kolom alarm baru                                                                                               |
+| `lib/data/models/settings_model.dart`                            | `fromMap`/`toMap` untuk 4 field alarm (snake_case)                                                                                        |
+| `lib/domain/entities/settings.dart`                              | 4 field baru: `isPreAdzanAlertEnabled`, `isPreIqomahAlertEnabled`, `preAdzanAlertSeconds`(10), `preIqomahAlertSeconds`(10)                |
+| `lib/domain/entities/transition_config.dart`                     | 4 field alarm + `fromSettings()` mapping                                                                                                  |
+| `lib/presentation/cubits/settings/settings_cubit.dart`           | 4 method update: `updatePreAdzanAlertEnabled`, `updatePreIqomahAlertEnabled`, `updatePreAdzanAlertSeconds`, `updatePreIqomahAlertSeconds` |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart` | `_audioAlertService`, `_preAdzanAlertFired`, `_preIqomahAlertFired`; `_checkAlertTrigger()`, `_checkAlertStop()` di `_tick()`             |
+| `lib/presentation/pages/settings/settings_menu_page.dart`        | Tambah `AlertSettingsSection` sebagai kategori ke-6                                                                                       |
+| `lib/main.dart`                                                  | `AudioAlertServiceImpl` di-instantiate dan di-inject ke `DisplayStateCubit`                                                               |
 
 Test yang dimodifikasi:
 
-| File | Keterangan |
-|------|------------|
-| `test/data/models/settings_model_test.dart` | +4 tests: serialisasi 4 field alarm baru |
-| `test/presentation/cubits/settings/settings_cubit_test.dart` | +4 tests: update enable/disable + seconds alarm |
+| File                                                                   | Keterangan                                                    |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `test/data/models/settings_model_test.dart`                            | +4 tests: serialisasi 4 field alarm baru                      |
+| `test/presentation/cubits/settings/settings_cubit_test.dart`           | +4 tests: update enable/disable + seconds alarm               |
 | `test/presentation/cubits/display_state/display_state_cubit_test.dart` | +6 tests: trigger/stop Pre-Adzan & Pre-Iqomah alert lifecycle |
 
 Dependencies yang ditambahkan:
@@ -277,28 +277,28 @@ Dilengkapi anti burn-in drift animation dan konfigurasi window waktu cross-midni
 
 File baru yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `lib/presentation/pages/main_display/layouts/midnight_standby_layout.dart` | Layout screensaver — background hitam, jam digital hijau-redup, info Subuh, anti burn-in drift |
-| `lib/presentation/pages/settings/sections/midnight_mode_section.dart` | Section Settings UI — toggle, stepper jam/menit mulai & berakhir, info bar |
-| `test/presentation/pages/main_display/layouts/midnight_standby_layout_test.dart` | 4 widget tests: layout hitam, jam digital, info Subuh, AnimationController |
-| `test/presentation/pages/main_display_page_test.dart` | 2 integration tests: MidnightStandbyLayout rendered, key OK → Settings |
-| `test/presentation/pages/settings/sections/midnight_mode_section_test.dart` | 6 widget tests: toggle ON/OFF, 4 stepper visible, info bar format, ExcludeFocus |
+| File                                                                             | Keterangan                                                                                     |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `lib/presentation/pages/main_display/layouts/midnight_standby_layout.dart`       | Layout screensaver — background hitam, jam digital hijau-redup, info Subuh, anti burn-in drift |
+| `lib/presentation/pages/settings/sections/midnight_mode_section.dart`            | Section Settings UI — toggle, stepper jam/menit mulai & berakhir, info bar                     |
+| `test/presentation/pages/main_display/layouts/midnight_standby_layout_test.dart` | 4 widget tests: layout hitam, jam digital, info Subuh, AnimationController                     |
+| `test/presentation/pages/main_display_page_test.dart`                            | 2 integration tests: MidnightStandbyLayout rendered, key OK → Settings                         |
+| `test/presentation/pages/settings/sections/midnight_mode_section_test.dart`      | 6 widget tests: toggle ON/OFF, 4 stepper visible, info bar format, ExcludeFocus                |
 
 File yang dimodifikasi:
 
-| File | Keterangan |
-|------|------------|
-| `lib/data/datasources/database_helper.dart` | Schema v8, migration DDL 5 kolom midnight baru |
-| `lib/data/models/settings_model.dart` | `fromMap`/`toMap` untuk 5 field midnight |
-| `lib/domain/entities/settings.dart` | 5 field baru (`isMidnightModeEnabled`, `midnightStart/EndHour/Minute`) |
-| `lib/domain/entities/transition_config.dart` | 5 field midnight + `fromSettings()` mapping |
-| `lib/domain/entities/display_state_type.dart` | Tambah `midnightStandby` |
-| `lib/domain/entities/display_state.dart` | Tambah `MidnightStandbyState` (currentTime, subuhTime, subuhLabel) |
-| `lib/domain/usecases/evaluate_display_state_use_case.dart` | `_evaluateMidnightWindow()` + cross-midnight comparison (CON-002) |
-| `lib/presentation/cubits/settings/settings_cubit.dart` | 5 method update midnight (updateMidnightModeEnabled, Start/EndHour/Minute) |
-| `lib/presentation/pages/main_display_page.dart` | Case `midnightStandby` di switch + import layout |
-| `lib/presentation/pages/settings/settings_menu_page.dart` | Tambah `MidnightModeSection` di categories + import |
+| File                                                       | Keterangan                                                                 |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `lib/data/datasources/database_helper.dart`                | Schema v8, migration DDL 5 kolom midnight baru                             |
+| `lib/data/models/settings_model.dart`                      | `fromMap`/`toMap` untuk 5 field midnight                                   |
+| `lib/domain/entities/settings.dart`                        | 5 field baru (`isMidnightModeEnabled`, `midnightStart/EndHour/Minute`)     |
+| `lib/domain/entities/transition_config.dart`               | 5 field midnight + `fromSettings()` mapping                                |
+| `lib/domain/entities/display_state_type.dart`              | Tambah `midnightStandby`                                                   |
+| `lib/domain/entities/display_state.dart`                   | Tambah `MidnightStandbyState` (currentTime, subuhTime, subuhLabel)         |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart` | `_evaluateMidnightWindow()` + cross-midnight comparison (CON-002)          |
+| `lib/presentation/cubits/settings/settings_cubit.dart`     | 5 method update midnight (updateMidnightModeEnabled, Start/EndHour/Minute) |
+| `lib/presentation/pages/main_display_page.dart`            | Case `midnightStandby` di switch + import layout                           |
+| `lib/presentation/pages/settings/settings_menu_page.dart`  | Tambah `MidnightModeSection` di categories + import                        |
 
 ### Kata Mutiara Islam / Wisdom Quote (COMPLETED — 2026-03-10)
 
@@ -307,33 +307,33 @@ sebagai state ke-6 pada display state machine. 14 phase implementasi, selesai de
 
 File baru yang dibuat:
 
-| File | Keterangan |
-|------|------------|
-| `assets/data/wisdom_quotes.json` | Katalog 11 item hardcoded (5 Quran + 6 Hadits) |
-| `lib/domain/entities/wisdom_quote.dart` | Immutable entity — `id`, `type`, `label`, `translationText`, `reference` |
-| `lib/domain/repositories/wisdom_quote_repository.dart` | Abstract interface |
-| `lib/data/models/wisdom_quote_model.dart` | `fromJson()`, `toEntity()` |
-| `lib/data/datasources/wisdom_quote_local_data_source.dart` | Loader JSON asset via `rootBundle` |
-| `lib/data/repositories/wisdom_quote_repository_impl.dart` | Implementasi konkret |
-| `lib/presentation/pages/main_display/layouts/wisdom_quote_layout.dart` | Layout full-screen — badge, tranSlasi, referensi, progress bar |
-| `lib/presentation/pages/wisdom_preview_page.dart` | Halaman pratinjau item terpilih |
-| `lib/presentation/pages/settings/sections/wisdom_quote_section.dart` | Section Settings UI — toggle, checklist, interval, durasi, waktu |
-| `lib/presentation/widgets/checklist_item_widget.dart` | Widget checklist reusable dengan badge tipe |
+| File                                                                   | Keterangan                                                               |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `assets/data/wisdom_quotes.json`                                       | Katalog 11 item hardcoded (5 Quran + 6 Hadits)                           |
+| `lib/domain/entities/wisdom_quote.dart`                                | Immutable entity — `id`, `type`, `label`, `translationText`, `reference` |
+| `lib/domain/repositories/wisdom_quote_repository.dart`                 | Abstract interface                                                       |
+| `lib/data/models/wisdom_quote_model.dart`                              | `fromJson()`, `toEntity()`                                               |
+| `lib/data/datasources/wisdom_quote_local_data_source.dart`             | Loader JSON asset via `rootBundle`                                       |
+| `lib/data/repositories/wisdom_quote_repository_impl.dart`              | Implementasi konkret                                                     |
+| `lib/presentation/pages/main_display/layouts/wisdom_quote_layout.dart` | Layout full-screen — badge, tranSlasi, referensi, progress bar           |
+| `lib/presentation/pages/wisdom_preview_page.dart`                      | Halaman pratinjau item terpilih                                          |
+| `lib/presentation/pages/settings/sections/wisdom_quote_section.dart`   | Section Settings UI — toggle, checklist, interval, durasi, waktu         |
+| `lib/presentation/widgets/checklist_item_widget.dart`                  | Widget checklist reusable dengan badge tipe                              |
 
 File yang dimodifikasi:
 
-| File | Keterangan |
-|------|------------|
-| `lib/data/datasources/database_helper.dart` | Schema v7, migration DDL 9 kolom baru |
-| `lib/data/models/settings_model.dart` | `fromMap`/`toMap` untuk 9 field wisdom |
-| `lib/domain/entities/settings.dart` | 9 field baru (`isWisdomEnabled`, `wisdomIntervalMinutes`, dst.) |
-| `lib/domain/entities/transition_config.dart` | 7 field wisdom + `fromSettings()` mapping |
-| `lib/domain/entities/display_state_type.dart` | Tambah `wisdomQuote` |
-| `lib/domain/entities/display_state.dart` | Tambah `WisdomQuoteState` |
-| `lib/domain/usecases/evaluate_display_state_use_case.dart` | Parameter `activeQuotes` + wisdom window logic |
-| `lib/presentation/cubits/display_state/display_state_cubit.dart` | Load quotes, inject `activeQuotes` ke `evaluate()` |
-| `lib/presentation/pages/settings/settings_menu_page.dart` | Tambah `WisdomQuoteSection` di categories |
-| `lib/main.dart` | Instansiasi `WisdomQuoteRepositoryImpl`, `RepositoryProvider` |
+| File                                                             | Keterangan                                                      |
+| ---------------------------------------------------------------- | --------------------------------------------------------------- |
+| `lib/data/datasources/database_helper.dart`                      | Schema v7, migration DDL 9 kolom baru                           |
+| `lib/data/models/settings_model.dart`                            | `fromMap`/`toMap` untuk 9 field wisdom                          |
+| `lib/domain/entities/settings.dart`                              | 9 field baru (`isWisdomEnabled`, `wisdomIntervalMinutes`, dst.) |
+| `lib/domain/entities/transition_config.dart`                     | 7 field wisdom + `fromSettings()` mapping                       |
+| `lib/domain/entities/display_state_type.dart`                    | Tambah `wisdomQuote`                                            |
+| `lib/domain/entities/display_state.dart`                         | Tambah `WisdomQuoteState`                                       |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart`       | Parameter `activeQuotes` + wisdom window logic                  |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart` | Load quotes, inject `activeQuotes` ke `evaluate()`              |
+| `lib/presentation/pages/settings/settings_menu_page.dart`        | Tambah `WisdomQuoteSection` di categories                       |
+| `lib/main.dart`                                                  | Instansiasi `WisdomQuoteRepositoryImpl`, `RepositoryProvider`   |
 
 ## Local Workflow
 
@@ -365,27 +365,27 @@ Untuk detailed implementation guidance, lihat dokumentasi specialized kami:
 
 ### Architecture Patterns
 
-| Pattern | Description | When to Use |
-|---------|-------------|-------------|
-| **State Machine Pattern** | 7-state display transition (STANDBY → PRE-ADZAN → ADZAN → IQOMAH → SHOLAT → KATA MUTIARA → MIDNIGHT STANDBY) | Core display logic |
-| **Offline-First Data** | SQLite sebagai single source of truth | Semua data persistence |
-| **Prayer Time Calculation** | Astronomical calculation dengan adhan-dart + manual correction | Jadwal sholat |
-| **Timer Management** | Countdown timers dengan lifecycle management | Adzan, Iqomah countdowns |
-| **Setup Wizard Pattern** | Multi-step first-run configuration | Initial setup |
-| **Cubit Pattern** | Simple state management tanpa events | Semua features |
+| Pattern                     | Description                                                                                                  | When to Use              |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| **State Machine Pattern**   | 7-state display transition (STANDBY → PRE-ADZAN → ADZAN → IQOMAH → SHOLAT → KATA MUTIARA → MIDNIGHT STANDBY) | Core display logic       |
+| **Offline-First Data**      | SQLite sebagai single source of truth                                                                        | Semua data persistence   |
+| **Prayer Time Calculation** | Astronomical calculation dengan adhan-dart + manual correction                                               | Jadwal sholat            |
+| **Timer Management**        | Countdown timers dengan lifecycle management                                                                 | Adzan, Iqomah countdowns |
+| **Setup Wizard Pattern**    | Multi-step first-run configuration                                                                           | Initial setup            |
+| **Cubit Pattern**           | Simple state management tanpa events                                                                         | Semua features           |
 
 ### UI Patterns
 
-| Pattern | Description | When to Use |
-|---------|-------------|-------------|
-| **D-Pad Navigation** | Focus traversal dengan remote control | Semua interactive UI |
-| **Landscape 16:9 Layout** | Fixed orientation untuk TV display | Semua pages |
-| **State-Based Display** | UI berubah otomatis berdasarkan state machine | Main display screen |
-| **Countdown Timer Widget** | Large countdown dengan auto-refresh | Pre-Adzan, Iqomah states |
-| **Marquee Running Text** | Scrolling text di footer | Information display |
-| **Glassmorphism Card** | Semi-transparent cards dengan blur effect | Prayer time cards |
-| **Screen Burn-in Prevention** | Auto-dimming dan blank screen saat sholat | SHOLAT state |
-| **ScreenUtil Responsive** | Proportional scaling via `flutter_screenutil` (design size 1920×1080) | Semua sizing dan font |
+| Pattern                              | Description                                                                                                                                                                                                                | When to Use                         |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **D-Pad Navigation**                 | Focus traversal dengan remote control                                                                                                                                                                                      | Semua interactive UI                |
+| **Landscape 16:9 Layout**            | Fixed orientation untuk TV display                                                                                                                                                                                         | Semua pages                         |
+| **State-Based Display**              | UI berubah otomatis berdasarkan state machine                                                                                                                                                                              | Main display screen                 |
+| **Countdown Timer Widget**           | Large countdown dengan auto-refresh                                                                                                                                                                                        | Pre-Adzan, Iqomah states            |
+| **Marquee Running Text**             | Scrolling text di footer                                                                                                                                                                                                   | Information display                 |
+| **Glassmorphism Card**               | Semi-transparent cards dengan blur effect                                                                                                                                                                                  | Prayer time cards                   |
+| **Screen Burn-in Prevention**        | Auto-dimming dan blank screen saat sholat                                                                                                                                                                                  | SHOLAT state                        |
+| **ScreenUtil Responsive**            | Proportional scaling via `flutter_screenutil` (design size 1920×1080)                                                                                                                                                      | Semua sizing dan font               |
 | **DPadStepper Vertical-Only Layout** | `DPadStepper` mengonsumsi ArrowLeft/Right untuk decrement/increment. **JANGAN** tempatkan dua `DPadStepper` dalam `Row` — fokus tidak bisa berpindah horizontal. Günakan `Column` agar ArrowDown/Up bekerja antar-stepper. | Semua section dengan pair Jam+Menit |
 
 ## Style Notes
@@ -898,6 +898,64 @@ RepaintBoundary(
 **Real Case**: `RunningTextWidget` di `StandbyLayout` — glassmorphism background dengan
 `BackdropFilter` + `Marquee` → severe GPU jank di Android TV low-end (Android 11).
 
+### 9. Android Screen Timeout / Ambient Mode — Layar Mati Setelah Idle
+
+**Issue**: Layar perangkat menjadi hitam setelah sekitar 10 menit meskipun aplikasi masih aktif
+di layar utama. User sering mengira app berpindah ke mode standby internal, padahal app masih
+berjalan normal di foreground.
+
+**Root Cause**: `Activity` Android tidak memasang `FLAG_KEEP_SCREEN_ON`, sehingga sistem tetap
+menerapkan screen timeout biasa. Pada Android TV ini dapat terlihat sebagai Ambient Mode; pada
+HP/tablet terlihat sebagai layar mati karena timeout layar. Ini **bukan** transisi ke
+`SholatState` atau `MidnightStandbyState`.
+
+**Problem**:
+```kotlin
+// ❌ WRONG - Activity tidak menahan layar tetap menyala
+package gulajava.mini.miqotul_khoir_tv
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()
+```
+
+**Solution**:
+```kotlin
+// ✅ CORRECT - Pasang FLAG_KEEP_SCREEN_ON di foreground activity
+package gulajava.mini.miqotul_khoir_tv
+
+import android.os.Bundle
+import android.view.WindowManager
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity() {
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+   }
+}
+```
+
+**Why This Works**:
+- Android tidak lagi mematikan layar karena idle selama activity tetap di foreground
+- Perilaku ini adalah solusi resmi Android untuk app display / kiosk / TV foreground
+- Saat app masuk background, sistem kembali boleh menerapkan timeout layar normal tanpa perlu
+  `clearFlags()` manual
+
+**Prevention**:
+1. Untuk semua app display Android TV / kiosk, audit `MainActivity` lebih dulu sebelum
+  mendiagnosis state machine Flutter
+2. Jika keluhan user berbunyi "sekitar 10 menit layar mati", prioritaskan diagnosis screen timeout
+  sistem, bukan bug `SholatState`
+3. Bedakan gejala ini dari layar hitam internal app: `SholatState` dan `MidnightStandbyState`
+  tetap membuat layar perangkat **menyala**, hanya kontennya yang memang hitam
+4. Uji di device nyata dengan screen timeout singkat (misal 30 detik atau 1 menit) untuk
+  membuktikan fix
+
+**Real Case**: Review Google Play melaporkan aplikasi "kembali ke standby layar hitam" setelah
+sekitar 10 menit pada Android TV, tablet, dan HP. Root cause terkonfirmasi sebagai screen timeout
+sistem, bukan logika display state internal.
+
 ## Flutter Architecture Guidelines
 
 - Follow Clean Architecture principles dengan clear layer separation
@@ -1061,7 +1119,7 @@ Core security dan data integrity practices:
 
 - **Minimum API Level**: 24 (Android 7.0)
 - **Target API Level**: Latest stable
-- **Required Features**: LEANBACK, TV banner icon
+- **TV Support**: LEANBACK launcher + TV banner icon
 - **Orientation**: Locked to Landscape
 - **Navigation**: D-Pad/Remote control only (no touch)
 - **Launcher**: Configured as TV launcher atau boot on startup
@@ -1069,13 +1127,25 @@ Core security dan data integrity practices:
 ### Manifest Configuration
 
 Ensure `AndroidManifest.xml` includes:
-- `<uses-feature android:name="android.software.leanback" android:required="true" />`
+- `<uses-feature android:name="android.software.leanback" android:required="false" />` jika APK juga mendukung HP/tablet,
+  atau `true` bila distribusi benar-benar TV-only
 - `<uses-feature android:name="android.hardware.touchscreen" android:required="false" />`
 - `screenOrientation="landscape"` for all activities
+- `MAIN` + `LAUNCHER` intent filter untuk instalasi non-TV, dan `MAIN` + `LEANBACK_LAUNCHER`
+  untuk Android TV jika produk memang dibagikan ke keduanya
+
+### Screen Timeout / Ambient Mode
+
+- Untuk aplikasi display Android TV, `MainActivity` harus memasang
+  `WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON` agar sistem tidak mematikan layar setelah idle.
+- Jika gejala user berbunyi "sekitar 10 menit layar mati" atau "kembali ke standby hitam" saat
+  app masih di layar utama, prioritaskan diagnosis screen timeout sistem / Ambient Mode sebelum
+  menyalahkan state machine Flutter.
+- Lihat juga pitfall #9 di bagian `Common Pitfalls & Solutions` untuk root cause dan contoh fix.
 
 ---
 
-**Last Updated**: March 27, 2026
+**Last Updated**: April 26, 2026
 **Version**: 2.1.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV

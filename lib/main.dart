@@ -72,15 +72,6 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await FirebaseAnalytics.instance.logAppOpen(
-    callOptions: AnalyticsCallOptions(global: true),
-    parameters: {
-      'platform': Platform.operatingSystem,
-      'version': '1.0.0',
-      'build': 'MiqotulKhoirTV-001',
-    },
-  );
-
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
@@ -91,6 +82,16 @@ void main() async {
   };
 
   runApp(const MiqotulKhoirApp());
+
+  // logAppOpen dipanggil SETELAH frame pertama dirender (non-blocking).
+  // Mencegah ANR "No focused window" akibat analytics call memblokir startup.
+  // Parameter 'version' dan 'build' dihapus — Firebase Analytics sudah
+  // mencatat app_version otomatis dari versionName di pubspec.yaml.
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    FirebaseAnalytics.instance.logAppOpen(
+      parameters: {'platform': Platform.operatingSystem},
+    );
+  });
 }
 
 /// Root widget aplikasi.
