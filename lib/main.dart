@@ -17,14 +17,19 @@ import 'core/theme/islamic_theme.dart';
 import 'data/datasources/city_local_data_source.dart';
 import 'data/datasources/database_helper.dart';
 import 'data/datasources/settings_local_data_source.dart';
+import 'data/datasources/slideshow_image_local_data_source.dart';
 import 'data/datasources/wisdom_quote_local_data_source.dart';
 import 'data/repositories/city_repository_impl.dart';
 import 'data/repositories/settings_repository_impl.dart';
+import 'data/repositories/slideshow_image_repository_impl.dart';
 import 'data/repositories/wisdom_quote_repository_impl.dart';
 import 'data/services/audio_alert_service_impl.dart';
+import 'data/services/slideshow_file_storage_service_impl.dart';
 import 'domain/repositories/city_repository.dart';
 import 'domain/repositories/settings_repository.dart';
+import 'domain/repositories/slideshow_image_repository.dart';
 import 'domain/repositories/wisdom_quote_repository.dart';
+import 'domain/services/slideshow_file_storage_service.dart';
 import 'domain/usecases/calculate_prayer_times_use_case.dart';
 import 'domain/usecases/evaluate_display_state_use_case.dart';
 import 'presentation/cubits/display_state/display_state_cubit.dart';
@@ -116,6 +121,13 @@ class MiqotulKhoirApp extends StatelessWidget {
     final wisdomDataSource = WisdomQuoteLocalDataSource();
     final wisdomQuoteRepository = WisdomQuoteRepositoryImpl(wisdomDataSource);
 
+    // TASK-044: Instansiasi SlideshowImageRepository dan SlideshowFileStorageService
+    final slideshowDataSource = SlideshowImageLocalDataSource(dbHelper);
+    final slideshowImageRepository = SlideshowImageRepositoryImpl(
+      slideshowDataSource,
+    );
+    final slideshowFileStorageService = SlideshowFileStorageServiceImpl();
+
     // TASK-030: Wrap MaterialApp dengan ScreenUtilInit
     return ScreenUtilInit(
       // Design baseline: 1920×1080 (REQ-002)
@@ -135,6 +147,13 @@ class MiqotulKhoirApp extends StatelessWidget {
             RepositoryProvider<WisdomQuoteRepository>.value(
               value: wisdomQuoteRepository,
             ),
+            // TASK-044: Provide SlideshowImageRepository dan SlideshowFileStorageService
+            RepositoryProvider<SlideshowImageRepository>.value(
+              value: slideshowImageRepository,
+            ),
+            RepositoryProvider<SlideshowFileStorageService>.value(
+              value: slideshowFileStorageService,
+            ),
           ],
           child: Builder(
             builder: (context) {
@@ -153,6 +172,9 @@ class MiqotulKhoirApp extends StatelessWidget {
                 settingsRepository: context.read<SettingsRepository>(),
                 // TASK-059: Inject WisdomQuoteRepository ke DisplayStateCubit
                 wisdomQuoteRepository: context.read<WisdomQuoteRepository>(),
+                // TASK-045: Inject SlideshowImageRepository ke DisplayStateCubit
+                slideshowImageRepository: context
+                    .read<SlideshowImageRepository>(),
                 audioAlertService: audioAlertService,
               );
               final settingsCubit = SettingsCubit(

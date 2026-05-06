@@ -426,6 +426,79 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
+  // --- Slideshow Pengumuman ---
+
+  /// Toggle aktif/nonaktif fitur Slideshow Pengumuman.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updateSlideshowEnabled(bool enabled) {
+    return _saveField('slideshow_enabled', {
+      'is_slideshow_enabled': enabled ? 1 : 0,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update interval jeda antar-slot slideshow (menit).
+  /// Validasi: 5–60 menit dengan step 5 sesuai TS-P4-005.
+  void updateSlideshowIntervalMinutes(int minutes) {
+    if (minutes < 5 || minutes > 60) return;
+    _debounceSave('slideshow_interval_minutes', {
+      'slideshow_interval_minutes': minutes,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update durasi total satu slot slideshow tampil di layar (menit).
+  /// Validasi: 1–10 menit dengan step 1 sesuai TS-P4-005.
+  void updateSlideshowSlotDurationMinutes(int minutes) {
+    if (minutes < 1 || minutes > 10) return;
+    _debounceSave('slideshow_slot_duration_minutes', {
+      'slideshow_slot_duration_minutes': minutes,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update durasi tampil satu gambar di dalam slot (detik).
+  /// Validasi: 5–30 detik dengan step 5 sesuai TS-P4-005.
+  void updateSlideshowImageDurationSeconds(int seconds) {
+    if (seconds < 5 || seconds > 30) return;
+    _debounceSave('slideshow_image_duration_seconds', {
+      'slideshow_image_duration_seconds': seconds,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam mulai jendela aktif Slideshow.
+  /// Validasi: 0–23.
+  void updateSlideshowStartHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('slideshow_start_hour', {
+      'slideshow_start_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit mulai jendela aktif Slideshow.
+  /// Validasi: 0–59 dengan step 5 sesuai TS-P4-005.
+  void updateSlideshowStartMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('slideshow_start_minute', {
+      'slideshow_start_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam berakhir jendela aktif Slideshow.
+  /// Validasi: 0–23.
+  void updateSlideshowEndHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('slideshow_end_hour', {
+      'slideshow_end_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit berakhir jendela aktif Slideshow.
+  /// Validasi: 0–59 dengan step 5 sesuai TS-P4-005.
+  void updateSlideshowEndMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('slideshow_end_minute', {
+      'slideshow_end_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
   @override
   Future<void> close() {
     _debounceTimer?.cancel();

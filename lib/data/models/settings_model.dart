@@ -68,6 +68,14 @@ class SettingsModel extends Settings {
     super.isPreIqomahAlertEnabled,
     super.preAdzanAlertSeconds,
     super.preIqomahAlertSeconds,
+    super.isSlideshowEnabled,
+    super.slideshowIntervalMinutes,
+    super.slideshowSlotDurationMinutes,
+    super.slideshowImageDurationSeconds,
+    super.slideshowStartHour,
+    super.slideshowStartMinute,
+    super.slideshowEndHour,
+    super.slideshowEndMinute,
   });
 
   /// Membuat [SettingsModel] dari raw SQLite `Map<String, dynamic>`.
@@ -135,6 +143,16 @@ class SettingsModel extends Settings {
           (map['is_pre_iqomah_alert_enabled'] as int? ?? 0) == 1,
       preAdzanAlertSeconds: map['pre_adzan_alert_seconds'] as int? ?? 10,
       preIqomahAlertSeconds: map['pre_iqomah_alert_seconds'] as int? ?? 10,
+      isSlideshowEnabled: (map['is_slideshow_enabled'] as int? ?? 0) == 1,
+      slideshowIntervalMinutes: map['slideshow_interval_minutes'] as int? ?? 15,
+      slideshowSlotDurationMinutes:
+          map['slideshow_slot_duration_minutes'] as int? ?? 2,
+      slideshowImageDurationSeconds:
+          map['slideshow_image_duration_seconds'] as int? ?? 15,
+      slideshowStartHour: map['slideshow_start_hour'] as int? ?? 6,
+      slideshowStartMinute: map['slideshow_start_minute'] as int? ?? 0,
+      slideshowEndHour: map['slideshow_end_hour'] as int? ?? 21,
+      slideshowEndMinute: map['slideshow_end_minute'] as int? ?? 0,
     );
   }
 
@@ -199,6 +217,14 @@ class SettingsModel extends Settings {
       'is_pre_iqomah_alert_enabled': isPreIqomahAlertEnabled ? 1 : 0,
       'pre_adzan_alert_seconds': preAdzanAlertSeconds,
       'pre_iqomah_alert_seconds': preIqomahAlertSeconds,
+      'is_slideshow_enabled': isSlideshowEnabled ? 1 : 0,
+      'slideshow_interval_minutes': slideshowIntervalMinutes,
+      'slideshow_slot_duration_minutes': slideshowSlotDurationMinutes,
+      'slideshow_image_duration_seconds': slideshowImageDurationSeconds,
+      'slideshow_start_hour': slideshowStartHour,
+      'slideshow_start_minute': slideshowStartMinute,
+      'slideshow_end_hour': slideshowEndHour,
+      'slideshow_end_minute': slideshowEndMinute,
     };
   }
 }

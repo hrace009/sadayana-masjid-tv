@@ -3,9 +3,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
+import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
 import 'package:miqotul_khoir_tv/domain/services/audio_alert_service.dart';
@@ -22,6 +24,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   final PrayerTimeCubit _prayerTimeCubit;
   final SettingsRepository _settingsRepository;
   final WisdomQuoteRepository _wisdomQuoteRepository;
+  final SlideshowImageRepository _slideshowImageRepository;
   final AudioAlertService _audioAlertService;
 
   StreamSubscription? _prayerTimeSubscription;
@@ -30,6 +33,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   DailyPrayerTimes? _currentPrayerTimes;
   TransitionConfig _currentConfig;
   List<WisdomQuote> _activeQuotes = const [];
+  List<SlideshowImage> _activeSlideshowImages = const [];
 
   bool _preAdzanAlertFired = false;
   bool _preIqomahAlertFired = false;
@@ -39,11 +43,13 @@ class DisplayStateCubit extends Cubit<DisplayState> {
     required PrayerTimeCubit prayerTimeCubit,
     required SettingsRepository settingsRepository,
     required WisdomQuoteRepository wisdomQuoteRepository,
+    required SlideshowImageRepository slideshowImageRepository,
     required AudioAlertService audioAlertService,
   }) : _evaluateUseCase = evaluateUseCase,
        _prayerTimeCubit = prayerTimeCubit,
        _settingsRepository = settingsRepository,
        _wisdomQuoteRepository = wisdomQuoteRepository,
+       _slideshowImageRepository = slideshowImageRepository,
        _audioAlertService = audioAlertService,
        // Default config, akan di-overwrite saat init()
        _currentConfig = const TransitionConfig(
@@ -86,6 +92,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
     _activeQuotes = await _wisdomQuoteRepository.getByIds(
       settings.wisdomSelectedIds,
     );
+    _activeSlideshowImages = await _slideshowImageRepository.getAll();
   }
 
   void _startTickTimer() {
@@ -115,6 +122,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
       config: _currentConfig,
       hijriDate: dailyPrayerTimes.hijriDate,
       activeQuotes: _activeQuotes,
+      slideshowImages: _activeSlideshowImages,
     );
 
     _checkAlertStop(previous, newState);

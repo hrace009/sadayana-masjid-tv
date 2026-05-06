@@ -1,6 +1,7 @@
 ﻿import 'package:equatable/equatable.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
+import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 
 import 'display_state_type.dart';
@@ -179,6 +180,58 @@ class SholatState extends DisplayState {
     remainingDuration,
     totalSholatMinutes,
     dailyPrayerTimes,
+  ];
+}
+
+/// Keadaan saat Slideshow Pengumuman Masjid sedang ditampilkan secara periodik.
+final class SlideshowAnnouncementState extends DisplayState {
+  /// Gambar yang sedang ditampilkan pada siklus saat ini.
+  final SlideshowImage currentImage;
+
+  /// Indeks gambar yang sedang ditampilkan dalam daftar aktif (0-based).
+  final int currentIndex;
+
+  /// Total gambar aktif yang tersedia (hanya slot terisi, bukan angka tetap 3).
+  final int totalItems;
+
+  final DateTime currentTime;
+
+  /// Total durasi satu slot slideshow dalam detik.
+  final int totalSlotDurationSeconds;
+
+  /// Sisa waktu slot slideshow saat ini dalam detik.
+  final int remainingSlotSeconds;
+
+  /// Durasi satu gambar dalam slot slideshow dalam detik.
+  final int imageDurationSeconds;
+
+  /// Sisa waktu gambar saat ini sebelum berpindah ke gambar berikutnya (dalam detik).
+  final int remainingImageSeconds;
+
+  const SlideshowAnnouncementState({
+    required this.currentImage,
+    required this.currentIndex,
+    required this.totalItems,
+    required this.currentTime,
+    required this.totalSlotDurationSeconds,
+    required this.remainingSlotSeconds,
+    required this.imageDurationSeconds,
+    required this.remainingImageSeconds,
+  });
+
+  @override
+  DisplayStateType get type => DisplayStateType.slideshowAnnouncement;
+
+  @override
+  List<Object?> get props => [
+    currentImage,
+    currentIndex,
+    totalItems,
+    currentTime,
+    totalSlotDurationSeconds,
+    remainingSlotSeconds,
+    imageDurationSeconds,
+    remainingImageSeconds,
   ];
 }
 

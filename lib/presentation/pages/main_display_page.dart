@@ -142,6 +142,15 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
                             state: state as SholatState,
                           );
                           break;
+                        // TASK-043 (Phase 7): Akan diganti dengan SlideshowLayout.
+                        // Sementara fallback ke StandbyLayout agar tidak crash.
+                        case DisplayStateType.slideshowAnnouncement:
+                          layoutWidget = StandbyLayout(
+                            key: const ValueKey('slideshow_stub'),
+                            state: StandbyState(currentTime: DateTime.now()),
+                            isSettingsVisible: false,
+                          );
+                          break;
                         case DisplayStateType.wisdomQuote:
                           layoutWidget = WisdomQuoteLayout(
                             key: const ValueKey('wisdom_quote'),

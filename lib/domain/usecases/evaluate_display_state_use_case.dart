@@ -2,6 +2,7 @@
 
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
+import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
@@ -19,6 +20,7 @@ class EvaluateDisplayStateUseCase {
     String? runningText,
     String? hijriDate,
     List<WisdomQuote>? activeQuotes,
+    List<SlideshowImage>? slideshowImages,
   }) {
     // 1. Iterasi hanya sholat wajib (5 waktu)
     final mainPrayers = dailyPrayerTimes.mainPrayers;
@@ -100,7 +102,20 @@ class EvaluateDisplayStateUseCase {
       if (midnightState != null) return midnightState;
     }
 
-    // 4. Wisdom Quote window check (sebelum fallback ke Standby)
+    // 4. Slideshow Announcement window check (setelah midnight, sebelum wisdom)
+    // TS-P5-005: urutan eksplisit — prayer -> midnight -> slideshow -> wisdom -> standby
+    if (config.isSlideshowEnabled &&
+        slideshowImages != null &&
+        slideshowImages.isNotEmpty) {
+      final slideshowState = _evaluateSlideshowWindow(
+        now: now,
+        config: config,
+        activeImages: slideshowImages,
+      );
+      if (slideshowState != null) return slideshowState;
+    }
+
+    // 5. Wisdom Quote window check (sebelum fallback ke Standby)
     if (config.isWisdomEnabled &&
         activeQuotes != null &&
         activeQuotes.isNotEmpty) {
@@ -166,6 +181,89 @@ class EvaluateDisplayStateUseCase {
       currentTime: now,
       subuhTime: subuh.time,
       subuhLabel: 'Subuh - $subuhHour:$subuhMinute',
+    );
+  }
+
+  /// Evaluasi apakah waktu [now] berada dalam slot aktif slideshow.
+  ///
+  /// **Rumus siklus (TS-P5-002)**:
+  /// - `slotDurationSeconds = slideshowSlotDurationMinutes * 60`
+  /// - `intervalSeconds     = slideshowIntervalMinutes * 60`
+  /// - `cycleLengthSeconds  = slotDurationSeconds + intervalSeconds`
+  ///
+  /// **Posisi dalam siklus (TS-P5-003)**:
+  /// - `positionInCycle = secondsSinceWindowStart % cycleLengthSeconds`
+  /// - Jika `positionInCycle >= slotDurationSeconds` → dalam jeda interval,
+  ///   kembalikan `null` dan lanjut ke wisdom atau standby.
+  ///
+  /// **Index gambar (TS-P5-004)**:
+  /// - `(positionInCycle ~/ imageDurationSeconds) % activeImages.length`
+  ///
+  /// Slot kosong sudah diabaikan oleh caller — [activeImages] hanya memuat
+  /// slot yang benar-benar terisi, diurutkan naik berdasarkan `slotIndex`
+  /// sesuai TS-P5-001.
+  ///
+  /// Mengembalikan [SlideshowAnnouncementState] jika dalam slot aktif,
+  /// atau `null` jika di luar window atau dalam jeda interval.
+  SlideshowAnnouncementState? _evaluateSlideshowWindow({
+    required DateTime now,
+    required TransitionConfig config,
+    required List<SlideshowImage> activeImages,
+  }) {
+    // 1. Cek apakah now berada dalam window aktif slideshow
+    final windowStart = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      config.slideshowStartHour,
+      config.slideshowStartMinute,
+    );
+    final windowEnd = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      config.slideshowEndHour,
+      config.slideshowEndMinute,
+    );
+
+    if (!now.isAfterOrEqual(windowStart) || !now.isBefore(windowEnd)) {
+      return null;
+    }
+
+    // 2. Hitung parameter siklus
+    final slotDurationSeconds = config.slideshowSlotDurationMinutes * 60;
+    final intervalSeconds = config.slideshowIntervalMinutes * 60;
+    final cycleLengthSeconds = slotDurationSeconds + intervalSeconds;
+    final imageDurationSeconds = config.slideshowImageDurationSeconds;
+
+    final secondsSinceWindowStart = now.difference(windowStart).inSeconds;
+    final positionInCycle = secondsSinceWindowStart % cycleLengthSeconds;
+
+    // 3. Jika posisi berada dalam jeda interval, bukan dalam slot aktif
+    if (positionInCycle >= slotDurationSeconds) return null;
+
+    // 4. Pilih gambar berdasarkan posisi dalam slot (TS-P5-004)
+    final imageIndex =
+        (positionInCycle ~/ imageDurationSeconds) % activeImages.length;
+    final currentImage = activeImages[imageIndex];
+
+    // 5. Hitung sisa waktu slot dan sisa waktu gambar
+    final remainingSlotSeconds = slotDurationSeconds - positionInCycle;
+    final positionInImage = positionInCycle % imageDurationSeconds;
+    final remainingImageSeconds = imageDurationSeconds - positionInImage;
+
+    return SlideshowAnnouncementState(
+      currentImage: currentImage,
+      currentIndex: imageIndex,
+      totalItems: activeImages.length,
+      currentTime: now,
+      totalSlotDurationSeconds: slotDurationSeconds,
+      remainingSlotSeconds: remainingSlotSeconds.clamp(0, slotDurationSeconds),
+      imageDurationSeconds: imageDurationSeconds,
+      remainingImageSeconds: remainingImageSeconds.clamp(
+        0,
+        imageDurationSeconds,
+      ),
     );
   }
 

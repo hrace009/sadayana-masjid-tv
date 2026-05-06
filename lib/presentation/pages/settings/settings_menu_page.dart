@@ -18,6 +18,7 @@ import 'sections/security_section.dart';
 import 'sections/treasury_section.dart';
 import 'sections/alert_settings_section.dart';
 import 'sections/midnight_mode_section.dart';
+import 'sections/slideshow_section.dart';
 import 'sections/wisdom_quote_section.dart';
 import 'sections/about_section.dart';
 
@@ -42,6 +43,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     "Keamanan (PIN)",
     "Informasi Kas",
     "Kata Mutiara",
+    "Slideshow Pengumuman",
     "Mode Hemat Daya",
     "Reset Data",
     "Tentang Aplikasi",
@@ -58,6 +60,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     SecuritySection(),
     TreasurySection(),
     WisdomQuoteSection(),
+    SlideshowSection(),
     MidnightModeSection(),
     ResetSection(),
     AboutSection(),

@@ -34,6 +34,16 @@ class TransitionConfig extends Equatable {
   final int preAdzanAlertSeconds;
   final int preIqomahAlertSeconds;
 
+  // Slideshow Pengumuman
+  final bool isSlideshowEnabled;
+  final int slideshowIntervalMinutes;
+  final int slideshowSlotDurationMinutes;
+  final int slideshowImageDurationSeconds;
+  final int slideshowStartHour;
+  final int slideshowStartMinute;
+  final int slideshowEndHour;
+  final int slideshowEndMinute;
+
   const TransitionConfig({
     required this.preAdzanMinutes,
     required this.adzanDurationSeconds,
@@ -57,6 +67,14 @@ class TransitionConfig extends Equatable {
     this.isPreIqomahAlertEnabled = false,
     this.preAdzanAlertSeconds = 10,
     this.preIqomahAlertSeconds = 10,
+    this.isSlideshowEnabled = false,
+    this.slideshowIntervalMinutes = 15,
+    this.slideshowSlotDurationMinutes = 2,
+    this.slideshowImageDurationSeconds = 15,
+    this.slideshowStartHour = 6,
+    this.slideshowStartMinute = 0,
+    this.slideshowEndHour = 21,
+    this.slideshowEndMinute = 0,
   });
 
   /// Factory method untuk membuat [TransitionConfig] dari [Settings].
@@ -91,6 +109,14 @@ class TransitionConfig extends Equatable {
       isPreIqomahAlertEnabled: settings.isPreIqomahAlertEnabled,
       preAdzanAlertSeconds: settings.preAdzanAlertSeconds,
       preIqomahAlertSeconds: settings.preIqomahAlertSeconds,
+      isSlideshowEnabled: settings.isSlideshowEnabled,
+      slideshowIntervalMinutes: settings.slideshowIntervalMinutes,
+      slideshowSlotDurationMinutes: settings.slideshowSlotDurationMinutes,
+      slideshowImageDurationSeconds: settings.slideshowImageDurationSeconds,
+      slideshowStartHour: settings.slideshowStartHour,
+      slideshowStartMinute: settings.slideshowStartMinute,
+      slideshowEndHour: settings.slideshowEndHour,
+      slideshowEndMinute: settings.slideshowEndMinute,
     );
   }
 
@@ -132,5 +158,13 @@ class TransitionConfig extends Equatable {
     isPreIqomahAlertEnabled,
     preAdzanAlertSeconds,
     preIqomahAlertSeconds,
+    isSlideshowEnabled,
+    slideshowIntervalMinutes,
+    slideshowSlotDurationMinutes,
+    slideshowImageDurationSeconds,
+    slideshowStartHour,
+    slideshowStartMinute,
+    slideshowEndHour,
+    slideshowEndMinute,
   ];
 }

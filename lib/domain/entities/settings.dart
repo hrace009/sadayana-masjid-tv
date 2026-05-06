@@ -97,6 +97,16 @@ class Settings extends Equatable {
   final int preAdzanAlertSeconds;
   final int preIqomahAlertSeconds;
 
+  // Slideshow Pengumuman (fitur opsional, default OFF)
+  final bool isSlideshowEnabled;
+  final int slideshowIntervalMinutes;
+  final int slideshowSlotDurationMinutes;
+  final int slideshowImageDurationSeconds;
+  final int slideshowStartHour;
+  final int slideshowStartMinute;
+  final int slideshowEndHour;
+  final int slideshowEndMinute;
+
   const Settings({
     this.isFirstRun = true,
     this.mosqueName = '',
@@ -151,6 +161,14 @@ class Settings extends Equatable {
     this.isPreIqomahAlertEnabled = false,
     this.preAdzanAlertSeconds = 10,
     this.preIqomahAlertSeconds = 10,
+    this.isSlideshowEnabled = false,
+    this.slideshowIntervalMinutes = 15,
+    this.slideshowSlotDurationMinutes = 2,
+    this.slideshowImageDurationSeconds = 15,
+    this.slideshowStartHour = 6,
+    this.slideshowStartMinute = 0,
+    this.slideshowEndHour = 21,
+    this.slideshowEndMinute = 0,
   });
 
   /// Membuat salinan [Settings] dengan field tertentu di-override.
@@ -208,6 +226,14 @@ class Settings extends Equatable {
     bool? isPreIqomahAlertEnabled,
     int? preAdzanAlertSeconds,
     int? preIqomahAlertSeconds,
+    bool? isSlideshowEnabled,
+    int? slideshowIntervalMinutes,
+    int? slideshowSlotDurationMinutes,
+    int? slideshowImageDurationSeconds,
+    int? slideshowStartHour,
+    int? slideshowStartMinute,
+    int? slideshowEndHour,
+    int? slideshowEndMinute,
   }) {
     return Settings(
       isFirstRun: isFirstRun ?? this.isFirstRun,
@@ -271,6 +297,17 @@ class Settings extends Equatable {
       preAdzanAlertSeconds: preAdzanAlertSeconds ?? this.preAdzanAlertSeconds,
       preIqomahAlertSeconds:
           preIqomahAlertSeconds ?? this.preIqomahAlertSeconds,
+      isSlideshowEnabled: isSlideshowEnabled ?? this.isSlideshowEnabled,
+      slideshowIntervalMinutes:
+          slideshowIntervalMinutes ?? this.slideshowIntervalMinutes,
+      slideshowSlotDurationMinutes:
+          slideshowSlotDurationMinutes ?? this.slideshowSlotDurationMinutes,
+      slideshowImageDurationSeconds:
+          slideshowImageDurationSeconds ?? this.slideshowImageDurationSeconds,
+      slideshowStartHour: slideshowStartHour ?? this.slideshowStartHour,
+      slideshowStartMinute: slideshowStartMinute ?? this.slideshowStartMinute,
+      slideshowEndHour: slideshowEndHour ?? this.slideshowEndHour,
+      slideshowEndMinute: slideshowEndMinute ?? this.slideshowEndMinute,
     );
   }
 
@@ -329,5 +366,13 @@ class Settings extends Equatable {
     isPreIqomahAlertEnabled,
     preAdzanAlertSeconds,
     preIqomahAlertSeconds,
+    isSlideshowEnabled,
+    slideshowIntervalMinutes,
+    slideshowSlotDurationMinutes,
+    slideshowImageDurationSeconds,
+    slideshowStartHour,
+    slideshowStartMinute,
+    slideshowEndHour,
+    slideshowEndMinute,
   ];
 }

@@ -20,7 +20,7 @@ class DatabaseHelper {
   static const String _databaseName = 'miqotul_khoir.db';
 
   /// Versi database saat ini. Increment untuk setiap schema change.
-  static const int _databaseVersion = 9;
+  static const int _databaseVersion = 10;
 
   // ---------------------------------------------------------------------------
   // Singleton
@@ -207,6 +207,47 @@ class DatabaseHelper {
         'ALTER TABLE settings ADD COLUMN pre_iqomah_alert_seconds INTEGER NOT NULL DEFAULT 10',
       );
     }
+    if (oldVersion < 10) {
+      // Tambah kolom Slideshow Pengumuman (fitur opsional, default OFF)
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_slideshow_enabled INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_interval_minutes INTEGER NOT NULL DEFAULT 15',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_slot_duration_minutes INTEGER NOT NULL DEFAULT 2',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_image_duration_seconds INTEGER NOT NULL DEFAULT 15',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_start_hour INTEGER NOT NULL DEFAULT 6',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_start_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_end_hour INTEGER NOT NULL DEFAULT 21',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN slideshow_end_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      // Buat tabel baru untuk metadata slot gambar slideshow
+      await db.execute('''
+        CREATE TABLE slideshow_images (
+          slot_index INTEGER PRIMARY KEY CHECK (slot_index BETWEEN 1 AND 3),
+          file_name TEXT NOT NULL,
+          stored_path TEXT NOT NULL UNIQUE,
+          mime_type TEXT NOT NULL,
+          width INTEGER NOT NULL,
+          height INTEGER NOT NULL,
+          file_size_bytes INTEGER NOT NULL,
+          created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+          updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+        )
+      ''');
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -377,6 +418,16 @@ class DatabaseHelper {
         pre_adzan_alert_seconds INTEGER NOT NULL DEFAULT 10,
         pre_iqomah_alert_seconds INTEGER NOT NULL DEFAULT 10,
 
+        -- Slideshow Pengumuman (fitur opsional, default OFF)
+        is_slideshow_enabled INTEGER NOT NULL DEFAULT 0,
+        slideshow_interval_minutes INTEGER NOT NULL DEFAULT 15,
+        slideshow_slot_duration_minutes INTEGER NOT NULL DEFAULT 2,
+        slideshow_image_duration_seconds INTEGER NOT NULL DEFAULT 15,
+        slideshow_start_hour INTEGER NOT NULL DEFAULT 6,
+        slideshow_start_minute INTEGER NOT NULL DEFAULT 0,
+        slideshow_end_hour INTEGER NOT NULL DEFAULT 21,
+        slideshow_end_minute INTEGER NOT NULL DEFAULT 0,
+
         -- Adzan Duration (Seconds)
         adzan_duration_seconds INTEGER NOT NULL DEFAULT 180,
 
@@ -392,6 +443,21 @@ class DatabaseHelper {
 
         -- Elevation (meter DPL)
         elevation INTEGER NOT NULL DEFAULT 0
+      )
+    ''');
+
+    // -- Table: slideshow_images (metadata slot gambar slideshow) --
+    await db.execute('''
+      CREATE TABLE slideshow_images (
+        slot_index INTEGER PRIMARY KEY CHECK (slot_index BETWEEN 1 AND 3),
+        file_name TEXT NOT NULL,
+        stored_path TEXT NOT NULL UNIQUE,
+        mime_type TEXT NOT NULL,
+        width INTEGER NOT NULL,
+        height INTEGER NOT NULL,
+        file_size_bytes INTEGER NOT NULL,
+        created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
       )
     ''');
 
