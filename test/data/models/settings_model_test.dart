@@ -68,6 +68,14 @@ void main() {
     'is_pre_iqomah_alert_enabled': 0,
     'pre_adzan_alert_seconds': 10,
     'pre_iqomah_alert_seconds': 10,
+    'is_slideshow_enabled': 0,
+    'slideshow_interval_minutes': 15,
+    'slideshow_slot_duration_minutes': 2,
+    'slideshow_image_duration_seconds': 15,
+    'slideshow_start_hour': 6,
+    'slideshow_start_minute': 0,
+    'slideshow_end_hour': 21,
+    'slideshow_end_minute': 0,
     'created_at': '2026-01-01T00:00:00',
     'updated_at': '2026-01-01T00:00:00',
   };
@@ -126,6 +134,14 @@ void main() {
     'is_pre_iqomah_alert_enabled': 0,
     'pre_adzan_alert_seconds': 8,
     'pre_iqomah_alert_seconds': 12,
+    'is_slideshow_enabled': 1,
+    'slideshow_interval_minutes': 10,
+    'slideshow_slot_duration_minutes': 3,
+    'slideshow_image_duration_seconds': 20,
+    'slideshow_start_hour': 8,
+    'slideshow_start_minute': 30,
+    'slideshow_end_hour': 20,
+    'slideshow_end_minute': 0,
     'created_at': '2026-02-18T10:00:00',
     'updated_at': '2026-02-18T14:00:00',
   };
@@ -194,6 +210,15 @@ void main() {
       expect(model.isPreIqomahAlertEnabled, isFalse);
       expect(model.preAdzanAlertSeconds, equals(10));
       expect(model.preIqomahAlertSeconds, equals(10));
+      // Slideshow fields — semua default OFF / nilai awal
+      expect(model.isSlideshowEnabled, isFalse);
+      expect(model.slideshowIntervalMinutes, equals(15));
+      expect(model.slideshowSlotDurationMinutes, equals(2));
+      expect(model.slideshowImageDurationSeconds, equals(15));
+      expect(model.slideshowStartHour, equals(6));
+      expect(model.slideshowStartMinute, equals(0));
+      expect(model.slideshowEndHour, equals(21));
+      expect(model.slideshowEndMinute, equals(0));
     });
 
     test(
@@ -253,6 +278,15 @@ void main() {
         expect(model.isPreIqomahAlertEnabled, isFalse);
         expect(model.preAdzanAlertSeconds, equals(8));
         expect(model.preIqomahAlertSeconds, equals(12));
+        // Slideshow fields — custom values
+        expect(model.isSlideshowEnabled, isTrue);
+        expect(model.slideshowIntervalMinutes, equals(10));
+        expect(model.slideshowSlotDurationMinutes, equals(3));
+        expect(model.slideshowImageDurationSeconds, equals(20));
+        expect(model.slideshowStartHour, equals(8));
+        expect(model.slideshowStartMinute, equals(30));
+        expect(model.slideshowEndHour, equals(20));
+        expect(model.slideshowEndMinute, equals(0));
       },
     );
   });
@@ -313,6 +347,15 @@ void main() {
       expect(map['is_pre_iqomah_alert_enabled'], equals(0));
       expect(map['pre_adzan_alert_seconds'], equals(8));
       expect(map['pre_iqomah_alert_seconds'], equals(12));
+      // Slideshow fields
+      expect(map['is_slideshow_enabled'], equals(1));
+      expect(map['slideshow_interval_minutes'], equals(10));
+      expect(map['slideshow_slot_duration_minutes'], equals(3));
+      expect(map['slideshow_image_duration_seconds'], equals(20));
+      expect(map['slideshow_start_hour'], equals(8));
+      expect(map['slideshow_start_minute'], equals(30));
+      expect(map['slideshow_end_hour'], equals(20));
+      expect(map['slideshow_end_minute'], equals(0));
 
       // toMap() should NOT include id, created_at, updated_at
       expect(map.containsKey('id'), isFalse);

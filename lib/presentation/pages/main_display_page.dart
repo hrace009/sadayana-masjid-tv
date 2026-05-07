@@ -16,6 +16,7 @@ import 'main_display/layouts/iqomah_layout.dart';
 import 'main_display/layouts/midnight_standby_layout.dart';
 import 'main_display/layouts/pre_adzan_layout.dart';
 import 'main_display/layouts/sholat_layout.dart';
+import 'main_display/layouts/slideshow_layout.dart';
 import 'main_display/layouts/standby_layout.dart';
 import 'main_display/layouts/wisdom_quote_layout.dart';
 import 'settings/pin_gate_page.dart';
@@ -142,13 +143,11 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
                             state: state as SholatState,
                           );
                           break;
-                        // TASK-043 (Phase 7): Akan diganti dengan SlideshowLayout.
-                        // Sementara fallback ke StandbyLayout agar tidak crash.
+                        // TASK-043 (Phase 7): Layout runtime Slideshow Pengumuman Masjid.
                         case DisplayStateType.slideshowAnnouncement:
-                          layoutWidget = StandbyLayout(
-                            key: const ValueKey('slideshow_stub'),
-                            state: StandbyState(currentTime: DateTime.now()),
-                            isSettingsVisible: false,
+                          layoutWidget = SlideshowLayout(
+                            key: const ValueKey('slideshow_announcement'),
+                            state: state as SlideshowAnnouncementState,
                           );
                           break;
                         case DisplayStateType.wisdomQuote:

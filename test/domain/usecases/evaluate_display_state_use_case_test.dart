@@ -1,9 +1,10 @@
-﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state_type.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
+import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 import 'package:miqotul_khoir_tv/domain/usecases/evaluate_display_state_use_case.dart';
@@ -822,6 +823,301 @@ void main() {
 
         // Restore main prayers untuk test lain
         when(() => mockDailyPrayerTimes.mainPrayers).thenReturn(mainPrayers);
+      });
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Slideshow Announcement evaluation tests
+  // Ref: TASK-051 (Phase 8), TEST-008, TEST-009, TEST-010, TS-P5-005
+  // ---------------------------------------------------------------------------
+
+  group('Slideshow Announcement Evaluation', () {
+    // Config dengan slideshow enabled, window 08:00–20:00,
+    // slotDuration=2min, interval=15min, imageDuration=15sec.
+    // cycleLengthSeconds = 120 + 900 = 1020s
+    const slideshowConfig = TransitionConfig(
+      preAdzanMinutes: 10,
+      adzanDurationSeconds: 180,
+      sholatDurationMinutes: 10,
+      iqomahMinutes: {
+        'Subuh': 10,
+        'Dzuhur': 10,
+        'Ashar': 10,
+        'Maghrib': 10,
+        'Isya': 10,
+      },
+      isSlideshowEnabled: true,
+      slideshowIntervalMinutes: 15,
+      slideshowSlotDurationMinutes: 2,
+      slideshowImageDurationSeconds: 15,
+      slideshowStartHour: 8,
+      slideshowStartMinute: 0,
+      slideshowEndHour: 20,
+      slideshowEndMinute: 0,
+    );
+
+    const testImages = [
+      SlideshowImage(
+        slotIndex: 1,
+        fileName: 'img1.jpg',
+        storedPath: '/p/1.jpg',
+        mimeType: 'image/jpeg',
+        width: 1920,
+        height: 1080,
+        fileSizeBytes: 100000,
+      ),
+      SlideshowImage(
+        slotIndex: 2,
+        fileName: 'img2.jpg',
+        storedPath: '/p/2.jpg',
+        mimeType: 'image/jpeg',
+        width: 1920,
+        height: 1080,
+        fileSizeBytes: 100000,
+      ),
+    ];
+
+    group('Guard: isSlideshowEnabled = false', () {
+      test('mengembalikan StandbyState jika slideshow disabled', () {
+        const disabledConfig = TransitionConfig(
+          preAdzanMinutes: 10,
+          adzanDurationSeconds: 180,
+          sholatDurationMinutes: 10,
+          iqomahMinutes: {
+            'Subuh': 10,
+            'Dzuhur': 10,
+            'Ashar': 10,
+            'Maghrib': 10,
+            'Isya': 10,
+          },
+          isSlideshowEnabled: false,
+          slideshowIntervalMinutes: 15,
+          slideshowSlotDurationMinutes: 2,
+          slideshowImageDurationSeconds: 15,
+          slideshowStartHour: 8,
+          slideshowStartMinute: 0,
+          slideshowEndHour: 20,
+          slideshowEndMinute: 0,
+        );
+        // now = 10:00 (dalam window slideshow jika enabled)
+        final now = DateTime(2026, 2, 19, 10, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: disabledConfig,
+          slideshowImages: testImages,
+        );
+
+        // Guard: slideshow disabled → tidak masuk _evaluateSlideshowWindow
+        expect(result, isNot(isA<SlideshowAnnouncementState>()));
+      });
+    });
+
+    group('Guard: slideshowImages = null atau kosong', () {
+      test('mengembalikan StandbyState jika slideshowImages = null', () {
+        final now = DateTime(2026, 2, 19, 10, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: slideshowConfig,
+          // slideshowImages tidak diisi → null
+        );
+
+        expect(result, isNot(isA<SlideshowAnnouncementState>()));
+      });
+
+      test('mengembalikan StandbyState jika slideshowImages kosong', () {
+        final now = DateTime(2026, 2, 19, 10, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: slideshowConfig,
+          slideshowImages: const [],
+        );
+
+        expect(result, isNot(isA<SlideshowAnnouncementState>()));
+      });
+    });
+
+    group('Guard: waktu di luar window', () {
+      test('mengembalikan non-Slideshow state jika before window (07:59)', () {
+        final now = DateTime(2026, 2, 19, 7, 59);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: slideshowConfig,
+          slideshowImages: testImages,
+        );
+
+        expect(result, isNot(isA<SlideshowAnnouncementState>()));
+      });
+
+      test(
+        'mengembalikan non-Slideshow state jika at/after window end (20:00)',
+        () {
+          final now = DateTime(2026, 2, 19, 20, 0);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: slideshowConfig,
+            slideshowImages: testImages,
+          );
+
+          expect(result, isNot(isA<SlideshowAnnouncementState>()));
+        },
+      );
+    });
+
+    group('Slideshow slot aktif (dalam window + dalam slotDuration)', () {
+      // now = 08:00:00 tepat (second = 0, positionInCycle = 0)
+      // slotDurationSeconds = 120, intervalSeconds = 900, cycle = 1020
+      // positionInCycle = 0 → dalam slot → harus return SlideshowAnnouncementState
+      test(
+        'mengembalikan SlideshowAnnouncementState di awal window (08:00:00)',
+        () {
+          final now = DateTime(2026, 2, 19, 8, 0, 0);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(maghrib);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: slideshowConfig,
+            slideshowImages: testImages,
+          );
+
+          expect(result, isA<SlideshowAnnouncementState>());
+          final state = result as SlideshowAnnouncementState;
+          expect(state.type, DisplayStateType.slideshowAnnouncement);
+          expect(state.currentImage, equals(testImages[0]));
+          expect(state.totalItems, equals(2));
+        },
+      );
+
+      test(
+        'rotasi gambar: detik ke-15 (posisi 15 dalam slot) → gambar index 1',
+        () {
+          // imageDurationSeconds = 15 → 0–14 = img[0], 15–29 = img[1]
+          final now = DateTime(2026, 2, 19, 8, 0, 15);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(maghrib);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: slideshowConfig,
+            slideshowImages: testImages,
+          );
+
+          expect(result, isA<SlideshowAnnouncementState>());
+          final state = result as SlideshowAnnouncementState;
+          // positionInCycle = 15 → imageIndex = 15 ~/ 15 % 2 = 1
+          expect(state.currentIndex, equals(1));
+          expect(state.currentImage, equals(testImages[1]));
+        },
+      );
+
+      test('rotasi wrap-around: detik ke-30 kembali ke gambar index 0', () {
+        // 30 ~/ 15 % 2 = 2 % 2 = 0 → gambar pertama lagi
+        final now = DateTime(2026, 2, 19, 8, 0, 30);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(maghrib);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: slideshowConfig,
+          slideshowImages: testImages,
+        );
+
+        expect(result, isA<SlideshowAnnouncementState>());
+        final state = result as SlideshowAnnouncementState;
+        expect(state.currentIndex, equals(0));
+      });
+    });
+
+    group('Slideshow jeda interval', () {
+      // positionInCycle = 120 (tepat mulai interval) → harus null
+      test(
+        'mengembalikan non-Slideshow state saat di dalam interval (posisi 120)',
+        () {
+          // secondsSinceWindowStart = 120 → positionInCycle = 120 >= 120 → null
+          final now = DateTime(2026, 2, 19, 8, 2, 0); // 8:00 + 120s = 8:02:00
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: slideshowConfig,
+            slideshowImages: testImages,
+          );
+
+          expect(result, isNot(isA<SlideshowAnnouncementState>()));
+        },
+      );
+    });
+
+    group('Prioritas: slideshow sebelum wisdom (TS-P5-005)', () {
+      test('slideshow menang atas wisdom ketika kedua window overlap', () {
+        // Config: slideshow 08:00–20:00, wisdom 08:00–22:00 (overlap)
+        const bothConfig = TransitionConfig(
+          preAdzanMinutes: 10,
+          adzanDurationSeconds: 180,
+          sholatDurationMinutes: 10,
+          iqomahMinutes: {
+            'Subuh': 10,
+            'Dzuhur': 10,
+            'Ashar': 10,
+            'Maghrib': 10,
+            'Isya': 10,
+          },
+          isSlideshowEnabled: true,
+          slideshowIntervalMinutes: 15,
+          slideshowSlotDurationMinutes: 2,
+          slideshowImageDurationSeconds: 15,
+          slideshowStartHour: 8,
+          slideshowStartMinute: 0,
+          slideshowEndHour: 20,
+          slideshowEndMinute: 0,
+          isWisdomEnabled: true,
+          wisdomIntervalMinutes: 15,
+          wisdomDurationMinutes: 2,
+          wisdomStartHour: 8,
+          wisdomStartMinute: 0,
+          wisdomEndHour: 22,
+          wisdomEndMinute: 0,
+        );
+
+        final quoteA = const WisdomQuote(
+          id: 'q1',
+          type: 'quran',
+          label: 'Q.S. Al-Baqarah: 1',
+          translationText: 'Alif lam mim',
+          reference: '',
+        );
+
+        // now = 08:00:00 — awal siklus slideshow (positionInCycle = 0 → slot aktif)
+        final now = DateTime(2026, 2, 19, 8, 0, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(maghrib);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: bothConfig,
+          slideshowImages: testImages,
+          activeQuotes: [quoteA],
+        );
+
+        // Slideshow dievaluasi sebelum wisdom → harus menang
+        expect(result, isA<SlideshowAnnouncementState>());
       });
     });
   });

@@ -1041,4 +1041,261 @@ void main() {
       },
     );
   });
+
+  // ---------------------------------------------------------------------------
+  // Slideshow Management
+  // ---------------------------------------------------------------------------
+
+  group('Slideshow Management', () {
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowEnabled(true) menyimpan langsung (tanpa debounce), nilai 1',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateSlideshowEnabled(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'slideshow_enabled',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'is_slideshow_enabled': 1}),
+        ).called(1);
+        verify(() => displayStateCubit.onSettingsChanged()).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowEnabled(false) menyimpan nilai 0',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateSlideshowEnabled(false),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'slideshow_enabled',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'is_slideshow_enabled': 0}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowIntervalMinutes(10) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowIntervalMinutes(10);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'slideshow_interval_minutes': 10,
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowIntervalMinutes diabaikan jika di luar range [5, 60]',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowIntervalMinutes(4);
+        cubit.updateSlideshowIntervalMinutes(61);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      expect: () => [],
+      verify: (_) {
+        verifyNever(() => settingsRepository.updateSettings(any()));
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowSlotDurationMinutes(3) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowSlotDurationMinutes(3);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'slideshow_slot_duration_minutes': 3,
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowImageDurationSeconds(20) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowImageDurationSeconds(20);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({
+            'slideshow_image_duration_seconds': 20,
+          }),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowStartHour(8) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowStartHour(8);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'slideshow_start_hour': 8}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowStartMinute(30) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowStartMinute(30);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () =>
+              settingsRepository.updateSettings({'slideshow_start_minute': 30}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowEndHour(22) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowEndHour(22);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'slideshow_end_hour': 22}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateSlideshowEndMinute(0) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateSlideshowEndMinute(0);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository.updateSettings({'slideshow_end_minute': 0}),
+        ).called(1);
+      },
+    );
+  });
 }

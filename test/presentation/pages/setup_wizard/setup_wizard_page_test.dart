@@ -1,4 +1,4 @@
-﻿import 'package:bloc_test/bloc_test.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +15,10 @@ import 'package:miqotul_khoir_tv/presentation/pages/setup_wizard/steps/identity_
 import 'package:miqotul_khoir_tv/presentation/pages/setup_wizard/steps/location_step.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/setup_wizard/steps/preview_step.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/setup_wizard/steps/welcome_step.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
+import 'package:miqotul_khoir_tv/domain/services/slideshow_file_storage_service.dart';
+
+import 'package:google_fonts/google_fonts.dart';
 
 // Mocks
 class MockSetupWizardCubit extends MockCubit<SetupWizardState>
@@ -24,12 +28,20 @@ class MockSettingsRepository extends Mock implements SettingsRepository {}
 
 class MockCityRepository extends Mock implements CityRepository {}
 
+class MockSlideshowImageRepository extends Mock implements SlideshowImageRepository {}
+
+class MockSlideshowFileStorageService extends Mock implements SlideshowFileStorageService {}
+
 void main() {
   late MockSetupWizardCubit mockCubit;
   late MockSettingsRepository mockSettingsRepo;
   late MockCityRepository mockCityRepo;
+  late MockSlideshowImageRepository mockSlideshowRepo;
+  late MockSlideshowFileStorageService mockSlideshowStorage;
 
   setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    GoogleFonts.config.allowRuntimeFetching = false;
     registerFallbackValue(const SetupWizardData());
     registerFallbackValue(
       const City(
@@ -46,11 +58,15 @@ void main() {
     mockCubit = MockSetupWizardCubit();
     mockSettingsRepo = MockSettingsRepository();
     mockCityRepo = MockCityRepository();
+    mockSlideshowRepo = MockSlideshowImageRepository();
+    mockSlideshowStorage = MockSlideshowFileStorageService();
+    when(() => mockSlideshowRepo.getAll()).thenAnswer((_) async => const []);
   });
 
   Widget createViewUnderTest() {
     return ScreenUtilInit(
       designSize: const Size(1920, 1080),
+      minTextAdapt: false,
       builder: (context, child) {
         return MaterialApp(
           theme: IslamicTheme.darkTheme(),
@@ -60,6 +76,8 @@ void main() {
                 value: mockSettingsRepo,
               ),
               RepositoryProvider<CityRepository>.value(value: mockCityRepo),
+              RepositoryProvider<SlideshowImageRepository>.value(value: mockSlideshowRepo),
+              RepositoryProvider<SlideshowFileStorageService>.value(value: mockSlideshowStorage),
             ],
             child: BlocProvider<SetupWizardCubit>.value(
               value: mockCubit,
@@ -83,7 +101,6 @@ void main() {
       );
 
       await tester.pumpWidget(createViewUnderTest());
-      await tester.pumpAndSettle();
 
       expect(find.byType(WelcomeStep), findsOneWidget);
       expect(find.byType(IdentityStep), findsNothing);
@@ -101,7 +118,6 @@ void main() {
       );
 
       await tester.pumpWidget(createViewUnderTest());
-      await tester.pumpAndSettle();
 
       expect(find.byType(IdentityStep), findsOneWidget);
       expect(find.text('Identitas Masjid'), findsOneWidget);
@@ -121,7 +137,6 @@ void main() {
       ).thenAnswer((_) async => ['Jawa Barat', 'DKI Jakarta']);
 
       await tester.pumpWidget(createViewUnderTest());
-      await tester.pumpAndSettle();
 
       expect(find.byType(LocationStep), findsOneWidget);
       expect(find.text('Lokasi Masjid'), findsOneWidget);
@@ -148,7 +163,6 @@ void main() {
       );
 
       await tester.pumpWidget(createViewUnderTest());
-      await tester.pumpAndSettle();
 
       expect(find.byType(PreviewStep), findsOneWidget);
       expect(find.text('Konfirmasi Pengaturan'), findsOneWidget);
@@ -166,7 +180,6 @@ void main() {
       );
 
       await tester.pumpWidget(createViewUnderTest());
-      await tester.pumpAndSettle();
 
       final button = find.text('Mulai Setup');
       expect(button, findsOneWidget);

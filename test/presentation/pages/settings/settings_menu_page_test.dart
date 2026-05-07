@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,19 +13,29 @@ import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/iqomah_sec
 import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/security_section.dart';
 import 'package:miqotul_khoir_tv/presentation/widgets/dpad_stepper.dart';
 import 'package:miqotul_khoir_tv/presentation/widgets/pin_input_widget.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
+import 'package:miqotul_khoir_tv/domain/services/slideshow_file_storage_service.dart';
 
 class MockSettingsCubit extends Mock implements SettingsCubit {}
 
 class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
 
+class MockSlideshowImageRepository extends Mock implements SlideshowImageRepository {}
+
+class MockSlideshowFileStorageService extends Mock implements SlideshowFileStorageService {}
+
 void main() {
   late MockSettingsCubit mockSettingsCubit;
   late MockWisdomQuoteRepository mockWisdomRepo;
+  late MockSlideshowImageRepository mockSlideshowRepo;
+  late MockSlideshowFileStorageService mockSlideshowStorage;
   late Settings mockSettings;
 
   setUp(() {
     mockSettingsCubit = MockSettingsCubit();
     mockWisdomRepo = MockWisdomQuoteRepository();
+    mockSlideshowRepo = MockSlideshowImageRepository();
+    mockSlideshowStorage = MockSlideshowFileStorageService();
     // Providing default settings using positional and required named properties.
     mockSettings = const Settings();
     when(
@@ -40,6 +50,8 @@ void main() {
     when(
       () => mockWisdomRepo.getByIds(any()),
     ).thenAnswer((_) async => const []);
+    
+    when(() => mockSlideshowRepo.getAll()).thenAnswer((_) async => const []);
   });
 
   Widget createTestWidget() {
@@ -48,8 +60,12 @@ void main() {
       minTextAdapt: true,
       builder: (context, _) {
         return MaterialApp(
-          home: RepositoryProvider<WisdomQuoteRepository>.value(
-            value: mockWisdomRepo,
+          home: MultiRepositoryProvider(
+            providers: [
+              RepositoryProvider<WisdomQuoteRepository>.value(value: mockWisdomRepo),
+              RepositoryProvider<SlideshowImageRepository>.value(value: mockSlideshowRepo),
+              RepositoryProvider<SlideshowFileStorageService>.value(value: mockSlideshowStorage),
+            ],
             child: BlocProvider<SettingsCubit>.value(
               value: mockSettingsCubit,
               child: const SettingsMenuPage(),

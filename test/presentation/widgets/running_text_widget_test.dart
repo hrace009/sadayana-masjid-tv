@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:marquee/marquee.dart';
@@ -90,9 +90,9 @@ void main() {
       },
     );
 
-    testWidgets('uses default scrollSpeed of 50.0', (tester) async {
+    testWidgets('uses default scrollSpeed of 30.0', (tester) async {
       const widget = RunningTextWidget(text: 'Test');
-      expect(widget.scrollSpeed, equals(50.0));
+      expect(widget.scrollSpeed, equals(30.0));
     });
 
     testWidgets('uses default pauseDuration of Duration.zero', (tester) async {
