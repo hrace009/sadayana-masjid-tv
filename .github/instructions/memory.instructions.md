@@ -97,6 +97,15 @@ Fitur yang sudah selesai di luar urutan Plan 01–11:
 > Catatan: Settings UI (Plan 12) dan Main Display UI (Plan 13) juga sudah selesai sejak 2026-02-20.
 > Lihat `AGENTS.md` tabel "Completed Features" untuk daftar lengkap.
 
+### Plan 14 — Slideshow Pengumuman ✅ COMPLETED (2026-05-08)
+
+Fitur pengumuman berbasis gambar selesai diimplementasi:
+
+- **State Management**: `SlideshowAnnouncementState` terintegrasi di `DisplayStateCubit`.
+- **Infrastructure**: Table `slideshow_images`, migration v10, logic siklus absolut.
+- **Features**: 3 slot gambar, manajemen file lokal (path_provider), sinkronisasi state instan.
+- **Testing**: Unit tests repo & cubit passing.
+
 ## Flutter UI Patterns — Deprecated APIs (2026-03-16)
 
 ### Pattern: Switch.adaptive — activeColor Deprecated
@@ -133,6 +142,65 @@ color.withOpacity(0.5)
 
 // ✅ BENAR
 color.withValues(alpha: 0.5)
+```
+
+---
+
+## Android TV — FocusableWidget Interaction Pattern (2026-05-08)
+
+### Bug: Tombol Tutup Preview Tidak Responsif (Remote/Klik)
+
+Pada halaman `SlideshowPreviewPage`, tombol "Tutup Preview" yang menggunakan `FocusableWidget` sering
+gagal menerima event klik/select jika berada di atas layer `Stack` yang memiliki `BackdropFilter`
+atau layer transparan lainnya.
+
+**Fix**: Gunakan `HitTestBehavior.opaque` pada `GestureDetector` internal `FocusableWidget`.
+
+```dart
+// lib/presentation/widgets/focusable_widget.dart
+
+GestureDetector(
+  behavior: HitTestBehavior.opaque, // <--- WAJIB untuk tombol di layer transparan
+  onTap: () {
+    _focusNode.requestFocus();
+    if (widget.onSelect != null) widget.onSelect!();
+  },
+  child: ...,
+)
+```
+
+**Prinsip**: Android TV remote (D-Pad Center) sering memetakan ke tap event. Jika behavior
+default (`deferToChild`) digunakan, dan child-nya tidak memiliki area visual solid yang luas,
+tap event seringkali "tembus" ke layer di bawahnya.
+
+---
+
+## Flutter Library Patterns — FilePicker v11 Migration (2026-05-08)
+
+### Breaking Change: FilePicker.platform.pickFiles Dihapus
+
+Pada `file_picker` v11.0.0+, akses ke instance `platform` secara langsung sudah dibatasi/dihapus
+untuk static methods.
+
+```dart
+// ❌ SALAH (v10-)
+FilePicker.platform.pickFiles(...)
+
+// ✅ BENAR (v11+)
+FilePicker.pickFiles(...)
+```
+
+**Testing**: Untuk melakukan mocking, gunakan `FilePickerPlatform.instance`.
+
+```dart
+// test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart
+
+class MockFilePicker extends Mock with MockPlatformInterfaceMixin implements FilePickerPlatform {}
+
+setUp(() {
+  mockPicker = MockFilePicker();
+  FilePickerPlatform.instance = mockPicker; // <--- Inject mock di sini
+});
 ```
 
 ---

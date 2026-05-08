@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: April 26, 2026
+**Last Updated**: May 08, 2026
 
 <!-- markdownlint-disable -->
 
@@ -53,6 +53,7 @@ lib/presentation/cubits/
 | **Kata Mutiara Islam** (Wisdom Quote)                | 2026-03-10      | 14 phases, 257 total tests ✅   | Production Ready |
 | **Mode Hemat Daya Tengah Malam** (Midnight Mode)     | 2026-03-16      | 7 phases, 306 total tests ✅    | Production Ready |
 | **Alarm Tanda Waktu** (Pre-Adzan & Pre-Iqomah Alert) | 2026-03-17      | 6 phases, 20 new alarm tests ✅ | Production Ready |
+| **Slideshow Pengumuman** (Announcement)             | 2026-05-08      | 8 phases, file_picker v11 ✅    | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
@@ -1145,7 +1146,55 @@ Ensure `AndroidManifest.xml` includes:
 
 ---
 
-**Last Updated**: April 26, 2026
+### Slideshow Pengumuman / Announcement Slideshow (COMPLETED — 2026-05-08)
+
+Fitur tampilan gambar pengumuman secara periodik pada layar utama. Menggunakan `SlideshowAnnouncementState`
+sebagai state ke-5 (sebelum Wisdom Quote). Mendukung 3 slot gambar dengan manajemen file lokal,
+konfigurasi jadwal aktif, interval antar slot, dan durasi per gambar.
+8 phase implementasi, migrasi `file_picker` v11.0.2.
+
+File baru yang dibuat:
+
+| File                                                                       | Keterangan                                                                   |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `lib/domain/entities/slideshow_image.dart`                                 | Entity — `slotIndex`, `fileName`, `storedPath`, `mimeType`, `width/height`   |
+| `lib/domain/repositories/slideshow_image_repository.dart`                  | Abstract interface (CRUD slot 1-3)                                           |
+| `lib/data/models/slideshow_image_model.dart`                               | `fromMap`/`toMap` SQLite serialization                                       |
+| `lib/data/services/slideshow_file_storage_service.dart`                    | Abstract interface untuk manajemen file I/O (import, delete)                 |
+| `lib/data/services/slideshow_file_storage_service_impl.dart`               | Implementasi `path_provider` & `File` ops (sandboxed directory)              |
+| `lib/data/repositories/slideshow_image_repository_impl.dart`               | Concrete impl — SQLite ops (replace-on-conflict per slot)                    |
+| `lib/presentation/cubits/slideshow_section/slideshow_section_cubit.dart`     | Manajemen slot UI (pick, import, replace, delete)                            |
+| `lib/presentation/pages/settings/sections/slideshow_section.dart`          | Settings UI — toggle, stepper jadwal/durasi, 3-slot card management          |
+| `lib/presentation/pages/main_display/layouts/slideshow_layout.dart`         | Layout display — full screen image dengan progress bar & slot info           |
+| `lib/presentation/pages/slideshow_preview_page.dart`                       | Halaman pratinjau full screen dari menu settings                             |
+| `test/data/repositories/slideshow_image_repository_impl_test.dart`         | Unit tests SQLite ops                                                        |
+| `test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart` | 12 tests: file picker mocking (v11), CRUD lifecycle, state transitions       |
+
+File yang dimodifikasi:
+
+| File                                                             | Keterangan                                                                                                       |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `lib/data/datasources/database_helper.dart`                      | Schema v10, migration DDL table `slideshow_images`, 8 kolom settings baru                                        |
+| `lib/data/models/settings_model.dart`                            | `fromMap`/`toMap` untuk 8 field slideshow baru                                                                   |
+| `lib/domain/entities/settings.dart`                              | 8 field baru: `isSlideshowEnabled`, `slideshowStart/EndHour/Minute`, `Interval`, `SlotDuration`, `ImageDuration` |
+| `lib/domain/entities/transition_config.dart`                     | 8 field slideshow + `fromSettings()` mapping                                                                     |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart`       | Logika siklus absolut (TS-P5-002), index gambar (TS-P5-004), priority 4                                          |
+| `lib/presentation/cubits/settings/settings_cubit.dart`           | 8 method update slideshow settings                                                                               |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart` | `_slideshowImageRepository`, `_activeSlideshowImages`; refresh images on `onSettingsChanged()`                   |
+| `lib/presentation/pages/main_display_page.dart`                  | Case `slideshowAnnouncement` di switch + `onSettingsChanged()` refresh saat kembali dari Settings                 |
+| `lib/presentation/pages/settings/settings_menu_page.dart`        | Tambah `SlideshowSection` sebagai kategori ke-7                                                                  |
+| `lib/main.dart`                                                  | Injection `SlideshowImageRepository` & `SlideshowFileStorageService`                                             |
+
+**Technical Patterns & Lessons Learned**:
+
+- **Absolute Cycle Logic**: Slideshow menggunakan jadwal absolut dari `windowStart` (06:00) agar sinkron antar-device.
+- **FilePicker v11 Migration**: `FilePicker.platform.pickFiles` dihapus, gunakan static method `FilePicker.pickFiles`. Mocking via `FilePickerPlatform.instance`.
+- **FocusableWidget HitTest**: Tombol interaktif di atas layer transparan (Preview) membutuhkan `HitTestBehavior.opaque` agar responsif terhadap remote TV.
+- **State Synchronization**: `SlideshowSectionCubit` secara eksplisit memicu `DisplayStateCubit.onSettingsChanged()` setelah operasi file agar UI layar utama langsung ter-update tanpa restart.
+
+---
+
+**Last Updated**: May 08, 2026
 **Version**: 2.1.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV
