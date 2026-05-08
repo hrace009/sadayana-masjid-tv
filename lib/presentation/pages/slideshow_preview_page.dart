@@ -29,17 +29,18 @@ class SlideshowPreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: KeyboardListener(
-        focusNode: FocusNode()..requestFocus(),
-        autofocus: true,
-        onKeyEvent: (event) {
+      body: Focus(
+        autofocus: false,
+        onKeyEvent: (node, event) {
           // Tutup preview saat tombol Back / Escape ditekan
           if (event is KeyDownEvent &&
               (event.logicalKey == LogicalKeyboardKey.goBack ||
                   event.logicalKey == LogicalKeyboardKey.escape ||
                   event.logicalKey == LogicalKeyboardKey.browserBack)) {
             Navigator.of(context).maybePop();
+            return KeyEventResult.handled;
           }
+          return KeyEventResult.ignored;
         },
         child: Stack(
           children: [
