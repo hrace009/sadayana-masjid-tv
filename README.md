@@ -1,12 +1,15 @@
-﻿# 🕌 Miqotul Khoir TV
+# 🕌 Miqotul Khoir TV
 
 ![Platform: Android TV](https://img.shields.io/badge/platform-Android%20TV-green)
 ![Framework: Flutter](https://img.shields.io/badge/framework-Flutter-blue)
 ![Architecture: Clean Architecture](https://img.shields.io/badge/architecture-Clean%20Architecture-purple)
-![Status: In Development](https://img.shields.io/badge/status-In%20Development-yellow)
+![Status: Production Ready](https://img.shields.io/badge/status-Production%20Ready-green)
 ![License: GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue)
+[![Get it on Google Play](https://img.shields.io/badge/Google%20Play-Get%20it%20on-black?logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=gulajava.mini.miqotul_khoir_tv&pli=1)
 
 Aplikasi **jam masjid digital** dan papan informasi jadwal sholat berbasis Android TV. Dirancang untuk menggantikan jam jadwal sholat konvensional di masjid atau musala dengan tampilan yang indah dan mudah dibaca dari jarak jauh.
+
+Dapatkan aplikasi resminya di [Google Play Store](https://play.google.com/store/apps/details?id=gulajava.mini.miqotul_khoir_tv&pli=1).
 
 Dirancang dengan prinsip **Offline-First** — cukup masukkan koordinat lokasi satu kali, dan aplikasi ini menghitung jadwal sholat secara **presisi abadi** tanpa perlu terhubung ke internet. Kompatibel dengan **TV Android**, **TV Pintar**, dan **Kotak Dekoder**.
 
