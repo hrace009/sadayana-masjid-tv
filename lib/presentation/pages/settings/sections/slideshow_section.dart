@@ -13,6 +13,7 @@ import '../../../cubits/settings/settings_cubit.dart';
 import '../../../cubits/settings/settings_state.dart';
 import '../../../cubits/slideshow_section/slideshow_section_cubit.dart';
 import '../../../cubits/slideshow_section/slideshow_section_state.dart';
+import '../../../cubits/display_state/display_state_cubit.dart';
 import '../../../widgets/dpad_stepper.dart';
 import '../../../widgets/focusable_widget.dart';
 import '../../slideshow_preview_page.dart';
@@ -39,9 +40,10 @@ class SlideshowSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SlideshowSectionCubit>(
-      create: (_) => SlideshowSectionCubit(
+      create: (context) => SlideshowSectionCubit(
         imageRepository: context.read<SlideshowImageRepository>(),
         storageService: context.read<SlideshowFileStorageService>(),
+        displayStateCubit: context.read<DisplayStateCubit>(),
       )..loadImages(),
       child: const _SlideshowSectionContent(),
     );

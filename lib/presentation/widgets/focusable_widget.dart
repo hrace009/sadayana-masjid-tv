@@ -99,6 +99,7 @@ class _FocusableWidgetState extends State<FocusableWidget> {
         scale: _isFocused ? 1.02 : 1.0,
         duration: widget.focusAnimationDuration,
         child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () {
             _effectiveFocusNode.requestFocus();
             widget.onSelect?.call();

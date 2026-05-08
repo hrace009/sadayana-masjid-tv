@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/src/platform/file_picker_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -11,6 +12,7 @@ import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.
 import 'package:miqotul_khoir_tv/domain/services/slideshow_file_storage_service.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/slideshow_section/slideshow_section_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/slideshow_section/slideshow_section_state.dart';
+import 'package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart';
 
 // ---------------------------------------------------------------------------
 // Mocks
@@ -24,7 +26,9 @@ class MockSlideshowFileStorageService extends Mock
 
 class MockFilePicker extends Mock
     with MockPlatformInterfaceMixin
-    implements FilePicker {}
+    implements FilePickerPlatform {}
+
+class MockDisplayStateCubit extends Mock implements DisplayStateCubit {}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -66,6 +70,7 @@ void main() {
   late MockSlideshowImageRepository repo;
   late MockSlideshowFileStorageService storage;
   late MockFilePicker mockPicker;
+  late MockDisplayStateCubit displayCubit;
 
   setUpAll(() {
     // mocktail perlu fallback value untuk enum/class yang dipakai dengan any()
@@ -88,11 +93,16 @@ void main() {
     repo = MockSlideshowImageRepository();
     storage = MockSlideshowFileStorageService();
     mockPicker = MockFilePicker();
-    FilePicker.platform = mockPicker;
+    FilePickerPlatform.instance = mockPicker;
+    displayCubit = MockDisplayStateCubit();
+    when(() => displayCubit.onSettingsChanged()).thenAnswer((_) async {});
   });
 
-  SlideshowSectionCubit buildCubit() =>
-      SlideshowSectionCubit(imageRepository: repo, storageService: storage);
+  SlideshowSectionCubit buildCubit() => SlideshowSectionCubit(
+        imageRepository: repo,
+        storageService: storage,
+        displayStateCubit: displayCubit,
+      );
 
   // ---------------------------------------------------------------------------
   // loadImages()

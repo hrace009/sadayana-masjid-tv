@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
 import 'package:miqotul_khoir_tv/domain/services/slideshow_file_storage_service.dart';
 import 'slideshow_section_state.dart';
+import '../display_state/display_state_cubit.dart';
 
 /// Cubit yang mengelola manajemen 3 slot gambar slideshow dari Settings UI.
 ///
@@ -31,12 +32,15 @@ import 'slideshow_section_state.dart';
 class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
   final SlideshowImageRepository _imageRepository;
   final SlideshowFileStorageService _storageService;
+  final DisplayStateCubit? _displayStateCubit;
 
   SlideshowSectionCubit({
     required SlideshowImageRepository imageRepository,
     required SlideshowFileStorageService storageService,
+    DisplayStateCubit? displayStateCubit,
   }) : _imageRepository = imageRepository,
        _storageService = storageService,
+       _displayStateCubit = displayStateCubit,
        super(const SlideshowSectionState.initial());
 
   // ---------------------------------------------------------------------------
@@ -81,6 +85,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       );
       await _imageRepository.save(image);
       await _reloadImages();
+      _displayStateCubit?.onSettingsChanged();
     } catch (e) {
       emit(
         state.copyWith(
@@ -120,6 +125,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       );
       await _imageRepository.save(newImage);
       await _reloadImages();
+      _displayStateCubit?.onSettingsChanged();
     } catch (e) {
       emit(
         state.copyWith(
@@ -148,6 +154,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
         await _imageRepository.deleteBySlot(slotIndex);
       }
       await _reloadImages();
+      _displayStateCubit?.onSettingsChanged();
     } catch (e) {
       emit(
         state.copyWith(
@@ -173,7 +180,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
   /// Filter ekstensi disesuaikan dengan whitelist SEC-004: jpg, jpeg, png, webp.
   /// [withData: true] memastikan bytes tersedia di semua platform (Android TV).
   Future<_PickedFile?> _pickImageBytes() async {
-    final result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png', 'webp'],
       allowMultiple: false,

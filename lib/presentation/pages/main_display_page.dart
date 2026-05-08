@@ -64,7 +64,12 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
 
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (_) => const PinGatePage()))
-        .then((_) => _focusNode.requestFocus());
+        .then((_) {
+      if (mounted) {
+        context.read<DisplayStateCubit>().onSettingsChanged();
+        _focusNode.requestFocus();
+      }
+    });
   }
 
   @override

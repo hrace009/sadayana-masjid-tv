@@ -135,7 +135,7 @@ class SlideshowPreviewPage extends StatelessWidget {
                     // Tombol tutup
                     FocusableWidget(
                       autofocus: true,
-                      onSelect: () => Navigator.of(context).maybePop(),
+                      onSelect: () => Navigator.of(context).pop(),
                       builder: (isFocused) => Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 20.w,
