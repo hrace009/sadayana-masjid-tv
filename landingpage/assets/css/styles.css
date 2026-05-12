@@ -1,0 +1,429 @@
+/* =============================================================================
+   Miqotul Khoir TV Masjid — Custom Theme
+   Ref: BRD-001, BRD-003, TASK-003, TASK-004
+   ============================================================================= */
+
+/* --- CSS Variables (Brand Colors — BRD-001) -------------------------------- */
+:root {
+  --mkt-deep-teal: #075b5e;
+  --mkt-primary-teal: #0e9296;
+  --mkt-light-teal: #1cc0c5;
+  --mkt-gold: #d4a012;
+  --mkt-light-gold: #e8c547;
+  --mkt-dark-bg: #041e1e;
+  --mkt-surface-dark: #082e2e;
+  --mkt-surface-light: #0f4343;
+  --mkt-text-primary: #f5f5f5;
+  --mkt-text-secondary: #b0c9c6;
+  --mkt-text-muted: #739a95;
+
+  /* Spacing & UI helpers */
+  --mkt-radius: 12px;
+  --mkt-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --mkt-shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* --- Base & Reset ----------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* GUD-003 */
+}
+
+body {
+  background-color: var(--mkt-dark-bg);
+  color: var(--mkt-text-primary);
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Link ------------------------------------------------------------------- */
+a {
+  color: var(--mkt-light-teal);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--mkt-light-gold);
+}
+
+/* --- Typography Helpers ----------------------------------------------------- */
+.mkt-text-primary {
+  color: var(--mkt-text-primary) !important;
+}
+.mkt-text-secondary {
+  color: var(--mkt-text-secondary) !important;
+}
+.mkt-text-muted {
+  color: var(--mkt-text-muted) !important;
+}
+.mkt-text-gold {
+  color: var(--mkt-gold) !important;
+}
+.mkt-text-teal {
+  color: var(--mkt-light-teal) !important;
+}
+
+/* --- Background Helpers ----------------------------------------------------- */
+.mkt-bg-dark {
+  background-color: var(--mkt-dark-bg);
+}
+.mkt-bg-surface {
+  background-color: var(--mkt-surface-dark);
+}
+.mkt-bg-card {
+  background-color: var(--mkt-surface-light);
+}
+
+/* --- Navbar ----------------------------------------------------------------- */
+.navbar-mkt {
+  background-color: var(--mkt-surface-dark);
+  border-bottom: 1px solid rgba(28, 192, 197, 0.15);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar-mkt.scrolled {
+  background-color: rgba(4, 30, 30, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--mkt-shadow);
+}
+
+.navbar-mkt .navbar-brand {
+  color: var(--mkt-text-primary);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+}
+
+.navbar-mkt .navbar-brand:hover {
+  color: var(--mkt-light-teal);
+}
+
+.navbar-mkt .nav-link {
+  color: var(--mkt-text-secondary);
+  font-size: 0.9rem;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
+}
+
+.navbar-mkt .nav-link:hover,
+.navbar-mkt .nav-link:focus {
+  color: var(--mkt-light-teal);
+}
+
+.navbar-mkt .navbar-toggler {
+  border-color: rgba(28, 192, 197, 0.4);
+}
+
+.navbar-mkt .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* --- Buttons ---------------------------------------------------------------- */
+.btn-mkt-primary {
+  background-color: var(--mkt-gold);
+  color: var(--mkt-dark-bg);
+  border: none;
+  border-radius: var(--mkt-radius);
+  font-weight: 700;
+  padding: 0.625rem 1.5rem;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-mkt-primary:hover,
+.btn-mkt-primary:focus {
+  background-color: var(--mkt-light-gold);
+  color: var(--mkt-dark-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(212, 160, 18, 0.35);
+}
+
+.btn-mkt-outline {
+  background-color: transparent;
+  color: var(--mkt-light-teal);
+  border: 2px solid var(--mkt-light-teal);
+  border-radius: var(--mkt-radius);
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.btn-mkt-outline:hover,
+.btn-mkt-outline:focus {
+  background-color: var(--mkt-light-teal);
+  color: var(--mkt-dark-bg);
+}
+
+/* --- Badges ----------------------------------------------------------------- */
+.badge-mkt {
+  background-color: rgba(28, 192, 197, 0.15);
+  color: var(--mkt-light-teal);
+  border: 1px solid rgba(28, 192, 197, 0.35);
+  border-radius: 2rem;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-mkt-gold {
+  background-color: rgba(212, 160, 18, 0.12);
+  color: var(--mkt-light-gold);
+  border: 1px solid rgba(212, 160, 18, 0.3);
+  border-radius: 2rem;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* --- Feature Cards --------------------------------------------------------- */
+.card-mkt {
+  background-color: var(--mkt-surface-light);
+  border: 1px solid rgba(28, 192, 197, 0.18);
+  border-radius: var(--mkt-radius);
+  box-shadow: var(--mkt-shadow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.card-mkt:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mkt-shadow-lg);
+}
+
+.card-mkt .card-icon {
+  font-size: 2rem;
+  color: var(--mkt-light-teal);
+  line-height: 1;
+}
+
+.card-mkt .card-icon.icon-gold {
+  color: var(--mkt-gold);
+}
+
+/* --- Section Layout -------------------------------------------------------- */
+.section-mkt {
+  padding: 5rem 0;
+}
+
+.section-mkt-alt {
+  padding: 5rem 0;
+  background-color: var(--mkt-surface-dark);
+}
+
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--mkt-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+  color: var(--mkt-text-secondary);
+  font-size: 1rem;
+  max-width: 640px;
+}
+
+/* Divider accent line */
+.section-divider {
+  width: 48px;
+  height: 4px;
+  background-color: var(--mkt-gold);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+}
+
+/* --- Hero ------------------------------------------------------------------- */
+.hero-mkt {
+  background: linear-gradient(
+    135deg,
+    var(--mkt-dark-bg) 0%,
+    var(--mkt-surface-dark) 55%,
+    var(--mkt-deep-teal) 100%
+  );
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px; /* Kompensasi navbar sticky */
+}
+
+.hero-mkt h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  color: var(--mkt-text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-mkt .lead {
+  color: var(--mkt-text-secondary);
+  font-size: 1.125rem;
+}
+
+/* --- TV Mockup Frame ------------------------------------------------------- */
+.tv-frame {
+  background-color: var(--mkt-surface-dark);
+  border: 3px solid rgba(28, 192, 197, 0.3);
+  border-radius: 16px;
+  padding: 1rem 1rem 0.5rem;
+  box-shadow: var(--mkt-shadow-lg);
+}
+
+.tv-frame::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 8px;
+  background-color: var(--mkt-surface-light);
+  border-radius: 4px;
+  margin: 0.5rem auto 0;
+}
+
+.tv-screen {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background-color: var(--mkt-dark-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tv-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* TASK-018 */
+}
+
+/* --- Screenshot Grid ------------------------------------------------------- */
+.screenshot-container {
+  aspect-ratio: 16 / 9;
+  background-color: var(--mkt-surface-dark);
+  border-radius: var(--mkt-radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenshot-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* TASK-018 */
+}
+
+/* Placeholder visual jika screenshot belum tersedia (TASK-017) */
+.screenshot-placeholder {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(
+    135deg,
+    var(--mkt-surface-dark),
+    var(--mkt-deep-teal)
+  );
+  border-radius: var(--mkt-radius);
+  border: 1px dashed rgba(28, 192, 197, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--mkt-text-muted);
+  font-size: 0.875rem;
+  gap: 0.5rem;
+}
+
+.screenshot-placeholder i {
+  font-size: 2.5rem;
+  opacity: 0.45;
+}
+
+/* --- How-It-Works Steps ---------------------------------------------------- */
+.step-number {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background-color: var(--mkt-primary-teal);
+  color: var(--mkt-text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  box-shadow: 0 2px 12px rgba(14, 146, 150, 0.4);
+}
+
+/* --- CTA Section ----------------------------------------------------------- */
+.cta-section {
+  background: linear-gradient(
+    135deg,
+    var(--mkt-deep-teal),
+    var(--mkt-surface-dark)
+  );
+  padding: 5rem 0;
+}
+
+/* --- Footer ----------------------------------------------------------------- */
+.footer-mkt {
+  background-color: var(--mkt-dark-bg);
+  border-top: 1px solid rgba(28, 192, 197, 0.12);
+  padding: 2.5rem 0;
+  color: var(--mkt-text-muted);
+  font-size: 0.875rem;
+}
+
+.footer-mkt a {
+  color: var(--mkt-text-secondary);
+}
+
+.footer-mkt a:hover {
+  color: var(--mkt-light-teal);
+}
+
+/* --- Responsive Tweaks ----------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .section-mkt,
+  .section-mkt-alt,
+  .cta-section {
+    padding: 3rem 0;
+  }
+
+  .hero-mkt {
+    min-height: auto;
+    padding: 100px 0 3rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero-mkt {
+    padding-top: 88px;
+  }
+}
