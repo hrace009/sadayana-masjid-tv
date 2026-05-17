@@ -44,6 +44,16 @@ class TransitionConfig extends Equatable {
   final int slideshowEndHour;
   final int slideshowEndMinute;
 
+  // Jadwal Imam Sholat Berjamaah
+  // Catatan: isImamScheduleLocked tidak masuk TransitionConfig (GUD-005)
+  final bool isImamScheduleEnabled;
+  final int imamScheduleIntervalMinutes;
+  final int imamScheduleDurationSeconds;
+  final int imamScheduleStartHour;
+  final int imamScheduleStartMinute;
+  final int imamScheduleEndHour;
+  final int imamScheduleEndMinute;
+
   const TransitionConfig({
     required this.preAdzanMinutes,
     required this.adzanDurationSeconds,
@@ -75,6 +85,13 @@ class TransitionConfig extends Equatable {
     this.slideshowStartMinute = 0,
     this.slideshowEndHour = 21,
     this.slideshowEndMinute = 0,
+    this.isImamScheduleEnabled = false,
+    this.imamScheduleIntervalMinutes = 15,
+    this.imamScheduleDurationSeconds = 30,
+    this.imamScheduleStartHour = 6,
+    this.imamScheduleStartMinute = 0,
+    this.imamScheduleEndHour = 21,
+    this.imamScheduleEndMinute = 0,
   });
 
   /// Factory method untuk membuat [TransitionConfig] dari [Settings].
@@ -117,6 +134,13 @@ class TransitionConfig extends Equatable {
       slideshowStartMinute: settings.slideshowStartMinute,
       slideshowEndHour: settings.slideshowEndHour,
       slideshowEndMinute: settings.slideshowEndMinute,
+      isImamScheduleEnabled: settings.isImamScheduleEnabled,
+      imamScheduleIntervalMinutes: settings.imamScheduleIntervalMinutes,
+      imamScheduleDurationSeconds: settings.imamScheduleDurationSeconds,
+      imamScheduleStartHour: settings.imamScheduleStartHour,
+      imamScheduleStartMinute: settings.imamScheduleStartMinute,
+      imamScheduleEndHour: settings.imamScheduleEndHour,
+      imamScheduleEndMinute: settings.imamScheduleEndMinute,
     );
   }
 
@@ -166,5 +190,12 @@ class TransitionConfig extends Equatable {
     slideshowStartMinute,
     slideshowEndHour,
     slideshowEndMinute,
+    isImamScheduleEnabled,
+    imamScheduleIntervalMinutes,
+    imamScheduleDurationSeconds,
+    imamScheduleStartHour,
+    imamScheduleStartMinute,
+    imamScheduleEndHour,
+    imamScheduleEndMinute,
   ];
 }

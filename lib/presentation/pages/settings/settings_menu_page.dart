@@ -17,6 +17,7 @@ import 'sections/running_text_section.dart';
 import 'sections/security_section.dart';
 import 'sections/treasury_section.dart';
 import 'sections/alert_settings_section.dart';
+import 'sections/imam_schedule_section.dart';
 import 'sections/midnight_mode_section.dart';
 import 'sections/slideshow_section.dart';
 import 'sections/wisdom_quote_section.dart';
@@ -44,6 +45,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     "Informasi Kas",
     "Kata Mutiara",
     "Slideshow Pengumuman",
+    "Jadwal Imam",
     "Mode Hemat Daya",
     "Reset Data",
     "Tentang Aplikasi",
@@ -61,6 +63,7 @@ class _SettingsMenuPageState extends State<SettingsMenuPage> {
     TreasurySection(),
     WisdomQuoteSection(),
     SlideshowSection(),
+    ImamScheduleSection(),
     MidnightModeSection(),
     ResetSection(),
     AboutSection(),

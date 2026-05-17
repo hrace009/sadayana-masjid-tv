@@ -2,6 +2,7 @@
 
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
+import 'package:miqotul_khoir_tv/domain/entities/imam_schedule_display.dart';
 import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 
@@ -21,6 +22,7 @@ class EvaluateDisplayStateUseCase {
     String? hijriDate,
     List<WisdomQuote>? activeQuotes,
     List<SlideshowImage>? slideshowImages,
+    List<ImamScheduleDisplay>? todayImamSchedule,
   }) {
     // 1. Iterasi hanya sholat wajib (5 waktu)
     final mainPrayers = dailyPrayerTimes.mainPrayers;
@@ -102,8 +104,8 @@ class EvaluateDisplayStateUseCase {
       if (midnightState != null) return midnightState;
     }
 
-    // 4. Slideshow Announcement window check (setelah midnight, sebelum wisdom)
-    // TS-P5-005: urutan eksplisit — prayer -> midnight -> slideshow -> wisdom -> standby
+    // 4. Slideshow Announcement window check (setelah midnight, sebelum imam)
+    // Urutan eksplisit: prayer -> midnight -> slideshow -> imam_schedule -> wisdom -> standby
     if (config.isSlideshowEnabled &&
         slideshowImages != null &&
         slideshowImages.isNotEmpty) {
@@ -115,7 +117,20 @@ class EvaluateDisplayStateUseCase {
       if (slideshowState != null) return slideshowState;
     }
 
-    // 5. Wisdom Quote window check (sebelum fallback ke Standby)
+    // 5. Imam Schedule window check (setelah slideshow, sebelum wisdom)
+    if (config.isImamScheduleEnabled &&
+        todayImamSchedule != null &&
+        todayImamSchedule.isNotEmpty) {
+      final imamState = _evaluateImamScheduleWindow(
+        now: now,
+        config: config,
+        todaySchedule: todayImamSchedule,
+        hijriDate: hijriDate ?? '',
+      );
+      if (imamState != null) return imamState;
+    }
+
+    // 6. Wisdom Quote window check (sebelum fallback ke Standby)
     if (config.isWisdomEnabled &&
         activeQuotes != null &&
         activeQuotes.isNotEmpty) {
@@ -127,7 +142,7 @@ class EvaluateDisplayStateUseCase {
       if (wisdomState != null) return wisdomState;
     }
 
-    // 5. Fallback: Standby State
+    // 7. Fallback: Standby State
     final nextPrayer = dailyPrayerTimes.nextPrayer(now);
     Duration? timeToNext;
 
@@ -142,6 +157,80 @@ class EvaluateDisplayStateUseCase {
       runningText: runningText,
       hijriDate: hijriDate,
       currentTime: now,
+    );
+  }
+
+  /// Daftar nama hari dalam Bahasa Indonesia (indeks 0 tidak dipakai;
+  /// 1=Senin...7=Minggu mengikuti ISO 8601 / [DateTime.weekday]).
+  static const _dayNames = [
+    '',
+    'SENIN',
+    'SELASA',
+    'RABU',
+    'KAMIS',
+    "JUM'AT",
+    'SABTU',
+    'MINGGU',
+  ];
+
+  /// Evaluasi apakah waktu [now] berada dalam window dan slot aktif
+  /// jadwal imam sholat berjamaah.
+  ///
+  /// **Logika siklus**:
+  /// - `cycleLength = intervalMinutes * 60 + durationSeconds`
+  /// - `positionInCycle = secondsSinceWindowStart % cycleLength`
+  /// - Jika `positionInCycle < durationSeconds` → dalam slot aktif, tampilkan jadwal.
+  /// - Jika `positionInCycle >= durationSeconds` → dalam jeda interval, kembalikan null.
+  ///
+  /// Mengembalikan [ImamScheduleState] jika dalam slot aktif, null jika tidak.
+  ImamScheduleState? _evaluateImamScheduleWindow({
+    required DateTime now,
+    required TransitionConfig config,
+    required List<ImamScheduleDisplay> todaySchedule,
+    required String hijriDate,
+  }) {
+    // 1. Cek apakah now berada dalam window aktif jadwal imam
+    final windowStart = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      config.imamScheduleStartHour,
+      config.imamScheduleStartMinute,
+    );
+    final windowEnd = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      config.imamScheduleEndHour,
+      config.imamScheduleEndMinute,
+    );
+
+    if (!now.isAfterOrEqual(windowStart) || !now.isBefore(windowEnd)) {
+      return null;
+    }
+
+    // 2. Hitung parameter siklus
+    final durationSeconds = config.imamScheduleDurationSeconds;
+    final intervalSeconds = config.imamScheduleIntervalMinutes * 60;
+    final cycleLength = durationSeconds + intervalSeconds;
+
+    final secondsSinceStart = now.difference(windowStart).inSeconds;
+    final positionInCycle = secondsSinceStart % cycleLength;
+
+    // 3. Jika posisi berada dalam jeda interval, bukan dalam slot aktif
+    if (positionInCycle >= durationSeconds) return null;
+
+    // 4. Bangun state dengan sisa waktu dan nama hari
+    final remainingSeconds = durationSeconds - positionInCycle;
+    final dayName = _dayNames[now.weekday];
+
+    return ImamScheduleState(
+      dayName: dayName,
+      hijriDate: hijriDate,
+      slots: todaySchedule,
+      currentTime: now,
+      totalDurationSeconds: durationSeconds,
+      remainingSeconds: remainingSeconds.clamp(0, durationSeconds),
     );
   }
 

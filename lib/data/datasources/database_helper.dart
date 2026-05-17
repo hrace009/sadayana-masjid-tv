@@ -20,7 +20,7 @@ class DatabaseHelper {
   static const String _databaseName = 'miqotul_khoir.db';
 
   /// Versi database saat ini. Increment untuk setiap schema change.
-  static const int _databaseVersion = 10;
+  static const int _databaseVersion = 11;
 
   // ---------------------------------------------------------------------------
   // Singleton
@@ -59,6 +59,7 @@ class DatabaseHelper {
     return openDatabase(
       path,
       version: _databaseVersion,
+      onConfigure: _onConfigure,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -80,6 +81,14 @@ class DatabaseHelper {
   // ---------------------------------------------------------------------------
   // Lifecycle Callbacks
   // ---------------------------------------------------------------------------
+
+  /// Dipanggil saat koneksi database pertama kali dibuka.
+  ///
+  /// Mengaktifkan foreign key enforcement agar `ON DELETE SET NULL`
+  /// pada tabel `imam_schedules` benar-benar berjalan [CON-005].
+  Future<void> _onConfigure(Database db) async {
+    await db.execute('PRAGMA foreign_keys = ON');
+  }
 
   /// Dipanggil saat database pertama kali dibuat.
   ///
@@ -247,6 +256,52 @@ class DatabaseHelper {
           updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
         )
       ''');
+    }
+    if (oldVersion < 11) {
+      // Tambah tabel master imam dan jadwal mingguan (fitur Jadwal Imam Sholat)
+      await db.execute('''
+        CREATE TABLE imams (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL UNIQUE,
+          is_active INTEGER NOT NULL DEFAULT 1,
+          created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE imam_schedules (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          day_of_week INTEGER NOT NULL CHECK (day_of_week BETWEEN 1 AND 7),
+          prayer_name TEXT NOT NULL CHECK (prayer_name IN ('subuh','dzuhur','ashar','maghrib','isya','jumat')),
+          imam_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+          khatib_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+          UNIQUE(day_of_week, prayer_name)
+        )
+      ''');
+      // Tambah 8 kolom konfigurasi jadwal imam ke tabel settings
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_imam_schedule_enabled INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN imam_schedule_interval_minutes INTEGER NOT NULL DEFAULT 15',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN imam_schedule_duration_seconds INTEGER NOT NULL DEFAULT 30',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN imam_schedule_start_hour INTEGER NOT NULL DEFAULT 6',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN imam_schedule_start_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN imam_schedule_end_hour INTEGER NOT NULL DEFAULT 21',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN imam_schedule_end_minute INTEGER NOT NULL DEFAULT 0',
+      );
+      await db.execute(
+        'ALTER TABLE settings ADD COLUMN is_imam_schedule_locked INTEGER NOT NULL DEFAULT 0',
+      );
     }
   }
 
@@ -428,6 +483,16 @@ class DatabaseHelper {
         slideshow_end_hour INTEGER NOT NULL DEFAULT 21,
         slideshow_end_minute INTEGER NOT NULL DEFAULT 0,
 
+        -- Jadwal Imam Sholat Berjamaah (fitur opsional, default OFF)
+        is_imam_schedule_enabled INTEGER NOT NULL DEFAULT 0,
+        imam_schedule_interval_minutes INTEGER NOT NULL DEFAULT 15,
+        imam_schedule_duration_seconds INTEGER NOT NULL DEFAULT 30,
+        imam_schedule_start_hour INTEGER NOT NULL DEFAULT 6,
+        imam_schedule_start_minute INTEGER NOT NULL DEFAULT 0,
+        imam_schedule_end_hour INTEGER NOT NULL DEFAULT 21,
+        imam_schedule_end_minute INTEGER NOT NULL DEFAULT 0,
+        is_imam_schedule_locked INTEGER NOT NULL DEFAULT 0,
+
         -- Adzan Duration (Seconds)
         adzan_duration_seconds INTEGER NOT NULL DEFAULT 180,
 
@@ -458,6 +523,28 @@ class DatabaseHelper {
         file_size_bytes INTEGER NOT NULL,
         created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
         updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+      )
+    ''');
+
+    // -- Table: imams (master data imam sholat berjamaah, maks 10 data) --
+    await db.execute('''
+      CREATE TABLE imams (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL UNIQUE,
+        is_active INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+      )
+    ''');
+
+    // -- Table: imam_schedules (jadwal imam per hari per waktu sholat) --
+    await db.execute('''
+      CREATE TABLE imam_schedules (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        day_of_week INTEGER NOT NULL CHECK (day_of_week BETWEEN 1 AND 7),
+        prayer_name TEXT NOT NULL CHECK (prayer_name IN ('subuh','dzuhur','ashar','maghrib','isya','jumat')),
+        imam_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+        khatib_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+        UNIQUE(day_of_week, prayer_name)
       )
     ''');
 

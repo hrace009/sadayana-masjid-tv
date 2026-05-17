@@ -3,6 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state_type.dart';
+import 'package:miqotul_khoir_tv/domain/entities/imam_schedule_display.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
 import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
@@ -1119,6 +1120,454 @@ void main() {
         // Slideshow dievaluasi sebelum wisdom → harus menang
         expect(result, isA<SlideshowAnnouncementState>());
       });
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Imam Schedule Evaluation tests
+  // Ref: TASK-024 (Phase 5), TEST-007
+  // ---------------------------------------------------------------------------
+
+  group('Imam Schedule Evaluation', () {
+    // Config: enabled, interval 15 menit, durasi 30 detik, window 06:00–21:00
+    // cycleLength = 30 + (15 * 60) = 930 detik
+    const imamConfig = TransitionConfig(
+      preAdzanMinutes: 10,
+      adzanDurationSeconds: 180,
+      sholatDurationMinutes: 10,
+      iqomahMinutes: {
+        'Subuh': 10,
+        'Dzuhur': 10,
+        'Ashar': 10,
+        'Maghrib': 10,
+        'Isya': 10,
+      },
+      isImamScheduleEnabled: true,
+      imamScheduleIntervalMinutes: 15,
+      imamScheduleDurationSeconds: 30,
+      imamScheduleStartHour: 6,
+      imamScheduleStartMinute: 0,
+      imamScheduleEndHour: 21,
+      imamScheduleEndMinute: 0,
+    );
+
+    // Helper: buat slot jadwal reguler (non-Jumat)
+    ImamScheduleDisplay makeSlot({
+      required int dayOfWeek,
+      required String prayerName,
+      String? imamName,
+    }) {
+      return ImamScheduleDisplay(
+        dayOfWeek: dayOfWeek,
+        prayerName: prayerName,
+        prayerLabel: prayerName[0].toUpperCase() + prayerName.substring(1),
+        imamId: imamName != null ? 1 : null,
+        imamName: imamName,
+        khatibId: null,
+        khatibName: null,
+      );
+    }
+
+    // Jadwal contoh: 5 slot Senin (dayOfWeek=1)
+    final todaySchedule = [
+      makeSlot(dayOfWeek: 1, prayerName: 'subuh', imamName: 'Ust. Ahmad'),
+      makeSlot(dayOfWeek: 1, prayerName: 'dzuhur', imamName: 'Ust. Budi'),
+      makeSlot(dayOfWeek: 1, prayerName: 'ashar'),
+      makeSlot(dayOfWeek: 1, prayerName: 'maghrib', imamName: 'Ust. Candra'),
+      makeSlot(dayOfWeek: 1, prayerName: 'isya', imamName: 'Ust. Dani'),
+    ];
+
+    group('Guard: isImamScheduleEnabled = false', () {
+      test('mengembalikan StandbyState jika imam schedule disabled', () {
+        const disabledConfig = TransitionConfig(
+          preAdzanMinutes: 10,
+          adzanDurationSeconds: 180,
+          sholatDurationMinutes: 10,
+          iqomahMinutes: {
+            'Subuh': 10,
+            'Dzuhur': 10,
+            'Ashar': 10,
+            'Maghrib': 10,
+            'Isya': 10,
+          },
+          isImamScheduleEnabled: false,
+          imamScheduleIntervalMinutes: 15,
+          imamScheduleDurationSeconds: 30,
+          imamScheduleStartHour: 6,
+          imamScheduleStartMinute: 0,
+          imamScheduleEndHour: 21,
+          imamScheduleEndMinute: 0,
+        );
+
+        // now = 10:00:00 — dalam window, siklus pertama slot aktif (pos=0)
+        final now = DateTime(2026, 2, 19, 10, 0, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: disabledConfig,
+          todayImamSchedule: todaySchedule,
+        );
+
+        expect(result, isNot(isA<ImamScheduleState>()));
+        expect(result, isA<StandbyState>());
+      });
+    });
+
+    group('Guard: todayImamSchedule = null atau kosong', () {
+      test('mengembalikan StandbyState jika todayImamSchedule = null', () {
+        final now = DateTime(2026, 2, 19, 10, 0, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: imamConfig,
+          // todayImamSchedule tidak diisi → null
+        );
+
+        expect(result, isNot(isA<ImamScheduleState>()));
+      });
+
+      test('mengembalikan StandbyState jika todayImamSchedule kosong', () {
+        final now = DateTime(2026, 2, 19, 10, 0, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: imamConfig,
+          todayImamSchedule: const [],
+        );
+
+        expect(result, isNot(isA<ImamScheduleState>()));
+      });
+    });
+
+    group('Guard: waktu di luar window', () {
+      test('mengembalikan non-ImamSchedule state sebelum window (05:59)', () {
+        final now = DateTime(2026, 2, 19, 5, 59);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: imamConfig,
+          todayImamSchedule: todaySchedule,
+        );
+
+        expect(result, isNot(isA<ImamScheduleState>()));
+      });
+
+      test(
+        'mengembalikan non-ImamSchedule state saat at/after window end (21:00)',
+        () {
+          final now = DateTime(2026, 2, 19, 21, 0);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: imamConfig,
+            todayImamSchedule: todaySchedule,
+          );
+
+          expect(result, isNot(isA<ImamScheduleState>()));
+        },
+      );
+    });
+
+    group('Imam schedule slot aktif (dalam window + dalam durasi)', () {
+      // now = 10:00:00 tepat (secondsSinceStart = 0, positionInCycle = 0)
+      // positionInCycle = 0 < durationSeconds (30) → slot aktif
+      test(
+        'mengembalikan ImamScheduleState di awal window (10:00:00)',
+        () {
+          // now = tepat di windowStart (06:00:00) → secondsSinceStart=0
+          // positionInCycle = 0 < 30 → slot aktif
+          final now = DateTime(2026, 2, 19, 6, 0, 0);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: imamConfig,
+            todayImamSchedule: todaySchedule,
+          );
+
+          expect(result, isA<ImamScheduleState>());
+          final state = result as ImamScheduleState;
+          expect(state.type, DisplayStateType.imamSchedule);
+          expect(state.slots, equals(todaySchedule));
+          expect(state.totalDurationSeconds, equals(30));
+          expect(state.remainingSeconds, equals(30));
+        },
+      );
+
+      test('state.dayName menggunakan nama hari Indonesia kapital', () {
+        // 2026-02-19 adalah hari Kamis (weekday = 4).
+        // Gunakan now = 06:00:00 (tepat di windowStart) → positionInCycle=0 → slot aktif.
+        final now = DateTime(2026, 2, 19, 6, 0, 0);
+        when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+        final result = useCase.evaluate(
+          now: now,
+          dailyPrayerTimes: mockDailyPrayerTimes,
+          config: imamConfig,
+          todayImamSchedule: todaySchedule,
+        );
+
+        expect(result, isA<ImamScheduleState>());
+        // weekday=4 → 'KAMIS'
+        expect((result as ImamScheduleState).dayName, equals('KAMIS'));
+      });
+
+      test(
+        'remainingSeconds berkurang seiring waktu (posisi 10 detik → sisa 20)',
+        () {
+          // Gunakan now = 06:00:10 (windowStart + 10 detik)
+          // positionInCycle = 10 < 30 → slot aktif, remainingSeconds = 30 - 10 = 20
+          final now = DateTime(2026, 2, 19, 6, 0, 10);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: imamConfig,
+            todayImamSchedule: todaySchedule,
+          );
+
+          expect(result, isA<ImamScheduleState>());
+          expect((result as ImamScheduleState).remainingSeconds, equals(20));
+        },
+      );
+    });
+
+    group('Imam schedule jeda interval', () {
+      // positionInCycle = 30 (tepat mulai interval) → null
+      test(
+        'mengembalikan non-ImamSchedule state saat di dalam interval (posisi 30)',
+        () {
+          // secondsSinceWindowStart = 30 → positionInCycle = 30 >= 30 → null
+          final now = DateTime(2026, 2, 19, 10, 0, 30);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: imamConfig,
+            todayImamSchedule: todaySchedule,
+          );
+
+          expect(result, isNot(isA<ImamScheduleState>()));
+        },
+      );
+
+      test(
+        'mengembalikan ImamScheduleState di siklus ke-2 (posisi 930)',
+        () {
+          // cycleLength = 930. Siklus ke-2 dimulai di secondsSinceStart = 930.
+          // windowStart = 06:00. 930s setelah 06:00 = 06:15:30.
+          final now = DateTime(2026, 2, 19, 6, 15, 30);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: imamConfig,
+            todayImamSchedule: todaySchedule,
+          );
+
+          expect(result, isA<ImamScheduleState>());
+          // positionInCycle = 930 % 930 = 0 → remainingSeconds = 30
+          expect((result as ImamScheduleState).remainingSeconds, equals(30));
+        },
+      );
+    });
+
+    group('Prioritas: prayer > imam schedule', () {
+      test(
+        'PreAdzanState menang atas ImamScheduleState ketika prayer window aktif',
+        () {
+          // PreAdzan Dzuhur window: 11:50–12:00.
+          // Imam window: 06:00–21:00, siklus pertama (pos=0) → slot aktif.
+          // now = 11:55 (dalam PreAdzan Dzuhur DAN mungkin dalam imam slot)
+          // secondsSinceImamWindowStart = 5*3600+55*60 = 21300
+          // positionInCycle = 21300 % 930 = 21300 - 22*930 = 21300-20460 = 840 > 30 → jeda
+          // Jadi pada 11:55 imam sedang dalam jeda. Agar test ini valid:
+          // Gunakan waktu yang imam slot aktif DAN preAdzan aktif.
+          // imamScheduleStartHour=11, now=11:00:00 (pos=0=slot aktif), preAdzan 11:50–12:00.
+          const imamEarlyConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isImamScheduleEnabled: true,
+            imamScheduleIntervalMinutes: 15,
+            imamScheduleDurationSeconds: 30,
+            imamScheduleStartHour: 11,
+            imamScheduleStartMinute: 50,
+            imamScheduleEndHour: 21,
+            imamScheduleEndMinute: 0,
+          );
+
+          // PreAdzan Dzuhur: 11:50. now = 11:50:00 → preAdzan window aktif.
+          // imamWindow juga baru mulai di 11:50:00 → pos=0 → slot aktif.
+          // Prayer harus menang.
+          final now = DateTime(2026, 2, 19, 11, 50, 0);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: imamEarlyConfig,
+            todayImamSchedule: todaySchedule,
+          );
+
+          // Prayer window dievaluasi lebih dahulu → PreAdzanState menang
+          expect(
+            result,
+            isA<PreAdzanState>(),
+            reason: 'Prayer window (PreAdzan) harus lebih prioritas dari imam schedule',
+          );
+        },
+      );
+    });
+
+    group('Prioritas: slideshow > imam schedule', () {
+      test(
+        'SlideshowAnnouncementState menang atas ImamScheduleState',
+        () {
+          // Config: slideshow 08:00–20:00 (slot aktif di pos=0), imam 06:00–21:00 (slot aktif di pos=0)
+          const bothConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isSlideshowEnabled: true,
+            slideshowIntervalMinutes: 15,
+            slideshowSlotDurationMinutes: 2,
+            slideshowImageDurationSeconds: 15,
+            slideshowStartHour: 8,
+            slideshowStartMinute: 0,
+            slideshowEndHour: 20,
+            slideshowEndMinute: 0,
+            isImamScheduleEnabled: true,
+            imamScheduleIntervalMinutes: 15,
+            imamScheduleDurationSeconds: 30,
+            imamScheduleStartHour: 8,
+            imamScheduleStartMinute: 0,
+            imamScheduleEndHour: 21,
+            imamScheduleEndMinute: 0,
+          );
+
+          const testImgList = [
+            SlideshowImage(
+              slotIndex: 1,
+              fileName: 'img1.jpg',
+              storedPath: '/p/1.jpg',
+              mimeType: 'image/jpeg',
+              width: 1920,
+              height: 1080,
+              fileSizeBytes: 100000,
+            ),
+          ];
+
+          // 08:00:00 → slideshow pos=0 (slot aktif) DAN imam pos=0 (slot aktif)
+          final now = DateTime(2026, 2, 19, 8, 0, 0);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(maghrib);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: bothConfig,
+            slideshowImages: testImgList,
+            todayImamSchedule: todaySchedule,
+          );
+
+          // Slideshow dievaluasi sebelum imam schedule → harus menang
+          expect(
+            result,
+            isA<SlideshowAnnouncementState>(),
+            reason: 'Slideshow harus lebih prioritas dari imam schedule',
+          );
+        },
+      );
+    });
+
+    group('Prioritas: imam schedule > wisdom', () {
+      test(
+        'ImamScheduleState menang atas WisdomQuoteState ketika kedua window overlap',
+        () {
+          // Config: imam 06:00–21:00, wisdom 06:00–22:00 (overlap)
+          // Keduanya dalam slot aktif di 06:00:00
+          const bothConfig = TransitionConfig(
+            preAdzanMinutes: 10,
+            adzanDurationSeconds: 180,
+            sholatDurationMinutes: 10,
+            iqomahMinutes: {
+              'Subuh': 10,
+              'Dzuhur': 10,
+              'Ashar': 10,
+              'Maghrib': 10,
+              'Isya': 10,
+            },
+            isImamScheduleEnabled: true,
+            imamScheduleIntervalMinutes: 15,
+            imamScheduleDurationSeconds: 30,
+            imamScheduleStartHour: 6,
+            imamScheduleStartMinute: 0,
+            imamScheduleEndHour: 21,
+            imamScheduleEndMinute: 0,
+            isWisdomEnabled: true,
+            wisdomIntervalMinutes: 15,
+            wisdomDurationMinutes: 3,
+            wisdomStartHour: 6,
+            wisdomStartMinute: 0,
+            wisdomEndHour: 22,
+            wisdomEndMinute: 0,
+          );
+
+          const quoteA = WisdomQuote(
+            id: 'q1',
+            type: 'quran',
+            label: 'Q.S.',
+            translationText: 'Alif lam mim',
+            reference: '',
+          );
+
+          // 06:00:00 → imam pos=0 (slot aktif), wisdom pos=0 (slot aktif)
+          final now = DateTime(2026, 2, 19, 6, 0, 0);
+          when(() => mockDailyPrayerTimes.nextPrayer(now)).thenReturn(dzuhur);
+
+          final result = useCase.evaluate(
+            now: now,
+            dailyPrayerTimes: mockDailyPrayerTimes,
+            config: bothConfig,
+            todayImamSchedule: todaySchedule,
+            activeQuotes: [quoteA],
+          );
+
+          // Imam schedule dievaluasi sebelum wisdom → harus menang
+          expect(
+            result,
+            isA<ImamScheduleState>(),
+            reason: 'Imam schedule harus lebih prioritas dari wisdom quote',
+          );
+        },
+      );
     });
   });
 }

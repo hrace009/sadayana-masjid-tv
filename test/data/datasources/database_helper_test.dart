@@ -292,4 +292,232 @@ void main() {
 
     await db.close();
   });
+
+  // ---------------------------------------------------------------------------
+  // TEST-008: Fresh install membuat tabel imams dan imam_schedules
+  // ---------------------------------------------------------------------------
+
+  test(
+    'TEST-008: Fresh install membuat tabel imams dan imam_schedules',
+    () async {
+      final db = await createTestDatabase();
+
+      final tables = await db.rawQuery(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('imams', 'imam_schedules') ORDER BY name",
+      );
+
+      final tableNames = tables.map((r) => r['name'] as String).toList();
+      expect(tableNames, containsAll(['imam_schedules', 'imams']));
+    },
+  );
+
+  // ---------------------------------------------------------------------------
+  // TEST-009: Fresh install settings memiliki 8 kolom imam dengan default benar
+  // ---------------------------------------------------------------------------
+
+  test('TEST-009: Fresh install settings table memiliki 8 kolom imam '
+      'schedule dengan default values yang benar', () async {
+    await createTestDatabase();
+
+    final helper = DatabaseHelper();
+    final db = await helper.database;
+    final rows = await db.query('settings');
+
+    expect(rows, hasLength(1));
+    final row = rows.first;
+
+    expect(row['is_imam_schedule_enabled'], equals(0));
+    expect(row['imam_schedule_interval_minutes'], equals(15));
+    expect(row['imam_schedule_duration_seconds'], equals(30));
+    expect(row['imam_schedule_start_hour'], equals(6));
+    expect(row['imam_schedule_start_minute'], equals(0));
+    expect(row['imam_schedule_end_hour'], equals(21));
+    expect(row['imam_schedule_end_minute'], equals(0));
+    expect(row['is_imam_schedule_locked'], equals(0));
+  });
+
+  // ---------------------------------------------------------------------------
+  // TEST-010: Migration v10 → v11 menambah tabel dan kolom dengan benar
+  // ---------------------------------------------------------------------------
+
+  test('TEST-010: migration v10→v11 membuat tabel imams dan imam_schedules '
+      'serta menambah 8 kolom settings dengan default values yang benar', () async {
+    // Buat database v10 secara manual (tanpa tabel imam dan kolom imam baru)
+    final db = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath);
+    await db.execute('''
+        CREATE TABLE settings (
+          id INTEGER PRIMARY KEY CHECK (id = 1),
+          is_first_run INTEGER NOT NULL DEFAULT 1,
+          mosque_name TEXT NOT NULL DEFAULT '',
+          mosque_address TEXT NOT NULL DEFAULT '',
+          city_name TEXT NOT NULL DEFAULT '',
+          province_name TEXT NOT NULL DEFAULT '',
+          latitude REAL NOT NULL DEFAULT -6.9175,
+          longitude REAL NOT NULL DEFAULT 107.6191,
+          timezone TEXT NOT NULL DEFAULT 'Asia/Jakarta',
+          calculation_method TEXT NOT NULL DEFAULT 'kemenag',
+          offset_subuh INTEGER NOT NULL DEFAULT 0,
+          offset_syuruq INTEGER NOT NULL DEFAULT 0,
+          offset_dhuha INTEGER NOT NULL DEFAULT 0,
+          offset_dzuhur INTEGER NOT NULL DEFAULT 0,
+          offset_ashar INTEGER NOT NULL DEFAULT 0,
+          offset_maghrib INTEGER NOT NULL DEFAULT 0,
+          offset_isya INTEGER NOT NULL DEFAULT 0,
+          dhuha_offset_minutes INTEGER NOT NULL DEFAULT 20,
+          hijri_adjustment INTEGER NOT NULL DEFAULT 0,
+          iqomah_subuh INTEGER NOT NULL DEFAULT 10,
+          iqomah_dzuhur INTEGER NOT NULL DEFAULT 10,
+          iqomah_ashar INTEGER NOT NULL DEFAULT 10,
+          iqomah_maghrib INTEGER NOT NULL DEFAULT 7,
+          iqomah_isya INTEGER NOT NULL DEFAULT 10,
+          iqomah_jumat INTEGER NOT NULL DEFAULT 10,
+          sholat_jumat_duration_minutes INTEGER NOT NULL DEFAULT 45,
+          is_slideshow_enabled INTEGER NOT NULL DEFAULT 0,
+          slideshow_interval_minutes INTEGER NOT NULL DEFAULT 15,
+          slideshow_slot_duration_minutes INTEGER NOT NULL DEFAULT 2,
+          slideshow_image_duration_seconds INTEGER NOT NULL DEFAULT 15,
+          slideshow_start_hour INTEGER NOT NULL DEFAULT 6,
+          slideshow_start_minute INTEGER NOT NULL DEFAULT 0,
+          slideshow_end_hour INTEGER NOT NULL DEFAULT 21,
+          slideshow_end_minute INTEGER NOT NULL DEFAULT 0,
+          adzan_duration_seconds INTEGER NOT NULL DEFAULT 180,
+          running_text TEXT NOT NULL DEFAULT 'Selamat datang di masjid kami',
+          settings_pin_hash TEXT NOT NULL DEFAULT '',
+          elevation INTEGER NOT NULL DEFAULT 0
+        )
+      ''');
+
+    // Insert row v10 (tanpa kolom imam)
+    await db.insert('settings', {'id': 1, 'is_first_run': 1});
+
+    // Simulasi migration v10 → v11: jalankan SQL yang sama dengan _onUpgrade
+    await db.execute('''
+        CREATE TABLE imams (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL UNIQUE,
+          is_active INTEGER NOT NULL DEFAULT 1,
+          created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+        )
+      ''');
+    await db.execute('''
+        CREATE TABLE imam_schedules (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          day_of_week INTEGER NOT NULL CHECK (day_of_week BETWEEN 1 AND 7),
+          prayer_name TEXT NOT NULL CHECK (prayer_name IN ('subuh','dzuhur','ashar','maghrib','isya','jumat')),
+          imam_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+          khatib_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+          UNIQUE(day_of_week, prayer_name)
+        )
+      ''');
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN is_imam_schedule_enabled INTEGER NOT NULL DEFAULT 0',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN imam_schedule_interval_minutes INTEGER NOT NULL DEFAULT 15',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN imam_schedule_duration_seconds INTEGER NOT NULL DEFAULT 30',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN imam_schedule_start_hour INTEGER NOT NULL DEFAULT 6',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN imam_schedule_start_minute INTEGER NOT NULL DEFAULT 0',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN imam_schedule_end_hour INTEGER NOT NULL DEFAULT 21',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN imam_schedule_end_minute INTEGER NOT NULL DEFAULT 0',
+    );
+    await db.execute(
+      'ALTER TABLE settings ADD COLUMN is_imam_schedule_locked INTEGER NOT NULL DEFAULT 0',
+    );
+
+    // Verifikasi: tabel baru ada
+    final tables = await db.rawQuery(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('imams', 'imam_schedules') ORDER BY name",
+    );
+    final tableNames = tables.map((r) => r['name'] as String).toList();
+    expect(tableNames, containsAll(['imam_schedules', 'imams']));
+
+    // Verifikasi: kolom baru ada dengan nilai default yang benar
+    final rows = await db.query('settings');
+    expect(rows, hasLength(1));
+    final row = rows.first;
+    expect(row['is_imam_schedule_enabled'], equals(0));
+    expect(row['imam_schedule_interval_minutes'], equals(15));
+    expect(row['imam_schedule_duration_seconds'], equals(30));
+    expect(row['imam_schedule_start_hour'], equals(6));
+    expect(row['imam_schedule_start_minute'], equals(0));
+    expect(row['imam_schedule_end_hour'], equals(21));
+    expect(row['imam_schedule_end_minute'], equals(0));
+    expect(row['is_imam_schedule_locked'], equals(0));
+
+    await db.close();
+  });
+
+  // ---------------------------------------------------------------------------
+  // TEST-011: PRAGMA foreign_keys aktif — ON DELETE SET NULL bekerja
+  // ---------------------------------------------------------------------------
+
+  test('TEST-011: PRAGMA foreign_keys aktif — hapus imam menghasilkan '
+      'imam_id NULL di imam_schedules (ON DELETE SET NULL)', () async {
+    // Buat in-memory DB dan aktifkan foreign keys (seperti _onConfigure)
+    final db = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath);
+    await db.execute('PRAGMA foreign_keys = ON');
+
+    // Verifikasi PRAGMA foreign_keys aktif
+    final pragmaResult = await db.rawQuery('PRAGMA foreign_keys');
+    expect(
+      pragmaResult.first.values.first,
+      equals(1),
+      reason: 'PRAGMA foreign_keys harus bernilai 1 (aktif)',
+    );
+
+    // Buat schema minimal
+    await db.execute('''
+        CREATE TABLE imams (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL UNIQUE,
+          is_active INTEGER NOT NULL DEFAULT 1,
+          created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+        )
+      ''');
+    await db.execute('''
+        CREATE TABLE imam_schedules (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          day_of_week INTEGER NOT NULL CHECK (day_of_week BETWEEN 1 AND 7),
+          prayer_name TEXT NOT NULL CHECK (prayer_name IN ('subuh','dzuhur','ashar','maghrib','isya','jumat')),
+          imam_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+          khatib_id INTEGER REFERENCES imams(id) ON DELETE SET NULL,
+          UNIQUE(day_of_week, prayer_name)
+        )
+      ''');
+
+    // Insert satu imam, lalu buat jadwal yang mereferensikannya
+    final imamId = await db.insert('imams', {'name': 'Ust. Ahmad Fauzi'});
+    await db.insert('imam_schedules', {
+      'day_of_week': 1,
+      'prayer_name': 'subuh',
+      'imam_id': imamId,
+    });
+
+    // Verifikasi jadwal ada dengan imam_id yang benar
+    final before = await db.query('imam_schedules');
+    expect(before.first['imam_id'], equals(imamId));
+
+    // Hapus imam — FK ON DELETE SET NULL harus membuat imam_id menjadi NULL
+    await db.delete('imams', where: 'id = ?', whereArgs: [imamId]);
+
+    // Verifikasi imam_id di jadwal sekarang NULL
+    final after = await db.query('imam_schedules');
+    expect(
+      after.first['imam_id'],
+      isNull,
+      reason: 'imam_id harus NULL setelah imam dihapus (ON DELETE SET NULL)',
+    );
+
+    await db.close();
+  });
 }

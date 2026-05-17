@@ -1,4 +1,4 @@
-﻿import 'package:bloc_test/bloc_test.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
@@ -1295,6 +1295,215 @@ void main() {
         verify(
           () => settingsRepository.updateSettings({'slideshow_end_minute': 0}),
         ).called(1);
+      },
+    );
+  });
+
+  // ---------------------------------------------------------------------------
+  // TEST-006: Imam Schedule Management (Phase 9)
+  // ---------------------------------------------------------------------------
+
+  group('Imam Schedule Management', () {
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleEnabled(true) menyimpan langsung (tanpa debounce)',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateImamScheduleEnabled(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'imam_schedule_enabled',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => settingsRepository
+              .updateSettings({'is_imam_schedule_enabled': 1}),
+        ).called(1);
+        verify(() => displayStateCubit.onSettingsChanged()).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleEnabled(false) menyimpan nilai 0',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateImamScheduleEnabled(false),
+      verify: (_) {
+        verify(
+          () => settingsRepository
+              .updateSettings({'is_imam_schedule_enabled': 0}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleIntervalMinutes(30) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateImamScheduleIntervalMinutes(30);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository
+              .updateSettings({'imam_schedule_interval_minutes': 30}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleIntervalMinutes diabaikan jika di luar range [5, 60]',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateImamScheduleIntervalMinutes(4); // terlalu kecil
+        cubit.updateImamScheduleIntervalMinutes(65); // terlalu besar
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verifyNever(() => settingsRepository.updateSettings(any()));
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleDurationSeconds(60) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateImamScheduleDurationSeconds(60);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository
+              .updateSettings({'imam_schedule_duration_seconds': 60}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleStartHour(7) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateImamScheduleStartHour(7);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () => settingsRepository
+              .updateSettings({'imam_schedule_start_hour': 7}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleEndHour(22) disimpan setelah debounce',
+      build: () {
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        when(
+          () => displayStateCubit.onSettingsChanged(),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) async {
+        cubit.updateImamScheduleEndHour(22);
+        await Future.delayed(const Duration(milliseconds: 600));
+      },
+      verify: (_) {
+        verify(
+          () =>
+              settingsRepository.updateSettings({'imam_schedule_end_hour': 22}),
+        ).called(1);
+      },
+    );
+
+    blocTest<SettingsCubit, SettingsState>(
+      'updateImamScheduleLocked(true) disimpan langsung TANPA triggerConfigUpdate',
+      build: () {
+        when(
+          () => settingsRepository.getSettings(),
+        ).thenAnswer((_) async => tSettings);
+        when(
+          () => settingsRepository.updateSettings(any()),
+        ).thenAnswer((_) async {});
+        return settingsCubit;
+      },
+      seed: () => SettingsLoaded(settings: tSettings),
+      act: (cubit) => cubit.updateImamScheduleLocked(true),
+      expect: () => [
+        SettingsLoaded(settings: tSettings, isSaving: true),
+        SettingsLoaded(
+          settings: tSettings,
+          isSaving: false,
+          lastSavedField: 'imam_schedule_locked',
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () =>
+              settingsRepository.updateSettings({'is_imam_schedule_locked': 1}),
+        ).called(1);
+        // onSettingsChanged TIDAK boleh dipanggil (GUD-005: hanya mempengaruhi UI)
+        verifyNever(() => displayStateCubit.onSettingsChanged());
       },
     );
   });

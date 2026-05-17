@@ -107,6 +107,16 @@ class Settings extends Equatable {
   final int slideshowEndHour;
   final int slideshowEndMinute;
 
+  // Jadwal Imam Sholat Berjamaah (fitur opsional, default OFF)
+  final bool isImamScheduleEnabled;
+  final int imamScheduleIntervalMinutes;
+  final int imamScheduleDurationSeconds;
+  final int imamScheduleStartHour;
+  final int imamScheduleStartMinute;
+  final int imamScheduleEndHour;
+  final int imamScheduleEndMinute;
+  final bool isImamScheduleLocked;
+
   const Settings({
     this.isFirstRun = true,
     this.mosqueName = '',
@@ -169,6 +179,14 @@ class Settings extends Equatable {
     this.slideshowStartMinute = 0,
     this.slideshowEndHour = 21,
     this.slideshowEndMinute = 0,
+    this.isImamScheduleEnabled = false,
+    this.imamScheduleIntervalMinutes = 15,
+    this.imamScheduleDurationSeconds = 30,
+    this.imamScheduleStartHour = 6,
+    this.imamScheduleStartMinute = 0,
+    this.imamScheduleEndHour = 21,
+    this.imamScheduleEndMinute = 0,
+    this.isImamScheduleLocked = false,
   });
 
   /// Membuat salinan [Settings] dengan field tertentu di-override.
@@ -234,6 +252,14 @@ class Settings extends Equatable {
     int? slideshowStartMinute,
     int? slideshowEndHour,
     int? slideshowEndMinute,
+    bool? isImamScheduleEnabled,
+    int? imamScheduleIntervalMinutes,
+    int? imamScheduleDurationSeconds,
+    int? imamScheduleStartHour,
+    int? imamScheduleStartMinute,
+    int? imamScheduleEndHour,
+    int? imamScheduleEndMinute,
+    bool? isImamScheduleLocked,
   }) {
     return Settings(
       isFirstRun: isFirstRun ?? this.isFirstRun,
@@ -308,6 +334,20 @@ class Settings extends Equatable {
       slideshowStartMinute: slideshowStartMinute ?? this.slideshowStartMinute,
       slideshowEndHour: slideshowEndHour ?? this.slideshowEndHour,
       slideshowEndMinute: slideshowEndMinute ?? this.slideshowEndMinute,
+      isImamScheduleEnabled:
+          isImamScheduleEnabled ?? this.isImamScheduleEnabled,
+      imamScheduleIntervalMinutes:
+          imamScheduleIntervalMinutes ?? this.imamScheduleIntervalMinutes,
+      imamScheduleDurationSeconds:
+          imamScheduleDurationSeconds ?? this.imamScheduleDurationSeconds,
+      imamScheduleStartHour:
+          imamScheduleStartHour ?? this.imamScheduleStartHour,
+      imamScheduleStartMinute:
+          imamScheduleStartMinute ?? this.imamScheduleStartMinute,
+      imamScheduleEndHour: imamScheduleEndHour ?? this.imamScheduleEndHour,
+      imamScheduleEndMinute:
+          imamScheduleEndMinute ?? this.imamScheduleEndMinute,
+      isImamScheduleLocked: isImamScheduleLocked ?? this.isImamScheduleLocked,
     );
   }
 
@@ -374,5 +414,13 @@ class Settings extends Equatable {
     slideshowStartMinute,
     slideshowEndHour,
     slideshowEndMinute,
+    isImamScheduleEnabled,
+    imamScheduleIntervalMinutes,
+    imamScheduleDurationSeconds,
+    imamScheduleStartHour,
+    imamScheduleStartMinute,
+    imamScheduleEndHour,
+    imamScheduleEndMinute,
+    isImamScheduleLocked,
   ];
 }

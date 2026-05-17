@@ -1,6 +1,7 @@
 ﻿import 'package:equatable/equatable.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
+import 'package:miqotul_khoir_tv/domain/entities/imam_schedule_display.dart';
 import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
 
@@ -232,6 +233,49 @@ final class SlideshowAnnouncementState extends DisplayState {
     remainingSlotSeconds,
     imageDurationSeconds,
     remainingImageSeconds,
+  ];
+}
+
+/// Keadaan saat Jadwal Imam Sholat Berjamaah sedang ditampilkan secara periodik.
+final class ImamScheduleState extends DisplayState {
+  /// Nama hari dalam Bahasa Indonesia (huruf kapital), misal "SENIN", "JUM'AT".
+  final String dayName;
+
+  /// Tanggal Hijriyah yang sudah diformat, misal "25 Dzulqa'dah 1447 H".
+  final String hijriDate;
+
+  /// Daftar 5 slot jadwal imam hari ini (sudah dinormalisasi dan di-resolve).
+  final List<ImamScheduleDisplay> slots;
+
+  /// Waktu saat ini — digunakan untuk menampilkan jam digital di header.
+  final DateTime currentTime;
+
+  /// Total durasi tampilan jadwal dalam satu slot (dalam detik).
+  final int totalDurationSeconds;
+
+  /// Sisa waktu tampilan jadwal sebelum kembali ke Standby (dalam detik).
+  final int remainingSeconds;
+
+  const ImamScheduleState({
+    required this.dayName,
+    required this.hijriDate,
+    required this.slots,
+    required this.currentTime,
+    required this.totalDurationSeconds,
+    required this.remainingSeconds,
+  });
+
+  @override
+  DisplayStateType get type => DisplayStateType.imamSchedule;
+
+  @override
+  List<Object?> get props => [
+    dayName,
+    hijriDate,
+    slots,
+    currentTime,
+    totalDurationSeconds,
+    remainingSeconds,
   ];
 }
 

@@ -8,6 +8,7 @@ import 'package:miqotul_khoir_tv/domain/entities/prayer_time.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/imam_schedule_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
@@ -29,6 +30,9 @@ class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
 class MockSlideshowImageRepository extends Mock
     implements SlideshowImageRepository {}
 
+class MockImamScheduleRepository extends Mock
+    implements ImamScheduleRepository {}
+
 class MockAudioAlertService extends Mock implements AudioAlertService {}
 
 class MockDailyPrayerTimes extends Mock implements DailyPrayerTimes {}
@@ -45,6 +49,7 @@ void main() {
   late WisdomQuoteRepository wisdomQuoteRepository;
   late AudioAlertService audioAlertService;
   late SlideshowImageRepository slideshowImageRepository;
+  late ImamScheduleRepository imamScheduleRepository;
   late DailyPrayerTimes dailyPrayerTimes;
   late StreamController<PrayerTimeState> prayerTimeStreamController;
 
@@ -110,6 +115,7 @@ void main() {
     wisdomQuoteRepository = MockWisdomQuoteRepository();
     audioAlertService = MockAudioAlertService();
     slideshowImageRepository = MockSlideshowImageRepository();
+    imamScheduleRepository = MockImamScheduleRepository();
     dailyPrayerTimes = MockDailyPrayerTimes();
     prayerTimeStreamController = StreamController<PrayerTimeState>();
 
@@ -121,6 +127,9 @@ void main() {
     // Default Mocks
     when(
       () => slideshowImageRepository.getAll(),
+    ).thenAnswer((_) async => const []);
+    when(
+      () => imamScheduleRepository.getScheduleForDay(any()),
     ).thenAnswer((_) async => const []);
     when(
       () => wisdomQuoteRepository.getByIds(any()),
@@ -144,6 +153,7 @@ void main() {
         hijriDate: any(named: 'hijriDate'),
         activeQuotes: any(named: 'activeQuotes'),
         slideshowImages: any(named: 'slideshowImages'),
+        todayImamSchedule: any(named: 'todayImamSchedule'),
       ),
     ).thenAnswer((invocation) {
       evaluateCallCount++;
@@ -163,6 +173,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
       expect(cubit.state, isA<StandbyState>());
@@ -176,6 +187,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 
@@ -193,6 +205,7 @@ void main() {
           hijriDate: any(named: 'hijriDate'),
           activeQuotes: any(named: 'activeQuotes'),
           slideshowImages: any(named: 'slideshowImages'),
+          todayImamSchedule: any(named: 'todayImamSchedule'),
         ),
       ).thenReturn(newState);
 
@@ -217,6 +230,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 
@@ -262,6 +276,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 
@@ -302,6 +317,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 
@@ -349,6 +365,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 
@@ -392,6 +409,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 
@@ -444,6 +462,7 @@ void main() {
             hijriDate: any(named: 'hijriDate'),
             activeQuotes: any(named: 'activeQuotes'),
             slideshowImages: any(named: 'slideshowImages'),
+            todayImamSchedule: any(named: 'todayImamSchedule'),
           ),
         ).thenAnswer((invocation) {
           final quotes =
@@ -455,13 +474,14 @@ void main() {
         });
 
         final cubit = DisplayStateCubit(
-        evaluateUseCase: evaluateUseCase,
-        prayerTimeCubit: prayerTimeCubit,
-        settingsRepository: settingsRepository,
-        wisdomQuoteRepository: wisdomQuoteRepository,
-        slideshowImageRepository: slideshowImageRepository,
-        audioAlertService: audioAlertService,
-      );
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          slideshowImageRepository: slideshowImageRepository,
+          imamScheduleRepository: imamScheduleRepository,
+          audioAlertService: audioAlertService,
+        );
 
         await Future.delayed(const Duration(milliseconds: 50));
 
@@ -519,6 +539,7 @@ void main() {
             hijriDate: any(named: 'hijriDate'),
             activeQuotes: any(named: 'activeQuotes'),
             slideshowImages: any(named: 'slideshowImages'),
+            todayImamSchedule: any(named: 'todayImamSchedule'),
           ),
         ).thenReturn(
           PreAdzanState(
@@ -530,13 +551,14 @@ void main() {
         );
 
         final cubit = DisplayStateCubit(
-        evaluateUseCase: evaluateUseCase,
-        prayerTimeCubit: prayerTimeCubit,
-        settingsRepository: settingsRepository,
-        wisdomQuoteRepository: wisdomQuoteRepository,
-        slideshowImageRepository: slideshowImageRepository,
-        audioAlertService: audioAlertService,
-      );
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          slideshowImageRepository: slideshowImageRepository,
+          imamScheduleRepository: imamScheduleRepository,
+          audioAlertService: audioAlertService,
+        );
 
         await Future.delayed(const Duration(milliseconds: 50));
         prayerTimeStreamController.add(
@@ -564,6 +586,7 @@ void main() {
             hijriDate: any(named: 'hijriDate'),
             activeQuotes: any(named: 'activeQuotes'),
             slideshowImages: any(named: 'slideshowImages'),
+            todayImamSchedule: any(named: 'todayImamSchedule'),
           ),
         ).thenReturn(
           PreAdzanState(
@@ -575,13 +598,14 @@ void main() {
         );
 
         final cubit = DisplayStateCubit(
-        evaluateUseCase: evaluateUseCase,
-        prayerTimeCubit: prayerTimeCubit,
-        settingsRepository: settingsRepository,
-        wisdomQuoteRepository: wisdomQuoteRepository,
-        slideshowImageRepository: slideshowImageRepository,
-        audioAlertService: audioAlertService,
-      );
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          slideshowImageRepository: slideshowImageRepository,
+          imamScheduleRepository: imamScheduleRepository,
+          audioAlertService: audioAlertService,
+        );
 
         await Future.delayed(const Duration(milliseconds: 50));
         prayerTimeStreamController.add(
@@ -615,6 +639,7 @@ void main() {
             hijriDate: any(named: 'hijriDate'),
             activeQuotes: any(named: 'activeQuotes'),
             slideshowImages: any(named: 'slideshowImages'),
+            todayImamSchedule: any(named: 'todayImamSchedule'),
           ),
         ).thenReturn(
           PreAdzanState(
@@ -626,13 +651,14 @@ void main() {
         );
 
         final cubit = DisplayStateCubit(
-        evaluateUseCase: evaluateUseCase,
-        prayerTimeCubit: prayerTimeCubit,
-        settingsRepository: settingsRepository,
-        wisdomQuoteRepository: wisdomQuoteRepository,
-        slideshowImageRepository: slideshowImageRepository,
-        audioAlertService: audioAlertService,
-      );
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          slideshowImageRepository: slideshowImageRepository,
+          imamScheduleRepository: imamScheduleRepository,
+          audioAlertService: audioAlertService,
+        );
 
         await Future.delayed(const Duration(milliseconds: 50));
         prayerTimeStreamController.add(
@@ -670,6 +696,7 @@ void main() {
             hijriDate: any(named: 'hijriDate'),
             activeQuotes: any(named: 'activeQuotes'),
             slideshowImages: any(named: 'slideshowImages'),
+            todayImamSchedule: any(named: 'todayImamSchedule'),
           ),
         ).thenAnswer((_) {
           tickCount++;
@@ -690,13 +717,14 @@ void main() {
         });
 
         final cubit = DisplayStateCubit(
-        evaluateUseCase: evaluateUseCase,
-        prayerTimeCubit: prayerTimeCubit,
-        settingsRepository: settingsRepository,
-        wisdomQuoteRepository: wisdomQuoteRepository,
-        slideshowImageRepository: slideshowImageRepository,
-        audioAlertService: audioAlertService,
-      );
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          slideshowImageRepository: slideshowImageRepository,
+          imamScheduleRepository: imamScheduleRepository,
+          audioAlertService: audioAlertService,
+        );
 
         await Future.delayed(const Duration(milliseconds: 50));
         cubit.onAppPaused(); // Hentikan timer agar tick hanya dari stream
@@ -742,6 +770,7 @@ void main() {
             hijriDate: any(named: 'hijriDate'),
             activeQuotes: any(named: 'activeQuotes'),
             slideshowImages: any(named: 'slideshowImages'),
+            todayImamSchedule: any(named: 'todayImamSchedule'),
           ),
         ).thenReturn(
           IqomahState(
@@ -753,13 +782,14 @@ void main() {
         );
 
         final cubit = DisplayStateCubit(
-        evaluateUseCase: evaluateUseCase,
-        prayerTimeCubit: prayerTimeCubit,
-        settingsRepository: settingsRepository,
-        wisdomQuoteRepository: wisdomQuoteRepository,
-        slideshowImageRepository: slideshowImageRepository,
-        audioAlertService: audioAlertService,
-      );
+          evaluateUseCase: evaluateUseCase,
+          prayerTimeCubit: prayerTimeCubit,
+          settingsRepository: settingsRepository,
+          wisdomQuoteRepository: wisdomQuoteRepository,
+          slideshowImageRepository: slideshowImageRepository,
+          imamScheduleRepository: imamScheduleRepository,
+          audioAlertService: audioAlertService,
+        );
 
         await Future.delayed(const Duration(milliseconds: 50));
         prayerTimeStreamController.add(
@@ -782,6 +812,7 @@ void main() {
         settingsRepository: settingsRepository,
         wisdomQuoteRepository: wisdomQuoteRepository,
         slideshowImageRepository: slideshowImageRepository,
+        imamScheduleRepository: imamScheduleRepository,
         audioAlertService: audioAlertService,
       );
 

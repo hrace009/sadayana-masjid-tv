@@ -12,6 +12,7 @@ import '../cubits/display_state/display_state.dart';
 import '../widgets/islamic_background.dart';
 import '../../../core/theme/tv_safe_area.dart';
 import 'main_display/layouts/adzan_layout.dart';
+import 'main_display/layouts/imam_schedule_layout.dart';
 import 'main_display/layouts/iqomah_layout.dart';
 import 'main_display/layouts/midnight_standby_layout.dart';
 import 'main_display/layouts/pre_adzan_layout.dart';
@@ -62,9 +63,9 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
     _settingsIconTimer?.cancel();
     setState(() => _isSettingsIconVisible = false);
 
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => const PinGatePage()))
-        .then((_) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const PinGatePage())).then((_) {
       if (mounted) {
         context.read<DisplayStateCubit>().onSettingsChanged();
         _focusNode.requestFocus();
@@ -153,6 +154,13 @@ class _MainDisplayPageState extends State<MainDisplayPage> {
                           layoutWidget = SlideshowLayout(
                             key: const ValueKey('slideshow_announcement'),
                             state: state as SlideshowAnnouncementState,
+                          );
+                          break;
+                        // TASK-040 (Phase 8): Layout runtime Jadwal Imam Sholat Berjamaah.
+                        case DisplayStateType.imamSchedule:
+                          layoutWidget = ImamScheduleLayout(
+                            key: const ValueKey('imam_schedule'),
+                            state: state as ImamScheduleState,
                           );
                           break;
                         case DisplayStateType.wisdomQuote:

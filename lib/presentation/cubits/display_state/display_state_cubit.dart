@@ -3,9 +3,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
 import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
+import 'package:miqotul_khoir_tv/domain/entities/imam_schedule_display.dart';
 import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/entities/transition_config.dart';
 import 'package:miqotul_khoir_tv/domain/entities/wisdom_quote.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/imam_schedule_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/settings_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
@@ -25,6 +27,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   final SettingsRepository _settingsRepository;
   final WisdomQuoteRepository _wisdomQuoteRepository;
   final SlideshowImageRepository _slideshowImageRepository;
+  final ImamScheduleRepository _imamScheduleRepository;
   final AudioAlertService _audioAlertService;
 
   StreamSubscription? _prayerTimeSubscription;
@@ -34,6 +37,8 @@ class DisplayStateCubit extends Cubit<DisplayState> {
   TransitionConfig _currentConfig;
   List<WisdomQuote> _activeQuotes = const [];
   List<SlideshowImage> _activeSlideshowImages = const [];
+  List<ImamScheduleDisplay>? _todayImamSchedule;
+  int _todayImamScheduleDayOfWeek = 0;
 
   bool _preAdzanAlertFired = false;
   bool _preIqomahAlertFired = false;
@@ -44,12 +49,14 @@ class DisplayStateCubit extends Cubit<DisplayState> {
     required SettingsRepository settingsRepository,
     required WisdomQuoteRepository wisdomQuoteRepository,
     required SlideshowImageRepository slideshowImageRepository,
+    required ImamScheduleRepository imamScheduleRepository,
     required AudioAlertService audioAlertService,
   }) : _evaluateUseCase = evaluateUseCase,
        _prayerTimeCubit = prayerTimeCubit,
        _settingsRepository = settingsRepository,
        _wisdomQuoteRepository = wisdomQuoteRepository,
        _slideshowImageRepository = slideshowImageRepository,
+       _imamScheduleRepository = imamScheduleRepository,
        _audioAlertService = audioAlertService,
        // Default config, akan di-overwrite saat init()
        _currentConfig = const TransitionConfig(
@@ -86,13 +93,19 @@ class DisplayStateCubit extends Cubit<DisplayState> {
     _startTickTimer();
   }
 
-  Future<void> _loadConfig() async {
+  Future<void> _loadConfig({DateTime? referenceTime}) async {
     final settings = await _settingsRepository.getSettings();
     _currentConfig = TransitionConfig.fromSettings(settings);
     _activeQuotes = await _wisdomQuoteRepository.getByIds(
       settings.wisdomSelectedIds,
     );
     _activeSlideshowImages = await _slideshowImageRepository.getAll();
+    // TASK-042: Load jadwal imam hari ini
+    final todayWeekday = referenceTime?.weekday ?? DateTime.now().weekday;
+    _todayImamSchedule = await _imamScheduleRepository.getScheduleForDay(
+      todayWeekday,
+    );
+    _todayImamScheduleDayOfWeek = todayWeekday;
   }
 
   void _startTickTimer() {
@@ -115,14 +128,26 @@ class DisplayStateCubit extends Cubit<DisplayState> {
       return;
     }
 
+    final now = DateTime.now();
+
+    // TASK-042: Refresh cache jadwal imam jika hari berganti
+    if (now.weekday != _todayImamScheduleDayOfWeek) {
+      // Fire-and-forget: reload async, tick berikutnya sudah pakai data baru
+      _imamScheduleRepository.getScheduleForDay(now.weekday).then((schedule) {
+        _todayImamSchedule = schedule;
+        _todayImamScheduleDayOfWeek = now.weekday;
+      });
+    }
+
     final previous = state;
     final newState = _evaluateUseCase.evaluate(
-      now: DateTime.now(),
+      now: now,
       dailyPrayerTimes: dailyPrayerTimes,
       config: _currentConfig,
       hijriDate: dailyPrayerTimes.hijriDate,
       activeQuotes: _activeQuotes,
       slideshowImages: _activeSlideshowImages,
+      todayImamSchedule: _todayImamSchedule,
     );
 
     _checkAlertStop(previous, newState);

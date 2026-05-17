@@ -499,6 +499,80 @@ class SettingsCubit extends Cubit<SettingsState> {
     }, triggerConfigUpdate: true);
   }
 
+  // --- Jadwal Imam Sholat Berjamaah ---
+
+  /// Toggle aktif/nonaktif fitur Jadwal Imam Sholat Berjamaah.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  Future<void> updateImamScheduleEnabled(bool enabled) {
+    return _saveField('imam_schedule_enabled', {
+      'is_imam_schedule_enabled': enabled ? 1 : 0,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update interval kemunculan Jadwal Imam (menit).
+  /// Validasi: 5–60 menit dengan step 5 sesuai REQ-006.
+  void updateImamScheduleIntervalMinutes(int minutes) {
+    if (minutes < 5 || minutes > 60) return;
+    _debounceSave('imam_schedule_interval_minutes', {
+      'imam_schedule_interval_minutes': minutes,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update durasi tampil Jadwal Imam (detik).
+  /// Validasi: 10–120 detik sesuai REQ-007.
+  void updateImamScheduleDurationSeconds(int seconds) {
+    if (seconds < 10 || seconds > 120) return;
+    _debounceSave('imam_schedule_duration_seconds', {
+      'imam_schedule_duration_seconds': seconds,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam mulai jendela aktif Jadwal Imam.
+  /// Validasi: 0–23.
+  void updateImamScheduleStartHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('imam_schedule_start_hour', {
+      'imam_schedule_start_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit mulai jendela aktif Jadwal Imam.
+  /// Validasi: 0–59.
+  void updateImamScheduleStartMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('imam_schedule_start_minute', {
+      'imam_schedule_start_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update jam berakhir jendela aktif Jadwal Imam.
+  /// Validasi: 0–23.
+  void updateImamScheduleEndHour(int hour) {
+    if (hour < 0 || hour > 23) return;
+    _debounceSave('imam_schedule_end_hour', {
+      'imam_schedule_end_hour': hour,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Update menit berakhir jendela aktif Jadwal Imam.
+  /// Validasi: 0–59.
+  void updateImamScheduleEndMinute(int minute) {
+    if (minute < 0 || minute > 59) return;
+    _debounceSave('imam_schedule_end_minute', {
+      'imam_schedule_end_minute': minute,
+    }, triggerConfigUpdate: true);
+  }
+
+  /// Toggle kunci/buka jadwal imam.
+  /// Disimpan langsung (tanpa debounce) karena toggle bersifat instan.
+  /// Tidak memicu `triggerConfigUpdate` sesuai GUD-005 — field lock hanya
+  /// mempengaruhi UI Settings, bukan evaluator display.
+  Future<void> updateImamScheduleLocked(bool locked) {
+    return _saveField('imam_schedule_locked', {
+      'is_imam_schedule_locked': locked ? 1 : 0,
+    });
+  }
+
   @override
   Future<void> close() {
     _debounceTimer?.cancel();

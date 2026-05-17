@@ -1,4 +1,4 @@
-﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import 'package:miqotul_khoir_tv/data/models/settings_model.dart';
 
@@ -76,6 +76,15 @@ void main() {
     'slideshow_start_minute': 0,
     'slideshow_end_hour': 21,
     'slideshow_end_minute': 0,
+    // Imam schedule fields — semua default OFF / nilai awal
+    'is_imam_schedule_enabled': 0,
+    'imam_schedule_interval_minutes': 15,
+    'imam_schedule_duration_seconds': 30,
+    'imam_schedule_start_hour': 6,
+    'imam_schedule_start_minute': 0,
+    'imam_schedule_end_hour': 21,
+    'imam_schedule_end_minute': 0,
+    'is_imam_schedule_locked': 0,
     'created_at': '2026-01-01T00:00:00',
     'updated_at': '2026-01-01T00:00:00',
   };
@@ -142,6 +151,15 @@ void main() {
     'slideshow_start_minute': 30,
     'slideshow_end_hour': 20,
     'slideshow_end_minute': 0,
+    // Imam schedule fields — custom values
+    'is_imam_schedule_enabled': 1,
+    'imam_schedule_interval_minutes': 30,
+    'imam_schedule_duration_seconds': 60,
+    'imam_schedule_start_hour': 7,
+    'imam_schedule_start_minute': 0,
+    'imam_schedule_end_hour': 22,
+    'imam_schedule_end_minute': 30,
+    'is_imam_schedule_locked': 1,
     'created_at': '2026-02-18T10:00:00',
     'updated_at': '2026-02-18T14:00:00',
   };
@@ -219,6 +237,15 @@ void main() {
       expect(model.slideshowStartMinute, equals(0));
       expect(model.slideshowEndHour, equals(21));
       expect(model.slideshowEndMinute, equals(0));
+      // Imam schedule fields — semua default OFF / nilai awal
+      expect(model.isImamScheduleEnabled, isFalse);
+      expect(model.imamScheduleIntervalMinutes, equals(15));
+      expect(model.imamScheduleDurationSeconds, equals(30));
+      expect(model.imamScheduleStartHour, equals(6));
+      expect(model.imamScheduleStartMinute, equals(0));
+      expect(model.imamScheduleEndHour, equals(21));
+      expect(model.imamScheduleEndMinute, equals(0));
+      expect(model.isImamScheduleLocked, isFalse);
     });
 
     test(
@@ -287,6 +314,15 @@ void main() {
         expect(model.slideshowStartMinute, equals(30));
         expect(model.slideshowEndHour, equals(20));
         expect(model.slideshowEndMinute, equals(0));
+        // Imam schedule fields — custom values
+        expect(model.isImamScheduleEnabled, isTrue);
+        expect(model.imamScheduleIntervalMinutes, equals(30));
+        expect(model.imamScheduleDurationSeconds, equals(60));
+        expect(model.imamScheduleStartHour, equals(7));
+        expect(model.imamScheduleStartMinute, equals(0));
+        expect(model.imamScheduleEndHour, equals(22));
+        expect(model.imamScheduleEndMinute, equals(30));
+        expect(model.isImamScheduleLocked, isTrue);
       },
     );
   });
@@ -356,6 +392,15 @@ void main() {
       expect(map['slideshow_start_minute'], equals(30));
       expect(map['slideshow_end_hour'], equals(20));
       expect(map['slideshow_end_minute'], equals(0));
+      // Imam schedule fields
+      expect(map['is_imam_schedule_enabled'], equals(1));
+      expect(map['imam_schedule_interval_minutes'], equals(30));
+      expect(map['imam_schedule_duration_seconds'], equals(60));
+      expect(map['imam_schedule_start_hour'], equals(7));
+      expect(map['imam_schedule_start_minute'], equals(0));
+      expect(map['imam_schedule_end_hour'], equals(22));
+      expect(map['imam_schedule_end_minute'], equals(30));
+      expect(map['is_imam_schedule_locked'], equals(1));
 
       // toMap() should NOT include id, created_at, updated_at
       expect(map.containsKey('id'), isFalse);

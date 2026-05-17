@@ -76,6 +76,14 @@ class SettingsModel extends Settings {
     super.slideshowStartMinute,
     super.slideshowEndHour,
     super.slideshowEndMinute,
+    super.isImamScheduleEnabled,
+    super.imamScheduleIntervalMinutes,
+    super.imamScheduleDurationSeconds,
+    super.imamScheduleStartHour,
+    super.imamScheduleStartMinute,
+    super.imamScheduleEndHour,
+    super.imamScheduleEndMinute,
+    super.isImamScheduleLocked,
   });
 
   /// Membuat [SettingsModel] dari raw SQLite `Map<String, dynamic>`.
@@ -153,6 +161,17 @@ class SettingsModel extends Settings {
       slideshowStartMinute: map['slideshow_start_minute'] as int? ?? 0,
       slideshowEndHour: map['slideshow_end_hour'] as int? ?? 21,
       slideshowEndMinute: map['slideshow_end_minute'] as int? ?? 0,
+      isImamScheduleEnabled:
+          (map['is_imam_schedule_enabled'] as int? ?? 0) == 1,
+      imamScheduleIntervalMinutes:
+          map['imam_schedule_interval_minutes'] as int? ?? 15,
+      imamScheduleDurationSeconds:
+          map['imam_schedule_duration_seconds'] as int? ?? 30,
+      imamScheduleStartHour: map['imam_schedule_start_hour'] as int? ?? 6,
+      imamScheduleStartMinute: map['imam_schedule_start_minute'] as int? ?? 0,
+      imamScheduleEndHour: map['imam_schedule_end_hour'] as int? ?? 21,
+      imamScheduleEndMinute: map['imam_schedule_end_minute'] as int? ?? 0,
+      isImamScheduleLocked: (map['is_imam_schedule_locked'] as int? ?? 0) == 1,
     );
   }
 
@@ -225,6 +244,14 @@ class SettingsModel extends Settings {
       'slideshow_start_minute': slideshowStartMinute,
       'slideshow_end_hour': slideshowEndHour,
       'slideshow_end_minute': slideshowEndMinute,
+      'is_imam_schedule_enabled': isImamScheduleEnabled ? 1 : 0,
+      'imam_schedule_interval_minutes': imamScheduleIntervalMinutes,
+      'imam_schedule_duration_seconds': imamScheduleDurationSeconds,
+      'imam_schedule_start_hour': imamScheduleStartHour,
+      'imam_schedule_start_minute': imamScheduleStartMinute,
+      'imam_schedule_end_hour': imamScheduleEndHour,
+      'imam_schedule_end_minute': imamScheduleEndMinute,
+      'is_imam_schedule_locked': isImamScheduleLocked ? 1 : 0,
     };
   }
 }

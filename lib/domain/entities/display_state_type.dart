@@ -18,6 +18,9 @@ enum DisplayStateType {
   /// Menampilkan Slideshow Pengumuman Masjid secara periodik.
   slideshowAnnouncement,
 
+  /// Menampilkan Jadwal Imam Sholat Berjamaah hari ini secara periodik.
+  imamSchedule,
+
   /// Menampilkan Kata Mutiara Islam secara periodik.
   wisdomQuote,
 
