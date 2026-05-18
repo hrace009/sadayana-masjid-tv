@@ -5,10 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:miqotul_khoir_tv/core/theme/islamic_theme.dart';
+import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
 import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
 import 'package:miqotul_khoir_tv/domain/services/slideshow_file_storage_service.dart';
+import 'package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_state.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/sections/slideshow_section.dart';
@@ -25,6 +27,8 @@ class MockSlideshowImageRepository extends Mock
 class MockSlideshowFileStorageService extends Mock
     implements SlideshowFileStorageService {}
 
+class MockDisplayStateCubit extends Mock implements DisplayStateCubit {}
+
 /// Widget tests untuk [SlideshowSection].
 ///
 /// [SlideshowSection] membuat [SlideshowSectionCubit] secara internal melalui
@@ -37,6 +41,7 @@ void main() {
   late MockSettingsCubit mockSettingsCubit;
   late MockSlideshowImageRepository mockRepo;
   late MockSlideshowFileStorageService mockStorage;
+  late MockDisplayStateCubit mockDisplayStateCubit;
 
   // ---------------------------------------------------------------------------
   // Setup helpers
@@ -56,6 +61,7 @@ void main() {
     mockSettingsCubit = MockSettingsCubit();
     mockRepo = MockSlideshowImageRepository();
     mockStorage = MockSlideshowFileStorageService();
+    mockDisplayStateCubit = MockDisplayStateCubit();
 
     // Stub semua updateSlideshow* methods
     when(
@@ -85,6 +91,12 @@ void main() {
 
     // Default: repo mengembalikan list kosong (tidak ada gambar)
     when(() => mockRepo.getAll()).thenAnswer((_) async => []);
+    when(
+      () => mockDisplayStateCubit.state,
+    ).thenReturn(StandbyState(currentTime: DateTime.now()));
+    when(
+      () => mockDisplayStateCubit.stream,
+    ).thenAnswer((_) => const Stream.empty());
   });
 
   Widget buildTestable(Settings settings) {
@@ -101,8 +113,13 @@ void main() {
               value: mockStorage,
             ),
           ],
-          child: BlocProvider<SettingsCubit>.value(
-            value: mockSettingsCubit,
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<SettingsCubit>.value(value: mockSettingsCubit),
+              BlocProvider<DisplayStateCubit>.value(
+                value: mockDisplayStateCubit,
+              ),
+            ],
             child: const Scaffold(body: SlideshowSection()),
           ),
         ),

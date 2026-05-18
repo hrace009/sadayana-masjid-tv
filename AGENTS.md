@@ -53,7 +53,7 @@ lib/presentation/cubits/
 | **Kata Mutiara Islam** (Wisdom Quote)                | 2026-03-10      | 14 phases, 257 total tests ✅   | Production Ready |
 | **Mode Hemat Daya Tengah Malam** (Midnight Mode)     | 2026-03-16      | 7 phases, 306 total tests ✅    | Production Ready |
 | **Alarm Tanda Waktu** (Pre-Adzan & Pre-Iqomah Alert) | 2026-03-17      | 6 phases, 20 new alarm tests ✅ | Production Ready |
-| **Slideshow Pengumuman** (Announcement)             | 2026-05-08      | 8 phases, file_picker v11 ✅    | Production Ready |
+| **Slideshow Pengumuman** (Announcement)              | 2026-05-08      | 8 phases, file_picker v11 ✅    | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
@@ -336,7 +336,10 @@ File yang dimodifikasi:
 | `lib/presentation/pages/settings/settings_menu_page.dart`        | Tambah `WisdomQuoteSection` di categories                       |
 | `lib/main.dart`                                                  | Instansiasi `WisdomQuoteRepositoryImpl`, `RepositoryProvider`   |
 
+
 ## Local Workflow
+
+**Testing Wajib per Phase:** Setelah setiap phase implementasi, WAJIB dilakukan testing (unit/widget/integration test) dan semua test harus lulus sebelum fase dianggap selesai atau lanjut ke fase berikutnya.
 
 Essential commands untuk memulai development:
 
@@ -1155,20 +1158,20 @@ konfigurasi jadwal aktif, interval antar slot, dan durasi per gambar.
 
 File baru yang dibuat:
 
-| File                                                                       | Keterangan                                                                   |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `lib/domain/entities/slideshow_image.dart`                                 | Entity — `slotIndex`, `fileName`, `storedPath`, `mimeType`, `width/height`   |
-| `lib/domain/repositories/slideshow_image_repository.dart`                  | Abstract interface (CRUD slot 1-3)                                           |
-| `lib/data/models/slideshow_image_model.dart`                               | `fromMap`/`toMap` SQLite serialization                                       |
-| `lib/data/services/slideshow_file_storage_service.dart`                    | Abstract interface untuk manajemen file I/O (import, delete)                 |
-| `lib/data/services/slideshow_file_storage_service_impl.dart`               | Implementasi `path_provider` & `File` ops (sandboxed directory)              |
-| `lib/data/repositories/slideshow_image_repository_impl.dart`               | Concrete impl — SQLite ops (replace-on-conflict per slot)                    |
-| `lib/presentation/cubits/slideshow_section/slideshow_section_cubit.dart`     | Manajemen slot UI (pick, import, replace, delete)                            |
-| `lib/presentation/pages/settings/sections/slideshow_section.dart`          | Settings UI — toggle, stepper jadwal/durasi, 3-slot card management          |
-| `lib/presentation/pages/main_display/layouts/slideshow_layout.dart`         | Layout display — full screen image dengan progress bar & slot info           |
-| `lib/presentation/pages/slideshow_preview_page.dart`                       | Halaman pratinjau full screen dari menu settings                             |
-| `test/data/repositories/slideshow_image_repository_impl_test.dart`         | Unit tests SQLite ops                                                        |
-| `test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart` | 12 tests: file picker mocking (v11), CRUD lifecycle, state transitions       |
+| File                                                                           | Keterangan                                                                 |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| `lib/domain/entities/slideshow_image.dart`                                     | Entity — `slotIndex`, `fileName`, `storedPath`, `mimeType`, `width/height` |
+| `lib/domain/repositories/slideshow_image_repository.dart`                      | Abstract interface (CRUD slot 1-3)                                         |
+| `lib/data/models/slideshow_image_model.dart`                                   | `fromMap`/`toMap` SQLite serialization                                     |
+| `lib/data/services/slideshow_file_storage_service.dart`                        | Abstract interface untuk manajemen file I/O (import, delete)               |
+| `lib/data/services/slideshow_file_storage_service_impl.dart`                   | Implementasi `path_provider` & `File` ops (sandboxed directory)            |
+| `lib/data/repositories/slideshow_image_repository_impl.dart`                   | Concrete impl — SQLite ops (replace-on-conflict per slot)                  |
+| `lib/presentation/cubits/slideshow_section/slideshow_section_cubit.dart`       | Manajemen slot UI (pick, import, replace, delete)                          |
+| `lib/presentation/pages/settings/sections/slideshow_section.dart`              | Settings UI — toggle, stepper jadwal/durasi, 3-slot card management        |
+| `lib/presentation/pages/main_display/layouts/slideshow_layout.dart`            | Layout display — full screen image dengan progress bar & slot info         |
+| `lib/presentation/pages/slideshow_preview_page.dart`                           | Halaman pratinjau full screen dari menu settings                           |
+| `test/data/repositories/slideshow_image_repository_impl_test.dart`             | Unit tests SQLite ops                                                      |
+| `test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart` | 12 tests: file picker mocking (v11), CRUD lifecycle, state transitions     |
 
 File yang dimodifikasi:
 
@@ -1181,7 +1184,7 @@ File yang dimodifikasi:
 | `lib/domain/usecases/evaluate_display_state_use_case.dart`       | Logika siklus absolut (TS-P5-002), index gambar (TS-P5-004), priority 4                                          |
 | `lib/presentation/cubits/settings/settings_cubit.dart`           | 8 method update slideshow settings                                                                               |
 | `lib/presentation/cubits/display_state/display_state_cubit.dart` | `_slideshowImageRepository`, `_activeSlideshowImages`; refresh images on `onSettingsChanged()`                   |
-| `lib/presentation/pages/main_display_page.dart`                  | Case `slideshowAnnouncement` di switch + `onSettingsChanged()` refresh saat kembali dari Settings                 |
+| `lib/presentation/pages/main_display_page.dart`                  | Case `slideshowAnnouncement` di switch + `onSettingsChanged()` refresh saat kembali dari Settings                |
 | `lib/presentation/pages/settings/settings_menu_page.dart`        | Tambah `SlideshowSection` sebagai kategori ke-7                                                                  |
 | `lib/main.dart`                                                  | Injection `SlideshowImageRepository` & `SlideshowFileStorageService`                                             |
 

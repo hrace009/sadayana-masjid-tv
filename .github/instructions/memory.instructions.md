@@ -31,6 +31,7 @@ applyTo: "**"
 - **Sequential Development**: Harus mengikuti urutan: PRD → Spec → Plan → Code
 - **No Skip Phases**: Tidak boleh melompat fase, setiap tahap harus selesai sebelum lanjut
 - **Documentation First**: Dokumentasi lengkap dan terstruktur harus ada sebelum mulai coding
+- **Testing Wajib per Phase**: Setelah setiap phase implementasi, WAJIB dilakukan testing (unit/widget/integration test) dan semua test harus lulus sebelum fase dianggap selesai atau lanjut ke fase berikutnya.
 - **Custom Agents Usage**: User menggunakan custom GitHub Copilot Agents sesuai dengan fase development:
   - `@ProductManagerPRD` untuk Requirements (PRD)
   - `@SpecificationArchitect` untuk Technical Specification

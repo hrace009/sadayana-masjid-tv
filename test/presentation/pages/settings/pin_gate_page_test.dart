@@ -3,8 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:miqotul_khoir_tv/domain/entities/display_state.dart';
+import 'package:miqotul_khoir_tv/domain/entities/imam_schedule.dart';
 import 'package:miqotul_khoir_tv/domain/entities/settings.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/imam_repository.dart';
+import 'package:miqotul_khoir_tv/domain/repositories/imam_schedule_repository.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/wisdom_quote_repository.dart';
+import 'package:miqotul_khoir_tv/presentation/cubits/display_state/display_state_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_cubit.dart';
 import 'package:miqotul_khoir_tv/presentation/cubits/settings/settings_state.dart';
 import 'package:miqotul_khoir_tv/presentation/pages/settings/pin_gate_page.dart';
@@ -18,21 +23,36 @@ class MockSettingsCubit extends Mock implements SettingsCubit {}
 
 class MockWisdomQuoteRepository extends Mock implements WisdomQuoteRepository {}
 
-class MockSlideshowImageRepository extends Mock implements SlideshowImageRepository {}
+class MockSlideshowImageRepository extends Mock
+    implements SlideshowImageRepository {}
 
-class MockSlideshowFileStorageService extends Mock implements SlideshowFileStorageService {}
+class MockSlideshowFileStorageService extends Mock
+    implements SlideshowFileStorageService {}
+
+class MockImamRepository extends Mock implements ImamRepository {}
+
+class MockImamScheduleRepository extends Mock
+    implements ImamScheduleRepository {}
+
+class MockDisplayStateCubit extends Mock implements DisplayStateCubit {}
 
 void main() {
   late MockSettingsCubit mockSettingsCubit;
   late MockWisdomQuoteRepository mockWisdomRepo;
   late MockSlideshowImageRepository mockSlideshowRepo;
   late MockSlideshowFileStorageService mockSlideshowStorage;
+  late MockImamRepository mockImamRepo;
+  late MockImamScheduleRepository mockImamScheduleRepo;
+  late MockDisplayStateCubit mockDisplayStateCubit;
 
   setUp(() {
     mockSettingsCubit = MockSettingsCubit();
     mockWisdomRepo = MockWisdomQuoteRepository();
     mockSlideshowRepo = MockSlideshowImageRepository();
     mockSlideshowStorage = MockSlideshowFileStorageService();
+    mockImamRepo = MockImamRepository();
+    mockImamScheduleRepo = MockImamScheduleRepository();
+    mockDisplayStateCubit = MockDisplayStateCubit();
     final mockSettings = const Settings();
     when(
       () => mockSettingsCubit.state,
@@ -45,8 +65,21 @@ void main() {
     when(
       () => mockWisdomRepo.getByIds(any()),
     ).thenAnswer((_) async => const []);
-    
+
     when(() => mockSlideshowRepo.getAll()).thenAnswer((_) async => const []);
+    when(() => mockImamRepo.getAll()).thenAnswer((_) async => const []);
+    when(
+      () => mockImamScheduleRepo.getRawScheduleForDay(any()),
+    ).thenAnswer((_) async => const <ImamSchedule>[]);
+    when(
+      () => mockImamScheduleRepo.getScheduleForDay(any()),
+    ).thenAnswer((_) async => const []);
+    when(
+      () => mockDisplayStateCubit.state,
+    ).thenReturn(StandbyState(currentTime: DateTime.now()));
+    when(
+      () => mockDisplayStateCubit.stream,
+    ).thenAnswer((_) => const Stream.empty());
   });
 
   Widget createTestWidget() {
@@ -57,12 +90,27 @@ void main() {
         return MaterialApp(
           builder: (context, child) => MultiRepositoryProvider(
             providers: [
-              RepositoryProvider<WisdomQuoteRepository>.value(value: mockWisdomRepo),
-              RepositoryProvider<SlideshowImageRepository>.value(value: mockSlideshowRepo),
-              RepositoryProvider<SlideshowFileStorageService>.value(value: mockSlideshowStorage),
+              RepositoryProvider<WisdomQuoteRepository>.value(
+                value: mockWisdomRepo,
+              ),
+              RepositoryProvider<SlideshowImageRepository>.value(
+                value: mockSlideshowRepo,
+              ),
+              RepositoryProvider<SlideshowFileStorageService>.value(
+                value: mockSlideshowStorage,
+              ),
+              RepositoryProvider<ImamRepository>.value(value: mockImamRepo),
+              RepositoryProvider<ImamScheduleRepository>.value(
+                value: mockImamScheduleRepo,
+              ),
             ],
-            child: BlocProvider<SettingsCubit>.value(
-              value: mockSettingsCubit,
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<SettingsCubit>.value(value: mockSettingsCubit),
+                BlocProvider<DisplayStateCubit>.value(
+                  value: mockDisplayStateCubit,
+                ),
+              ],
               child: child!,
             ),
           ),
