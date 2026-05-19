@@ -1210,6 +1210,7 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
                   label: 'Batal',
                   fontSize: 28.sp,
                   minHeight: 56.h,
+                  fontWeight: FontWeight.bold,
                   onSelect: () => Navigator.of(context).pop(),
                 ),
                 SizedBox(width: 12.w),
@@ -1218,6 +1219,7 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
                   isPrimary: true,
                   fontSize: 28.sp,
                   minHeight: 56.h,
+                  fontWeight: FontWeight.bold,
                   onSelect: () {
                     final name = _controller.text.trim();
                     if (name.isNotEmpty) {
@@ -1459,6 +1461,7 @@ class _DialogButton extends StatelessWidget {
   final bool autofocus;
   final double? fontSize;
   final double? minHeight;
+  final FontWeight? fontWeight;
 
   const _DialogButton({
     required this.label,
@@ -1468,6 +1471,7 @@ class _DialogButton extends StatelessWidget {
     this.autofocus = false,
     this.fontSize,
     this.minHeight,
+    this.fontWeight,
   });
 
   @override
@@ -1508,7 +1512,7 @@ class _DialogButton extends StatelessWidget {
                       : IslamicColors.textPrimary,
                 ).copyWith(
                   fontSize: fontSize,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: fontWeight ?? FontWeight.w600,
                   height: 1.2,
                 ),
           ),
