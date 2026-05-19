@@ -25,7 +25,8 @@ class MockSettingsCubit extends Mock implements SettingsCubit {}
 
 class MockImamRepository extends Mock implements ImamRepository {}
 
-class MockImamScheduleRepository extends Mock implements ImamScheduleRepository {}
+class MockImamScheduleRepository extends Mock
+    implements ImamScheduleRepository {}
 
 class MockDisplayStateCubit extends Mock implements DisplayStateCubit {}
 
@@ -66,12 +67,12 @@ void main() {
 
   /// Stub SettingsCubit dengan settings tertentu.
   void stubSettingsCubit(Settings settings) {
-    when(() => mockSettingsCubit.state).thenReturn(
-      SettingsLoaded(settings: settings),
-    );
-    when(() => mockSettingsCubit.stream).thenAnswer(
-      (_) => Stream.value(SettingsLoaded(settings: settings)),
-    );
+    when(
+      () => mockSettingsCubit.state,
+    ).thenReturn(SettingsLoaded(settings: settings));
+    when(
+      () => mockSettingsCubit.stream,
+    ).thenAnswer((_) => Stream.value(SettingsLoaded(settings: settings)));
     when(() => mockSettingsCubit.isPinEnabled).thenReturn(false);
   }
 
@@ -109,15 +110,13 @@ void main() {
 
     // DisplayStateCubit — perlu stub state & stream karena ImamScheduleSection
     // mengakses displayStateCubit.stream di dalam builder-nya.
-    when(() => mockDisplayCubit.state).thenReturn(
-      StandbyState(currentTime: DateTime(2026, 1, 1)),
-    );
-    when(() => mockDisplayCubit.stream).thenAnswer(
-      (_) => const Stream<DisplayState>.empty(),
-    );
     when(
-      () => mockDisplayCubit.onSettingsChanged(),
-    ).thenAnswer((_) async {});
+      () => mockDisplayCubit.state,
+    ).thenReturn(StandbyState(currentTime: DateTime(2026, 1, 1)));
+    when(
+      () => mockDisplayCubit.stream,
+    ).thenAnswer((_) => const Stream<DisplayState>.empty());
+    when(() => mockDisplayCubit.onSettingsChanged()).thenAnswer((_) async {});
 
     // Default: repository kosong
     stubRepositoryDefaults();
@@ -179,7 +178,9 @@ void main() {
 
         expect(find.text('Aktifkan Jadwal Imam'), findsOneWidget);
 
-        final switches = tester.widgetList<Switch>(find.byType(Switch)).toList();
+        final switches = tester
+            .widgetList<Switch>(find.byType(Switch))
+            .toList();
         // Switch pertama = toggle enabled
         expect(switches.first.value, isTrue);
       },
@@ -195,7 +196,9 @@ void main() {
         await tester.tap(find.text('Aktifkan Jadwal Imam'));
         await tester.pump();
 
-        verify(() => mockSettingsCubit.updateImamScheduleEnabled(false)).called(1);
+        verify(
+          () => mockSettingsCubit.updateImamScheduleEnabled(false),
+        ).called(1);
       },
     );
 
@@ -226,44 +229,68 @@ void main() {
       },
     );
 
+    testWidgets('(f) toggle "Kunci Jadwal" tampil ketika enabled=true', (
+      tester,
+    ) async {
+      stubSettingsCubit(_enabledSettings);
+      await tester.pumpWidget(buildTestable());
+      await tester.pumpAndSettle();
+
+      expect(find.text('Kunci Jadwal'), findsOneWidget);
+    });
+
     testWidgets(
-      '(f) toggle "Kunci Jadwal" tampil ketika enabled=true',
+      '(g) tap "Kunci Jadwal" dengan imam terdaftar → updateImamScheduleLocked(true) dipanggil',
       (tester) async {
         stubSettingsCubit(_enabledSettings);
-        await tester.pumpWidget(buildTestable());
-        await tester.pumpAndSettle();
-
-        expect(find.text('Kunci Jadwal'), findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      '(g) tap "Kunci Jadwal" → updateImamScheduleLocked(true) dipanggil',
-      (tester) async {
-        stubSettingsCubit(_enabledSettings);
+        // Toggle kunci hanya aktif jika ada imam terdaftar (canLock = hasImams)
+        stubRepositoryDefaults(
+          imams: [const Imam(id: 1, name: 'Ahmad Fauzi', isActive: true)],
+        );
         await tester.pumpWidget(buildTestable());
         await tester.pumpAndSettle();
 
         await tester.tap(find.text('Kunci Jadwal'));
         await tester.pump();
 
-        verify(() => mockSettingsCubit.updateImamScheduleLocked(true)).called(1);
+        verify(
+          () => mockSettingsCubit.updateImamScheduleLocked(true),
+        ).called(1);
       },
     );
 
     testWidgets(
-      '(h) info bar jam aktif tampil dengan format HH:MM – HH:MM',
+      '(g2) tap "Kunci Jadwal" tanpa imam terdaftar → toggle nonaktif, updateImamScheduleLocked tidak dipanggil',
       (tester) async {
-        // startHour=6, startMinute=0, endHour=21, endMinute=0
         stubSettingsCubit(_enabledSettings);
+        stubRepositoryDefaults(imams: []); // tidak ada imam → canLock=false
         await tester.pumpWidget(buildTestable());
         await tester.pumpAndSettle();
 
-        // Info bar: 'Aktif 06:00 – 21:00'
-        expect(find.textContaining('06:00'), findsAtLeastNWidgets(1));
-        expect(find.textContaining('21:00'), findsAtLeastNWidgets(1));
+        await tester.tap(find.text('Kunci Jadwal'));
+        await tester.pump();
+
+        verifyNever(() => mockSettingsCubit.updateImamScheduleLocked(any()));
+        // Hint text muncul saat toggle dinonaktifkan
+        expect(
+          find.text('Tambah imam terlebih dahulu untuk mengunci'),
+          findsOneWidget,
+        );
       },
     );
+
+    testWidgets('(h) info bar jam aktif tampil dengan format HH:MM – HH:MM', (
+      tester,
+    ) async {
+      // startHour=6, startMinute=0, endHour=21, endMinute=0
+      stubSettingsCubit(_enabledSettings);
+      await tester.pumpWidget(buildTestable());
+      await tester.pumpAndSettle();
+
+      // Info bar: 'Aktif 06:00 – 21:00'
+      expect(find.textContaining('06:00'), findsAtLeastNWidgets(1));
+      expect(find.textContaining('21:00'), findsAtLeastNWidgets(1));
+    });
 
     testWidgets(
       '(i) daftar imam kosong → tampil pesan "Belum ada imam terdaftar"',
@@ -273,63 +300,55 @@ void main() {
         await tester.pumpWidget(buildTestable());
         await tester.pumpAndSettle();
 
-        expect(
-          find.textContaining('Belum ada imam terdaftar'),
-          findsOneWidget,
-        );
+        expect(find.textContaining('Belum ada imam terdaftar'), findsOneWidget);
       },
     );
 
-    testWidgets(
-      '(j) daftar imam terisi → nama imam tampil di list',
-      (tester) async {
-        stubSettingsCubit(_enabledSettings);
-        stubRepositoryDefaults(
-          imams: const [
-            Imam(id: 1, name: 'Ust. Ahmad Fauzi', isActive: true),
-            Imam(id: 2, name: 'Ust. Budi Santoso', isActive: true),
-          ],
-        );
-        await tester.pumpWidget(buildTestable());
-        await tester.pumpAndSettle();
+    testWidgets('(j) daftar imam terisi → nama imam tampil di list', (
+      tester,
+    ) async {
+      stubSettingsCubit(_enabledSettings);
+      stubRepositoryDefaults(
+        imams: const [
+          Imam(id: 1, name: 'Ust. Ahmad Fauzi', isActive: true),
+          Imam(id: 2, name: 'Ust. Budi Santoso', isActive: true),
+        ],
+      );
+      await tester.pumpWidget(buildTestable());
+      await tester.pumpAndSettle();
 
-        expect(find.text('Ust. Ahmad Fauzi'), findsOneWidget);
-        expect(find.text('Ust. Budi Santoso'), findsOneWidget);
-      },
-    );
+      expect(find.text('Ust. Ahmad Fauzi'), findsOneWidget);
+      expect(find.text('Ust. Budi Santoso'), findsOneWidget);
+    });
 
-    testWidgets(
-      '(k) counter imam/10 tampil di header daftar imam',
-      (tester) async {
-        stubSettingsCubit(_enabledSettings);
-        stubRepositoryDefaults(
-          imams: const [
-            Imam(id: 1, name: 'Ust. Ahmad', isActive: true),
-          ],
-        );
-        await tester.pumpWidget(buildTestable());
-        await tester.pumpAndSettle();
+    testWidgets('(k) counter imam/10 tampil di header daftar imam', (
+      tester,
+    ) async {
+      stubSettingsCubit(_enabledSettings);
+      stubRepositoryDefaults(
+        imams: const [Imam(id: 1, name: 'Ust. Ahmad', isActive: true)],
+      );
+      await tester.pumpWidget(buildTestable());
+      await tester.pumpAndSettle();
 
-        expect(find.text('1/10'), findsOneWidget);
-      },
-    );
+      expect(find.text('1/10'), findsOneWidget);
+    });
 
-    testWidgets(
-      '(l) 7 tab hari tampil di grid jadwal mingguan',
-      (tester) async {
-        stubSettingsCubit(_enabledSettings);
-        await tester.pumpWidget(buildTestable());
-        await tester.pumpAndSettle();
+    testWidgets('(l) 7 tab hari tampil di grid jadwal mingguan', (
+      tester,
+    ) async {
+      stubSettingsCubit(_enabledSettings);
+      await tester.pumpWidget(buildTestable());
+      await tester.pumpAndSettle();
 
-        // 7 nama hari: Senin, Selasa, Rabu, Kamis, Jum'at, Sabtu, Minggu
-        expect(find.text('Senin'), findsOneWidget);
-        expect(find.text('Selasa'), findsOneWidget);
-        expect(find.text('Rabu'), findsOneWidget);
-        expect(find.text('Kamis'), findsOneWidget);
-        expect(find.textContaining("Jum'at"), findsOneWidget);
-        expect(find.text('Sabtu'), findsOneWidget);
-        expect(find.text('Minggu'), findsOneWidget);
-      },
-    );
+      // 7 nama hari: Senin, Selasa, Rabu, Kamis, Jum'at, Sabtu, Minggu
+      expect(find.text('Senin'), findsOneWidget);
+      expect(find.text('Selasa'), findsOneWidget);
+      expect(find.text('Rabu'), findsOneWidget);
+      expect(find.text('Kamis'), findsOneWidget);
+      expect(find.textContaining("Jum'at"), findsOneWidget);
+      expect(find.text('Sabtu'), findsOneWidget);
+      expect(find.text('Minggu'), findsOneWidget);
+    });
   });
 }

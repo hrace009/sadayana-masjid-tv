@@ -101,7 +101,7 @@ class _ImamScheduleSectionContentState
 
             // TASK-029: Toggle aktifkan jadwal imam
             _buildToggleEnabled(settings, settingsCubit),
-            SizedBox(height: 16.h),
+            SizedBox(height: 18.h),
 
             // Seluruh konten di bawah dinonaktifkan saat toggle OFF
             Expanded(
@@ -117,60 +117,76 @@ class _ImamScheduleSectionContentState
                         children: [
                           // TASK-031, 032: DPadStepper konfigurasi tampilan
                           _buildConfigBlock(settings, settingsCubit),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: 50.h),
 
                           // TASK-033: DPadStepper jam aktif (4 stepper, Column)
                           _buildJamAktifBlock(settings, settingsCubit),
                           SizedBox(height: 16.h),
-
                           Divider(color: IslamicColors.glassBorder, height: 1),
                           SizedBox(height: 16.h),
 
-                          // TASK-030: Toggle kunci jadwal
-                          _buildToggleLocked(settings, settingsCubit),
-                          SizedBox(height: 16.h),
+                          // TASK-030: Toggle kunci jadwal + Area CRUD
+                          // hasImams: kunci hanya boleh aktif jika ada imam terdaftar
+                          // effectiveLocked: lock hanya berlaku jika ada data imam
+                          BlocBuilder<ImamScheduleCubit, ImamScheduleState>(
+                            builder: (context, imamState) {
+                              final hasImams =
+                                  imamState is ImamScheduleLoaded &&
+                                  imamState.imams.isNotEmpty;
+                              final effectiveLocked = locked && hasImams;
 
-                          // Area CRUD — dinonaktifkan saat jadwal terkunci
-                          ExcludeFocus(
-                            excluding: locked,
-                            child: IgnorePointer(
-                              ignoring: locked,
-                              child: Opacity(
-                                opacity: locked ? 0.4 : 1.0,
-                                child:
-                                    BlocBuilder<
-                                      ImamScheduleCubit,
-                                      ImamScheduleState
-                                    >(
-                                      builder: (context, imamState) {
-                                        if (imamState is ImamScheduleInitial ||
-                                            imamState is ImamScheduleLoading) {
-                                          return const Center(
-                                            child: Padding(
-                                              padding: EdgeInsets.all(24),
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            ),
-                                          );
-                                        }
-                                        if (imamState is ImamScheduleError) {
-                                          return _buildError(
-                                            context,
-                                            imamState.message,
-                                          );
-                                        }
-                                        if (imamState is ImamScheduleLoaded) {
-                                          return _buildCrudContent(
-                                            context,
-                                            imamState,
-                                            context.read<ImamScheduleCubit>(),
-                                          );
-                                        }
-                                        return const SizedBox.shrink();
-                                      },
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildToggleLocked(
+                                    settings,
+                                    settingsCubit,
+                                    canLock: hasImams,
+                                  ),
+                                  SizedBox(height: 16.h),
+
+                                  // Area CRUD — dinonaktifkan hanya jika terkunci
+                                  // DAN ada data imam yang perlu dilindungi
+                                  ExcludeFocus(
+                                    excluding: effectiveLocked,
+                                    child: IgnorePointer(
+                                      ignoring: effectiveLocked,
+                                      child: Opacity(
+                                        opacity: effectiveLocked ? 0.4 : 1.0,
+                                        child: () {
+                                          if (imamState
+                                                  is ImamScheduleInitial ||
+                                              imamState
+                                                  is ImamScheduleLoading) {
+                                            return const Center(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(24),
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          }
+                                          if (imamState is ImamScheduleError) {
+                                            return _buildError(
+                                              context,
+                                              imamState.message,
+                                            );
+                                          }
+                                          if (imamState is ImamScheduleLoaded) {
+                                            return _buildCrudContent(
+                                              context,
+                                              imamState,
+                                              context.read<ImamScheduleCubit>(),
+                                            );
+                                          }
+                                          return const SizedBox.shrink();
+                                        }(),
+                                      ),
                                     ),
-                              ),
-                            ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -238,53 +254,69 @@ class _ImamScheduleSectionContentState
 
   // ───────────────────── TASK-030 Toggle Kunci ────────────────────────────
 
-  Widget _buildToggleLocked(Settings settings, SettingsCubit settingsCubit) {
-    return FocusableWidget(
-      onSelect: () => settingsCubit.updateImamScheduleLocked(
-        !settings.isImamScheduleLocked,
-      ),
-      builder: (isFocused) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
-        decoration: BoxDecoration(
-          color: IslamicColors.glassWhite,
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(
-            color: isFocused
-                ? IslamicColors.goldAmber
-                : IslamicColors.glassBorder,
-            width: isFocused ? 2.0 : 1.0,
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildToggleLocked(
+    Settings settings,
+    SettingsCubit settingsCubit, {
+    bool canLock = true,
+  }) {
+    return ExcludeFocus(
+      excluding: !canLock,
+      child: Opacity(
+        opacity: canLock ? 1.0 : 0.5,
+        child: FocusableWidget(
+          onSelect: canLock
+              ? () => settingsCubit.updateImamScheduleLocked(
+                  !settings.isImamScheduleLocked,
+                )
+              : null,
+          builder: (isFocused) => Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+            decoration: BoxDecoration(
+              color: IslamicColors.glassWhite,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(
+                color: isFocused
+                    ? IslamicColors.goldAmber
+                    : IslamicColors.glassBorder,
+                width: isFocused ? 2.0 : 1.0,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Kunci Jadwal',
-                  style: IslamicTypography.body(
-                    color: IslamicColors.textPrimary,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Kunci Jadwal',
+                      style: IslamicTypography.body(
+                        color: IslamicColors.textPrimary,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      !canLock
+                          ? 'Tambah imam terlebih dahulu untuk mengunci'
+                          : settings.isImamScheduleLocked
+                          ? 'Jadwal terkunci — tidak dapat diubah'
+                          : 'Jadwal dapat diubah sewaktu-waktu',
+                      style: IslamicTypography.caption(
+                        color: IslamicColors.textSecondary,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 2.h),
-                Text(
-                  settings.isImamScheduleLocked
-                      ? 'Jadwal terkunci — tidak dapat diubah'
-                      : 'Jadwal dapat diubah sewaktu-waktu',
-                  style: IslamicTypography.caption(
-                    color: IslamicColors.textSecondary,
+                Switch.adaptive(
+                  value: settings.isImamScheduleLocked,
+                  onChanged: null,
+                  activeThumbColor: IslamicColors.goldAmber,
+                  activeTrackColor: IslamicColors.goldAmber.withValues(
+                    alpha: 0.5,
                   ),
                 ),
               ],
             ),
-            Switch.adaptive(
-              value: settings.isImamScheduleLocked,
-              onChanged: null,
-              activeThumbColor: IslamicColors.goldAmber,
-              activeTrackColor: IslamicColors.goldAmber.withValues(alpha: 0.5),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -298,7 +330,10 @@ class _ImamScheduleSectionContentState
       children: [
         Text(
           'Konfigurasi Tampilan',
-          style: IslamicTypography.body(color: IslamicColors.textSecondary),
+          style: IslamicTypography.body(
+            color: IslamicColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ).copyWith(fontSize: 30.sp, height: 1.2),
         ),
         SizedBox(height: 12.h),
         // TASK-031: Interval tampil (5–60 menit, step 5)
@@ -351,9 +386,10 @@ class _ImamScheduleSectionContentState
               Text(
                 'Aktif ${_pad(settings.imamScheduleStartHour)}:${_pad(settings.imamScheduleStartMinute)}'
                 ' – ${_pad(settings.imamScheduleEndHour)}:${_pad(settings.imamScheduleEndMinute)}',
-                style: IslamicTypography.caption(
+                style: IslamicTypography.body(
                   color: IslamicColors.textSecondary,
-                ),
+                  fontWeight: FontWeight.w600,
+                ).copyWith(fontSize: 28.sp, height: 1.2),
               ),
             ],
           ),
@@ -361,7 +397,10 @@ class _ImamScheduleSectionContentState
         SizedBox(height: 12.h),
         Text(
           'Jam Aktif Tampil',
-          style: IslamicTypography.body(color: IslamicColors.textSecondary),
+          style: IslamicTypography.body(
+            color: IslamicColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ).copyWith(fontSize: 34.sp, height: 1.2),
         ),
         SizedBox(height: 12.h),
 
@@ -418,6 +457,7 @@ class _ImamScheduleSectionContentState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 24.h),
         // TASK-034: Daftar imam master
         _buildImamListBlock(context, state, cubit),
         SizedBox(height: 16.h),
@@ -448,15 +488,19 @@ class _ImamScheduleSectionContentState
           children: [
             Text(
               'Daftar Imam',
-              style: IslamicTypography.body(color: IslamicColors.textSecondary),
+              style: IslamicTypography.body(
+                color: IslamicColors.textPrimary,
+                fontWeight: FontWeight.w700,
+              ).copyWith(fontSize: 30.sp, height: 1.2),
             ),
             Text(
               '${imams.length}/10',
-              style: IslamicTypography.caption(
+              style: IslamicTypography.body(
                 color: imams.length < 10
                     ? IslamicColors.textSecondary
                     : IslamicColors.warning,
-              ),
+                fontWeight: FontWeight.w600,
+              ).copyWith(fontSize: 28.sp, height: 1.2),
             ),
           ],
         ),
@@ -516,7 +560,10 @@ class _ImamScheduleSectionContentState
             padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Text(
               'Belum ada imam terdaftar. Tambah imam terlebih dahulu.',
-              style: IslamicTypography.body(color: IslamicColors.textMuted),
+              style: IslamicTypography.body(
+                color: IslamicColors.textMuted,
+                fontWeight: FontWeight.w600,
+              ).copyWith(fontSize: 28.sp, height: 1.3),
             ),
           )
         else
@@ -551,27 +598,33 @@ class _ImamScheduleSectionContentState
           children: [
             Text(
               'Jadwal Mingguan',
-              style: IslamicTypography.body(color: IslamicColors.textSecondary),
+              style: IslamicTypography.body(
+                color: IslamicColors.textSecondary,
+                fontWeight: FontWeight.w700,
+              ).copyWith(fontSize: 30.sp, height: 1.2),
             ),
             FocusableWidget(
               onSelect: () => _showClearDayConfirmDialog(context, cubit),
               builder: (isFocused) => Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.r),
+                  borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(
                     color: isFocused
-                        ? IslamicColors.error
+                        ? IslamicColors.goldAmber
                         : IslamicColors.glassBorder,
                   ),
                 ),
                 child: Text(
                   'Kosongkan Hari',
-                  style: IslamicTypography.caption(
+                  textAlign: TextAlign.center,
+                  style: IslamicTypography.body(
                     color: isFocused
-                        ? IslamicColors.error
+                        ? IslamicColors.goldAmber
                         : IslamicColors.textSecondary,
-                  ),
+                    fontWeight: FontWeight.w700,
+                  ).copyWith(fontSize: 28.sp, height: 1.2),
                 ),
               ),
             ),
@@ -617,6 +670,7 @@ class _ImamScheduleSectionContentState
                     label: "Jumat\n(Khatib)",
                     personName: slot.khatibName ?? 'Khatib belum diisi',
                     isEmpty: slot.khatibName == null,
+                    maxLines: 2,
                     onSelect: () => _showImamPickerDialog(
                       context: context,
                       cubit: cubit,
@@ -630,6 +684,7 @@ class _ImamScheduleSectionContentState
                     label: "Jumat\n(Imam)",
                     personName: slot.imamName ?? 'Imam belum diisi',
                     isEmpty: slot.imamName == null,
+                    maxLines: 2,
                     onSelect: () => _showImamPickerDialog(
                       context: context,
                       cubit: cubit,
@@ -840,7 +895,9 @@ class _DayTab extends StatelessWidget {
       onSelect: onSelect,
       builder: (isFocused) => AnimatedContainer(
         duration: const Duration(milliseconds: 150),
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
+        alignment: Alignment.center,
+        constraints: BoxConstraints(minWidth: 120.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         decoration: BoxDecoration(
           color: isSelected
               ? IslamicColors.goldAmber.withValues(alpha: 0.25)
@@ -858,12 +915,13 @@ class _DayTab extends StatelessWidget {
         ),
         child: Text(
           dayName,
+          textAlign: TextAlign.center,
           style: IslamicTypography.caption(
             color: isSelected
                 ? IslamicColors.goldAmber
                 : IslamicColors.textSecondary,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-          ),
+            fontWeight: FontWeight.w700,
+          ).copyWith(fontSize: 26.sp, height: 1.2),
         ),
       ),
     );
@@ -876,12 +934,14 @@ class _ScheduleSlotTile extends StatelessWidget {
   final String personName;
   final bool isEmpty;
   final VoidCallback onSelect;
+  final int maxLines;
 
   const _ScheduleSlotTile({
     required this.label,
     required this.personName,
     required this.isEmpty,
     required this.onSelect,
+    this.maxLines = 1,
   });
 
   @override
@@ -904,12 +964,19 @@ class _ScheduleSlotTile extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: 72.w,
+              width: 150.w,
               child: Text(
                 label,
-                style: IslamicTypography.body(
-                  color: IslamicColors.textSecondary,
-                ),
+                maxLines: maxLines,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    IslamicTypography.body(
+                      color: IslamicColors.textSecondary,
+                    ).copyWith(
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.w600,
+                      height: 1.2,
+                    ),
               ),
             ),
             SizedBox(width: 12.w),
@@ -922,6 +989,9 @@ class _ScheduleSlotTile extends StatelessWidget {
                           ? IslamicColors.textMuted
                           : IslamicColors.textPrimary,
                     ).copyWith(
+                      fontSize: 30.sp,
+                      fontWeight: isEmpty ? FontWeight.w500 : FontWeight.w600,
+                      height: 1.2,
                       fontStyle: isEmpty ? FontStyle.italic : FontStyle.normal,
                     ),
               ),
@@ -931,7 +1001,7 @@ class _ScheduleSlotTile extends StatelessWidget {
               color: isFocused
                   ? IslamicColors.goldAmber
                   : IslamicColors.textMuted,
-              size: 20.sp,
+              size: 28.sp,
             ),
           ],
         ),
@@ -975,7 +1045,7 @@ class _ImamListTile extends StatelessWidget {
           FocusableWidget(
             onSelect: onEdit,
             builder: (isFocused) => Container(
-              padding: EdgeInsets.all(6.r),
+              padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.r),
                 color: isFocused
@@ -992,7 +1062,7 @@ class _ImamListTile extends StatelessWidget {
                 color: isFocused
                     ? IslamicColors.goldAmber
                     : IslamicColors.textSecondary,
-                size: 18.sp,
+                size: 30.sp,
               ),
             ),
           ),
@@ -1001,7 +1071,7 @@ class _ImamListTile extends StatelessWidget {
           FocusableWidget(
             onSelect: onDelete,
             builder: (isFocused) => Container(
-              padding: EdgeInsets.all(6.r),
+              padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6.r),
                 color: isFocused
@@ -1016,7 +1086,7 @@ class _ImamListTile extends StatelessWidget {
                 color: isFocused
                     ? IslamicColors.error
                     : IslamicColors.textSecondary,
-                size: 18.sp,
+                size: 30.sp,
               ),
             ),
           ),
@@ -1138,12 +1208,16 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
               children: [
                 _DialogButton(
                   label: 'Batal',
+                  fontSize: 28.sp,
+                  minHeight: 56.h,
                   onSelect: () => Navigator.of(context).pop(),
                 ),
                 SizedBox(width: 12.w),
                 _DialogButton(
                   label: widget.confirmLabel,
                   isPrimary: true,
+                  fontSize: 28.sp,
+                  minHeight: 56.h,
                   onSelect: () {
                     final name = _controller.text.trim();
                     if (name.isNotEmpty) {
@@ -1383,6 +1457,8 @@ class _DialogButton extends StatelessWidget {
   final bool isPrimary;
   final bool isDestructive;
   final bool autofocus;
+  final double? fontSize;
+  final double? minHeight;
 
   const _DialogButton({
     required this.label,
@@ -1390,6 +1466,8 @@ class _DialogButton extends StatelessWidget {
     this.isPrimary = false,
     this.isDestructive = false,
     this.autofocus = false,
+    this.fontSize,
+    this.minHeight,
   });
 
   @override
@@ -1402,6 +1480,10 @@ class _DialogButton extends StatelessWidget {
             ? IslamicColors.error
             : IslamicColors.goldAmber;
         return Container(
+          constraints: minHeight != null
+              ? BoxConstraints(minHeight: minHeight!)
+              : null,
+          alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           decoration: BoxDecoration(
             color: isPrimary
@@ -1418,11 +1500,17 @@ class _DialogButton extends StatelessWidget {
           ),
           child: Text(
             label,
-            style: IslamicTypography.body(
-              color: isPrimary
-                  ? IslamicColors.darkBackground
-                  : IslamicColors.textPrimary,
-            ),
+            textAlign: TextAlign.center,
+            style:
+                IslamicTypography.body(
+                  color: isPrimary
+                      ? IslamicColors.darkBackground
+                      : IslamicColors.textPrimary,
+                ).copyWith(
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.w600,
+                  height: 1.2,
+                ),
           ),
         );
       },
