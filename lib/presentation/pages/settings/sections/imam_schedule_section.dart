@@ -291,18 +291,20 @@ class _ImamScheduleSectionContentState
                       'Kunci Jadwal',
                       style: IslamicTypography.body(
                         color: IslamicColors.textPrimary,
-                      ),
+                        fontWeight: FontWeight.w700,
+                      ).copyWith(fontSize: 30.sp, height: 1.2),
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 4.h),
                     Text(
                       !canLock
                           ? 'Tambah imam terlebih dahulu untuk mengunci'
                           : settings.isImamScheduleLocked
                           ? 'Jadwal terkunci — tidak dapat diubah'
                           : 'Jadwal dapat diubah sewaktu-waktu',
-                      style: IslamicTypography.caption(
+                      style: IslamicTypography.body(
                         color: IslamicColors.textSecondary,
-                      ),
+                        fontWeight: FontWeight.w500,
+                      ).copyWith(fontSize: 24.sp, height: 1.25),
                     ),
                   ],
                 ),
@@ -1001,7 +1003,7 @@ class _ScheduleSlotTile extends StatelessWidget {
               color: isFocused
                   ? IslamicColors.goldAmber
                   : IslamicColors.textMuted,
-              size: 28.sp,
+              size: 38.sp,
             ),
           ],
         ),
@@ -1184,14 +1186,24 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
                 child: TextField(
                   controller: _controller,
                   focusNode: _fieldFocusNode,
-                  style: IslamicTypography.body(
-                    color: IslamicColors.textPrimary,
-                  ),
+                  style:
+                      IslamicTypography.body(
+                        color: IslamicColors.textPrimary,
+                      ).copyWith(
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.w600,
+                        height: 1.2,
+                      ),
                   decoration: InputDecoration(
                     hintText: 'Nama imam / ustadz',
-                    hintStyle: IslamicTypography.body(
-                      color: IslamicColors.textMuted,
-                    ),
+                    hintStyle:
+                        IslamicTypography.body(
+                          color: IslamicColors.textMuted,
+                        ).copyWith(
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.w500,
+                          height: 1.2,
+                        ),
                     border: InputBorder.none,
                     isDense: true,
                   ),
@@ -1259,12 +1271,13 @@ class _ImamPickerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: IslamicColors.surfaceDark,
+      insetPadding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 32.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.r),
         side: const BorderSide(color: IslamicColors.glassBorder),
       ),
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: 420.h, maxWidth: 420.w),
+        constraints: BoxConstraints(maxHeight: 640.h, maxWidth: 800.w),
         child: Padding(
           padding: EdgeInsets.all(24.r),
           child: Column(
@@ -1277,7 +1290,7 @@ class _ImamPickerDialog extends StatelessWidget {
                 dayName,
                 style: IslamicTypography.caption(
                   color: IslamicColors.textSecondary,
-                ),
+                ).copyWith(fontSize: 32.sp, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 16.h),
               Flexible(
@@ -1376,11 +1389,11 @@ class _ImamPickerItem extends StatelessWidget {
                         : isSelected
                         ? IslamicColors.goldAmber
                         : IslamicColors.textPrimary,
-                  ),
+                  ).copyWith(fontSize: 30.sp, fontWeight: FontWeight.w500),
                 ),
               ),
               if (isSelected)
-                Icon(Icons.check, color: IslamicColors.goldAmber, size: 18.sp),
+                Icon(Icons.check, color: IslamicColors.goldAmber, size: 28.sp),
             ],
           ),
         ),
