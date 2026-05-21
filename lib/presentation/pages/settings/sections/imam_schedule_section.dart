@@ -1186,6 +1186,7 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
                 child: TextField(
                   controller: _controller,
                   focusNode: _fieldFocusNode,
+                  maxLength: 60,
                   style:
                       IslamicTypography.body(
                         color: IslamicColors.textPrimary,
@@ -1204,6 +1205,7 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
                           fontWeight: FontWeight.w500,
                           height: 1.2,
                         ),
+                    counterText: '',
                     border: InputBorder.none,
                     isDense: true,
                   ),
@@ -1212,7 +1214,18 @@ class _ImamNameDialogState extends State<_ImamNameDialog> {
                 ),
               ),
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 4.h),
+            ValueListenableBuilder<TextEditingValue>(
+              valueListenable: _controller,
+              builder: (_, value, _) => Text(
+                '${value.text.length}/60',
+                style: IslamicTypography.caption(
+                  color: Colors.white,
+                ).copyWith(fontSize: 26.sp),
+                textAlign: TextAlign.right,
+              ),
+            ),
+            SizedBox(height: 16.h),
 
             // Tombol aksi — pakai Dialog biasa (bukan AlertDialog) per AGENTS.md
             Row(

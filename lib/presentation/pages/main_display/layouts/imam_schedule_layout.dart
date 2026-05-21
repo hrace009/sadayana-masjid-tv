@@ -80,7 +80,7 @@ class ImamScheduleLayout extends StatelessWidget {
   Widget _buildBody(String mosqueName) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 960.w),
+        constraints: BoxConstraints(maxWidth: 1400.w),
         child: GlassmorphismCard(
           padding: EdgeInsets.symmetric(horizontal: 64.w, vertical: 40.h),
           child: Column(
@@ -108,26 +108,26 @@ class ImamScheduleLayout extends StatelessWidget {
               Text(
                 mosqueName,
                 style: IslamicTypography.subtitle().copyWith(
-                  fontSize: 24.sp,
+                  fontSize: 32.sp,
                   color: IslamicColors.textSecondary,
                 ),
               ),
               SizedBox(height: 24.h),
               // Day badge
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  color: IslamicColors.primaryTeal.withValues(alpha: 0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(
-                    color: IslamicColors.primaryTeal.withValues(alpha: 0.4),
+                    color: Colors.white.withValues(alpha: 0.6),
                   ),
                 ),
                 child: Text(
                   '══  ${state.dayName}  ══',
                   style: IslamicTypography.title().copyWith(
-                    fontSize: 28.sp,
-                    color: IslamicColors.primaryTeal,
+                    fontSize: 36.sp,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 4,
                   ),
@@ -152,11 +152,11 @@ class ImamScheduleLayout extends StatelessWidget {
         children: [
           // Prayer label
           SizedBox(
-            width: 120.w,
+            width: 200.w,
             child: Text(
               slot.prayerLabel,
               style: IslamicTypography.body().copyWith(
-                fontSize: 26.sp,
+                fontSize: 36.sp,
                 color: IslamicColors.goldAmber,
                 fontWeight: FontWeight.w600,
               ),
@@ -167,7 +167,7 @@ class ImamScheduleLayout extends StatelessWidget {
             padding: EdgeInsets.only(right: 20.w),
             child: Text(
               '│',
-              style: TextStyle(fontSize: 26.sp, color: IslamicColors.textMuted),
+              style: TextStyle(fontSize: 36.sp, color: IslamicColors.textMuted),
             ),
           ),
           // Imam info
@@ -187,10 +187,12 @@ class ImamScheduleLayout extends StatelessWidget {
     return Text(
       hasName ? name : 'Imam belum tersedia',
       style: IslamicTypography.body().copyWith(
-        fontSize: 26.sp,
+        fontSize: 36.sp,
         color: hasName ? IslamicColors.textPrimary : IslamicColors.textMuted,
         fontStyle: hasName ? FontStyle.normal : FontStyle.italic,
       ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -222,11 +224,11 @@ class ImamScheduleLayout extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: 80.w,
+          width: 100.w,
           child: Text(
             '$label:',
             style: IslamicTypography.body().copyWith(
-              fontSize: 24.sp,
+              fontSize: 34.sp,
               color: IslamicColors.textSecondary,
               fontWeight: FontWeight.w500,
             ),
@@ -237,12 +239,14 @@ class ImamScheduleLayout extends StatelessWidget {
           child: Text(
             hasName ? name : emptyText,
             style: IslamicTypography.body().copyWith(
-              fontSize: 24.sp,
+              fontSize: 34.sp,
               color: hasName
                   ? IslamicColors.textPrimary
                   : IslamicColors.textMuted,
               fontStyle: hasName ? FontStyle.normal : FontStyle.italic,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
