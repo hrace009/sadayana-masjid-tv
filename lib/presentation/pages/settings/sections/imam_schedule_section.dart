@@ -206,7 +206,7 @@ class _ImamScheduleSectionContentState
   Widget _buildHeader() {
     return Row(
       children: [
-        Icon(Icons.mosque, color: IslamicColors.goldAmber, size: 28.sp),
+        Icon(Icons.mosque, color: IslamicColors.goldAmber, size: 38.sp),
         SizedBox(width: 12.w),
         Text('Jadwal Imam Sholat', style: IslamicTypography.heading()),
       ],
@@ -382,7 +382,7 @@ class _ImamScheduleSectionContentState
               Icon(
                 Icons.schedule,
                 color: IslamicColors.textSecondary,
-                size: 16.sp,
+                size: 30.sp,
               ),
               SizedBox(width: 8.w),
               Text(
@@ -538,7 +538,7 @@ class _ImamScheduleSectionContentState
                       color: isFocused
                           ? IslamicColors.goldAmber
                           : IslamicColors.textSecondary,
-                      size: 20.sp,
+                      size: 32.sp,
                     ),
                     SizedBox(width: 8.w),
                     Text(

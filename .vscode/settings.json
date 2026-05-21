@@ -1,3 +1,4 @@
 {
-    "chat.mcp.serverSampling": {}
+    "chat.mcp.serverSampling": {},
+    "chat.utilityModel": "copilot/auto"
 }
