@@ -1035,7 +1035,7 @@ class _ImamListTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.person, color: IslamicColors.textMuted, size: 18.sp),
+          Icon(Icons.person, color: IslamicColors.textMuted, size: 30.sp),
           SizedBox(width: 10.w),
           Expanded(
             child: Text(
