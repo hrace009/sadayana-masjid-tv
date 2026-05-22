@@ -78,75 +78,85 @@ class ImamScheduleLayout extends StatelessWidget {
   }
 
   Widget _buildBody(String mosqueName) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 1400.w),
-        child: GlassmorphismCard(
-          padding: EdgeInsets.symmetric(horizontal: 64.w, vertical: 40.h),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Title
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 1400.w,
+              maxHeight: constraints.maxHeight,
+            ),
+            child: GlassmorphismCard(
+              padding: EdgeInsets.symmetric(horizontal: 64.w, vertical: 28.h),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('🕌', style: TextStyle(fontSize: 36.sp)),
-                  SizedBox(width: 16.w),
+                  // Title
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('🕌', style: TextStyle(fontSize: 36.sp)),
+                      SizedBox(width: 16.w),
+                      Text(
+                        'JADWAL IMAM SHOLAT',
+                        style: IslamicTypography.heading().copyWith(
+                          fontSize: 38.sp,
+                          fontWeight: FontWeight.bold,
+                          color: IslamicColors.goldAmber,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                  // Mosque name
                   Text(
-                    'JADWAL IMAM SHOLAT',
-                    style: IslamicTypography.heading().copyWith(
-                      fontSize: 38.sp,
-                      fontWeight: FontWeight.bold,
-                      color: IslamicColors.goldAmber,
-                      letterSpacing: 2,
+                    mosqueName,
+                    style: IslamicTypography.subtitle().copyWith(
+                      fontSize: 32.sp,
+                      color: IslamicColors.textSecondary,
                     ),
                   ),
+                  SizedBox(height: 16.h),
+                  // Day badge
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 40.w,
+                      vertical: 10.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.6),
+                      ),
+                    ),
+                    child: Text(
+                      '══  ${state.dayName}  ══',
+                      style: IslamicTypography.title().copyWith(
+                        fontSize: 36.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 4,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.h),
+                  // Schedule slots
+                  ...state.slots.map(_buildSlotRow),
                 ],
               ),
-              SizedBox(height: 6.h),
-              // Mosque name
-              Text(
-                mosqueName,
-                style: IslamicTypography.subtitle().copyWith(
-                  fontSize: 32.sp,
-                  color: IslamicColors.textSecondary,
-                ),
-              ),
-              SizedBox(height: 24.h),
-              // Day badge
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 10.h),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.6),
-                  ),
-                ),
-                child: Text(
-                  '══  ${state.dayName}  ══',
-                  style: IslamicTypography.title().copyWith(
-                    fontSize: 36.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 4,
-                  ),
-                ),
-              ),
-              SizedBox(height: 28.h),
-              // Schedule slots
-              ...state.slots.map(_buildSlotRow),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
   Widget _buildSlotRow(ImamScheduleDisplay slot) {
     final isFriday = slot.prayerName == 'jumat';
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6.h),
+      padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -224,7 +234,7 @@ class ImamScheduleLayout extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: 100.w,
+          width: 160.w,
           child: Text(
             '$label:',
             style: IslamicTypography.body().copyWith(
