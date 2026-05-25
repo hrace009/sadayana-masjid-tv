@@ -1,4 +1,5 @@
 import 'package:miqotul_khoir_tv/data/datasources/imam_local_data_source.dart';
+import 'package:miqotul_khoir_tv/data/models/imam_model.dart';
 import 'package:miqotul_khoir_tv/domain/entities/imam.dart';
 import 'package:miqotul_khoir_tv/domain/repositories/imam_repository.dart';
 
@@ -28,8 +29,8 @@ class ImamRepositoryImpl implements ImamRepository {
   @override
   Future<void> update(Imam imam) async {
     return await _localDataSource.update(
-      imam as dynamic,
-    ); // Cast to ImanModel is safe
+      ImanModel(id: imam.id, name: imam.name, isActive: imam.isActive),
+    );
   }
 
   @override
