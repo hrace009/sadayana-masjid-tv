@@ -4,14 +4,16 @@ Letakkan screenshot tampilan aplikasi di folder ini.
 
 ## Nama File yang Diharapkan
 
-| Nama File | Konten | Digunakan di |
-|-----------|--------|--------------|
-| `standby.png` | Layar standby utama: jam digital, jadwal sholat, kas masjid | `index.html` — screenshot ke-1 |
-| `pre-adzan.png` | Hitung mundur menjelang waktu Adzan | `index.html` — screenshot ke-2 |
-| `iqomah.png` | Hitung mundur Iqomah | `index.html` — screenshot ke-3 |
-| `settings.png` | Menu pengaturan (via remote TV) | `index.html` — screenshot ke-4 |
-| `wisdom.png` | Tampilan Kata Mutiara Islam | `index.html` — screenshot ke-5 |
-| `slideshow.png` | Slideshow pengumuman gambar | `index.html` — screenshot ke-6 |
+| Nama File                   | Konten                                                          | Digunakan di                   |
+| --------------------------- | --------------------------------------------------------------- | ------------------------------ |
+| `standby.png`               | Layar standby utama: jam digital, jadwal sholat, kas masjid     | `index.html` — screenshot ke-1 |
+| `pre-adzan.png`             | Hitung mundur menjelang waktu Adzan                             | `index.html` — screenshot ke-2 |
+| `iqomah.png`                | Hitung mundur Iqomah                                            | `index.html` — screenshot ke-3 |
+| `settings.png`              | Menu pengaturan (via remote TV)                                 | `index.html` — screenshot ke-4 |
+| `wisdom.png`                | Tampilan Kata Mutiara Islam                                     | `index.html` — screenshot ke-5 |
+| `slideshow.png`             | Slideshow pengumuman gambar                                     | `index.html` — screenshot ke-6 |
+| `imam-schedule-weekday.png` | Tampilan Jadwal Imam hari biasa di layar utama                  | `index.html` — screenshot ke-7 |
+| `imam-schedule-jumat.png`   | Tampilan Jadwal Imam hari Jumat dengan Khatib dan Imam terpisah | `index.html` — screenshot ke-8 |
 
 ## Spesifikasi Teknis
 
