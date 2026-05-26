@@ -1,9 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:file_picker/src/platform/file_picker_platform_interface.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -24,9 +25,9 @@ class MockSlideshowImageRepository extends Mock
 class MockSlideshowFileStorageService extends Mock
     implements SlideshowFileStorageService {}
 
-class MockFilePicker extends Mock
+class MockImagePickerPlatform extends Mock
     with MockPlatformInterfaceMixin
-    implements FilePickerPlatform {}
+    implements ImagePickerPlatform {}
 
 class MockDisplayStateCubit extends Mock implements DisplayStateCubit {}
 
@@ -54,27 +55,25 @@ const _kSlot2 = SlideshowImage(
   fileSizeBytes: 180000,
 );
 
-FilePickerResult _makePickerResult(String name, Uint8List bytes) {
-  return FilePickerResult([
-    PlatformFile(name: name, size: bytes.length, bytes: bytes),
-  ]);
+XFile _makeXFile(Uint8List bytes, String name) {
+  return XFile.fromData(bytes, name: name, path: '/virtual/$name');
 }
 
 /// Unit tests untuk [SlideshowSectionCubit].
 ///
-/// FilePicker dimock melalui `FilePicker.platform` setter yang
-/// disediakan package `file_picker` untuk testing.
+/// ImagePicker dimock melalui `ImagePickerPlatform.instance`.
 ///
 /// Ref: TASK-049 (Phase 8 — Slideshow Pengumuman), TEST-004, TEST-005, TEST-006
 void main() {
   late MockSlideshowImageRepository repo;
   late MockSlideshowFileStorageService storage;
-  late MockFilePicker mockPicker;
+  late MockImagePickerPlatform mockImagePickerPlatform;
   late MockDisplayStateCubit displayCubit;
 
   setUpAll(() {
     // mocktail perlu fallback value untuk enum/class yang dipakai dengan any()
-    registerFallbackValue(FileType.any);
+    registerFallbackValue(ImageSource.gallery);
+    registerFallbackValue(const ImagePickerOptions());
     registerFallbackValue(Uint8List(0));
     registerFallbackValue(
       const SlideshowImage(
@@ -92,17 +91,17 @@ void main() {
   setUp(() {
     repo = MockSlideshowImageRepository();
     storage = MockSlideshowFileStorageService();
-    mockPicker = MockFilePicker();
-    FilePickerPlatform.instance = mockPicker;
+    mockImagePickerPlatform = MockImagePickerPlatform();
+    ImagePickerPlatform.instance = mockImagePickerPlatform;
     displayCubit = MockDisplayStateCubit();
     when(() => displayCubit.onSettingsChanged()).thenAnswer((_) async {});
   });
 
   SlideshowSectionCubit buildCubit() => SlideshowSectionCubit(
-        imageRepository: repo,
-        storageService: storage,
-        displayStateCubit: displayCubit,
-      );
+    imageRepository: repo,
+    storageService: storage,
+    displayStateCubit: displayCubit,
+  );
 
   // ---------------------------------------------------------------------------
   // loadImages()
@@ -151,11 +150,9 @@ void main() {
       'tidak emit state baru jika user membatalkan picker (TS-P4-002)',
       setUp: () {
         when(
-          () => mockPicker.pickFiles(
-            type: any(named: 'type'),
-            allowedExtensions: any(named: 'allowedExtensions'),
-            allowMultiple: any(named: 'allowMultiple'),
-            withData: any(named: 'withData'),
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
           ),
         ).thenAnswer((_) async => null);
       },
@@ -176,14 +173,12 @@ void main() {
       'emits [isBusy: true] lalu [isBusy: false, images: loaded] setelah import',
       setUp: () {
         when(
-          () => mockPicker.pickFiles(
-            type: any(named: 'type'),
-            allowedExtensions: any(named: 'allowedExtensions'),
-            allowMultiple: any(named: 'allowMultiple'),
-            withData: any(named: 'withData'),
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
           ),
         ).thenAnswer(
-          (_) async => _makePickerResult('slide_slot_1_9999.jpg', fakeBytes),
+          (_) async => _makeXFile(fakeBytes, 'slide_slot_1_9999.jpg'),
         );
         when(
           () => storage.importImage(
@@ -211,13 +206,11 @@ void main() {
       'importIntoSlot tidak auto-set isSlideshowEnabled ke true (TS-P4-002)',
       () async {
         when(
-          () => mockPicker.pickFiles(
-            type: any(named: 'type'),
-            allowedExtensions: any(named: 'allowedExtensions'),
-            allowMultiple: any(named: 'allowMultiple'),
-            withData: any(named: 'withData'),
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
           ),
-        ).thenAnswer((_) async => _makePickerResult('img.jpg', fakeBytes));
+        ).thenAnswer((_) async => _makeXFile(fakeBytes, 'img.jpg'));
         when(
           () => storage.importImage(
             slotIndex: any(named: 'slotIndex'),
@@ -250,13 +243,11 @@ void main() {
       'emits errorMessage dan isBusy: false jika storage.importImage() throws',
       setUp: () {
         when(
-          () => mockPicker.pickFiles(
-            type: any(named: 'type'),
-            allowedExtensions: any(named: 'allowedExtensions'),
-            allowMultiple: any(named: 'allowMultiple'),
-            withData: any(named: 'withData'),
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
           ),
-        ).thenAnswer((_) async => _makePickerResult('img.jpg', fakeBytes));
+        ).thenAnswer((_) async => _makeXFile(fakeBytes, 'img.jpg'));
         when(
           () => storage.importImage(
             slotIndex: any(named: 'slotIndex'),
@@ -287,13 +278,11 @@ void main() {
       'memanggil deleteStoredImage untuk gambar lama, lalu importImage + save',
       setUp: () {
         when(
-          () => mockPicker.pickFiles(
-            type: any(named: 'type'),
-            allowedExtensions: any(named: 'allowedExtensions'),
-            allowMultiple: any(named: 'allowMultiple'),
-            withData: any(named: 'withData'),
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
           ),
-        ).thenAnswer((_) async => _makePickerResult('new.png', fakeBytes));
+        ).thenAnswer((_) async => _makeXFile(fakeBytes, 'new.png'));
         when(() => repo.getBySlot(1)).thenAnswer((_) async => _kSlot1);
         when(() => storage.deleteStoredImage(any())).thenAnswer((_) async {});
         when(
@@ -325,11 +314,9 @@ void main() {
       'no-op jika user cancel pada replaceSlot',
       setUp: () {
         when(
-          () => mockPicker.pickFiles(
-            type: any(named: 'type'),
-            allowedExtensions: any(named: 'allowedExtensions'),
-            allowMultiple: any(named: 'allowMultiple'),
-            withData: any(named: 'withData'),
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
           ),
         ).thenAnswer((_) async => null);
       },
@@ -421,6 +408,48 @@ void main() {
           isBusy: false,
           errorMessage: null,
         ),
+      ],
+    );
+  });
+
+  group('importIntoSlot() — PlatformException dari picker', () {
+    blocTest<SlideshowSectionCubit, SlideshowSectionState>(
+      'emits errorMessage dan tidak crash saat picker melempar PlatformException',
+      setUp: () {
+        when(
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
+          ),
+        ).thenThrow(PlatformException(code: 'invalid_format_type'));
+      },
+      build: buildCubit,
+      act: (c) => c.importIntoSlot(1),
+      expect: () => [
+        isA<SlideshowSectionState>()
+            .having((s) => s.errorMessage, 'errorMessage', isNotNull)
+            .having((s) => s.isBusy, 'isBusy', isFalse),
+      ],
+    );
+  });
+
+  group('replaceSlot() — PlatformException dari picker', () {
+    blocTest<SlideshowSectionCubit, SlideshowSectionState>(
+      'emits errorMessage dan tidak crash saat picker melempar PlatformException',
+      setUp: () {
+        when(
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
+          ),
+        ).thenThrow(PlatformException(code: 'invalid_format_type'));
+      },
+      build: buildCubit,
+      act: (c) => c.replaceSlot(1),
+      expect: () => [
+        isA<SlideshowSectionState>()
+            .having((s) => s.errorMessage, 'errorMessage', isNotNull)
+            .having((s) => s.isBusy, 'isBusy', isFalse),
       ],
     );
   });

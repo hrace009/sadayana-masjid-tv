@@ -1,7 +1,7 @@
-import 'dart:typed_data';
-
-import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
 
 import 'package:miqotul_khoir_tv/domain/repositories/slideshow_image_repository.dart';
 import 'package:miqotul_khoir_tv/domain/services/slideshow_file_storage_service.dart';
@@ -33,14 +33,17 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
   final SlideshowImageRepository _imageRepository;
   final SlideshowFileStorageService _storageService;
   final DisplayStateCubit? _displayStateCubit;
+  final ImagePicker _imagePicker;
 
   SlideshowSectionCubit({
     required SlideshowImageRepository imageRepository,
     required SlideshowFileStorageService storageService,
     DisplayStateCubit? displayStateCubit,
+    ImagePicker? imagePicker,
   }) : _imageRepository = imageRepository,
        _storageService = storageService,
        _displayStateCubit = displayStateCubit,
+       _imagePicker = imagePicker ?? ImagePicker(),
        super(const SlideshowSectionState.initial());
 
   // ---------------------------------------------------------------------------
@@ -174,26 +177,36 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
   // Private helpers
   // ---------------------------------------------------------------------------
 
-  /// Membuka file picker dan mengembalikan [_PickedFile] berisi bytes dan nama
+  /// Membuka image picker dan mengembalikan [_PickedFile] berisi bytes dan nama
   /// file, atau `null` jika user membatalkan pilihan.
   ///
-  /// Filter ekstensi disesuaikan dengan whitelist SEC-004: jpg, jpeg, png, webp.
-  /// [withData: true] memastikan bytes tersedia di semua platform (Android TV).
+  /// Picker hanya bertugas mengambil file dari galeri. Validasi format ekstensi
+  /// tetap dilakukan di layer [SlideshowFileStorageService] sesuai whitelist.
+  ///
+  /// PlatformException dari picker ditangani di sini agar tidak menjadi crash
+  /// fatal pada perangkat tanpa aplikasi galeri/pengelola file kompatibel.
   Future<_PickedFile?> _pickImageBytes() async {
-    final result = await FilePicker.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'jpeg', 'png', 'webp'],
-      allowMultiple: false,
-      withData: true,
-    );
+    try {
+      final XFile? image = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+        requestFullMetadata: false,
+      );
+      if (image == null) return null;
 
-    if (result == null || result.files.isEmpty) return null;
+      final bytes = await image.readAsBytes();
+      if (bytes.isEmpty) return null;
 
-    final file = result.files.first;
-    final bytes = file.bytes;
-    if (bytes == null || bytes.isEmpty) return null;
-
-    return _PickedFile(fileName: file.name, data: bytes);
+      return _PickedFile(fileName: p.basename(image.path), data: bytes);
+    } on PlatformException {
+      emit(
+        state.copyWith(
+          errorMessage:
+              'Tidak dapat membuka galeri gambar. Pastikan perangkat '
+              'memiliki aplikasi galeri atau pengelola file yang kompatibel.',
+        ),
+      );
+      return null;
+    }
   }
 
   /// Me-reload daftar slot dari repository dan memperbarui state.

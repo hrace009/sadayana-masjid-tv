@@ -1,10 +1,10 @@
 ---
 goal: "Refactor Picker Slideshow: Migrasi dari file_picker ke image_picker untuk Fix Crash Crashlytics (invalid_format_type)"
-version: "1.0"
+version: "1.1"
 date_created: "2026-05-26"
 last_updated: "2026-05-26"
 owner: "Gulajava Ministudio"
-status: "Planned"
+status: "Completed"
 tags:
   - fix
   - refactor
@@ -17,7 +17,7 @@ tags:
 
 # Refactor Picker Slideshow: Migrasi `file_picker` → `image_picker`
 
-![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+![Status: Completed](https://img.shields.io/badge/status-Completed-brightgreen)
 
 Laporan Crashlytics (Issue `a6c29f9`, 13 crash event, v1.3.0) menunjukkan crash
 fatal `PlatformException(invalid_format_type, Can't handle the provided file
@@ -38,6 +38,15 @@ kompatibel di Android TV. Validasi format tetap dijaga oleh
 `SlideshowFileStorageServiceImpl` (tidak berubah). Sekaligus, `_pickImageBytes()`
 dibungkus `try/catch PlatformException` agar tidak ada crash bahkan pada device
 yang tidak memiliki galeri terpasang.
+
+## Execution Summary (Final)
+
+- **Status Eksekusi**: Semua task pada Phase 1–4 selesai pada 2026-05-26.
+- **Validasi Kualitas**:
+  - `dart analyze lib/presentation/cubits/slideshow_section/slideshow_section_cubit.dart` → **No issues found**.
+  - `flutter test test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart --reporter=expanded` → **14 tests passed**.
+  - `flutter test --reporter=expanded` → **All tests passed** (513 tests).
+- **Verifikasi Dependency**: `file_picker` sudah tidak ada di `pubspec.lock`; dependency aktif telah bermigrasi ke `image_picker`.
 
 ---
 
@@ -63,11 +72,11 @@ yang tidak memiliki galeri terpasang.
 
 - **GOAL-001**: Hapus `file_picker` dan tambahkan `image_picker` ke `pubspec.yaml`, lalu jalankan `flutter pub get`.
 
-| Task     | Description                                                                                                                                                                       | Completed | Date |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TASK-001 | Hapus baris `file_picker: ^11.0.2` dari `dependencies` di `pubspec.yaml`                                                                                                          |           |      |
-| TASK-002 | Tambahkan baris `image_picker: ^1.1.0` ke `dependencies` di `pubspec.yaml`                                                                                                        |           |      |
-| TASK-003 | Jalankan `flutter pub get` dan pastikan `pubspec.lock` terupdate (entry `file_picker` hilang, `image_picker` + `image_picker_android` + `image_picker_platform_interface` muncul) |           |      |
+| Task     | Description                                                                                                                                                                       | Completed | Date       |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-001 | Hapus baris `file_picker: ^11.0.2` dari `dependencies` di `pubspec.yaml`                                                                                                          | ✅         | 2026-05-26 |
+| TASK-002 | Tambahkan baris `image_picker: ^1.1.0` ke `dependencies` di `pubspec.yaml`                                                                                                        | ✅         | 2026-05-26 |
+| TASK-003 | Jalankan `flutter pub get` dan pastikan `pubspec.lock` terupdate (entry `file_picker` hilang, `image_picker` + `image_picker_android` + `image_picker_platform_interface` muncul) | ✅         | 2026-05-26 |
 
 ---
 
@@ -75,13 +84,13 @@ yang tidak memiliki galeri terpasang.
 
 - **GOAL-002**: Ganti implementasi `_pickImageBytes()` di `SlideshowSectionCubit` menggunakan `image_picker`, tambah injeksi `ImagePicker`, dan bungkus `PlatformException` agar tidak crash.
 
-| Task     | Description                                                                                                                                                                                                                                                                                                                                    | Completed | Date |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TASK-004 | Hapus `import 'package:file_picker/file_picker.dart';` dari `slideshow_section_cubit.dart`                                                                                                                                                                                                                                                     |           |      |
-| TASK-005 | Tambahkan `import 'package:flutter/services.dart';` (untuk `PlatformException`), `import 'package:image_picker/image_picker.dart';`, dan `import 'package:path/path.dart' as p;` (untuk `p.basename` — ekstraksi nama file yang aman dari path penuh) ke `slideshow_section_cubit.dart`                                                        |           |      |
-| TASK-006 | Tambahkan field `final ImagePicker _imagePicker;` ke `SlideshowSectionCubit` dan tambahkan `ImagePicker? imagePicker` sebagai optional parameter di konstruktor. Default ke `ImagePicker()` jika null.                                                                                                                                         |           |      |
-| TASK-007 | Rewrite method `_pickImageBytes()`: ganti `FilePicker.pickFiles(...)` dengan `_imagePicker.pickImage(source: ImageSource.gallery, requestFullMetadata: false)`. Return `_PickedFile` dari `XFile.readAsBytes()` dan `XFile.name`. Wrap seluruh body dengan `try/catch PlatformException` yang emit `errorMessage` ke state lalu return `null`. |           |      |
-| TASK-008 | Update komentar doc `_pickImageBytes()` agar mencerminkan penggunaan `image_picker` dan tidak lagi menyebut `FilePicker`/`withData`.                                                                                                                                                                                                           |           |      |
+| Task     | Description                                                                                                                                                                                                                                                                                                                                                | Completed | Date       |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-004 | Hapus `import 'package:file_picker/file_picker.dart';` dari `slideshow_section_cubit.dart`                                                                                                                                                                                                                                                                 | ✅         | 2026-05-26 |
+| TASK-005 | Tambahkan `import 'package:flutter/services.dart';` (untuk `PlatformException`), `import 'package:image_picker/image_picker.dart';`, dan `import 'package:path/path.dart' as p;` (untuk `p.basename` — ekstraksi nama file yang aman dari path penuh) ke `slideshow_section_cubit.dart`                                                                    | ✅         | 2026-05-26 |
+| TASK-006 | Tambahkan field `final ImagePicker _imagePicker;` ke `SlideshowSectionCubit` dan tambahkan `ImagePicker? imagePicker` sebagai optional parameter di konstruktor. Default ke `ImagePicker()` jika null.                                                                                                                                                     | ✅         | 2026-05-26 |
+| TASK-007 | Rewrite method `_pickImageBytes()`: ganti `FilePicker.pickFiles(...)` dengan `_imagePicker.pickImage(source: ImageSource.gallery, requestFullMetadata: false)`. Return `_PickedFile` dari `XFile.readAsBytes()` dan `p.basename(image.path)`. Wrap seluruh body dengan `try/catch PlatformException` yang emit `errorMessage` ke state lalu return `null`. | ✅         | 2026-05-26 |
+| TASK-008 | Update komentar doc `_pickImageBytes()` agar mencerminkan penggunaan `image_picker` dan tidak lagi menyebut `FilePicker`/`withData`.                                                                                                                                                                                                                       | ✅         | 2026-05-26 |
 
 **Detail TASK-007 — implementasi `_pickImageBytes()` setelah refactor:**
 
@@ -132,16 +141,16 @@ SlideshowSectionCubit({
 
 - **GOAL-003**: Update unit test `slideshow_section_cubit_test.dart` agar menggunakan `image_picker` mock, dan tambahkan regression test untuk skenario `PlatformException`.
 
-| Task     | Description                                                                                                                                                                                                             | Completed | Date |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TASK-009 | Hapus semua import `file_picker` dari test file. Tambahkan `import 'package:image_picker/image_picker.dart';` dan `import 'package:flutter/services.dart';`.                                                            |           |      |
-| TASK-010 | Ganti class `MockFilePicker` dengan `MockImagePickerPlatform` yang mengimplementasikan `ImagePickerPlatform` (bukan `FilePickerPlatform`). Tetap gunakan `with MockPlatformInterfaceMixin`.                             |           |      |
-| TASK-011 | Di `setUp()`: ganti `FilePickerPlatform.instance = mockPicker` dengan `ImagePickerPlatform.instance = mockImagePickerPlatform`. Rename variabel `mockPicker` → `mockImagePickerPlatform`.                               |           |      |
-| TASK-012 | Tambahkan `registerFallbackValue(ImageSource.gallery)` dan `registerFallbackValue(const ImagePickerOptions())` ke `setUpAll()`.                                                                                         |           |      |
-| TASK-013 | Ganti helper `_makePickerResult(String name, Uint8List bytes)` dengan `_makeXFile(Uint8List bytes, String name)` yang mengembalikan `XFile(name, bytes: bytes)`.                                                        |           |      |
-| TASK-014 | Update semua stub `when(() => mockPicker.pickFiles(...))` menjadi `when(() => mockImagePickerPlatform.getImageFromSource(source: any(named: 'source'), options: any(named: 'options')))` dengan return type `XFile?`.   |           |      |
-| TASK-015 | Tambahkan grup test baru `'importIntoSlot() — PlatformException dari picker'`: stub `getImageFromSource` agar throw `PlatformException(code: 'invalid_format_type')`, verify cubit emit `errorMessage` dan tidak crash. |           |      |
-| TASK-016 | Tambahkan grup test baru `'replaceSlot() — PlatformException dari picker'`: skenario sama dengan TASK-015 untuk `replaceSlot()`.                                                                                        |           |      |
+| Task     | Description                                                                                                                                                                                                             | Completed | Date       |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-009 | Hapus semua import `file_picker` dari test file. Tambahkan `import 'package:image_picker/image_picker.dart';` dan `import 'package:flutter/services.dart';`.                                                            | ✅         | 2026-05-26 |
+| TASK-010 | Ganti class `MockFilePicker` dengan `MockImagePickerPlatform` yang mengimplementasikan `ImagePickerPlatform` (bukan `FilePickerPlatform`). Tetap gunakan `with MockPlatformInterfaceMixin`.                             | ✅         | 2026-05-26 |
+| TASK-011 | Di `setUp()`: ganti `FilePickerPlatform.instance = mockPicker` dengan `ImagePickerPlatform.instance = mockImagePickerPlatform`. Rename variabel `mockPicker` → `mockImagePickerPlatform`.                               | ✅         | 2026-05-26 |
+| TASK-012 | Tambahkan `registerFallbackValue(ImageSource.gallery)` dan `registerFallbackValue(const ImagePickerOptions())` ke `setUpAll()`.                                                                                         | ✅         | 2026-05-26 |
+| TASK-013 | Ganti helper `_makePickerResult(String name, Uint8List bytes)` dengan `_makeXFile(Uint8List bytes, String name)` yang mengembalikan `XFile.fromData(...)` untuk in-memory test data.                                    | ✅         | 2026-05-26 |
+| TASK-014 | Update semua stub `when(() => mockPicker.pickFiles(...))` menjadi `when(() => mockImagePickerPlatform.getImageFromSource(source: any(named: 'source'), options: any(named: 'options')))` dengan return type `XFile?`.   | ✅         | 2026-05-26 |
+| TASK-015 | Tambahkan grup test baru `'importIntoSlot() — PlatformException dari picker'`: stub `getImageFromSource` agar throw `PlatformException(code: 'invalid_format_type')`, verify cubit emit `errorMessage` dan tidak crash. | ✅         | 2026-05-26 |
+| TASK-016 | Tambahkan grup test baru `'replaceSlot() — PlatformException dari picker'`: skenario sama dengan TASK-015 untuk `replaceSlot()`.                                                                                        | ✅         | 2026-05-26 |
 
 **Detail TASK-010 — mock class baru:**
 
@@ -198,12 +207,12 @@ group('importIntoSlot() — PlatformException dari picker', () {
 
 - **GOAL-004**: Pastikan tidak ada error compile, analyze warning, dan semua test hijau sebelum dianggap selesai.
 
-| Task     | Description                                                                                                                                                                                    | Completed | Date |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---- |
-| TASK-017 | Jalankan `dart analyze lib/presentation/cubits/slideshow_section/slideshow_section_cubit.dart` — harus zero issues.                                                                            |           |      |
-| TASK-018 | Jalankan `flutter test test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart --reporter=expanded` — semua test harus PASS termasuk 2 test regression baru dari Phase 3. |           |      |
-| TASK-019 | Jalankan `flutter test --reporter=expanded` (full test suite) untuk memastikan tidak ada regresi di modul lain.                                                                                |           |      |
-| TASK-020 | Verifikasi `pubspec.lock` tidak lagi mengandung entry `file_picker`.                                                                                                                           |           |      |
+| Task     | Description                                                                                                                                                                                    | Completed | Date       |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-017 | Jalankan `dart analyze lib/presentation/cubits/slideshow_section/slideshow_section_cubit.dart` — harus zero issues.                                                                            | ✅         | 2026-05-26 |
+| TASK-018 | Jalankan `flutter test test/presentation/cubits/slideshow_section/slideshow_section_cubit_test.dart --reporter=expanded` — semua test harus PASS termasuk 2 test regression baru dari Phase 3. | ✅         | 2026-05-26 |
+| TASK-019 | Jalankan `flutter test --reporter=expanded` (full test suite) untuk memastikan tidak ada regresi di modul lain.                                                                                | ✅         | 2026-05-26 |
+| TASK-020 | Verifikasi `pubspec.lock` tidak lagi mengandung entry `file_picker`.                                                                                                                           | ✅         | 2026-05-26 |
 
 ---
 
