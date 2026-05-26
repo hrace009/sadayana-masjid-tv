@@ -215,7 +215,6 @@ a:hover {
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
-  height: 100%;
 }
 
 .card-mkt:hover {
@@ -433,5 +432,122 @@ a:hover {
 @media (min-width: 1400px) {
   .hero-mkt {
     padding-top: 88px;
+  }
+}
+
+/* ==========================================================================
+   Panduan Pengguna — Utility Classes (TASK-026 / TASK-027)
+   Semua token mengacu ke :root CSS variables — tidak ada hardcoded value.
+   ========================================================================== */
+
+/* --- Callout / note boxes (menggantikan inline border-left styles) --- */
+.guide-callout {
+  background: rgba(14, 146, 150, 0.07);
+  border-left: 3px solid var(--mkt-primary-teal);
+  border-radius: 0 var(--mkt-radius) var(--mkt-radius) 0;
+  padding: 1rem 1.25rem;
+}
+.guide-callout-warn {
+  background: rgba(224, 92, 92, 0.07);
+  border-left: 3px solid rgba(224, 92, 92, 0.6);
+  border-radius: 0 var(--mkt-radius) var(--mkt-radius) 0;
+  padding: 1rem 1.25rem;
+}
+.guide-callout-gold {
+  background: rgba(212, 160, 18, 0.07);
+  border-left: 3px solid rgba(212, 160, 18, 0.4);
+  border-radius: 0 var(--mkt-radius) var(--mkt-radius) 0;
+  padding: 1rem 1.25rem;
+}
+
+/* --- Device type badge chips --- */
+.guide-device-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2rem;
+}
+.guide-device-badge-tv {
+  background: rgba(28, 192, 197, 0.12);
+  color: var(--mkt-light-teal);
+  border: 1px solid rgba(28, 192, 197, 0.3);
+}
+.guide-device-badge-touch {
+  background: rgba(232, 197, 71, 0.12);
+  color: var(--mkt-light-gold);
+  border: 1px solid rgba(232, 197, 71, 0.3);
+}
+
+/* --- Screenshot figures untuk halaman panduan --- */
+.guide-figure {
+  margin: 0;
+}
+.guide-figure figcaption {
+  font-size: 0.8125rem;
+  color: var(--mkt-text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+.guide-figure-sm .screenshot-container,
+.guide-figure-sm .screenshot-placeholder {
+  border-radius: 8px;
+  border: 1px solid rgba(28, 192, 197, 0.18);
+}
+.guide-figure-sm figcaption {
+  font-size: 0.775rem;
+}
+
+/* Mini label konteks sebelum screenshot */
+.guide-screenshot-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mkt-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* --- Accordion dark-theme override (TASK-026 — dipindah dari panduan.html inline <style>) --- */
+.accordion-item {
+  background-color: var(--mkt-surface-light);
+  border: 1px solid rgba(28, 192, 197, 0.18);
+  border-radius: var(--mkt-radius) !important;
+  overflow: hidden;
+}
+.accordion-button {
+  background-color: var(--mkt-surface-light);
+  color: var(--mkt-text-primary);
+  font-weight: 600;
+  box-shadow: none !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: var(--mkt-deep-teal);
+  color: var(--mkt-text-primary);
+}
+.accordion-button::after {
+  filter: invert(1) brightness(1.5);
+}
+.accordion-button:focus {
+  box-shadow: 0 0 0 2px rgba(28, 192, 197, 0.35) !important;
+}
+.accordion-body {
+  background-color: var(--mkt-surface-light);
+  color: var(--mkt-text-secondary);
+}
+
+/* --- Guide separator between settings submenu items --- */
+.guide-menu-separator {
+  border-top: 1px solid rgba(28, 192, 197, 0.15);
+  padding-top: 2rem;
+}
+
+/* --- Responsive tweak khusus panduan pada mobile --- */
+@media (max-width: 767.98px) {
+  .guide-callout,
+  .guide-callout-warn,
+  .guide-callout-gold {
+    padding: 0.75rem 1rem;
   }
 }

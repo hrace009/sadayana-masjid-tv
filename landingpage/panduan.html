@@ -1,0 +1,3489 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO: Title & Description -->
+    <title>Panduan Pengguna — Miqotul Khoir TV Masjid</title>
+    <meta
+      name="description"
+      content="Panduan lengkap penggunaan aplikasi Miqotul Khoir TV Masjid: cara membuka settings, navigasi menu, setup awal wizard, referensi 15 menu konfigurasi, dan FAQ untuk DKM dan operator masjid."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Gulajava Ministudio" />
+    <meta
+      name="keywords"
+      content="panduan miqotul khoir tv, cara pengaturan jam masjid, setup android tv masjid, menu settings jadwal sholat, DKM android tv"
+    />
+
+    <!-- Canonical + Social SEO -->
+    <link
+      rel="canonical"
+      href="https://gulajavaministudio.github.io/miqotul-khoir-tv-masjid/panduan.html"
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Panduan Pengguna — Miqotul Khoir TV Masjid"
+    />
+    <meta
+      property="og:description"
+      content="Panduan lengkap penggunaan aplikasi Miqotul Khoir TV Masjid untuk DKM dan operator masjid: cara buka settings, setup awal, navigasi menu, dan referensi 15 kategori pengaturan."
+    />
+    <meta
+      property="og:url"
+      content="https://gulajavaministudio.github.io/miqotul-khoir-tv-masjid/panduan.html"
+    />
+    <meta property="og:site_name" content="Miqotul Khoir TV" />
+    <meta
+      property="og:image"
+      content="https://gulajavaministudio.github.io/miqotul-khoir-tv-masjid/assets/img/favicon/android-chrome-512x512.png"
+    />
+    <meta property="og:image:alt" content="Logo Miqotul Khoir TV Masjid" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Panduan Pengguna — Miqotul Khoir TV Masjid"
+    />
+    <meta
+      name="twitter:description"
+      content="Panduan lengkap penggunaan Miqotul Khoir TV Masjid untuk DKM dan operator masjid."
+    />
+    <meta
+      name="twitter:image"
+      content="https://gulajavaministudio.github.io/miqotul-khoir-tv-masjid/assets/img/favicon/android-chrome-512x512.png"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="assets/img/favicon/favicon.ico"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/img/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/img/favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="assets/img/favicon/site.webmanifest" />
+    <meta name="theme-color" content="#0b5e56" />
+
+    <!-- Bootstrap 5.3.8 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons 1.13.1 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Custom Theme — reuse token dari styles.css (CON-004) -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+
+
+  <body>
+    <!-- =====================================================================
+         Navbar — TASK-008
+         Reuse pola navbar dari index.html; brand → index.html;
+         link internal mengarah ke anchor di panduan.html.
+         ===================================================================== -->
+    <nav
+      class="navbar navbar-expand-lg navbar-mkt sticky-top"
+      id="navbar-mkt"
+      aria-label="Navigasi panduan"
+    >
+      <div class="container">
+        <!-- Brand / Logo — link kembali ke halaman utama -->
+        <a
+          class="navbar-brand d-flex align-items-center gap-2"
+          href="index.html"
+        >
+          <img
+            src="assets/img/logo-mktv.png"
+            alt="Logo Miqotul Khoir TV Masjid"
+            class="logo-mktv-badge"
+            loading="eager"
+            width="36"
+            height="36"
+            style="object-fit: contain"
+          />
+          <span>Miqotul Khoir TV</span>
+        </a>
+
+        <!-- Toggler (mobile) -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarPanduan"
+          aria-controls="navbarPanduan"
+          aria-expanded="false"
+          aria-label="Buka menu navigasi"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links + CTA -->
+        <div class="collapse navbar-collapse" id="navbarPanduan">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#ringkasan">Ringkasan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#akses-settings">Buka Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#setup-awal">Setup Awal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#menu-settings">Menu Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#faq">FAQ</a>
+            </li>
+          </ul>
+          <a
+            href="https://play.google.com/store/apps/details?id=gulajava.mini.miqotul_khoir_tv"
+            class="btn btn-mkt-primary ms-lg-3"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="bi bi-google-play me-1" aria-hidden="true"></i>
+            Download di Google Play
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =====================================================================
+         Ringkasan & Daftar Isi — #ringkasan
+         TASK-007: shell halaman; TASK-013 (Phase 3) akan melengkapi konten.
+         ===================================================================== -->
+    <section class="section-mkt" id="ringkasan" aria-label="Ringkasan panduan">
+      <div class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="mb-4">
+          <ol
+            class="breadcrumb mb-0"
+            style="background: transparent; padding: 0; font-size: 0.875rem"
+          >
+            <li class="breadcrumb-item">
+              <a href="index.html">Beranda</a>
+            </li>
+            <li
+              class="breadcrumb-item active mkt-text-muted"
+              aria-current="page"
+            >
+              Panduan Pengguna
+            </li>
+          </ol>
+        </nav>
+
+        <!-- Hero: intro + screenshot -->
+        <div class="row align-items-start g-5">
+          <!-- Kiri: teks intro -->
+          <div class="col-lg-7">
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge-mkt">
+                <i class="bi bi-tv me-1" aria-hidden="true"></i>
+                Android TV
+              </span>
+              <span class="badge-mkt">
+                <i class="bi bi-phone me-1" aria-hidden="true"></i>
+                HP &amp; Tablet
+              </span>
+              <span class="badge-mkt-gold">
+                <i class="bi bi-book me-1" aria-hidden="true"></i>
+                Panduan Resmi
+              </span>
+            </div>
+
+            <h1
+              style="
+                font-size: clamp(1.75rem, 4vw, 2.75rem);
+                font-weight: 800;
+                color: var(--mkt-text-primary);
+                line-height: 1.2;
+                letter-spacing: -0.02em;
+              "
+            >
+              Panduan Pengguna<br />
+              Miqotul Khoir TV Masjid
+            </h1>
+
+            <p
+              class="mt-3 mb-3"
+              style="
+                color: var(--mkt-text-secondary);
+                font-size: 1.0625rem;
+                line-height: 1.7;
+              "
+            >
+              Panduan ini ditujukan untuk
+              <strong>DKM, pengurus masjid, dan operator</strong>
+              yang bertanggung jawab mengelola aplikasi Miqotul Khoir TV Masjid.
+              Di sini Anda akan menemukan cara membuka menu pengaturan,
+              menjalankan setup awal, memahami setiap menu konfigurasi, serta
+              solusi atas pertanyaan umum yang sering muncul.
+            </p>
+
+            <p
+              class="mb-4"
+              style="color: var(--mkt-text-secondary); font-size: 0.9375rem"
+            >
+              Panduan ini berlaku untuk dua mode penggunaan:
+              <strong style="color: var(--mkt-light-teal)"
+                >Android TV dengan remote</strong
+              >
+              dan
+              <strong style="color: var(--mkt-light-teal)"
+                >HP / tablet layar sentuh</strong
+              >. Setiap bagian menjelaskan langkah-langkah untuk masing-masing
+              perangkat secara terpisah agar tidak membingungkan.
+            </p>
+
+            <a href="index.html" class="btn btn-mkt-outline">
+              <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>
+              Kembali ke Beranda
+            </a>
+          </div>
+
+          <!-- Kanan: screenshot layar utama (IMG-001) -->
+          <div class="col-lg-5">
+            <figure class="mb-0">
+              <div class="screenshot-container">
+                <img
+                  src="assets/img/screenshots/standby.png"
+                  alt="Tampilan layar utama Miqotul Khoir TV Masjid — jam digital, jadwal sholat, dan informasi masjid"
+                  loading="eager"
+                  width="1920"
+                  height="1080"
+                />
+              </div>
+              <figcaption
+                class="text-center mt-2 mkt-text-muted"
+              >
+                Tampilan layar utama yang akan terlihat setelah setup selesai
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- Daftar Isi -->
+        <div
+          class="mt-5 pt-4"
+          style="border-top: 1px solid rgba(28, 192, 197, 0.15)"
+        >
+          <h2 class="h5 fw-bold mb-4" style="color: var(--mkt-text-primary)">
+            <i class="bi bi-list-ul me-2 mkt-text-teal" aria-hidden="true"></i>
+            Daftar Isi
+          </h2>
+
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <!-- TOC 1: Cara Masuk ke Pengaturan -->
+            <div class="col">
+              <a
+                href="#akses-settings"
+                class="d-block card-mkt p-3 text-decoration-none h-100"
+              >
+                <div class="d-flex align-items-center gap-3">
+                  <i
+                    class="bi bi-gear-fill mkt-text-teal"
+                    style="font-size: 1.5rem; flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <div>
+                    <div
+                      class="fw-semibold mkt-text-primary"
+                      style="font-size: 0.9rem"
+                    >
+                      Cara Masuk ke Pengaturan
+                    </div>
+                    <div class="mkt-text-muted" style="font-size: 0.8rem">
+                      Remote TV &amp; layar sentuh
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- TOC 2: Cara Navigasi Menu -->
+            <div class="col">
+              <a
+                href="#navigasi-menu"
+                class="d-block card-mkt p-3 text-decoration-none h-100"
+              >
+                <div class="d-flex align-items-center gap-3">
+                  <i
+                    class="bi bi-layout-sidebar mkt-text-teal"
+                    style="font-size: 1.5rem; flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <div>
+                    <div
+                      class="fw-semibold mkt-text-primary"
+                      style="font-size: 0.9rem"
+                    >
+                      Cara Navigasi Menu
+                    </div>
+                    <div class="mkt-text-muted" style="font-size: 0.8rem">
+                      Panel kiri &amp; panel kanan
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- TOC 3: Setup Awal -->
+            <div class="col">
+              <a
+                href="#setup-awal"
+                class="d-block card-mkt p-3 text-decoration-none h-100"
+              >
+                <div class="d-flex align-items-center gap-3">
+                  <i
+                    class="bi bi-list-check mkt-text-teal"
+                    style="font-size: 1.5rem; flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <div>
+                    <div
+                      class="fw-semibold mkt-text-primary"
+                      style="font-size: 0.9rem"
+                    >
+                      Setup Awal Langkah demi Langkah
+                    </div>
+                    <div class="mkt-text-muted" style="font-size: 0.8rem">
+                      4 langkah wizard pertama kali
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- TOC 4: Jika PIN Aktif -->
+            <div class="col">
+              <a
+                href="#keamanan-pin"
+                class="d-block card-mkt p-3 text-decoration-none h-100"
+              >
+                <div class="d-flex align-items-center gap-3">
+                  <i
+                    class="bi bi-shield-lock mkt-text-teal"
+                    style="font-size: 1.5rem; flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <div>
+                    <div
+                      class="fw-semibold mkt-text-primary"
+                      style="font-size: 0.9rem"
+                    >
+                      Jika PIN Aktif
+                    </div>
+                    <div class="mkt-text-muted" style="font-size: 0.8rem">
+                      Memasukkan &amp; mengelola PIN
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- TOC 5: Referensi Menu Settings -->
+            <div class="col">
+              <a
+                href="#menu-settings"
+                class="d-block card-mkt p-3 text-decoration-none h-100"
+              >
+                <div class="d-flex align-items-center gap-3">
+                  <i
+                    class="bi bi-sliders"
+                    style="
+                      font-size: 1.5rem;
+                      flex-shrink: 0;
+                      color: var(--mkt-gold);
+                    "
+                    aria-hidden="true"
+                  ></i>
+                  <div>
+                    <div
+                      class="fw-semibold mkt-text-primary"
+                      style="font-size: 0.9rem"
+                    >
+                      Referensi Menu Pengaturan
+                    </div>
+                    <div class="mkt-text-muted" style="font-size: 0.8rem">
+                      15 kategori konfigurasi
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- TOC 6: FAQ -->
+            <div class="col">
+              <a
+                href="#faq"
+                class="d-block card-mkt p-3 text-decoration-none h-100"
+              >
+                <div class="d-flex align-items-center gap-3">
+                  <i
+                    class="bi bi-question-circle"
+                    style="
+                      font-size: 1.5rem;
+                      flex-shrink: 0;
+                      color: var(--mkt-gold);
+                    "
+                    aria-hidden="true"
+                  ></i>
+                  <div>
+                    <div
+                      class="fw-semibold mkt-text-primary"
+                      style="font-size: 0.9rem"
+                    >
+                      Pertanyaan Umum &amp; Kendala
+                    </div>
+                    <div class="mkt-text-muted" style="font-size: 0.8rem">
+                      Solusi masalah yang sering terjadi
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Cara Masuk ke Pengaturan — #akses-settings
+         Konten detail ditambahkan pada Phase 3 (TASK-014).
+         ===================================================================== -->
+    <section
+      class="section-mkt-alt"
+      id="akses-settings"
+      aria-label="Cara masuk ke pengaturan"
+    >
+      <div class="container">
+        <div class="mb-5">
+          <div class="section-divider"></div>
+          <h2 class="section-title">Cara Masuk ke Pengaturan</h2>
+          <p class="section-subtitle">
+            Cara membuka menu pengaturan berbeda antara perangkat Android TV
+            dengan remote dan HP atau tablet layar sentuh. Ikuti langkah yang
+            sesuai dengan perangkat Anda.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Android TV / Remote -->
+          <div class="col-md-6">
+            <div class="card-mkt p-4 h-100">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i
+                  class="bi bi-tv mkt-text-teal"
+                  style="font-size: 1.25rem"
+                  aria-hidden="true"
+                ></i>
+                <span
+                  class="fw-bold mkt-text-primary"
+                  style="font-size: 0.95rem"
+                >
+                  Android TV / Remote
+                </span>
+              </div>
+              <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+                Dari layar utama, tekan salah satu tombol berikut pada remote TV
+                untuk langsung membuka menu pengaturan:
+              </p>
+              <ul
+                class="list-unstyled mb-3"
+                style="font-size: 0.9rem; line-height: 2"
+              >
+                <li class="d-flex align-items-center gap-2">
+                  <i
+                    class="bi bi-dot mkt-text-teal"
+                    style="font-size: 1.4rem"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary"
+                    ><strong class="mkt-text-primary">OK / Select</strong> —
+                    tombol tengah D-Pad</span
+                  >
+                </li>
+                <li class="d-flex align-items-center gap-2">
+                  <i
+                    class="bi bi-dot mkt-text-teal"
+                    style="font-size: 1.4rem"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary"
+                    ><strong class="mkt-text-primary">Enter</strong> — keyboard
+                    eksternal</span
+                  >
+                </li>
+                <li class="d-flex align-items-center gap-2">
+                  <i
+                    class="bi bi-dot mkt-text-teal"
+                    style="font-size: 1.4rem"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary"
+                    ><strong class="mkt-text-primary">Back / Escape</strong> —
+                    tombol kembali remote</span
+                  >
+                </li>
+                <li class="d-flex align-items-center gap-2">
+                  <i
+                    class="bi bi-dot mkt-text-teal"
+                    style="font-size: 1.4rem"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary"
+                    ><strong class="mkt-text-primary">Play/Pause</strong> —
+                    tombol media remote</span
+                  >
+                </li>
+              </ul>
+              <p class="mkt-text-muted mb-0" style="font-size: 0.8rem">
+                Semua tombol di atas langsung membuka pengaturan — tidak perlu
+                mengetuk layar terlebih dahulu seperti di perangkat sentuh.
+              </p>
+            </div>
+          </div>
+
+          <!-- HP / Tablet Touchscreen -->
+          <div class="col-md-6">
+            <div class="card-mkt p-4 h-100">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i
+                  class="bi bi-phone mkt-text-teal"
+                  style="font-size: 1.25rem"
+                  aria-hidden="true"
+                ></i>
+                <span
+                  class="fw-bold mkt-text-primary"
+                  style="font-size: 0.95rem"
+                >
+                  HP / Tablet Touchscreen
+                </span>
+              </div>
+              <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+                Di perangkat layar sentuh, membuka pengaturan membutuhkan dua
+                langkah karena aplikasi menyembunyikan ikon settings secara
+                default:
+              </p>
+              <ol
+                class="ps-3 mb-3"
+                style="
+                  font-size: 0.9rem;
+                  line-height: 2;
+                  color: var(--mkt-text-secondary);
+                "
+              >
+                <li>
+                  <strong class="mkt-text-primary">Ketuk di mana saja</strong>
+                  pada layar utama untuk memunculkan ikon ⚙
+                </li>
+                <li>
+                  Ikon ⚙ akan muncul selama
+                  <strong class="mkt-text-primary">5 detik</strong>, lalu hilang
+                  otomatis
+                </li>
+                <li>
+                  <strong class="mkt-text-primary"
+                    >Ketuk ikon ⚙ tersebut</strong
+                  >
+                  sebelum 5 detik habis untuk masuk ke pengaturan
+                </li>
+              </ol>
+              <div class="guide-callout mt-3">
+                <p class="mb-0 mkt-text-muted" style="font-size: 0.8rem">
+                  <strong class="mkt-text-secondary">Tips:</strong>
+                  Jika ikon ⚙ tidak muncul, pastikan Anda mengetuk area layar
+                  utama — bukan tombol lain. Ketuk satu kali saja, lalu segera
+                  ketuk ikon ⚙ yang muncul sebelum 5 detik habis.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alur setelah pengaturan terbuka — TASK-014 -->
+
+        <div class="row justify-content-center mt-4">
+          <div class="col-lg-10">
+            <div
+              class="card-mkt p-4"
+              style="border-color: rgba(212, 160, 18, 0.35)"
+            >
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i
+                  class="bi bi-arrow-right-circle-fill"
+                  style="color: var(--mkt-gold); font-size: 1.15rem"
+                  aria-hidden="true"
+                ></i>
+                <span class="fw-bold" style="color: var(--mkt-light-gold)"
+                  >Setelah Pengaturan Terbuka</span
+                >
+              </div>
+              <p class="mkt-text-secondary mb-2" style="font-size: 0.9rem">
+                Baik melalui remote TV maupun layar sentuh, alur selanjutnya
+                adalah sama:
+              </p>
+              <ul
+                class="mb-0 ps-3"
+                style="
+                  font-size: 0.9rem;
+                  line-height: 1.9;
+                  color: var(--mkt-text-secondary);
+                "
+              >
+                <li>
+                  Jika
+                  <strong class="mkt-text-primary">PIN tidak aktif</strong>:
+                  menu pengaturan langsung terbuka tanpa layar PIN.
+                </li>
+                <li>
+                  Jika
+                  <strong class="mkt-text-primary">PIN aktif</strong>: halaman
+                  input PIN 6 digit muncul terlebih dahulu. Masukkan PIN yang
+                  benar untuk melanjutkan, atau tekan
+                  <strong class="mkt-text-primary">Kembali</strong> untuk
+                  membatalkan. Lihat <a href="#keamanan-pin">Panduan PIN</a>.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Cara Navigasi Menu — #navigasi-menu
+         Konten detail ditambahkan pada Phase 3 (TASK-015).
+         ===================================================================== -->
+    <section
+      class="section-mkt"
+      id="navigasi-menu"
+      aria-label="Cara navigasi menu pengaturan"
+    >
+      <div class="container">
+        <div class="mb-5">
+          <div class="section-divider"></div>
+          <h2 class="section-title">Cara Navigasi Menu Pengaturan</h2>
+          <p class="section-subtitle">
+            Menu pengaturan menggunakan layout dua panel: daftar kategori di
+            panel kiri dan isi pengaturan di panel kanan. Navigasi berbeda
+            antara remote TV dan layar sentuh.
+          </p>
+        </div>
+
+        <div class="row align-items-start g-5">
+          <!-- Screenshot menu settings (IMG-003) -->
+          <div class="col-lg-6">
+            <figure class="mb-0">
+              <div class="screenshot-container">
+                <img
+                  src="assets/img/screenshots/settings.png"
+                  alt="Tampilan menu pengaturan Miqotul Khoir TV Masjid — panel kiri kategori, panel kanan isi"
+                  loading="lazy"
+                  width="1920"
+                  height="1080"
+                />
+              </div>
+              <figcaption
+                class="text-center mt-2 mkt-text-muted"
+              >
+                Panel kiri: daftar kategori &bull; Panel kanan: isi pengaturan
+                yang dipilih
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Ringkasan navigasi -->
+          <div class="col-lg-6">
+            <div class="card-mkt p-4 mb-3">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i
+                  class="bi bi-tv mkt-text-teal"
+                  style="font-size: 1.1rem"
+                  aria-hidden="true"
+                ></i>
+                <span class="fw-bold mkt-text-primary"
+                  >Android TV / Remote</span
+                >
+              </div>
+              <ul
+                class="list-unstyled mb-0"
+                style="
+                  font-size: 0.9rem;
+                  line-height: 1.9;
+                  color: var(--mkt-text-secondary);
+                "
+              >
+                <li>
+                  Gunakan
+                  <strong class="mkt-text-primary">↑ ↓ (Atas/Bawah)</strong>
+                  untuk berpindah antar kategori di panel kiri
+                </li>
+                <li>
+                  Tekan <strong class="mkt-text-primary">OK / Select</strong>
+                  untuk memilih kategori — isi pengaturan tampil seketika di
+                  panel kanan
+                </li>
+                <li>
+                  Tekan
+                  <strong class="mkt-text-primary">→ (Kanan)</strong> untuk
+                  berpindah fokus ke panel kanan dan berinteraksi dengan kontrol
+                  pengaturan
+                </li>
+                <li>
+                  Navigasi ke tombol
+                  <strong class="mkt-text-primary">"Tutup Pengaturan"</strong>
+                  di bagian bawah panel kiri untuk menutup dan kembali ke layar
+                  utama
+                </li>
+              </ul>
+              <p class="mkt-text-muted mt-3 mb-0" style="font-size: 0.8rem">
+                Saat pertama terbuka,
+                <strong>Identitas Masjid</strong> sudah terpilih dan fokus
+                berada di kategori pertama.
+              </p>
+            </div>
+            <div class="card-mkt p-4">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i
+                  class="bi bi-phone mkt-text-teal"
+                  style="font-size: 1.1rem"
+                  aria-hidden="true"
+                ></i>
+                <span class="fw-bold mkt-text-primary">HP / Tablet</span>
+              </div>
+              <ul
+                class="list-unstyled mb-0"
+                style="
+                  font-size: 0.9rem;
+                  line-height: 1.9;
+                  color: var(--mkt-text-secondary);
+                "
+              >
+                <li>
+                  <strong class="mkt-text-primary">Ketuk nama kategori</strong>
+                  di panel kiri untuk membuka isinya
+                </li>
+                <li>Isi pengaturan langsung tampil di panel kanan</li>
+                <li>
+                  Tombol
+                  <strong class="mkt-text-primary">"Tutup Pengaturan"</strong>
+                  ada di bagian bawah panel kiri
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Setup Awal Langkah demi Langkah — #setup-awal
+         Konten detail ditambahkan pada Phase 3 (TASK-016).
+         ===================================================================== -->
+    <section
+      class="section-mkt-alt"
+      id="setup-awal"
+      aria-label="Setup awal langkah demi langkah"
+    >
+      <div class="container">
+        <div class="mb-5">
+          <div class="section-divider"></div>
+          <h2 class="section-title">Setup Awal Langkah demi Langkah</h2>
+          <p class="section-subtitle">
+            Saat pertama kali membuka aplikasi, wizard setup memandu Anda
+            melalui 4 langkah untuk mengonfigurasi identitas masjid dan
+            menentukan lokasi untuk perhitungan jadwal sholat.
+          </p>
+        </div>
+
+        <!-- 4 langkah wizard -->
+        <div class="row row-cols-2 row-cols-md-4 g-3 mb-5">
+          <div class="col">
+            <div class="card-mkt p-3 text-center h-100">
+              <div class="step-number mx-auto mb-3">1</div>
+              <div
+                class="fw-semibold mkt-text-primary"
+                style="font-size: 0.9rem"
+              >
+                Selamat Datang
+              </div>
+              <div class="mkt-text-muted mt-1" style="font-size: 0.8rem">
+                Pengenalan aplikasi &amp; panduan singkat
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card-mkt p-3 text-center h-100">
+              <div class="step-number mx-auto mb-3">2</div>
+              <div
+                class="fw-semibold mkt-text-primary"
+                style="font-size: 0.9rem"
+              >
+                Identitas Masjid
+              </div>
+              <div class="mkt-text-muted mt-1" style="font-size: 0.8rem">
+                Isi nama &amp; alamat lengkap masjid
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card-mkt p-3 text-center h-100">
+              <div class="step-number mx-auto mb-3">3</div>
+              <div
+                class="fw-semibold mkt-text-primary"
+                style="font-size: 0.9rem"
+              >
+                Pilih Lokasi
+              </div>
+              <div class="mkt-text-muted mt-1" style="font-size: 0.8rem">
+                Pilih provinsi, lalu kota/kabupaten
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card-mkt p-3 text-center h-100">
+              <div class="step-number mx-auto mb-3">4</div>
+              <div
+                class="fw-semibold mkt-text-primary"
+                style="font-size: 0.9rem"
+              >
+                Konfirmasi
+              </div>
+              <div class="mkt-text-muted mt-1" style="font-size: 0.8rem">
+                Tinjau data, lalu "Simpan &amp; Selesai"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catatan penting -->
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div
+              class="card-mkt p-4"
+              style="border-color: rgba(212, 160, 18, 0.35)"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-info-circle-fill"
+                  style="
+                    color: var(--mkt-gold);
+                    font-size: 1.25rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                  "
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div
+                    class="fw-semibold mb-1"
+                    style="color: var(--mkt-light-gold)"
+                  >
+                    Catatan Penting
+                  </div>
+                  <ul
+                    class="mb-0 ps-3"
+                    style="
+                      font-size: 0.9rem;
+                      line-height: 1.8;
+                      color: var(--mkt-text-secondary);
+                    "
+                  >
+                    <li>
+                      Di Step 3, dropdown kota hanya akan muncul setelah
+                      provinsi dipilih terlebih dahulu.
+                    </li>
+                    <li>
+                      Di Step 4, tombol
+                      <strong class="mkt-text-primary"
+                        >"Simpan &amp; Selesai"</strong
+                      >
+                      menyimpan semua data ke perangkat dan menutup wizard.
+                    </li>
+                    <li>
+                      Jika ingin mengulang setup, gunakan menu
+                      <a href="#menu-reset-data">Reset Data</a>
+                      di pengaturan.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail langkah demi langkah — TASK-016 -->
+        <div class="row justify-content-center mt-2">
+          <div class="col-lg-10">
+            <!-- Langkah 1 detail -->
+            <div class="card-mkt p-4 mb-3">
+              <div class="d-flex align-items-start gap-3">
+                <div class="step-number flex-shrink-0">1</div>
+                <div class="flex-grow-1">
+                  <h3 class="h6 fw-bold mkt-text-primary mb-2">
+                    Selamat Datang
+                  </h3>
+                  <p class="mkt-text-secondary mb-2" style="font-size: 0.9rem">
+                    Layar pertama menampilkan logo aplikasi, judul
+                    <strong>Miqotul Khoir TV</strong>, dan keterangan singkat
+                    bahwa wizard akan memandu konfigurasi awal masjid.
+                  </p>
+                  <div class="d-flex align-items-start gap-2">
+                    <i
+                      class="bi bi-caret-right-fill mkt-text-teal flex-shrink-0 mt-1"
+                      style="font-size: 0.85rem"
+                      aria-hidden="true"
+                    ></i>
+                    <p
+                      class="mkt-text-secondary mb-0"
+                      style="font-size: 0.9rem"
+                    >
+                      <strong class="mkt-text-primary">Aksi:</strong> Tekan
+                      <strong>OK / Select</strong> (remote TV) atau ketuk tombol
+                      <strong>"Mulai Setup"</strong> (layar sentuh). Tombol ini
+                      sudah difokuskan otomatis — cukup tekan
+                      <strong>Enter</strong> di keyboard eksternal.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Langkah 2 detail -->
+            <div class="card-mkt p-4 mb-3">
+              <div class="d-flex align-items-start gap-3">
+                <div class="step-number flex-shrink-0">2</div>
+                <div class="flex-grow-1">
+                  <h3 class="h6 fw-bold mkt-text-primary mb-2">
+                    Identitas Masjid
+                  </h3>
+                  <p class="mkt-text-secondary mb-2" style="font-size: 0.9rem">
+                    Isi dua kolom teks menggunakan keyboard yang muncul:
+                  </p>
+                  <ul
+                    class="mb-2 ps-3"
+                    style="
+                      font-size: 0.9rem;
+                      line-height: 1.9;
+                      color: var(--mkt-text-secondary);
+                    "
+                  >
+                    <li>
+                      <strong class="mkt-text-primary">Nama Masjid</strong> —
+                      nama resmi masjid, contoh: <em>Masjid Raya Bandung</em>.
+                    </li>
+                    <li>
+                      <strong class="mkt-text-primary">Alamat Lengkap</strong>
+                      — alamat jalan dan kelurahan, contoh:
+                      <em>Jl. Asia Afrika No. 123</em>.
+                    </li>
+                  </ul>
+                  <div class="d-flex align-items-start gap-2">
+                    <i
+                      class="bi bi-caret-right-fill mkt-text-teal flex-shrink-0 mt-1"
+                      style="font-size: 0.85rem"
+                      aria-hidden="true"
+                    ></i>
+                    <p
+                      class="mkt-text-secondary mb-0"
+                      style="font-size: 0.9rem"
+                    >
+                      <strong class="mkt-text-primary">Aksi:</strong> Tekan
+                      <strong>"Selanjutnya"</strong> untuk lanjut. Kedua kolom
+                      wajib diisi — pesan validasi akan muncul di bawah form
+                      jika ada yang kosong. Tekan
+                      <strong>"Kembali"</strong> untuk kembali ke langkah 1.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Langkah 3 detail -->
+            <div class="card-mkt p-4 mb-3">
+              <div class="d-flex align-items-start gap-3">
+                <div class="step-number flex-shrink-0">3</div>
+                <div class="flex-grow-1">
+                  <h3 class="h6 fw-bold mkt-text-primary mb-2">Pilih Lokasi</h3>
+                  <p class="mkt-text-secondary mb-2" style="font-size: 0.9rem">
+                    Dua dropdown harus dipilih secara berurutan:
+                  </p>
+                  <ul
+                    class="mb-2 ps-3"
+                    style="
+                      font-size: 0.9rem;
+                      line-height: 1.9;
+                      color: var(--mkt-text-secondary);
+                    "
+                  >
+                    <li>
+                      <strong class="mkt-text-primary">Provinsi</strong> — pilih
+                      provinsi tempat masjid berada.
+                    </li>
+                    <li>
+                      <strong class="mkt-text-primary">Kota / Kabupaten</strong>
+                      — dropdown ini baru muncul setelah provinsi dipilih. Pilih
+                      kota atau kabupaten yang paling dekat dengan lokasi
+                      masjid.
+                    </li>
+                  </ul>
+                  <div class="d-flex align-items-start gap-2">
+                    <i
+                      class="bi bi-caret-right-fill mkt-text-teal flex-shrink-0 mt-1"
+                      style="font-size: 0.85rem"
+                      aria-hidden="true"
+                    ></i>
+                    <p
+                      class="mkt-text-secondary mb-0"
+                      style="font-size: 0.9rem"
+                    >
+                      <strong class="mkt-text-primary">Aksi:</strong> Setelah
+                      kota dipilih, tekan <strong>"Selanjutnya"</strong> untuk
+                      menuju pratinjau. Tekan <strong>"Kembali"</strong> untuk
+                      kembali ke langkah 2.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Langkah 4 detail -->
+            <div class="card-mkt p-4">
+              <div class="d-flex align-items-start gap-3">
+                <div class="step-number flex-shrink-0">4</div>
+                <div class="flex-grow-1">
+                  <h3 class="h6 fw-bold mkt-text-primary mb-2">
+                    Konfirmasi &amp; Simpan
+                  </h3>
+                  <p class="mkt-text-secondary mb-2" style="font-size: 0.9rem">
+                    Layar pratinjau menampilkan ringkasan semua data beserta
+                    <strong>jadwal sholat hari ini</strong> berdasarkan kota
+                    yang dipilih. Periksa kembali:
+                  </p>
+                  <ul
+                    class="mb-2 ps-3"
+                    style="
+                      font-size: 0.9rem;
+                      line-height: 1.9;
+                      color: var(--mkt-text-secondary);
+                    "
+                  >
+                    <li>Nama masjid dan alamat sudah sesuai.</li>
+                    <li>Kota / kabupaten sesuai lokasi masjid.</li>
+                    <li>
+                      Jadwal sholat yang tampil masuk akal untuk lokasi
+                      tersebut.
+                    </li>
+                  </ul>
+                  <div class="d-flex align-items-start gap-2">
+                    <i
+                      class="bi bi-caret-right-fill mkt-text-teal flex-shrink-0 mt-1"
+                      style="font-size: 0.85rem"
+                      aria-hidden="true"
+                    ></i>
+                    <p
+                      class="mkt-text-secondary mb-0"
+                      style="font-size: 0.9rem"
+                    >
+                      <strong class="mkt-text-primary">Aksi:</strong> Tekan
+                      <strong>"Simpan &amp; Selesai"</strong> untuk menyimpan
+                      semua data ke perangkat dan menutup wizard. Tekan
+                      <strong>"Kembali"</strong> untuk memperbaiki data sebelum
+                      menyimpan.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================================
+         Jika PIN Aktif — #keamanan-pin
+         Konten detail ditambahkan pada Phase 3 (TASK-017).
+         ===================================================================== -->
+    <section
+      class="section-mkt"
+      id="keamanan-pin"
+      aria-label="Panduan PIN keamanan settings"
+    >
+      <div class="container">
+        <div class="mb-5">
+          <div class="section-divider"></div>
+          <h2 class="section-title">Jika PIN Aktif</h2>
+          <p class="section-subtitle">
+            Fitur PIN melindungi menu pengaturan agar hanya operator yang
+            berwenang yang dapat mengubah konfigurasi masjid.
+          </p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-6 col-lg-5">
+            <div class="card-mkt p-4 h-100">
+              <h3 class="h6 fw-bold mkt-text-primary mb-3">
+                Kondisi Saat Membuka Settings
+              </h3>
+              <ul
+                class="list-unstyled mb-0"
+                style="font-size: 0.9rem; line-height: 2"
+              >
+                <li class="d-flex align-items-start gap-2">
+                  <i
+                    class="bi bi-check-circle-fill mkt-text-teal mt-1"
+                    style="flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary">
+                    <strong class="mkt-text-primary">PIN tidak aktif:</strong>
+                    settings langsung terbuka tanpa halaman PIN
+                  </span>
+                </li>
+                <li class="d-flex align-items-start gap-2">
+                  <i
+                    class="bi bi-shield-lock-fill"
+                    style="
+                      color: var(--mkt-gold);
+                      flex-shrink: 0;
+                      margin-top: 0.25rem;
+                    "
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary">
+                    <strong class="mkt-text-primary">PIN aktif:</strong>
+                    halaman PIN muncul — masukkan 6 digit PIN yang benar
+                  </span>
+                </li>
+                <li class="d-flex align-items-start gap-2">
+                  <i
+                    class="bi bi-x-circle-fill mt-1"
+                    style="color: #e05c5c; flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary">
+                    <strong class="mkt-text-primary">PIN salah:</strong>
+                    muncul pesan error selama sebentar, lalu bisa coba lagi
+                  </span>
+                </li>
+                <li class="d-flex align-items-start gap-2">
+                  <i
+                    class="bi bi-arrow-left-circle mkt-text-teal mt-1"
+                    style="flex-shrink: 0"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mkt-text-secondary">
+                    Tombol <strong class="mkt-text-primary">Kembali</strong>
+                    membatalkan dan kembali ke layar utama
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-5">
+            <div class="card-mkt p-4 h-100">
+              <h3 class="h6 fw-bold mkt-text-primary mb-3">Mengelola PIN</h3>
+              <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+                Buat, ubah, atau nonaktifkan PIN melalui menu pengaturan:
+              </p>
+              <p
+                class="mb-3"
+                style="font-size: 0.9rem; color: var(--mkt-text-secondary)"
+              >
+                Menu Pengaturan →
+                <a href="#menu-keamanan-pin"><strong>Keamanan (PIN)</strong></a>
+              </p>
+              <p class="mkt-text-muted mb-0" style="font-size: 0.8rem">
+                Jika PIN terlupa, lihat
+                <a href="#faq">FAQ</a> untuk langkah pemulihan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Referensi Menu Pengaturan — #menu-settings
+         Grid 15 menu sebagai navigasi; konten detail setiap menu
+         ditambahkan pada Phase 4 (TASK-019 s.d. TASK-025).
+         ===================================================================== -->
+    <section
+      class="section-mkt-alt"
+      id="menu-settings"
+      aria-label="Referensi 15 menu pengaturan"
+    >
+      <div class="container">
+        <div class="text-center mb-5">
+          <div class="section-divider mx-auto"></div>
+          <h2 class="section-title">Referensi Menu Pengaturan</h2>
+          <p class="section-subtitle mx-auto">
+            Penjelasan lengkap untuk setiap kategori di menu pengaturan. Pilih
+            menu di bawah untuk langsung menuju penjelasannya.
+          </p>
+        </div>
+
+        <!-- Grid navigasi 15 menu -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-5">
+          <div class="col">
+            <a
+              href="#menu-identitas-masjid"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-building mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Identitas Masjid
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Nama, alamat, dan header layar utama
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-koreksi-waktu"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-clock-history mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Koreksi Waktu (Ihtiyat)
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Offset ±menit per waktu sholat
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-durasi-iqomah"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-hourglass-split mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Durasi Iqomah</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Lama countdown iqomah per sholat
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-pengaturan-dhuha"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-sun"
+                  style="
+                    font-size: 1.4rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                    color: var(--mkt-gold);
+                  "
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Pengaturan Dhuha
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Toggle &amp; offset menit setelah Syuruq
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-durasi-tampilan"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-stopwatch mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Durasi Tampilan
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Durasi pre-adzan, adzan, iqomah
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-alarm-tanda-waktu"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-bell-fill"
+                  style="
+                    font-size: 1.4rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                    color: var(--mkt-gold);
+                  "
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Alarm Tanda Waktu
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Suara tanda sebelum adzan &amp; iqomah
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-running-text"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-text-paragraph mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Running Text</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Teks berjalan di footer layar utama
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-keamanan-pin"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-shield-lock mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Keamanan (PIN)</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Buat, ubah, atau nonaktifkan PIN
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-informasi-kas"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-wallet2"
+                  style="
+                    font-size: 1.4rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                    color: var(--mkt-gold);
+                  "
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Informasi Kas</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Saldo &amp; laporan keuangan masjid
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-kata-mutiara"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-quote"
+                  style="
+                    font-size: 1.4rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                    color: var(--mkt-gold);
+                  "
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Kata Mutiara</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Ayat Al-Quran &amp; Hadits periodik
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-slideshow-pengumuman"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-images mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Slideshow Pengumuman
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Gambar pengumuman kegiatan masjid
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-jadwal-imam"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-people-fill mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Jadwal Imam</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Imam harian &amp; khatib Jumat
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-mode-hemat-daya"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-moon-stars-fill mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Mode Hemat Daya
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Layar minimal di jam-jam malam
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-reset-data"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-arrow-counterclockwise"
+                  style="
+                    font-size: 1.4rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                    color: #e05c5c;
+                  "
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">Reset Data</div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Kembalikan ke pengaturan awal
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col">
+            <a
+              href="#menu-tentang-aplikasi"
+              class="d-block card-mkt p-3 text-decoration-none h-100"
+            >
+              <div class="d-flex align-items-start gap-3">
+                <i
+                  class="bi bi-info-circle mkt-text-teal"
+                  style="font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem"
+                  aria-hidden="true"
+                ></i>
+                <div>
+                  <div class="fw-semibold mkt-text-primary">
+                    Tentang Aplikasi
+                  </div>
+                  <div class="mkt-text-muted" style="font-size: 0.8rem">
+                    Versi aplikasi &amp; info developer
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             15 Subseksi Referensi Menu Pengaturan — TASK-019 s.d. TASK-023
+             ═══════════════════════════════════════════════════════════════ -->
+
+        <!-- ═══ 1. Identitas Masjid ═══════════════════════════════════════ -->
+        <div
+          id="menu-identitas-masjid"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-building mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Identitas Masjid</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Nama dan alamat masjid yang ditampilkan di pojok kiri atas layar
+            utama sebagai identitas visual di setiap mode tampilan.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    <strong class="mkt-text-primary">Nama Masjid</strong> — teks
+                    bebas, wajib diisi (minimal 3 karakter)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Alamat Lengkap</strong> —
+                    teks bebas, boleh dikosongkan
+                  </li>
+                  <li>
+                    Tekan tombol <strong>"Simpan"</strong> untuk mengonfirmasi
+                    perubahan
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Nama dan alamat tampil di header pojok kiri atas di semua
+                  state layar (Standby, Pre-Adzan, Adzan, Iqomah).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan Android TV:</strong>
+              Tekan <strong>OK / Enter</strong> pada tombol edit via D-Pad untuk
+              memunculkan keyboard virtual, lalu ketik nama atau alamat.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 2. Koreksi Waktu (Ihtiyat) ══════════════════════════════════ -->
+
+        <div
+          id="menu-koreksi-waktu"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-clock-history mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">
+                Koreksi Waktu (Ihtiyat)
+              </h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Penyesuaian offset ±30 menit per waktu sholat untuk kebutuhan
+            ihtiyat (kehati-hatian) atau koreksi jadwal lokal masjid.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Offset <strong class="mkt-text-primary">Subuh</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                  <li>
+                    Offset <strong class="mkt-text-primary">Syuruq</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                  <li>
+                    Offset <strong class="mkt-text-primary">Dhuha</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                  <li>
+                    Offset <strong class="mkt-text-primary">Dzuhur</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                  <li>
+                    Offset <strong class="mkt-text-primary">Ashar</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                  <li>
+                    Offset <strong class="mkt-text-primary">Maghrib</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                  <li>
+                    Offset <strong class="mkt-text-primary">Isya</strong> —
+                    rentang −30 s.d. +30 menit
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Perubahan offset langsung memengaruhi jadwal sholat yang
+                  tampil di layar utama dan seluruh transisi state (Pre-Adzan,
+                  Adzan, Iqomah).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Aplikasi sudah menggunakan standar Kemenag RI (SIHAT) dengan
+              ihtiyat bawaan +2 menit. Ubah offset ini hanya jika ada keputusan
+              pengurus atau kesepakatan jamaah untuk penyesuaian tambahan.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 3. Durasi Iqomah ══════════════════════════════════════════ -->
+
+        <div
+          id="menu-durasi-iqomah"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-hourglass-split mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Durasi Iqomah</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Jeda waktu antara selesainya adzan dan dimulainya iqomah untuk
+            setiap waktu sholat wajib.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    <strong class="mkt-text-primary">Subuh</strong> — rentang
+                    1–30 menit
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Dzuhur</strong> — rentang
+                    1–30 menit
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Jum'at</strong> — rentang
+                    1–30 menit
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Ashar</strong> — rentang
+                    1–30 menit
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Maghrib</strong> — rentang
+                    1–30 menit
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Isya</strong> — rentang
+                    1–30 menit
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Layar menampilkan countdown iqomah (hitung mundur) setelah
+                  adzan selesai. Durasi countdown ini mengikuti nilai yang
+                  diatur per waktu sholat.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Waktu Jum'at umumnya diatur lebih panjang karena khutbah
+              berlangsung sebelum iqomah dimulai.
+            </p>
+          </div>
+          <!-- IMG-023: iqomah.png — Contoh countdown iqomah di layar utama -->
+          <figure class="guide-figure guide-figure-sm mt-3 mb-0">
+            <div class="guide-screenshot-label">
+              <i class="bi bi-display" aria-hidden="true"></i> Contoh tampilan
+              di layar utama
+            </div>
+            <div class="screenshot-container">
+              <img
+                src="assets/img/screenshots/iqomah.png"
+                alt="Tampilan countdown iqomah di layar utama Miqotul Khoir TV Masjid"
+                loading="lazy"
+                width="1920"
+                height="1080"
+              />
+            </div>
+            <figcaption>
+              Layar countdown iqomah yang menghitung mundur sebelum sholat
+              berjamaah dimulai
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ═══ 4. Pengaturan Dhuha ═══════════════════════════════════════ -->
+        <div
+          id="menu-pengaturan-dhuha"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-sun"
+                style="font-size: 1.5rem; color: var(--mkt-gold)"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Pengaturan Dhuha</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Menentukan kapan waktu Dhuha mulai ditampilkan, dihitung sejumlah
+            menit setelah waktu Syuruq.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    <strong class="mkt-text-primary">Offset Dhuha</strong> —
+                    rentang 10–30 menit setelah Syuruq
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Waktu Dhuha di jadwal layar utama bergeser maju sejumlah
+                  offset menit setelah waktu Syuruq.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ 5. Durasi Tampilan ════════════════════════════════════════ -->
+        <div
+          id="menu-durasi-tampilan"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-stopwatch mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Durasi Tampilan</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Mengatur lama tiap state tampilan layar utama serta kalibrasi
+            tanggal Hijriyah agar sesuai dengan kalender resmi masjid.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Pre-Adzan (Persiapan)</strong
+                    >
+                    — 5–30 menit sebelum adzan
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Tampilan Waktu Adzan</strong
+                    >
+                    — 60–600 detik (kelipatan 10)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Durasi Layar Hitam (Saat Sholat)</strong
+                    >
+                    — 10–45 menit (kelipatan 5)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Durasi Layar Hitam Jum'at</strong
+                    >
+                    — 10–90 menit (kelipatan 5)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Kalibrasi Tanggal Hijriyah</strong
+                    >
+                    — −2 s.d. +2 hari
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Transisi Standby → Pre-Adzan → Adzan → Iqomah → Sholat
+                  mengikuti durasi yang dikonfigurasi. Layar hitam saat sholat
+                  aktif sesuai waktu yang diatur.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Gunakan "Kalibrasi Tanggal Hijriyah" jika tanggal Hijriyah yang
+              tampil berbeda 1–2 hari dari kalender resmi masjid. Nilai positif
+              memajukan tanggal, nilai negatif memundurkan.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 6. Alarm Tanda Waktu ══════════════════════════════════════ -->
+        <div
+          id="menu-alarm-tanda-waktu"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-bell-fill"
+                style="font-size: 1.5rem; color: var(--mkt-gold)"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">
+                Alarm Tanda Waktu
+              </h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Membunyikan suara tanda singkat beberapa detik sebelum adzan dimulai
+            dan/atau sebelum iqomah selesai sebagai pengingat bagi jamaah.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    <strong class="mkt-text-primary">Alarm Pre-Adzan</strong>
+                    — toggle aktif/nonaktif + countdown 5–15 detik sebelum
+                    adzan
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Alarm Pre-Iqomah</strong>
+                    — toggle aktif/nonaktif + countdown 5–15 detik sebelum
+                    iqomah selesai
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Bunyi audio muncul dari speaker perangkat Android TV sesuai
+                  waktu yang ditentukan, tanpa mengubah tampilan layar.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Stepper countdown hanya aktif saat toggle terkait dinyalakan.
+              Pastikan volume speaker perangkat tidak dalam kondisi mute.
+            </p>
+          </div>
+          <!-- IMG-024: pre-adzan.png — Contoh tampilan pre-adzan di layar utama -->
+          <figure class="guide-figure guide-figure-sm mt-3 mb-0">
+            <div class="guide-screenshot-label">
+              <i class="bi bi-display" aria-hidden="true"></i> Contoh tampilan
+              di layar utama
+            </div>
+            <div class="screenshot-container">
+              <img
+                src="assets/img/screenshots/pre-adzan.png"
+                alt="Tampilan hitung mundur pre-adzan di layar utama Miqotul Khoir TV Masjid"
+                loading="lazy"
+                width="1920"
+                height="1080"
+              />
+            </div>
+            <figcaption>
+              Layar pre-adzan: hitung mundur detik menjelang waktu adzan tiba
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ═══ 7. Running Text ═══════════════════════════════════════════ -->
+        <div
+          id="menu-running-text"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-text-paragraph mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Running Text</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Teks berjalan di footer layar utama — cocok untuk pengumuman, jadwal
+            kegiatan, atau informasi harian masjid.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    <strong class="mkt-text-primary">Area Input Teks</strong> —
+                    teks bebas, mendukung teks panjang multiline
+                  </li>
+                  <li>Preview real-time tersedia di bagian atas section</li>
+                  <li>
+                    Perubahan disimpan setelah menekan
+                    <strong>Done / Enter</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Teks berjalan terus-menerus di bagian bawah layar utama pada
+                  semua mode tampilan (Standby, Pre-Adzan, Adzan, Iqomah).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan Android TV:</strong>
+              Tekan <strong>OK / Enter</strong> pada area teks via D-Pad untuk
+              memunculkan keyboard virtual. Teks baru langsung terlihat di
+              preview sebelum disimpan.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 8. Keamanan (PIN) ═════════════════════════════════════════ -->
+        <div
+          id="menu-keamanan-pin"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-shield-lock mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Keamanan (PIN)</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Proteksi menu pengaturan dengan PIN 6 digit agar hanya operator
+            berwenang yang dapat mengubah konfigurasi aplikasi.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Tombol
+                    <strong class="mkt-text-primary">"Buat PIN"</strong> — jika
+                    PIN belum pernah dibuat
+                  </li>
+                  <li>
+                    Tombol
+                    <strong class="mkt-text-primary">"Ubah PIN"</strong> — jika
+                    PIN sudah aktif
+                  </li>
+                  <li>
+                    Tombol
+                    <strong class="mkt-text-primary">"Nonaktifkan PIN"</strong>
+                    — hanya muncul jika PIN sedang aktif
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Saat PIN aktif, setiap kali membuka pengaturan user akan
+                  diminta memasukkan PIN 6 digit di halaman PIN gate sebelum
+                  masuk ke menu.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Operator yang sudah masuk melewati PIN gate tidak perlu memasukkan
+              PIN lagi selama sesi pengaturan berjalan. Lihat juga panduan
+              <a href="#keamanan-pin" class="mkt-text-teal">Jika PIN Aktif</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 9. Informasi Kas ══════════════════════════════════════════ -->
+
+        <div
+          id="menu-informasi-kas"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-wallet2"
+                style="font-size: 1.5rem; color: var(--mkt-gold)"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Informasi Kas</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Tampilkan data keuangan masjid di layar utama sebagai bentuk
+            transparansi kepada jamaah.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Toggle
+                    <strong class="mkt-text-primary"
+                      >Aktifkan Informasi Kas</strong
+                    >
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Saldo Kas</strong> — angka
+                    Rupiah, diisi manual
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Pemasukan Periode Ini</strong
+                    >
+                    — angka Rupiah, diisi manual
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Pengeluaran Periode Ini</strong
+                    >
+                    — angka Rupiah, diisi manual
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Informasi kas masjid tampil di layar utama saat mode standby
+                  ketika fitur diaktifkan.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Nilai diformat otomatis ke "Rp X.XXX.XXX". Data diisi manual oleh
+              pengurus — tidak terhubung ke sistem keuangan manapun.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 10. Kata Mutiara ══════════════════════════════════════════ -->
+
+        <div
+          id="menu-kata-mutiara"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-quote"
+                style="font-size: 1.5rem; color: var(--mkt-gold)"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Kata Mutiara</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Tampilkan ayat Al-Quran atau hadits pilihan secara periodik di layar
+            utama sebagai pengingat spiritual bagi jamaah.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Toggle
+                    <strong class="mkt-text-primary"
+                      >Aktifkan Kata Mutiara</strong
+                    >
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Tampil Setiap</strong> —
+                    5–30 menit (kelipatan 5)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Lama Tampil</strong> — 1–10
+                    menit per sesi
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Jam Aktif</strong> — Dari
+                    Jam:Menit s.d. Sampai Jam:Menit
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Mode Tampil</strong> — Urut
+                    atau Acak (radio)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Pilih Konten</strong> —
+                    checklist 11 item (5 ayat Al-Quran + 6 hadits)
+                  </li>
+                  <li>Tombol Pratinjau konten terpilih</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Layar full-screen Kata Mutiara muncul periodik, menggantikan
+                  layar standby selama durasi yang diatur, sesuai jam aktif.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Kata Mutiara tidak tampil di luar jam aktif yang ditentukan. Jika
+              tidak ada item yang dipilih di daftar checklist, fitur tidak akan
+              menampilkan konten meskipun toggle dalam kondisi ON.
+            </p>
+          </div>
+          <!-- IMG-019: screenshots/wisdom.png -->
+          <figure class="guide-figure guide-figure-sm mt-3 mb-0">
+            <div class="guide-screenshot-label">
+              <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+              Layar Utama
+            </div>
+            <img
+              src="assets/img/screenshots/wisdom.png"
+              alt="Contoh tayangan Kata Mutiara di layar utama"
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
+            <figcaption>
+              Contoh tayangan full-screen Kata Mutiara di layar utama
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ═══ 11. Slideshow Pengumuman ══════════════════════════════════ -->
+
+        <div
+          id="menu-slideshow-pengumuman"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-images mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">
+                Slideshow Pengumuman
+              </h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Tampilkan gambar pengumuman kegiatan masjid secara periodik di layar
+            utama. Mendukung hingga 3 slot gambar yang dapat dikelola secara
+            independen.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Toggle
+                    <strong class="mkt-text-primary"
+                      >Aktifkan Slideshow Pengumuman</strong
+                    >
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Jadwal Aktif</strong> —
+                    Jam:Menit Mulai s.d. Jam:Menit Berakhir
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Interval Antar Slot</strong
+                    >
+                    — jeda antar penampilan slideshow (menit)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Durasi Per Slot</strong> —
+                    lama satu sesi slideshow tampil (menit)
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Durasi Per Gambar</strong>
+                    — lama tiap gambar tampil (detik)
+                  </li>
+                  <li>3 slot gambar: Pilih / Ganti / Hapus per slot</li>
+                  <li>Tombol Pratinjau tersedia per slot gambar</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Gambar pengumuman tampil full-screen secara periodik sesuai
+                  jadwal aktif, menggantikan layar standby selama durasi yang
+                  diatur.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Toggle otomatis nonaktif jika semua slot gambar dihapus. Gambar
+              disimpan lokal di perangkat — tidak memerlukan koneksi internet.
+            </p>
+          </div>
+          <!-- IMG-020: screenshots/slideshow.png -->
+          <figure class="guide-figure guide-figure-sm mt-3 mb-0">
+            <div class="guide-screenshot-label">
+              <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+              Layar Utama
+            </div>
+            <img
+              src="assets/img/screenshots/slideshow.png"
+              alt="Contoh tayangan Slideshow di layar utama"
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
+            <figcaption>
+              Contoh tayangan Slideshow Pengumuman di layar utama
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ═══ 12. Jadwal Imam ═══════════════════════════════════════════ -->
+
+        <div
+          id="menu-jadwal-imam"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-people-fill mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Jadwal Imam</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Tampilkan jadwal imam sholat berjamaah harian secara periodik di
+            layar utama agar jamaah mengetahui siapa imam pada setiap waktu
+            sholat.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Toggle
+                    <strong class="mkt-text-primary"
+                      >Aktifkan Jadwal Imam</strong
+                    >
+                  </li>
+                  <li>
+                    Toggle
+                    <strong class="mkt-text-primary">Kunci Jadwal</strong> —
+                    cegah perubahan jadwal yang tidak disengaja
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary">Durasi Tampil</strong> —
+                    lama jadwal imam tampil di layar utama
+                  </li>
+                  <li>
+                    Grid jadwal
+                    <strong class="mkt-text-primary">7 hari</strong>
+                    (Senin–Minggu) × masing-masing waktu sholat
+                  </li>
+                  <li>Tambah / Edit / Hapus data imam per hari dan waktu</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Layar jadwal imam tampil periodik selama durasi yang diatur.
+                  Hari yang ditampilkan menyesuaikan otomatis dengan hari
+                  aktual.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Aktifkan kunci jadwal setelah semua data imam selesai diisi untuk
+              mencegah perubahan tidak disengaja via D-Pad. Nonaktifkan kunci
+              terlebih dahulu sebelum memperbarui jadwal.
+            </p>
+          </div>
+          <!-- IMG-021: screenshots/imam-schedule-weekday.png -->
+          <figure class="guide-figure guide-figure-sm mt-3 mb-0">
+            <div class="guide-screenshot-label">
+              <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+              Layar Utama (Hari Biasa)
+            </div>
+            <img
+              src="assets/img/screenshots/imam-schedule-weekday.png"
+              alt="Contoh tayangan Jadwal Imam hari biasa di layar utama"
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
+            <figcaption>
+              Contoh tayangan Jadwal Imam pada hari biasa
+            </figcaption>
+          </figure>
+          <!-- IMG-022: screenshots/imam-schedule-jumat.png -->
+          <figure class="guide-figure guide-figure-sm mt-3 mb-0">
+            <div class="guide-screenshot-label">
+              <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+              Layar Utama (Jumat)
+            </div>
+            <img
+              src="assets/img/screenshots/imam-schedule-jumat.png"
+              alt="Contoh tayangan Jadwal Imam hari Jumat di layar utama"
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
+            <figcaption>
+              Contoh tayangan Jadwal Imam pada hari Jumat
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- ═══ 13. Mode Hemat Daya ════════════════════════════════════════ -->
+
+        <div
+          id="menu-mode-hemat-daya"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-moon-stars-fill mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Mode Hemat Daya</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Alihkan layar ke tampilan minimal (jam digital + jadwal Subuh) pada
+            jam-jam malam untuk menghemat daya dan mencegah burn-in layar.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Toggle
+                    <strong class="mkt-text-primary"
+                      >Aktifkan Mode Hemat Daya</strong
+                    >
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Jam Mulai + Menit Mulai</strong
+                    >
+                    — waktu layar beralih ke mode minimal
+                  </li>
+                  <li>
+                    <strong class="mkt-text-primary"
+                      >Jam Berakhir + Menit Berakhir</strong
+                    >
+                    — waktu kembali ke standby normal
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Layar beralih ke mode minimal gelap dengan jam digital dan
+                  jadwal Subuh. Otomatis kembali ke standby normal setelah jam
+                  berakhir.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Catatan:</strong>
+              Mode ini mendukung rentang lintas tengah malam — contoh: 22:00
+              s.d. 04:30. Konfigurasi dinonaktifkan (abu-abu) saat toggle dalam
+              kondisi OFF.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 14. Reset Data ════════════════════════════════════════════ -->
+
+        <div
+          id="menu-reset-data"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-arrow-counterclockwise"
+                style="font-size: 1.5rem; color: #e05c5c"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Reset Data</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Hapus semua pengaturan dan kembalikan aplikasi ke kondisi bawaan
+            pabrik. Gunakan jika ingin mengkonfigurasi ulang dari awal atau
+            pindah ke masjid lain.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-sliders2" aria-hidden="true"></i> Pengaturan
+                  Penting
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Tombol <strong class="mkt-text-primary">Reset</strong> —
+                    memunculkan dialog konfirmasi sebelum eksekusi
+                  </li>
+                  <li>
+                    Data yang dihapus: kota tersimpan, koreksi waktu, dan
+                    identitas masjid
+                  </li>
+                  <li>
+                    Tekan <strong>"Batal"</strong> di dialog untuk membatalkan
+                    tanpa efek apapun
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Setelah reset berhasil, aplikasi menavigasi ke Setup Wizard
+                  untuk mengisi ulang semua konfigurasi dari langkah pertama.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout-warn mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong style="color: #e05c5c">⚠️ Peringatan:</strong>
+              Tindakan ini <strong>tidak dapat dibatalkan</strong> setelah
+              dikonfirmasi. Catat konfigurasi penting (nama masjid, kota,
+              koreksi waktu) sebelum melakukan reset.
+            </p>
+          </div>
+        </div>
+
+        <!-- ═══ 15. Tentang Aplikasi ══════════════════════════════════════ -->
+
+        <div
+          id="menu-tentang-aplikasi"
+          class="mb-5"
+          style="
+            border-top: 1px solid rgba(28, 192, 197, 0.15);
+            padding-top: 2rem;
+          "
+        >
+          <div
+            class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <i
+                class="bi bi-info-circle mkt-text-teal"
+                style="font-size: 1.5rem"
+                aria-hidden="true"
+              ></i>
+              <h3 class="h5 fw-bold mkt-text-primary mb-0">Tentang Aplikasi</h3>
+            </div>
+            <a
+              href="#menu-settings"
+              class="mkt-text-muted text-decoration-none"
+              style="font-size: 0.8rem"
+            >
+              <i class="bi bi-chevron-up" aria-hidden="true"></i> Daftar menu
+            </a>
+          </div>
+          <p class="mkt-text-secondary mb-3" style="font-size: 0.9rem">
+            Informasi versi, deskripsi, dan kredit pengembang aplikasi. Halaman
+            ini bersifat <em>read-only</em> — tidak ada konfigurasi yang dapat
+            diubah.
+          </p>
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-light-teal)"
+                >
+                  <i class="bi bi-info-circle" aria-hidden="true"></i> Informasi
+                  yang Ditampilkan
+                </div>
+                <ul
+                  class="mb-0 ps-3 mkt-text-secondary"
+                  style="font-size: 0.875rem; line-height: 1.85"
+                >
+                  <li>
+                    Nama:
+                    <strong class="mkt-text-primary">Miqotul Khoir TV</strong>
+                  </li>
+                  <li>
+                    Versi:
+                    <strong class="mkt-text-primary">1.2.2</strong> (build 5) ·
+                    Lisensi GPL v3
+                  </li>
+                  <li>7 fitur utama yang tersedia di aplikasi</li>
+                  <li>
+                    Developer:
+                    <strong class="mkt-text-primary"
+                      >Gulajava Ministudio</strong
+                    >
+                  </li>
+                  <li>
+                    Kontak:
+                    <a
+                      href="mailto:gulajava.mini@gmail.com"
+                      class="mkt-text-teal"
+                      >gulajava.mini@gmail.com</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card-mkt p-3 h-100">
+                <div
+                  class="fw-semibold mb-2"
+                  style="font-size: 0.85rem; color: var(--mkt-gold)"
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i> Dampak di
+                  Layar Utama
+                </div>
+                <p
+                  class="mkt-text-secondary mb-0"
+                  style="font-size: 0.875rem; line-height: 1.7"
+                >
+                  Tidak ada perubahan pada layar utama. Ini adalah halaman
+                  informasi saja.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-callout mt-3">
+            <p class="mkt-text-secondary mb-0" style="font-size: 0.85rem">
+              <strong class="mkt-text-teal">Tips Support:</strong>
+              Cantumkan nomor versi saat menghubungi support agar tim pengembang
+              dapat memberikan bantuan yang tepat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         FAQ — #faq
+         Berisi 5 pertanyaan umum; konten lengkap ditambahkan Phase 3
+         (TASK-018).
+         ===================================================================== -->
+    <section
+      class="section-mkt"
+      id="faq"
+      aria-label="Pertanyaan umum dan kendala"
+    >
+      <div class="container">
+        <div class="mb-5">
+          <div class="section-divider"></div>
+          <h2 class="section-title">Pertanyaan Umum &amp; Kendala</h2>
+          <p class="section-subtitle">
+            Kumpulan solusi untuk masalah yang paling sering dialami operator
+            masjid saat menggunakan Miqotul Khoir TV Masjid.
+          </p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="accordion" id="faqAccordion">
+              <!-- FAQ 1 -->
+              <div class="accordion-item mb-2">
+                <h3 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq1"
+                    aria-expanded="false"
+                    aria-controls="faq1"
+                  >
+                    Bagaimana cara membuka menu pengaturan di Android TV?
+                  </button>
+                </h3>
+                <div
+                  id="faq1"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Tekan tombol
+                    <strong>OK / Select</strong> pada remote TV dari layar utama
+                    untuk langsung membuka menu pengaturan. Anda juga dapat
+                    menggunakan tombol <strong>Enter</strong>,
+                    <strong>Escape (Back)</strong>, atau
+                    <strong>Play/Pause</strong>. Lihat
+                    <a href="#akses-settings"
+                      >panduan cara masuk ke pengaturan</a
+                    >
+                    untuk detail lebih lanjut.
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 2 -->
+              <div class="accordion-item mb-2">
+                <h3 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq2"
+                    aria-expanded="false"
+                    aria-controls="faq2"
+                  >
+                    Ikon ⚙ tidak muncul saat layar sentuh diketuk di HP/tablet.
+                  </button>
+                </h3>
+                <div
+                  id="faq2"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Ketuk di mana saja pada layar utama untuk memunculkan ikon
+                    ⚙. Ikon akan tampil selama
+                    <strong>5 detik</strong>, lalu hilang otomatis. Segera ketuk
+                    ikon ⚙ tersebut sebelum 5 detik berakhir. Jika berhasil
+                    masuk, akan langsung diarahkan ke halaman PIN (jika PIN
+                    aktif) atau ke menu pengaturan.
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 3 -->
+              <div class="accordion-item mb-2">
+                <h3 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq3"
+                    aria-expanded="false"
+                    aria-controls="faq3"
+                  >
+                    Saya lupa PIN pengaturan. Apa yang harus dilakukan?
+                  </button>
+                </h3>
+                <div
+                  id="faq3"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Jika PIN tidak bisa diingat, Anda dapat menghapus data
+                    aplikasi melalui menu
+                    <strong
+                      >Pengaturan Android → Aplikasi → Miqotul Khoir TV Masjid →
+                      Hapus Data</strong
+                    >. Setelah data dihapus, wizard setup akan muncul kembali
+                    dan Anda dapat memulai dari awal tanpa PIN. Lihat
+                    <a href="#menu-reset-data">panduan menu Reset Data</a>
+                    untuk langkah-langkah lebih detail.
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 4 -->
+              <div class="accordion-item mb-2">
+                <h3 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq4"
+                    aria-expanded="false"
+                    aria-controls="faq4"
+                  >
+                    Bagaimana cara menjalankan setup awal dari awal?
+                  </button>
+                </h3>
+                <div
+                  id="faq4"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Buka menu pengaturan, pilih
+                    <a href="#menu-reset-data"><strong>Reset Data</strong></a
+                    >, dan konfirmasi reset. Setelah reset berhasil, aplikasi
+                    otomatis kembali ke layar awal dan menampilkan wizard setup
+                    agar Anda dapat mengulang pengisian identitas masjid dan
+                    lokasi dari awal.
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ 5 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faq5"
+                    aria-expanded="false"
+                    aria-controls="faq5"
+                  >
+                    Waktu sholat yang ditampilkan tidak akurat untuk lokasi
+                    masjid saya.
+                  </button>
+                </h3>
+                <div
+                  id="faq5"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body">
+                    Pastikan kota yang dipilih di wizard setup atau pengaturan
+                    sudah sesuai dengan lokasi masjid. Jika masih ada selisih,
+                    Anda dapat menyesuaikan offset menit per waktu sholat
+                    melalui menu
+                    <a href="#menu-koreksi-waktu"
+                      ><strong>Koreksi Waktu (Ihtiyat)</strong></a
+                    >. Waktu sholat dihitung menggunakan metode Kemenag SIHAT
+                    (Subuh 20°, Isya 18°, Ihtiyat +2 menit).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Bantuan & Support CTA — #support
+         ===================================================================== -->
+    <section class="cta-section" id="support" aria-label="Bantuan dan dukungan">
+      <div class="container text-center">
+        <div class="section-divider mx-auto"></div>
+        <h2 class="section-title mb-3">Butuh Bantuan Lebih Lanjut?</h2>
+        <p class="section-subtitle mx-auto mb-4">
+          Jika panduan ini belum menjawab pertanyaan Anda, hubungi kami melalui
+          email atau tinggalkan pertanyaan di Google Play Store.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a
+            href="mailto:gulajava.mini@gmail.com"
+            class="btn btn-mkt-primary btn-lg"
+          >
+            <i class="bi bi-envelope me-2" aria-hidden="true"></i>
+            Kirim Email ke Support
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=gulajava.mini.miqotul_khoir_tv"
+            class="btn btn-mkt-outline btn-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="bi bi-google-play me-2" aria-hidden="true"></i>
+            Unduh di Google Play
+          </a>
+        </div>
+        <p class="mt-3 mkt-text-secondary" style="font-size: 0.875rem">
+          <a href="index.html">
+            <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>
+            Kembali ke halaman utama Miqotul Khoir TV
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Footer — TASK-012
+         Identik dengan footer index.html; link panduan.html ditambahkan
+         pada kolom tengah.
+         ===================================================================== -->
+    <footer class="footer-mkt" aria-label="Footer">
+      <div class="container">
+        <div class="row align-items-center gy-3">
+          <!-- Kiri: nama produk & developer -->
+          <div class="col-md-4">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <img
+                src="assets/img/logo-mktv.png"
+                alt="Logo Miqotul Khoir TV"
+                class="logo-mktv-badge"
+                loading="lazy"
+                width="28"
+                height="28"
+                style="object-fit: contain"
+              />
+              <span class="fw-semibold mkt-text-secondary"
+                >Miqotul Khoir TV Masjid</span
+              >
+            </div>
+            <small
+              >Dikembangkan oleh <strong>Gulajava Ministudio</strong></small
+            >
+          </div>
+
+          <!-- Tengah: link navigasi -->
+          <div class="col-md-4 text-md-center">
+            <a
+              href="https://gulajavaministudio.github.io/miqotul-khoir-tv-masjid/privacy-policy-miqotul-khoir-tv/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="me-3"
+            >
+              Kebijakan Privasi
+            </a>
+            <a href="panduan.html" class="me-3">Panduan Pengguna</a>
+            <a
+              href="https://play.google.com/store/apps/details?id=gulajava.mini.miqotul_khoir_tv"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Play
+            </a>
+          </div>
+
+          <!-- Kanan: kontak -->
+          <div class="col-md-4 text-md-end">
+            <a href="mailto:gulajava.mini@gmail.com">
+              <i class="bi bi-envelope me-1" aria-hidden="true"></i>
+              gulajava.mini@gmail.com
+            </a>
+            <br />
+            <small class="mkt-text-muted"
+              >&copy; <span id="footer-year">2026</span> Gulajava
+              Ministudio</small
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5.3.8 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

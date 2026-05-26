@@ -2,15 +2,17 @@
 goal: "Membuat Halaman Panduan Pengguna MKTV di Landing Page dengan Referensi Penggunaan, Navigasi, Menu Settings, dan Rencana Screenshot"
 version: 1.0
 date_created: 2026-05-25
-last_updated: 2026-05-25
+last_updated: 2026-05-27
 owner: "Gulajava Ministudio"
-status: 'Planned'
+status: 'In Progress'
 tags: [feature, landing-page, documentation, user-guide, support, website]
 ---
 
 # Introduction
 
-![Status: Planned](https://img.shields.io/badge/status-Planned-blue)
+![Status: In Progress](https://img.shields.io/badge/status-In_Progress-yellow)
+
+<!-- markdownlint-disable -->
 
 Plan ini mendefinisikan implementasi halaman panduan pengguna khusus untuk
 produk **Miqotul Khoir TV Masjid** pada website statis di folder
@@ -124,32 +126,32 @@ aktual pada source code Flutter agar tidak terjadi mismatch dokumentasi.
 
 ### Screenshot Requirement Matrix
 
-| ID | File yang Dibutuhkan | Status Awal | Lokasi Target | Digunakan Untuk |
-| --- | --- | --- | --- | --- |
-| IMG-001 | `standby.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Tampilan layar utama / pembuka panduan |
-| IMG-002 | `guide/home-settings-overlay.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Menjelaskan ikon settings setelah layar disentuh |
-| IMG-003 | `settings.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Gambaran umum struktur menu settings |
-| IMG-004 | `guide/pin-gate.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Menjelaskan halaman PIN sebelum settings |
-| IMG-005 | `guide/setup-welcome.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Langkah 1 setup wizard |
-| IMG-006 | `guide/setup-identity.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Langkah 2 isi identitas masjid |
-| IMG-007 | `guide/setup-location.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Langkah 3 pilih provinsi dan kota |
-| IMG-008 | `guide/setup-preview.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Langkah 4 konfirmasi dan simpan |
-| IMG-009 | `guide/settings-identity.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Identitas Masjid |
-| IMG-010 | `guide/settings-ihtiyat.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Koreksi Waktu |
-| IMG-011 | `guide/settings-running-text.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Running Text |
-| IMG-012 | `guide/settings-security.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu PIN |
-| IMG-013 | `guide/settings-treasury.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Informasi Kas |
-| IMG-014 | `guide/settings-wisdom-quote.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Kata Mutiara |
-| IMG-015 | `guide/settings-slideshow.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Slideshow Pengumuman |
-| IMG-016 | `guide/settings-imam-schedule.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Jadwal Imam |
-| IMG-017 | `guide/settings-midnight-mode.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Mode Hemat Daya |
-| IMG-018 | `guide/settings-reset-data.png` | Baru | `landingpage/assets/img/screenshots/guide/` | Referensi menu Reset Data |
-| IMG-019 | `wisdom.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Contoh hasil tayang Kata Mutiara di layar utama |
-| IMG-020 | `slideshow.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Contoh hasil tayang slideshow di layar utama |
-| IMG-021 | `imam-schedule-weekday.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Contoh hasil tayang jadwal imam hari biasa |
-| IMG-022 | `imam-schedule-jumat.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Contoh hasil tayang jadwal imam hari Jumat |
-| IMG-023 | `iqomah.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Contoh tampilan layar utama saat iqomah berlangsung |
-| IMG-024 | `pre-adzan.png` | Sudah ada | `landingpage/assets/img/screenshots/` | Contoh tampilan layar saat alarm pre-adzan aktif |
+| ID      | File yang Dibutuhkan               | Status Awal | Lokasi Target                               | Digunakan Untuk                                     |
+| ------- | ---------------------------------- | ----------- | ------------------------------------------- | --------------------------------------------------- |
+| IMG-001 | `standby.png`                      | Sudah ada   | `landingpage/assets/img/screenshots/`       | Tampilan layar utama / pembuka panduan              |
+| IMG-002 | `guide/home-settings-overlay.png`  | Baru        | `landingpage/assets/img/screenshots/guide/` | Menjelaskan ikon settings setelah layar disentuh    |
+| IMG-003 | `settings.png`                     | Sudah ada   | `landingpage/assets/img/screenshots/`       | Gambaran umum struktur menu settings                |
+| IMG-004 | `guide/pin-gate.png`               | Baru        | `landingpage/assets/img/screenshots/guide/` | Menjelaskan halaman PIN sebelum settings            |
+| IMG-005 | `guide/setup-welcome.png`          | Baru        | `landingpage/assets/img/screenshots/guide/` | Langkah 1 setup wizard                              |
+| IMG-006 | `guide/setup-identity.png`         | Baru        | `landingpage/assets/img/screenshots/guide/` | Langkah 2 isi identitas masjid                      |
+| IMG-007 | `guide/setup-location.png`         | Baru        | `landingpage/assets/img/screenshots/guide/` | Langkah 3 pilih provinsi dan kota                   |
+| IMG-008 | `guide/setup-preview.png`          | Baru        | `landingpage/assets/img/screenshots/guide/` | Langkah 4 konfirmasi dan simpan                     |
+| IMG-009 | `guide/settings-identity.png`      | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Identitas Masjid                     |
+| IMG-010 | `guide/settings-ihtiyat.png`       | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Koreksi Waktu                        |
+| IMG-011 | `guide/settings-running-text.png`  | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Running Text                         |
+| IMG-012 | `guide/settings-security.png`      | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu PIN                                  |
+| IMG-013 | `guide/settings-treasury.png`      | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Informasi Kas                        |
+| IMG-014 | `guide/settings-wisdom-quote.png`  | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Kata Mutiara                         |
+| IMG-015 | `guide/settings-slideshow.png`     | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Slideshow Pengumuman                 |
+| IMG-016 | `guide/settings-imam-schedule.png` | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Jadwal Imam                          |
+| IMG-017 | `guide/settings-midnight-mode.png` | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Mode Hemat Daya                      |
+| IMG-018 | `guide/settings-reset-data.png`    | Baru        | `landingpage/assets/img/screenshots/guide/` | Referensi menu Reset Data                           |
+| IMG-019 | `wisdom.png`                       | Sudah ada   | `landingpage/assets/img/screenshots/`       | Contoh hasil tayang Kata Mutiara di layar utama     |
+| IMG-020 | `slideshow.png`                    | Sudah ada   | `landingpage/assets/img/screenshots/`       | Contoh hasil tayang slideshow di layar utama        |
+| IMG-021 | `imam-schedule-weekday.png`        | Sudah ada   | `landingpage/assets/img/screenshots/`       | Contoh hasil tayang jadwal imam hari biasa          |
+| IMG-022 | `imam-schedule-jumat.png`          | Sudah ada   | `landingpage/assets/img/screenshots/`       | Contoh hasil tayang jadwal imam hari Jumat          |
+| IMG-023 | `iqomah.png`                       | Sudah ada   | `landingpage/assets/img/screenshots/`       | Contoh tampilan layar utama saat iqomah berlangsung |
+| IMG-024 | `pre-adzan.png`                    | Sudah ada   | `landingpage/assets/img/screenshots/`       | Contoh tampilan layar saat alarm pre-adzan aktif    |
 
 ## 2. Implementation Steps
 
@@ -158,87 +160,87 @@ aktual pada source code Flutter agar tidak terjadi mismatch dokumentasi.
 - GOAL-001: Menetapkan arsitektur konten, source-of-truth, dan inventaris aset
   untuk halaman panduan pengguna.
 
-| Task | Description | Completed | Date |
-| ---- | ----------- | --------- | ---- |
-| TASK-001 | Buat dokumen peta konten internal untuk `landingpage/panduan.html` berdasarkan source-of-truth berikut: `lib/presentation/pages/main_display_page.dart`, `lib/presentation/pages/settings/pin_gate_page.dart`, `lib/presentation/pages/settings/settings_menu_page.dart`, `lib/presentation/pages/setup_wizard/setup_wizard_page.dart`, dan seluruh file di `lib/presentation/pages/settings/sections/`. |  |  |
-| TASK-002 | Verifikasi perilaku akses settings dari `MainDisplayPage`: dokumentasikan tap-anywhere untuk memunculkan ikon settings selama 5 detik (`_showSettingsIcon()`), navigasi ke `PinGatePage` melalui `_openSettings()`, serta shortcut `LogicalKeyboardKey.select`, `enter`, `escape`, dan `mediaPlayPause` pada blok `onKeyEvent`. |  |  |
-| TASK-003 | Verifikasi perilaku `PinGatePage`: dokumentasikan kondisi bypass jika PIN tidak aktif dan alur masuk ke `SettingsMenuPage` jika verifikasi PIN berhasil. |  |  |
-| TASK-004 | Turunkan daftar 15 kategori menu dari `_categories` dan `_sections` di `lib/presentation/pages/settings/settings_menu_page.dart`, lalu jadikan struktur dasar reference section pada panduan. |  |  |
-| TASK-005 | Definisikan inventory screenshot final menggunakan matrix `IMG-001` s.d. `IMG-024`, termasuk status existing/new, nama file final, dan penempatan per section panduan. |  |  |
-| TASK-006 | Putuskan struktur halaman panduan yang terdiri atas: Hero ringkas, daftar isi, cara masuk ke pengaturan, navigasi dasar, setup awal, referensi menu settings, FAQ, dan CTA/support footer. |  |  |
+| Task     | Description                                                                                                                                                                                                                                                                                                                                                                                              | Completed | Date       |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-001 | Buat dokumen peta konten internal untuk `landingpage/panduan.html` berdasarkan source-of-truth berikut: `lib/presentation/pages/main_display_page.dart`, `lib/presentation/pages/settings/pin_gate_page.dart`, `lib/presentation/pages/settings/settings_menu_page.dart`, `lib/presentation/pages/setup_wizard/setup_wizard_page.dart`, dan seluruh file di `lib/presentation/pages/settings/sections/`. | ✅         | 2026-05-26 |
+| TASK-002 | Verifikasi perilaku akses settings dari `MainDisplayPage`: dokumentasikan tap-anywhere untuk memunculkan ikon settings selama 5 detik (`_showSettingsIcon()`), navigasi ke `PinGatePage` melalui `_openSettings()`, serta shortcut `LogicalKeyboardKey.select`, `enter`, `escape`, dan `mediaPlayPause` pada blok `onKeyEvent`.                                                                          | ✅         | 2026-05-26 |
+| TASK-003 | Verifikasi perilaku `PinGatePage`: dokumentasikan kondisi bypass jika PIN tidak aktif dan alur masuk ke `SettingsMenuPage` jika verifikasi PIN berhasil.                                                                                                                                                                                                                                                 | ✅         | 2026-05-26 |
+| TASK-004 | Turunkan daftar 15 kategori menu dari `_categories` dan `_sections` di `lib/presentation/pages/settings/settings_menu_page.dart`, lalu jadikan struktur dasar reference section pada panduan.                                                                                                                                                                                                            | ✅         | 2026-05-26 |
+| TASK-005 | Definisikan inventory screenshot final menggunakan matrix `IMG-001` s.d. `IMG-024`, termasuk status existing/new, nama file final, dan penempatan per section panduan.                                                                                                                                                                                                                                   | ✅         | 2026-05-26 |
+| TASK-006 | Putuskan struktur halaman panduan yang terdiri atas: Hero ringkas, daftar isi, cara masuk ke pengaturan, navigasi dasar, setup awal, referensi menu settings, FAQ, dan CTA/support footer.                                                                                                                                                                                                               | ✅         | 2026-05-26 |
 
 ### Implementation Phase 2
 
 - GOAL-002: Membuat shell halaman `panduan.html` dan menghubungkannya dari
   landing page utama.
 
-| Task | Description | Completed | Date |
-| ---- | ----------- | --------- | ---- |
-| TASK-007 | Buat file baru `landingpage/panduan.html` dengan HTML5 document, `lang="id"`, title khusus panduan, meta description, canonical, OG tags, Bootstrap 5.3.8 CDN, Bootstrap Icons CDN, dan referensi ke `landingpage/assets/css/styles.css` serta `landingpage/assets/js/main.js`. |  |  |
-| TASK-008 | Reuse pola navbar dari `landingpage/index.html` (brand, toggler, tombol CTA), namun sesuaikan link internal agar mengarah ke anchor di `panduan.html` seperti `#ringkasan`, `#akses-settings`, `#setup-awal`, `#menu-settings`, dan `#faq`. |  |  |
-| TASK-009 | Tambahkan link `Panduan` pada navbar `landingpage/index.html` tanpa mengganggu link existing (`Kenapa MKTV?`, `Fitur`, `Tampilan`, `Cara Pasang`). |  |  |
-| TASK-010 | Tambahkan link `Panduan Pengguna` pada area footer `landingpage/index.html` agar halaman bantuan bisa diakses dari seluruh halaman marketing. |  |  |
-| TASK-011 | Tambahkan satu CTA sekunder pada `landingpage/index.html` yang mengarahkan user ke `panduan.html`, misalnya di section `Cara Pasang & Gunakan` atau CTA akhir, dengan copy yang eksplisit seperti "Lihat Panduan Penggunaan". |  |  |
-| TASK-012 | Reuse pola footer dari `landingpage/index.html` pada `landingpage/panduan.html` agar branding, kontak support, dan link legal tetap konsisten. |  |  |
+| Task     | Description                                                                                                                                                                                                                                                                     | Completed | Date       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-007 | Buat file baru `landingpage/panduan.html` dengan HTML5 document, `lang="id"`, title khusus panduan, meta description, canonical, OG tags, Bootstrap 5.3.8 CDN, Bootstrap Icons CDN, dan referensi ke `landingpage/assets/css/styles.css` serta `landingpage/assets/js/main.js`. | ✅         | 2026-05-26 |
+| TASK-008 | Reuse pola navbar dari `landingpage/index.html` (brand, toggler, tombol CTA), namun sesuaikan link internal agar mengarah ke anchor di `panduan.html` seperti `#ringkasan`, `#akses-settings`, `#setup-awal`, `#menu-settings`, dan `#faq`.                                     | ✅         | 2026-05-26 |
+| TASK-009 | Tambahkan link `Panduan` pada navbar `landingpage/index.html` tanpa mengganggu link existing (`Kenapa MKTV?`, `Fitur`, `Tampilan`, `Cara Pasang`).                                                                                                                              | ✅         | 2026-05-26 |
+| TASK-010 | Tambahkan link `Panduan Pengguna` pada area footer `landingpage/index.html` agar halaman bantuan bisa diakses dari seluruh halaman marketing.                                                                                                                                   | ✅         | 2026-05-26 |
+| TASK-011 | Tambahkan satu CTA sekunder pada `landingpage/index.html` yang mengarahkan user ke `panduan.html`, misalnya di section `Cara Pasang & Gunakan` atau CTA akhir, dengan copy yang eksplisit seperti "Lihat Panduan Penggunaan".                                                   | ✅         | 2026-05-26 |
+| TASK-012 | Reuse pola footer dari `landingpage/index.html` pada `landingpage/panduan.html` agar branding, kontak support, dan link legal tetap konsisten.                                                                                                                                  | ✅         | 2026-05-26 |
 
 ### Implementation Phase 3
 
 - GOAL-003: Menulis materi tutorial utama untuk user baru dan operator.
 
-| Task | Description | Completed | Date |
-| ---- | ----------- | --------- | ---- |
-| TASK-013 | Tulis section ringkasan pada `landingpage/panduan.html` yang menjelaskan siapa target panduan ini, perangkat yang didukung, dan hasil yang akan didapat user setelah membaca halaman. |  |  |
-| TASK-014 | Tulis section "Cara Masuk ke Pengaturan" dengan dua subalur terpisah: **Android TV / Remote** dan **HP / Tablet Touchscreen**. Wajib merujuk pada perilaku aktual di `main_display_page.dart` dan `pin_gate_page.dart`; jangan menulis instruksi yang tidak sesuai dengan key binding atau gesture yang ada. |  |  |
-| TASK-015 | Tulis section "Cara Navigasi Menu" berdasarkan split layout `SettingsMenuPage`: panel kiri untuk kategori, panel kanan untuk isi, tombol kembali di bawah, serta perbedaan interaksi antara D-Pad dan tap sentuh. |  |  |
-| TASK-016 | Tulis section "Setup Awal Langkah demi Langkah" berdasarkan 4 file wizard: `welcome_step.dart`, `identity_step.dart`, `location_step.dart`, dan `preview_step.dart`. Uraikan urutan isi data, validasi dasar, dan aksi lanjut/kembali/simpan. |  |  |
-| TASK-017 | Tulis section "Jika PIN Aktif" yang menjelaskan kapan user diminta memasukkan PIN, apa yang terjadi jika PIN salah, dan kondisi ketika settings langsung terbuka tanpa PIN. |  |  |
-| TASK-018 | Tulis section "FAQ / Kendala Umum" yang menjawab minimal masalah berikut: tidak tahu cara membuka settings, ikon settings tidak muncul di perangkat sentuh, lupa PIN, belum paham fungsi menu tertentu, dan ingin reset ke setup awal. |  |  |
+| Task     | Description                                                                                                                                                                                                                                                                                                  | Completed | Date       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ---------- |
+| TASK-013 | Tulis section ringkasan pada `landingpage/panduan.html` yang menjelaskan siapa target panduan ini, perangkat yang didukung, dan hasil yang akan didapat user setelah membaca halaman.                                                                                                                        | ✅         | 2026-05-27 |
+| TASK-014 | Tulis section "Cara Masuk ke Pengaturan" dengan dua subalur terpisah: **Android TV / Remote** dan **HP / Tablet Touchscreen**. Wajib merujuk pada perilaku aktual di `main_display_page.dart` dan `pin_gate_page.dart`; jangan menulis instruksi yang tidak sesuai dengan key binding atau gesture yang ada. | ✅         | 2026-05-27 |
+| TASK-015 | Tulis section "Cara Navigasi Menu" berdasarkan split layout `SettingsMenuPage`: panel kiri untuk kategori, panel kanan untuk isi, tombol kembali di bawah, serta perbedaan interaksi antara D-Pad dan tap sentuh.                                                                                            | ✅         | 2026-05-27 |
+| TASK-016 | Tulis section "Setup Awal Langkah demi Langkah" berdasarkan 4 file wizard: `welcome_step.dart`, `identity_step.dart`, `location_step.dart`, dan `preview_step.dart`. Uraikan urutan isi data, validasi dasar, dan aksi lanjut/kembali/simpan.                                                                | ✅         | 2026-05-27 |
+| TASK-017 | Tulis section "Jika PIN Aktif" yang menjelaskan kapan user diminta memasukkan PIN, apa yang terjadi jika PIN salah, dan kondisi ketika settings langsung terbuka tanpa PIN.                                                                                                                                  | ✅         | 2026-05-27 |
+| TASK-018 | Tulis section "FAQ / Kendala Umum" yang menjawab minimal masalah berikut: tidak tahu cara membuka settings, ikon settings tidak muncul di perangkat sentuh, lupa PIN, belum paham fungsi menu tertentu, dan ingin reset ke setup awal.                                                                       | ✅         | 2026-05-27 |
 
 ### Implementation Phase 4
 
 - GOAL-004: Menulis referensi detail seluruh kategori settings tanpa menyimpang
   dari source code aktual.
 
-| Task | Description | Completed | Date |
-| ---- | ----------- | --------- | ---- |
-| TASK-019 | Buat subsection referensi untuk menu `Identitas Masjid`, `Koreksi Waktu (Ihtiyat)`, `Durasi Iqomah`, dan `Pengaturan Dhuha` berdasarkan file `identity_section.dart`, `ihtiyat_section.dart`, `iqomah_section.dart`, dan `dhuha_section.dart`. Jelaskan field penting seperti nama/alamat, offset waktu, durasi iqomah per sholat, dan offset Dhuha setelah Syuruq. |  |  |
-| TASK-020 | Buat subsection referensi untuk menu `Durasi Tampilan`, `Alarm Tanda Waktu`, dan `Running Text` berdasarkan `display_timing_section.dart`, `alert_settings_section.dart`, dan `running_text_section.dart`. Jelaskan parameter durasi, alarm pre-adzan/pre-iqomah, preview running text, dan aksi simpan. |  |  |
-| TASK-021 | Buat subsection referensi untuk menu `Keamanan (PIN)` dan `Informasi Kas` berdasarkan `security_section.dart` dan `treasury_section.dart`. Jelaskan status PIN aktif/nonaktif, buat/ubah/nonaktifkan PIN, toggle info kas, input saldo/pemasukan/pengeluaran, serta preview nominal. |  |  |
-| TASK-022 | Buat subsection referensi untuk menu `Kata Mutiara`, `Slideshow Pengumuman`, dan `Jadwal Imam` berdasarkan `wisdom_quote_section.dart`, `slideshow_section.dart`, dan `imam_schedule_section.dart`. Jelaskan toggle fitur, waktu aktif, interval, slot gambar, preview, CRUD data terkait, serta dampaknya pada layar utama. |  |  |
-| TASK-023 | Buat subsection referensi untuk menu `Mode Hemat Daya`, `Reset Data`, dan `Tentang Aplikasi` berdasarkan `midnight_mode_section.dart`, `reset_section.dart`, dan `about_section.dart`. Jelaskan jadwal mode hemat daya, konsekuensi reset data, dan fungsi informasi aplikasi. |  |  |
-| TASK-024 | Untuk setiap subsection settings, gunakan pola konsisten: fungsi utama, pengaturan penting, kapan digunakan, apa dampaknya di layar utama, dan catatan penggunaan untuk Android TV/touchscreen. |  |  |
-| TASK-025 | Tambahkan anchor link per kategori settings agar user dapat lompat langsung dari daftar isi atau daftar menu bantuan ke submenu yang diinginkan. |  |  |
+| Task     | Description                                                                                                                                                                                                                                                                                                                                                         | Completed | Date       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-019 | Buat subsection referensi untuk menu `Identitas Masjid`, `Koreksi Waktu (Ihtiyat)`, `Durasi Iqomah`, dan `Pengaturan Dhuha` berdasarkan file `identity_section.dart`, `ihtiyat_section.dart`, `iqomah_section.dart`, dan `dhuha_section.dart`. Jelaskan field penting seperti nama/alamat, offset waktu, durasi iqomah per sholat, dan offset Dhuha setelah Syuruq. | ✅         | 2026-05-27 |
+| TASK-020 | Buat subsection referensi untuk menu `Durasi Tampilan`, `Alarm Tanda Waktu`, dan `Running Text` berdasarkan `display_timing_section.dart`, `alert_settings_section.dart`, dan `running_text_section.dart`. Jelaskan parameter durasi, alarm pre-adzan/pre-iqomah, preview running text, dan aksi simpan.                                                            | ✅         | 2026-05-27 |
+| TASK-021 | Buat subsection referensi untuk menu `Keamanan (PIN)` dan `Informasi Kas` berdasarkan `security_section.dart` dan `treasury_section.dart`. Jelaskan status PIN aktif/nonaktif, buat/ubah/nonaktifkan PIN, toggle info kas, input saldo/pemasukan/pengeluaran, serta preview nominal.                                                                                | ✅         | 2026-05-27 |
+| TASK-022 | Buat subsection referensi untuk menu `Kata Mutiara`, `Slideshow Pengumuman`, dan `Jadwal Imam` berdasarkan `wisdom_quote_section.dart`, `slideshow_section.dart`, dan `imam_schedule_section.dart`. Jelaskan toggle fitur, waktu aktif, interval, slot gambar, preview, CRUD data terkait, serta dampaknya pada layar utama.                                        | ✅         | 2026-05-27 |
+| TASK-023 | Buat subsection referensi untuk menu `Mode Hemat Daya`, `Reset Data`, dan `Tentang Aplikasi` berdasarkan `midnight_mode_section.dart`, `reset_section.dart`, dan `about_section.dart`. Jelaskan jadwal mode hemat daya, konsekuensi reset data, dan fungsi informasi aplikasi.                                                                                      | ✅         | 2026-05-27 |
+| TASK-024 | Untuk setiap subsection settings, gunakan pola konsisten: fungsi utama, pengaturan penting, kapan digunakan, apa dampaknya di layar utama, dan catatan penggunaan untuk Android TV/touchscreen.                                                                                                                                                                     | ✅         | 2026-05-27 |
+| TASK-025 | Tambahkan anchor link per kategori settings agar user dapat lompat langsung dari daftar isi atau daftar menu bantuan ke submenu yang diinginkan.                                                                                                                                                                                                                    | ✅         | 2026-05-27 |
 
 ### Implementation Phase 5
 
 - GOAL-005: Menambahkan styling panduan, layout bantuan, dan integrasi
   screenshot pendukung.
 
-| Task | Description | Completed | Date |
-| ---- | ----------- | --------- | ---- |
-| TASK-026 | Modifikasi `landingpage/assets/css/styles.css` untuk menambah utility class khusus halaman panduan, minimal untuk: table of contents, callout perangkat, step list, screenshot figure, note/warning box, dan sticky in-page navigation bila diperlukan. |  |  |
-| TASK-027 | Pastikan kelas CSS baru tetap reuse token warna `--mkt-*` yang sudah ada dan tidak membuat cabang tema visual baru. |  |  |
-| TASK-028 | Tambahkan folder `landingpage/assets/img/screenshots/guide/` untuk aset screenshot panduan yang tidak dipakai oleh halaman marketing utama. |  |  |
-| TASK-029 | Update `landingpage/assets/img/screenshots/README.md` agar mencantumkan inventory `IMG-001` s.d. `IMG-024`, aturan naming, rasio 16:9, dan daftar screenshot yang existing vs baru untuk halaman panduan. |  |  |
-| TASK-030 | Integrasikan screenshot existing (`standby.png`, `settings.png`, `wisdom.png`, `slideshow.png`, `iqomah.png`, `pre-adzan.png`, `imam-schedule-weekday.png`, `imam-schedule-jumat.png`) dan siapkan slot markup untuk screenshot baru dalam `panduan.html` menggunakan `<figure>`, `<img>`, dan `<figcaption>`. |  |  |
-| TASK-031 | Untuk screenshot yang menunjukkan langkah atau area penting, tentukan apakah akan memakai gambar polos atau varian anotasi terpisah. Jika anotasi dipakai, gunakan nama file berbeda (misalnya `*-annotated.png`) agar aset asli tetap tersedia. |  |  |
-| TASK-032 | Tambahkan caption deskriptif pada setiap screenshot agar fungsi visualnya jelas, misalnya "Tap layar untuk memunculkan ikon settings" atau "Pilih kota sebelum menekan Selanjutnya". |  |  |
+| Task     | Description                                                                                                                                                                                                                                                                                                    | Completed | Date       |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-026 | Modifikasi `landingpage/assets/css/styles.css` untuk menambah utility class khusus halaman panduan, minimal untuk: table of contents, callout perangkat, step list, screenshot figure, note/warning box, dan sticky in-page navigation bila diperlukan.                                                        | ✅         | 2026-05-26 |
+| TASK-027 | Pastikan kelas CSS baru tetap reuse token warna `--mkt-*` yang sudah ada dan tidak membuat cabang tema visual baru.                                                                                                                                                                                            | ✅         | 2026-05-26 |
+| TASK-028 | Tambahkan folder `landingpage/assets/img/screenshots/guide/` untuk aset screenshot panduan yang tidak dipakai oleh halaman marketing utama.                                                                                                                                                                    | ✅         | 2026-05-26 |
+| TASK-029 | Update `landingpage/assets/img/screenshots/README.md` agar mencantumkan inventory `IMG-001` s.d. `IMG-024`, aturan naming, rasio 16:9, dan daftar screenshot yang existing vs baru untuk halaman panduan.                                                                                                      | ✅         | 2026-05-26 |
+| TASK-030 | Integrasikan screenshot existing (`standby.png`, `settings.png`, `wisdom.png`, `slideshow.png`, `iqomah.png`, `pre-adzan.png`, `imam-schedule-weekday.png`, `imam-schedule-jumat.png`) pada `panduan.html`; screenshot baru di `guide/` tetap didokumentasikan di README dan baru dipasang setelah aset final tersedia. | ✅         | 2026-05-26 |
+| TASK-031 | Untuk screenshot yang menunjukkan langkah atau area penting, tentukan apakah akan memakai gambar polos atau varian anotasi terpisah. Jika anotasi dipakai, gunakan nama file berbeda (misalnya `*-annotated.png`) agar aset asli tetap tersedia.                                                               | ✅         | 2026-05-26 |
+| TASK-032 | Tambahkan caption deskriptif pada setiap screenshot agar fungsi visualnya jelas, misalnya "Tap layar untuk memunculkan ikon settings" atau "Pilih kota sebelum menekan Selanjutnya".                                                                                                                           | ✅         | 2026-05-26 |
 
 ### Implementation Phase 6
 
 - GOAL-006: Melakukan QA konten, validasi konsistensi, dan verifikasi
   keterbacaan lintas perangkat.
 
-| Task | Description | Completed | Date |
-| ---- | ----------- | --------- | ---- |
-| TASK-033 | Buka `landingpage/panduan.html` di browser lokal dan verifikasi halaman render tanpa asset 404, tanpa layout rusak, dan tanpa anchor link yang mati. |  |  |
-| TASK-034 | Verifikasi responsive layout minimal pada viewport 375px, 768px, 1366px, dan 1920px; fokus pada keterbacaan daftar isi, table screenshot, dan subsection menu settings yang panjang. |  |  |
-| TASK-035 | Verifikasi seluruh tautan dari `landingpage/index.html` menuju `panduan.html` bekerja pada navbar, footer, dan CTA sekunder. |  |  |
-| TASK-036 | Audit isi panduan terhadap source code aktual: akses settings di `main_display_page.dart`, PIN di `pin_gate_page.dart`, struktur menu di `settings_menu_page.dart`, dan wizard di file `setup_wizard/steps/*.dart`. |  |  |
-| TASK-037 | Audit bahwa seluruh label menu settings yang disebut di panduan identik dengan label yang tampil di aplikasi; jangan ada nama menu lama, typo, atau istilah buatan baru. |  |  |
-| TASK-038 | Audit bahwa screenshot tidak memuat data sensitif, PIN nyata, atau identitas masjid yang tidak boleh dipublikasikan. |  |  |
-| TASK-039 | Audit bahwa `title`, `meta description`, heading hierarchy, alt text gambar, dan copy CTA halaman panduan sesuai untuk kebutuhan bantuan pengguna dan support Google Play. |  |  |
-| TASK-040 | Lakukan final content QA untuk memastikan tone Bahasa Indonesia konsisten: baku, natural, tidak terlalu teknis, dan tidak bertentangan antarbagian. |  |  |
+| Task     | Description                                                                                                                                                                                                         | Completed | Date       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| TASK-033 | Buka `landingpage/panduan.html` di browser lokal dan verifikasi halaman render tanpa asset 404, tanpa layout rusak, dan tanpa anchor link yang mati.                                                                | ✅         | 2026-05-26 |
+| TASK-034 | Verifikasi responsive layout minimal pada viewport 375px, 768px, 1366px, dan 1920px; fokus pada keterbacaan daftar isi, table screenshot, dan subsection menu settings yang panjang.                                | ✅         | 2026-05-26 |
+| TASK-035 | Verifikasi seluruh tautan dari `landingpage/index.html` menuju `panduan.html` bekerja pada navbar, footer, dan CTA sekunder.                                                                                        | ✅         | 2026-05-26 |
+| TASK-036 | Audit isi panduan terhadap source code aktual: akses settings di `main_display_page.dart`, PIN di `pin_gate_page.dart`, struktur menu di `settings_menu_page.dart`, dan wizard di file `setup_wizard/steps/*.dart`. | ✅         | 2026-05-26 |
+| TASK-037 | Audit bahwa seluruh label menu settings yang disebut di panduan identik dengan label yang tampil di aplikasi; jangan ada nama menu lama, typo, atau istilah buatan baru.                                            | ✅         | 2026-05-26 |
+| TASK-038 | Audit bahwa screenshot tidak memuat data sensitif, PIN nyata, atau identitas masjid yang tidak boleh dipublikasikan.                                                                                                | ✅         | 2026-05-26 |
+| TASK-039 | Audit bahwa `title`, `meta description`, heading hierarchy, alt text gambar, dan copy CTA halaman panduan sesuai untuk kebutuhan bantuan pengguna dan support Google Play.                                          | ✅         | 2026-05-26 |
+| TASK-040 | Lakukan final content QA untuk memastikan tone Bahasa Indonesia konsisten: baku, natural, tidak terlalu teknis, dan tidak bertentangan antarbagian.                                                                 | ✅         | 2026-05-26 |
 
 ## 3. Alternatives
 
@@ -370,7 +372,8 @@ aktual pada source code Flutter agar tidak terjadi mismatch dokumentasi.
   source-of-truth dan lakukan audit sebelum publish.
 - **RISK-002**: Screenshot baru belum tersedia saat halaman panduan selesai
   ditulis. **Mitigasi**: definisikan inventory aset lebih awal dan siapkan
-  placeholder markup yang dapat diisi bertahap.
+  instruksi pemasangan di README; jangan tampilkan placeholder kosong di halaman
+  publik sebelum screenshot final tersedia.
 - **RISK-003**: Halaman panduan bisa menjadi terlalu panjang untuk user mobile.
   **Mitigasi**: sediakan daftar isi, anchor link, subsection ringkas, dan
   pengelompokan menu yang jelas.
