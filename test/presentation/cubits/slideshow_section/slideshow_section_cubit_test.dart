@@ -1,11 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:path/path.dart' as p;
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'package:miqotul_khoir_tv/domain/entities/slideshow_image.dart';
@@ -451,6 +449,138 @@ void main() {
             .having((s) => s.errorMessage, 'errorMessage', isNotNull)
             .having((s) => s.isBusy, 'isBusy', isFalse),
       ],
+    );
+  });
+
+  // -------------------------------------------------------------------------
+  // Exception non-PlatformException dari readAsBytes() — Finding HIGH
+  // -------------------------------------------------------------------------
+
+  group(
+    'importIntoSlot() — Exception non-PlatformException dari readAsBytes()',
+    () {
+      blocTest<SlideshowSectionCubit, SlideshowSectionState>(
+        'emits errorMessage dan tidak crash saat readAsBytes() melempar PathNotFoundException',
+        setUp: () {
+          // XFile dengan path yang tidak ada → readAsBytes() melempar
+          // PathNotFoundException (subclass Exception) secara alami.
+          when(
+            () => mockImagePickerPlatform.getImageFromSource(
+              source: any(named: 'source'),
+              options: any(named: 'options'),
+            ),
+          ).thenAnswer((_) async => XFile('/nonexistent/path.jpg'));
+        },
+        build: buildCubit,
+        act: (c) => c.importIntoSlot(1),
+        // isBusy:true tidak diemit karena _pickImageBytes() throw sebelum
+        // importIntoSlot() sempat memanggil emit(isBusy:true).
+        expect: () => [
+          isA<SlideshowSectionState>()
+              .having((s) => s.errorMessage, 'errorMessage', isNotNull)
+              .having((s) => s.isBusy, 'isBusy', isFalse),
+        ],
+      );
+    },
+  );
+
+  group('replaceSlot() — Exception non-PlatformException dari readAsBytes()', () {
+    blocTest<SlideshowSectionCubit, SlideshowSectionState>(
+      'emits errorMessage dan tidak crash saat readAsBytes() melempar PathNotFoundException',
+      setUp: () {
+        when(
+          () => mockImagePickerPlatform.getImageFromSource(
+            source: any(named: 'source'),
+            options: any(named: 'options'),
+          ),
+        ).thenAnswer((_) async => XFile('/nonexistent/path.jpg'));
+      },
+      build: buildCubit,
+      act: (c) => c.replaceSlot(1),
+      // isBusy:true tidak diemit karena _pickImageBytes() throw sebelum
+      // replaceSlot() sempat memanggil emit(isBusy:true).
+      expect: () => [
+        isA<SlideshowSectionState>()
+            .having((s) => s.errorMessage, 'errorMessage', isNotNull)
+            .having((s) => s.isBusy, 'isBusy', isFalse),
+      ],
+    );
+  });
+
+  // ---------------------------------------------------------------------------
+  // importIntoSlot() — _resolveFileName() strategi fallback nama file
+  // ---------------------------------------------------------------------------
+
+  group('importIntoSlot() — _resolveFileName() strategi fallback nama file', () {
+    final fakeBytes = Uint8List.fromList([0xFF, 0xD8, 0xFF, 0xE0]);
+
+    /// Stub storage/repo agar importIntoSlot() dapat tuntas setelah picker selesai.
+    void stubStorageForImport() {
+      when(
+        () => storage.importImage(
+          slotIndex: any(named: 'slotIndex'),
+          originalFileName: any(named: 'originalFileName'),
+          bytes: any(named: 'bytes'),
+        ),
+      ).thenAnswer((_) async => _kSlot1);
+      when(() => repo.save(any())).thenAnswer((_) async {});
+      when(() => repo.getAll()).thenAnswer((_) async => [_kSlot1]);
+    }
+
+    /// Helper: pick image dari [filePath], jalankan importIntoSlot(1), lalu
+    /// return `originalFileName` yang diteruskan ke storage.importImage().
+    Future<String> captureOriginalFileName(String filePath) async {
+      final xfile = XFile.fromData(fakeBytes, path: filePath);
+      when(
+        () => mockImagePickerPlatform.getImageFromSource(
+          source: any(named: 'source'),
+          options: any(named: 'options'),
+        ),
+      ).thenAnswer((_) async => xfile);
+      stubStorageForImport();
+
+      final cubit = buildCubit();
+      await cubit.importIntoSlot(1);
+
+      final captured = verify(
+        () => storage.importImage(
+          slotIndex: any(named: 'slotIndex'),
+          originalFileName: captureAny(named: 'originalFileName'),
+          bytes: any(named: 'bytes'),
+        ),
+      ).captured;
+
+      await cubit.close();
+      return captured.single as String;
+    }
+
+    test(
+      'TEST-002: path dengan ekstensi valid (.jpg) — kembalikan basename path',
+      () async {
+        // p.join menggunakan separator platform yang benar (/ di POSIX, \ di Windows)
+        // sehingga p.basename dan XFile.name keduanya menghasilkan 'image.jpg'
+        final filePath = p.join('cache', 'image.jpg');
+        expect(await captureOriginalFileName(filePath), equals('image.jpg'));
+      },
+    );
+
+    test(
+      'TEST-003: path tanpa ekstensi — fallback ke image.name (basename path)',
+      () async {
+        // Tidak ada ekstensi → validExts.contains('') = false
+        // Fallback ke image.name = path.split(sep).last = 'tmp_file'
+        final filePath = p.join('cache', 'tmp_file');
+        expect(await captureOriginalFileName(filePath), equals('tmp_file'));
+      },
+    );
+
+    test(
+      'TEST-004: path dengan ekstensi tidak dikenal (.bmp) — fallback ke image.name',
+      () async {
+        // .bmp bukan dalam whitelist validExts → fallback ke image.name = 'photo.bmp'
+        final filePath = p.join('cache', 'photo.bmp');
+        expect(await captureOriginalFileName(filePath), equals('photo.bmp'));
+      },
     );
   });
 }

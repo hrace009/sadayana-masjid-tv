@@ -183,8 +183,10 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
   /// Picker hanya bertugas mengambil file dari galeri. Validasi format ekstensi
   /// tetap dilakukan di layer [SlideshowFileStorageService] sesuai whitelist.
   ///
-  /// PlatformException dari picker ditangani di sini agar tidak menjadi crash
-  /// fatal pada perangkat tanpa aplikasi galeri/pengelola file kompatibel.
+  /// [PlatformException] dari picker ditangani agar tidak menjadi crash fatal
+  /// pada perangkat tanpa aplikasi galeri/pengelola file yang kompatibel.
+  /// [Exception] lainnya (contoh: [FileSystemException] dari [XFile.readAsBytes])
+  /// juga ditangani agar error I/O tidak menjadi crash yang tidak terduga.
   Future<_PickedFile?> _pickImageBytes() async {
     try {
       final XFile? image = await _imagePicker.pickImage(
@@ -196,13 +198,20 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       final bytes = await image.readAsBytes();
       if (bytes.isEmpty) return null;
 
-      return _PickedFile(fileName: p.basename(image.path), data: bytes);
+      return _PickedFile(fileName: _resolveFileName(image), data: bytes);
     } on PlatformException {
       emit(
         state.copyWith(
           errorMessage:
               'Tidak dapat membuka galeri gambar. Pastikan perangkat '
               'memiliki aplikasi galeri atau pengelola file yang kompatibel.',
+        ),
+      );
+      return null;
+    } on Exception {
+      emit(
+        state.copyWith(
+          errorMessage: 'Gagal membaca file gambar. Silakan coba lagi.',
         ),
       );
       return null;
@@ -225,6 +234,29 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
         ),
       );
     }
+  }
+
+  /// Menentukan nama file dari [XFile] hasil picker dengan strategi fallback.
+  ///
+  /// Prioritas:
+  /// 1. `p.basename(image.path)` — jika ekstensinya ada dalam whitelist
+  /// 2. `image.name` — nama file sebagaimana dipilih user (fallback)
+  /// 3. `p.basename(image.path)` — jika `image.name` kosong (last resort)
+  ///
+  /// Whitelist ekstensi disesuaikan dengan
+  /// `SlideshowFileStorageServiceImpl._allowedExtensions`.
+  String _resolveFileName(XFile image) {
+    const validExts = {'jpg', 'jpeg', 'png', 'webp'};
+    final nameFromPath = p.basename(image.path);
+    final extFromPath = p
+        .extension(nameFromPath)
+        .replaceFirst('.', '')
+        .toLowerCase();
+    if (validExts.contains(extFromPath)) {
+      return nameFromPath;
+    }
+    final fallbackName = image.name;
+    return fallbackName.isNotEmpty ? fallbackName : nameFromPath;
   }
 }
 

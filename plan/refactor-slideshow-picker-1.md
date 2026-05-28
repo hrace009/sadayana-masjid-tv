@@ -19,6 +19,8 @@ tags:
 
 ![Status: Completed](https://img.shields.io/badge/status-Completed-brightgreen)
 
+<!-- markdownlint-disable -->
+
 Laporan Crashlytics (Issue `a6c29f9`, 13 crash event, v1.3.0) menunjukkan crash
 fatal `PlatformException(invalid_format_type, Can't handle the provided file
 type., null, null)` saat pengguna mencoba mengimpor gambar slideshow di perangkat
@@ -227,9 +229,9 @@ group('importIntoSlot() — PlatformException dari picker', () {
 ## 4. Dependencies
 
 - **DEP-001**: `image_picker: ^1.1.0` — package baru yang ditambahkan ke `pubspec.yaml`.
-- **DEP-002**: `image_picker_platform_interface` — transitive dependency dari `image_picker`, dibutuhkan di test untuk `ImagePickerPlatform.instance`.
+- **DEP-002**: `image_picker_platform_interface` — ditambahkan secara eksplisit ke `dev_dependencies` di `pubspec.yaml` untuk menghindari lint `depend_on_referenced_packages`. Dibutuhkan di test untuk `ImagePickerPlatform.instance`.
 - **DEP-003**: `cross_file` — transitive dependency dari `image_picker`, menyediakan class `XFile` dan `XFile(bytes: ...)` untuk in-memory test data.
-- **DEP-004**: `plugin_platform_interface` — transitive dependency melalui chain `image_picker` → `image_picker_platform_interface` → `plugin_platform_interface`. Tidak perlu ditambahkan secara eksplisit ke `pubspec.yaml`; tetap dibutuhkan untuk `MockPlatformInterfaceMixin` di test file.
+- **DEP-004**: `plugin_platform_interface` — ditambahkan secara eksplisit ke `dev_dependencies` di `pubspec.yaml` untuk menghindari lint `depend_on_referenced_packages`. Dibutuhkan untuk `MockPlatformInterfaceMixin` di test file.
 - **DEP-005**: `path: ^1.9.1` — sudah ada sebagai direct dependency di `pubspec.yaml` (dipakai `DatabaseHelper`). Digunakan di `_pickImageBytes()` untuk `p.basename()`. Tidak perlu ditambahkan.
 
 ---
