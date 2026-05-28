@@ -206,6 +206,45 @@ setUp(() {
 
 ---
 
+## Flutter Library Patterns — cross_file `XFile.name` Behavior on IO Platform (2026-05-28)
+
+### XFile.name Mengabaikan Parameter `name` di Non-Web
+
+Di `cross_file` (IO platform), parameter `name` pada konstruktor `XFile(...)` dan `XFile.fromData(...)`
+**selalu diabaikan**. `XFile.name` getter = `_file.path.split(Platform.pathSeparator).last`.
+
+```dart
+// ❌ SALAH — asumsi name='foto.jpg' akan digunakan
+final xfile = XFile.fromData(bytes, name: 'foto.jpg', path: '/cache/tmp_file');
+print(xfile.name); // → '/cache/tmp_file' (di POSIX), BUKAN 'foto.jpg'
+                   // → '/cache/tmp_file' juga di Windows (tidak ada '\' dalam path)
+
+// ✅ BENAR — name selalu berasal dari path.split(separator).last
+final xfile = XFile.fromData(bytes, path: p.join('cache', 'tmp_file'));
+print(xfile.name); // → 'tmp_file' (konsisten di semua platform)
+```
+
+**Implikasi untuk testing**: Jangan gunakan Unix-style path literal `/cache/tmp` di test yang
+berjalan di Windows. `Platform.pathSeparator = '\\'` di Windows → `/cache/tmp` tidak tersplit
+→ `name = '/cache/tmp'` (seluruh string, bukan `tmp`).
+
+```dart
+// ❌ SALAH — gagal di Windows
+final xfile = XFile.fromData(bytes, path: '/cache/tmp_file');
+expect(xfile.name, equals('tmp_file')); // FAIL di Windows!
+
+// ✅ BENAR — gunakan p.join() untuk cross-platform path
+import 'package:path/path.dart' as p;
+final xfile = XFile.fromData(bytes, path: p.join('cache', 'tmp_file'));
+expect(xfile.name, equals('tmp_file')); // PASS di semua platform
+```
+
+**Solusi di production code**: Gunakan `p.basename(image.path)` atau `image.name` — keduanya
+menghasilkan nilai yang sama karena `name` memang diturunkan dari `path`. Untuk validasi ekstensi,
+implementasikan `_resolveFileName()` dengan strategi fallback `path → name`.
+
+---
+
 ## Android TV — DPadStepper Layout Constraint (2026-03-17)
 
 ### Bug: DPadStepper dalam Row — D-Pad Kanan Tidak Pindah Fokus
