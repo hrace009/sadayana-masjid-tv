@@ -4,7 +4,7 @@ Selamat datang di repositori project **Miqotul Khoir TV (MKT)** — aplikasi jam
 
 File ini berisi panduan utama untuk kontributor baru dan AI assistant yang bekerja dengan project Flutter/Dart untuk platform Android TV.
 
-**Last Updated**: May 08, 2026
+**Last Updated**: May 30, 2026
 
 <!-- markdownlint-disable -->
 
@@ -54,6 +54,7 @@ lib/presentation/cubits/
 | **Mode Hemat Daya Tengah Malam** (Midnight Mode)     | 2026-03-16      | 7 phases, 306 total tests ✅    | Production Ready |
 | **Alarm Tanda Waktu** (Pre-Adzan & Pre-Iqomah Alert) | 2026-03-17      | 6 phases, 20 new alarm tests ✅ | Production Ready |
 | **Slideshow Pengumuman** (Announcement)              | 2026-05-08      | 8 phases, file_picker v11 ✅    | Production Ready |
+| **Jadwal Imam Sholat Berjamaah** (Imam Schedule)     | 2026-05-25      | 10 phases, 98 total tests ✅    | Production Ready |
 
 ### Plan 01 — Database Infrastructure (COMPLETED)
 
@@ -1197,8 +1198,84 @@ File yang dimodifikasi:
 
 ---
 
-**Last Updated**: May 08, 2026
-**Version**: 2.1.0
+### Jadwal Imam Sholat Berjamaah (COMPLETED — 2026-05-25)
+
+Fitur tampilan full-screen periodik jadwal imam sholat berjamaah untuk hari ini. Menambahkan
+`ImamScheduleState` sebagai State ke-9 pada display state machine. Mendukung maksimal 10 imam,
+jadwal 7 hari (Senin–Minggu), dan tampilan khusus hari Jumat dengan pemisahan Khatib dan Imam.
+Data bersumber dari tabel SQLite `imams` dan `imam_schedules` dengan foreign key enforcement.
+10 phase implementasi, 98 total tests baru.
+
+Prioritas display: `prayer` → `midnight` → `slideshow` (pengumuman) → `imam_schedule` → `wisdom` → `standby`.
+
+File baru yang dibuat:
+
+| File                                                                    | Keterangan                                                               |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `lib/domain/entities/imam.dart`                                         | Immutable entity — `id`, `name`, `isActive`, `Equatable`                 |
+| `lib/domain/entities/imam_schedule.dart`                                | Immutable entity — `id`, `dayOfWeek`, `prayerName`, `imamId`, `khatibId` |
+| `lib/domain/entities/imam_schedule_display.dart`                        | DTO normalized+resolved untuk display & dropdown binding                 |
+| `lib/domain/repositories/imam_repository.dart`                          | Abstract interface CRUD imam (zero infra imports)                        |
+| `lib/domain/repositories/imam_schedule_repository.dart`                 | Abstract interface jadwal imam                                           |
+| `lib/data/models/imam_model.dart`                                       | `fromMap`/`toMap`, `is_active` int↔bool                                  |
+| `lib/data/models/imam_schedule_model.dart`                              | `fromMap`/`toMap`, snake_case mapping                                    |
+| `lib/data/datasources/imam_local_data_source.dart`                      | SQLite CRUD imam, validasi maks 10 entri                                 |
+| `lib/data/datasources/imam_schedule_local_data_source.dart`             | SQLite ops + LEFT JOIN, normalisasi slot Jumat, upsert                   |
+| `lib/data/repositories/imam_repository_impl.dart`                       | Implementasi konkret CRUD imam                                           |
+| `lib/data/repositories/imam_schedule_repository_impl.dart`              | Implementasi konkret jadwal imam                                         |
+| `lib/presentation/cubits/imam_schedule/imam_schedule_cubit.dart`        | CRUD cubit admin UI, sinkronisasi ke `DisplayStateCubit`                 |
+| `lib/presentation/cubits/imam_schedule/imam_schedule_state.dart`        | State definitions (Initial, Loading, Loaded, Error)                      |
+| `lib/presentation/pages/settings/sections/imam_schedule_section.dart`   | Settings UI — toggle, lock, stepper, CRUD imam, grid jadwal 7 hari       |
+| `lib/presentation/pages/main_display/layouts/imam_schedule_layout.dart` | Layout full-screen — header, tabel 5 slot, footer progress bar           |
+
+File yang dimodifikasi:
+
+| File                                                             | Keterangan                                                                                                           |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `lib/data/datasources/database_helper.dart`                      | Schema v11, `_onConfigure()` FK enforcement, migrasi tabel `imams`+`imam_schedules`, 8 kolom settings                |
+| `lib/domain/entities/settings.dart`                              | 8 field baru: `isImamScheduleEnabled`, interval, duration, start/end hour/minute, `isImamScheduleLocked`             |
+| `lib/data/models/settings_model.dart`                            | `fromMap`/`toMap` untuk 8 field imam baru (snake_case)                                                               |
+| `lib/domain/entities/transition_config.dart`                     | 7 field imam + `fromSettings()` mapping (`isImamScheduleLocked` dikecualikan)                                        |
+| `lib/domain/entities/display_state_type.dart`                    | Tambah `imamSchedule`                                                                                                |
+| `lib/domain/entities/display_state.dart`                         | Tambah `ImamScheduleState` (dayName, hijriDate, slots, currentTime, remainingSeconds)                                |
+| `lib/domain/usecases/evaluate_display_state_use_case.dart`       | `_evaluateImamScheduleWindow()` — siklus absolut, guard empty schedule, priority setelah slideshow                   |
+| `lib/presentation/cubits/settings/settings_cubit.dart`           | 8 method update imam schedule; lock tidak memicu `triggerConfigUpdate`                                               |
+| `lib/presentation/cubits/display_state/display_state_cubit.dart` | Inject `ImamScheduleRepository`, cache `_todayImamSchedule`, reload saat weekday berganti & `onSettingsChanged()`    |
+| `lib/presentation/pages/main_display_page.dart`                  | Case `imamSchedule` → `ImamScheduleLayout`                                                                           |
+| `lib/presentation/pages/settings/settings_menu_page.dart`        | Tambah `ImamScheduleSection` setelah Slideshow dan sebelum Mode Hemat Daya                                           |
+| `lib/main.dart`                                                  | Instansiasi `ImamLocalDataSource`, `ImamScheduleLocalDataSource`, `ImamRepositoryImpl`, `ImamScheduleRepositoryImpl` |
+
+Test yang dibuat/dimodifikasi:
+
+| File                                                                          | Keterangan                                                      |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `test/data/models/imam_model_test.dart`                                       | 4 tests: fromMap, toMap, round-trip, `isActive` int↔bool        |
+| `test/data/models/imam_schedule_model_test.dart`                              | 4 tests: fromMap nullable, toMap, round-trip                    |
+| `test/data/repositories/imam_repository_impl_test.dart`                       | 18 tests: getAll, insert, insert max-10, update, delete, count  |
+| `test/data/repositories/imam_schedule_repository_impl_test.dart`              | 8+ tests: JOIN resolves names, slot normalisasi, Jumat FK       |
+| `test/presentation/cubits/imam_schedule/imam_schedule_cubit_test.dart`        | 24 tests: loadAll, CRUD, sinkronisasi ke DisplayStateCubit      |
+| `test/presentation/pages/settings/sections/imam_schedule_section_test.dart`   | 13 tests: toggle, lock, stepper, CRUD imam, character counter   |
+| `test/presentation/pages/main_display/layouts/imam_schedule_layout_test.dart` | 12 tests: render, slot kosong/terisi, badge hari, Jumat         |
+| `test/data/models/settings_model_test.dart`                                   | +8 tests: serialisasi 8 field imam baru                         |
+| `test/data/datasources/database_helper_test.dart`                             | +tests: migration v11, FK enforcement aktif                     |
+| `test/presentation/cubits/settings/settings_cubit_test.dart`                  | +8 tests: 8 method update imam schedule                         |
+| `test/domain/usecases/evaluate_display_state_use_case_test.dart`              | +13 tests: imam window aktif/nonaktif, empty schedule, priority |
+| `test/presentation/cubits/display_state/display_state_cubit_test.dart`        | +tests: cache jadwal hari ini, day-rollover handling            |
+
+**Technical Patterns & Lessons Learned**:
+
+- **FK Enforcement via `_onConfigure()`**: Aktifkan `PRAGMA foreign_keys = ON` di method `_onConfigure(Database db)` yang terdaftar ke `openDatabase(onConfigure:...)` agar `ON DELETE SET NULL` benar-benar berlaku saat imam dihapus. Tanpa ini, delete imam tidak men-null-kan `imam_id`/`khatib_id` di jadwal.
+- **Jumat Normalization di DataSource**: Aturan "hari Jumat pakai slot `jumat`, bukan `dzuhur`" ditegakkan di `ImamScheduleLocalDataSource.setSchedule()` — konversi `dzuhur`→`jumat` saat `dayOfWeek==5`, tolak `jumat` untuk non-Jumat, dan hapus row konflik legacy. SQLite schema tidak menggunakan trigger tambahan agar solusi tetap sederhana.
+- **Cache Jadwal Harian di DisplayStateCubit**: `DisplayStateCubit` menyimpan `_todayImamSchedule` dan `_todayImamScheduleDayOfWeek`. Pada setiap tick, jika `weekday` berubah, jadwal di-reload otomatis — tanpa polling SQLite setiap detik. Pada `onSettingsChanged()`, config dan jadwal hari ini direfresh bersama.
+- **Domain Adapter Pattern di Repository**: `ImamRepositoryImpl.update()` mengkonversi `Imam` entity ke `ImamModel` secara eksplisit untuk menghindari runtime cast error (`type 'Imam' is not a subtype of type 'ImamModel'`). Repository bertindak sebagai adapter domain ↔ data layer.
+- **`isImamScheduleLocked` Dikecualikan dari `TransitionConfig`**: Field lock hanya mempengaruhi UI admin di halaman Settings (disable/enable editing). Tidak perlu masuk ke evaluator display — evaluator hanya memeriksa 7 field scheduling yang relevan.
+
+Planning doc: `plan/feature-imam-schedule-1.md` (v1.4, status: Completed)
+
+---
+
+**Last Updated**: May 30, 2026
+**Version**: 2.2.0
 **Project**: Miqotul Khoir TV (MKT)
 **Platform**: Android TV
 **Related Docs**: [ARCHITECTURE_PATTERNS.md](docs/ARCHITECTURE_PATTERNS.md), [Product_Requirement_Document.md](Product_Requirement_Document.md)
