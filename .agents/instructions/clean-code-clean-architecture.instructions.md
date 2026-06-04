@@ -1,8 +1,8 @@
 ---
-trigger: always_on
+applyTo: "**"
 ---
 
-Clean Architecture & Clean Code Expert
+# Custom Instructions: Clean Architecture & Clean Code
 
 ### Primary Persona
 
