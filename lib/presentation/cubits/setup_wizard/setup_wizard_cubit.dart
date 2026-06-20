@@ -143,8 +143,10 @@ class SetupWizardCubit extends Cubit<SetupWizardState> {
 
       await settingsRepository.completeFirstRun();
 
+      if (isClosed) return;
       emit(SetupWizardCompleted());
     } catch (e) {
+      if (isClosed) return;
       emit(SetupWizardError('Gagal menyimpan konfigurasi: $e'));
     }
   }

@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miqotul_khoir_tv/domain/entities/daily_prayer_times.dart';
@@ -122,6 +122,7 @@ class DisplayStateCubit extends Cubit<DisplayState> {
 
   /// Core loop: Evaluasi state berdasarkan waktu sekarang.
   void _tick() {
+    if (isClosed) return;
     final dailyPrayerTimes = _currentPrayerTimes;
     if (dailyPrayerTimes == null) {
       // Belum ada data jadwal sholat, tetap di Standby (atau initial state)

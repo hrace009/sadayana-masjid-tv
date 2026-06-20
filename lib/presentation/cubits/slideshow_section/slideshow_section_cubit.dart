@@ -58,8 +58,10 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
     emit(state.copyWith(isLoading: true, clearError: true));
     try {
       final images = await _imageRepository.getAll();
+      if (isClosed) return;
       emit(state.copyWith(images: images, isLoading: false));
     } catch (e) {
+      if (isClosed) return;
       emit(
         state.copyWith(
           isLoading: false,
@@ -79,6 +81,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
     final bytes = await _pickImageBytes();
     if (bytes == null) return; // user cancel — no state change
 
+    if (isClosed) return;
     emit(state.copyWith(isBusy: true, clearError: true));
     try {
       final image = await _storageService.importImage(
@@ -90,6 +93,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       await _reloadImages();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(
         state.copyWith(
           isBusy: false,
@@ -112,6 +116,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
     final bytes = await _pickImageBytes();
     if (bytes == null) return; // user cancel — no state change
 
+    if (isClosed) return;
     emit(state.copyWith(isBusy: true, clearError: true));
     try {
       // Hapus file internal lama jika ada
@@ -130,6 +135,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       await _reloadImages();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(
         state.copyWith(
           isBusy: false,
@@ -159,6 +165,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       await _reloadImages();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(
         state.copyWith(
           isBusy: false,
@@ -200,6 +207,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
 
       return _PickedFile(fileName: _resolveFileName(image), data: bytes);
     } on PlatformException {
+      if (isClosed) return null;
       emit(
         state.copyWith(
           errorMessage:
@@ -209,6 +217,7 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
       );
       return null;
     } on Exception {
+      if (isClosed) return null;
       emit(
         state.copyWith(
           errorMessage: 'Gagal membaca file gambar. Silakan coba lagi.',
@@ -225,8 +234,10 @@ class SlideshowSectionCubit extends Cubit<SlideshowSectionState> {
   Future<void> _reloadImages() async {
     try {
       final images = await _imageRepository.getAll();
+      if (isClosed) return;
       emit(state.copyWith(images: images, isBusy: false));
     } catch (e) {
+      if (isClosed) return;
       emit(
         state.copyWith(
           isBusy: false,

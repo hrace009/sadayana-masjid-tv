@@ -28,8 +28,10 @@ class SettingsCubit extends Cubit<SettingsState> {
     try {
       // Load settings from repository (Direct return, no Either)
       final settings = await settingsRepository.getSettings();
+      if (isClosed) return;
       emit(SettingsLoaded(settings: settings));
     } catch (e) {
+      if (isClosed) return;
       emit(SettingsError(message: e.toString()));
     }
   }
@@ -67,6 +69,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
         // Reload to ensure state consistency
         final newSettings = await settingsRepository.getSettings();
+        if (isClosed) return;
         emit(
           SettingsLoaded(
             settings: newSettings,
@@ -84,6 +87,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           await displayStateCubit.onSettingsChanged();
         }
       } catch (e) {
+        if (isClosed) return;
         emit(
           SettingsError(
             message: e.toString(),
@@ -389,8 +393,10 @@ class SettingsCubit extends Cubit<SettingsState> {
 
       // Reload logic
       final newSettings = await settingsRepository.getSettings();
+      if (isClosed) return;
       emit(SettingsLoaded(settings: newSettings, isSaving: false));
     } catch (e) {
+      if (isClosed) return;
       emit(
         SettingsError(
           message: e.toString(),
@@ -422,6 +428,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       // Reload setelah reset
       await loadSettings();
     } catch (e) {
+      if (isClosed) return;
       emit(SettingsError(message: 'Gagal melakukan factory reset: $e'));
     }
   }

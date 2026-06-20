@@ -103,6 +103,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
         weeklySchedule[day] = _buildDaySchedule(day, rawRows, imams);
       }
 
+      if (isClosed) return;
       emit(
         ImamScheduleLoaded(
           imams: imams,
@@ -111,6 +112,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
         ),
       );
     } catch (e) {
+      if (isClosed) return;
       emit(ImamScheduleError('Gagal memuat data jadwal imam: ${e.toString()}'));
     }
   }
@@ -125,6 +127,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
       await _imamRepository.insert(name);
       await loadAll();
     } catch (e) {
+      if (isClosed) return;
       emit(ImamScheduleError('Gagal menambah imam: ${e.toString()}'));
     }
   }
@@ -139,6 +142,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
       await loadAll();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(ImamScheduleError('Gagal memperbarui data imam: ${e.toString()}'));
     }
   }
@@ -154,6 +158,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
       await loadAll();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(ImamScheduleError('Gagal menghapus imam: ${e.toString()}'));
     }
   }
@@ -180,6 +185,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
       await loadAll();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(ImamScheduleError('Gagal menyimpan jadwal: ${e.toString()}'));
     }
   }
@@ -193,6 +199,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
       await loadAll();
       _displayStateCubit?.onSettingsChanged();
     } catch (e) {
+      if (isClosed) return;
       emit(
         ImamScheduleError('Gagal menghapus jadwal hari ini: ${e.toString()}'),
       );
@@ -205,6 +212,7 @@ class ImamScheduleCubit extends Cubit<ImamScheduleState> {
   /// Dipanggil oleh [ImamScheduleSection] saat [SettingsCubit] memperbarui
   /// nilai `isImamScheduleLocked` agar state Cubit ini tetap sinkron.
   void updateLockState(bool isLocked) {
+    if (isClosed) return;
     if (state is ImamScheduleLoaded) {
       emit((state as ImamScheduleLoaded).copyWith(isLocked: isLocked));
     }
